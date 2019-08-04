@@ -1,0 +1,73 @@
+package com.example.popularmovies.adapter;
+
+import android.content.Context;
+import android.support.annotation.NonNull;
+import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+
+import com.bumptech.glide.Glide;
+import com.example.popularmovies.R;
+import com.example.popularmovies.pojo.Movie;
+import com.example.popularmovies.utils.NetworkUtils;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class MovieAdapter extends RecyclerView.Adapter<MovieViewHolder> {
+    private final Context context;
+    private List<Movie> movies;
+    private OnMovieClickListener clickListener;
+
+    public MovieAdapter(Context context) {
+        this.context = context;
+        movies = new ArrayList<>();
+    }
+
+    public void setClickListener(OnMovieClickListener clickListener) {
+        this.clickListener = clickListener;
+    }
+
+    public Movie getItem(int position) {
+        return movies.get(position);
+    }
+
+
+    public void setMovies(List<Movie> movies) {
+        this.movies = movies;
+        notifyDataSetChanged();
+    }
+
+    public void addMovies(List<Movie> newMovies) {
+        int posBefore = getItemCount();
+        movies.addAll(newMovies);
+        notifyItemRangeInserted(posBefore, newMovies.size());
+    }
+
+    @NonNull
+    @Override
+    public MovieViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+        View itemView = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.movie_item, viewGroup, false);
+        return new MovieViewHolder(itemView);
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull final MovieViewHolder movieViewHolder, int i) {
+        Movie movie = movies.get(i);
+        Glide.with(context)
+                .load(NetworkUtils.BASE_POSTER_URL + NetworkUtils.BIG_POSTER_SIZE + movie.getPosterPath())
+                .into(movieViewHolder.moviePoster);
+
+        movieViewHolder.itemView.setOnClickListener(v -> {
+            if (clickListener != null) {
+                clickListener.onMovieClick(movieViewHolder.getAdapterPosition());
+            }
+        });
+    }
+
+    @Override
+    public int getItemCount() {
+        return movies.size();
+    }
+}
