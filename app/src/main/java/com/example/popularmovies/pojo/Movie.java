@@ -1,17 +1,14 @@
 package com.example.popularmovies.pojo;
 
-import android.arch.persistence.room.Entity;
-import android.arch.persistence.room.PrimaryKey;
-
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-@Entity(tableName = "movies")
+import java.util.List;
+
 public class Movie {
     @SerializedName("vote_count")
     @Expose
     private int voteCount;
-    @PrimaryKey
     @SerializedName("id")
     @Expose
     private int id;
@@ -36,11 +33,9 @@ public class Movie {
     @SerializedName("original_title")
     @Expose
     private String originalTitle;
-    /*
     @SerializedName("genre_ids")
     @Expose
     private List<Integer> genreIds = null;
-    */
     @SerializedName("backdrop_path")
     @Expose
     private String backdropPath;
@@ -54,11 +49,7 @@ public class Movie {
     @Expose
     private String releaseDate;
 
-    public Movie(int voteCount, int id, boolean video, double voteAverage,
-                 String title, double popularity, String posterPath,
-                 String originalLanguage, String originalTitle, String backdropPath,
-                 boolean adult, String overview,
-                 String releaseDate) {
+    public Movie(int voteCount, int id, boolean video, double voteAverage, String title, double popularity, String posterPath, String originalLanguage, String originalTitle, List<Integer> genreIds, String backdropPath, boolean adult, String overview, String releaseDate) {
         this.voteCount = voteCount;
         this.id = id;
         this.video = video;
@@ -68,6 +59,7 @@ public class Movie {
         this.posterPath = posterPath;
         this.originalLanguage = originalLanguage;
         this.originalTitle = originalTitle;
+        this.genreIds = genreIds;
         this.backdropPath = backdropPath;
         this.adult = adult;
         this.overview = overview;
@@ -96,11 +88,6 @@ public class Movie {
 
     public void setVideo(boolean video) {
         this.video = video;
-    }
-
-    @Override
-    public String toString() {
-        return title + '\n' + overview;
     }
 
     public double getVoteAverage() {
@@ -149,6 +136,14 @@ public class Movie {
 
     public void setOriginalTitle(String originalTitle) {
         this.originalTitle = originalTitle;
+    }
+
+    public List<Integer> getGenreIds() {
+        return genreIds;
+    }
+
+    public void setGenreIds(List<Integer> genreIds) {
+        this.genreIds = genreIds;
     }
 
     public String getBackdropPath() {

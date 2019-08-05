@@ -8,7 +8,7 @@ import com.example.popularmovies.pojo.Movie;
 
 @StateStrategyType(AddToEndSingleStrategy.class)
 public interface DetailContract extends MvpView {
-    void setMovieDetail(Movie title);
+    void setMovieDetail(Movie movie);
 
     void setFavoriteIconOn();
 

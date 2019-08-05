@@ -3,15 +3,12 @@ package com.example.popularmovies.screens.main;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.v4.view.animation.FastOutSlowInInterpolator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.TranslateAnimation;
 import android.widget.ProgressBar;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -19,13 +16,11 @@ import android.widget.Toast;
 
 import com.arellomobile.mvp.MvpAppCompatActivity;
 import com.arellomobile.mvp.presenter.InjectPresenter;
-import com.arellomobile.mvp.presenter.ProvidePresenter;
 import com.example.popularmovies.R;
 import com.example.popularmovies.adapter.MovieAdapter;
 import com.example.popularmovies.pojo.Movie;
 import com.example.popularmovies.screens.detail.DetailActivity;
 import com.example.popularmovies.screens.favorite.FavoriteActivity;
-import com.example.popularmovies.viewmodel.MovieViewModelImpl;
 
 import java.util.List;
 
@@ -34,7 +29,6 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class MainActivity extends MvpAppCompatActivity implements MainContract {
-    private final int ANIMATION_DURATION = 300; //ms
 
     @BindView(R.id.switchFilter)
     Switch switchFilter;
@@ -50,7 +44,6 @@ public class MainActivity extends MvpAppCompatActivity implements MainContract {
     @InjectPresenter
     MainPresenter presenter;
     private MovieAdapter movieAdapter;
-    private TranslateAnimation recyclerViewAnimation;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -70,11 +63,6 @@ public class MainActivity extends MvpAppCompatActivity implements MainContract {
                 break;
         }
         return super.onOptionsItemSelected(item);
-    }
-
-    @ProvidePresenter
-    MainPresenter providePresenter() {
-        return new MainPresenter(new MovieViewModelImpl(getApplication(), this));
     }
 
     @Override
@@ -97,21 +85,9 @@ public class MainActivity extends MvpAppCompatActivity implements MainContract {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-        initAnimation();
         initSwitch();
         initRecyclerView();
         initAdapter();
-    }
-
-    private void initAnimation() {
-        recyclerViewAnimation = new TranslateAnimation(
-                Animation.RELATIVE_TO_PARENT, 0.0f,
-                Animation.RELATIVE_TO_PARENT, 0.0f,
-                Animation.RELATIVE_TO_PARENT, 1.0f,
-                Animation.RELATIVE_TO_PARENT, 0.0f
-        );
-        recyclerViewAnimation.setDuration(ANIMATION_DURATION);
-        recyclerViewAnimation.setInterpolator(new FastOutSlowInInterpolator());
     }
 
     private void initAdapter() {
@@ -169,7 +145,6 @@ public class MainActivity extends MvpAppCompatActivity implements MainContract {
     @Override
     public void setMovies(List<Movie> movies) {
         movieAdapter.setMovies(movies);
-        recyclerView.startAnimation(recyclerViewAnimation);
     }
 
     @Override

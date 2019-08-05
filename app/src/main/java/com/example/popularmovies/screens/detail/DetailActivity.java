@@ -1,6 +1,5 @@
 package com.example.popularmovies.screens.detail;
 
-import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ImageView;
@@ -14,8 +13,6 @@ import com.bumptech.glide.Glide;
 import com.example.popularmovies.R;
 import com.example.popularmovies.pojo.Movie;
 import com.example.popularmovies.utils.NetworkUtils;
-import com.example.popularmovies.viewmodel.MovieViewModelFactory;
-import com.example.popularmovies.viewmodel.MovieViewModelImpl;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -46,9 +43,8 @@ public class DetailActivity extends MvpAppCompatActivity implements DetailContra
 
     @ProvidePresenter
     DetailPresenter providePresenter() {
-        MovieViewModelFactory factory = new MovieViewModelFactory(getApplication(), this);
         Intent intent = getIntent();
-        return new DetailPresenter(ViewModelProviders.of(this, factory).get(MovieViewModelImpl.class), intent.getIntExtra("id", 920));
+        return new DetailPresenter(intent.getIntExtra("id", 0));
     }
 
     @Override

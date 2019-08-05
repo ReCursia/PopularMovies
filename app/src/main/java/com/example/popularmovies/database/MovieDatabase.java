@@ -1,14 +1,7 @@
 package com.example.popularmovies.database;
 
-import android.arch.persistence.room.Database;
-import android.arch.persistence.room.Room;
-import android.arch.persistence.room.RoomDatabase;
-import android.content.Context;
-
-import com.example.popularmovies.pojo.FavoriteMovie;
-import com.example.popularmovies.pojo.Movie;
-
-@Database(entities = {Movie.class, FavoriteMovie.class}, version = 2, exportSchema = false)
+/*
+@Database(entities = {Movie.class}, version = 2, exportSchema = false)
 public abstract class MovieDatabase extends RoomDatabase {
     private static final String DB_NAME = "movies2.db";
     private static MovieDatabase instance;
@@ -21,6 +14,5 @@ public abstract class MovieDatabase extends RoomDatabase {
     }
 
     public abstract MovieDao movieDao();
-
-    public abstract FavoriteMovieDao favoriteMovieDao();
 }
+*/

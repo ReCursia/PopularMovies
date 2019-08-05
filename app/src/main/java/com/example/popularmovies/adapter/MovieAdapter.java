@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.example.popularmovies.R;
 import com.example.popularmovies.pojo.Movie;
 import com.example.popularmovies.utils.NetworkUtils;
@@ -16,6 +17,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MovieAdapter extends RecyclerView.Adapter<MovieViewHolder> {
+    private final static int FADE_OUT_DURATION = 100; //ms
+
     private final Context context;
     private List<Movie> movies;
     private OnMovieClickListener clickListener;
@@ -57,6 +60,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieViewHolder> {
         Movie movie = movies.get(i);
         Glide.with(context)
                 .load(NetworkUtils.BASE_POSTER_URL + NetworkUtils.BIG_POSTER_SIZE + movie.getPosterPath())
+                .transition(DrawableTransitionOptions.withCrossFade(FADE_OUT_DURATION))
                 .into(movieViewHolder.moviePoster);
 
         movieViewHolder.itemView.setOnClickListener(v -> {

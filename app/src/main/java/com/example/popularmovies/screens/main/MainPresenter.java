@@ -4,13 +4,10 @@ import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
 import com.example.popularmovies.R;
 import com.example.popularmovies.pojo.DiscoverMovies;
-import com.example.popularmovies.pojo.FavoriteMovie;
 import com.example.popularmovies.pojo.Movie;
 import com.example.popularmovies.repository.MoviesApi;
 import com.example.popularmovies.repository.MoviesService;
 import com.example.popularmovies.utils.NetworkUtils;
-import com.example.popularmovies.viewmodel.MovieViewModel;
-import com.example.popularmovies.viewmodel.ViewModelDataChangedListener;
 
 import java.util.List;
 
@@ -25,64 +22,46 @@ public class MainPresenter extends MvpPresenter<MainContract> {
     private int currentPage;
     private String sortBy;
     private boolean tabIsChanged;
-    private MovieViewModel movieViewModel;
 
-    public MainPresenter(MovieViewModel movieViewModel) {
-        this.movieViewModel = movieViewModel;
-        initViewModel();
+    public MainPresenter() {
         client = MoviesService.getInstance().getMoviesApi();
         getViewState().setSwitchOff();
         onSwitchValueChanged(false);
     }
 
-    private void initViewModel() {
-        movieViewModel.setDataChangedListener(new ViewModelDataChangedListener() {
-            @Override
-            public void moviesDataChanged(List<Movie> movieList) {
-                if (tabIsChanged) {
-                    getViewState().setMovies(movieList);
-                    tabIsChanged = false;
-                }
-
-                getViewState().addMovies(movieList);
-            }
-
-            @Override
-            public void favoriteMoviesDataChanged(List<FavoriteMovie> favoriteMovieList) {
-                //nothing yet SEPARATE CLASSES FAST
-            }
-        });
-    }
-
     private void loadMovies() {
         Call<DiscoverMovies> call = client.discoverMovies(sortBy, currentPage);
 
-        if (tabIsChanged)
-            getViewState().showLoading(); //TODO небольшой костыль, но я экспериментирую
+        if (tabIsChanged) {
+            getViewState().showLoading();
+        }
 
         call.enqueue(new Callback<DiscoverMovies>() {
             @Override
             public void onResponse(Call<DiscoverMovies> call, Response<DiscoverMovies> response) {
                 if (response.isSuccessful()) {
-                    if (tabIsChanged) getViewState().hideLoading();
-                    moviesAreLoaded(response.body().getMovies());
-                    currentPage++;
+                    handleSuccessfulResponse(response);
                 }
             }
 
             @Override
             public void onFailure(Call<DiscoverMovies> call, Throwable t) {
-                getViewState().showErrorMessage(t.getMessage());
-                //movieViewModel.getAllMovies(); //get it from DB if no connection данные скорее всего изменняются, но так как листенер уже отработал то ничего не оповестили
+                getViewState().hideLoading();
+                getViewState().showErrorMessage(t.getLocalizedMessage());
             }
         });
     }
 
-    private void moviesAreLoaded(List<Movie> movies) {
+    private void handleSuccessfulResponse(Response<DiscoverMovies> response) {
+        List<Movie> movies = response.body().getMovies();
         if (tabIsChanged) {
-            movieViewModel.deleteAllMovies();
+            getViewState().setMovies(movies);
+            getViewState().hideLoading();
+            tabIsChanged = false;
+        } else {
+            getViewState().addMovies(movies);
         }
-        movieViewModel.insertMovies(movies);
+        currentPage++;
     }
 
     public void onPopularTextViewClicked() {
