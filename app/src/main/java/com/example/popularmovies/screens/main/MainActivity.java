@@ -72,11 +72,6 @@ public class MainActivity extends MvpAppCompatActivity implements MainContract {
         return super.onOptionsItemSelected(item);
     }
 
-    @Override
-    public void startAppearAnimation() {
-        recyclerView.startAnimation(recyclerViewAnimation);
-    }
-
     @ProvidePresenter
     MainPresenter providePresenter() {
         return new MainPresenter(new MovieViewModelImpl(getApplication(), this));
@@ -174,6 +169,7 @@ public class MainActivity extends MvpAppCompatActivity implements MainContract {
     @Override
     public void setMovies(List<Movie> movies) {
         movieAdapter.setMovies(movies);
+        recyclerView.startAnimation(recyclerViewAnimation);
     }
 
     @Override

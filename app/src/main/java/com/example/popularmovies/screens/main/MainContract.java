@@ -30,8 +30,6 @@ public interface MainContract extends MvpView {
 
     void addMovies(List<Movie> movies);
 
-    void startAppearAnimation();
-
     //Text
     void setPopularTextColor(int color);
 

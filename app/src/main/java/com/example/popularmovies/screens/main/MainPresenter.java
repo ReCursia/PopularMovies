@@ -41,9 +41,9 @@ public class MainPresenter extends MvpPresenter<MainContract> {
             public void moviesDataChanged(List<Movie> movieList) {
                 if (tabIsChanged) {
                     getViewState().setMovies(movieList);
-                    getViewState().startAppearAnimation();
                     tabIsChanged = false;
                 }
+
                 getViewState().addMovies(movieList);
             }
 
