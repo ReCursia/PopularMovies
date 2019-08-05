@@ -5,6 +5,9 @@ import com.arellomobile.mvp.viewstate.strategy.AddToEndSingleStrategy;
 import com.arellomobile.mvp.viewstate.strategy.SkipStrategy;
 import com.arellomobile.mvp.viewstate.strategy.StateStrategyType;
 import com.example.popularmovies.pojo.Movie;
+import com.example.popularmovies.pojo.Trailer;
+
+import java.util.List;
 
 @StateStrategyType(AddToEndSingleStrategy.class)
 public interface DetailContract extends MvpView {
@@ -14,9 +17,18 @@ public interface DetailContract extends MvpView {
 
     void setFavoriteIconOff();
 
+    //List
+    void setTrailers(List<Trailer> trailers);
+
+    @StateStrategyType(SkipStrategy.class)
+    void showErrorMessage(String message);
+
     @StateStrategyType(SkipStrategy.class)
     void showMovieAddedMessage();
 
     @StateStrategyType(SkipStrategy.class)
     void showMovieRemovedMessage();
+
+    @StateStrategyType(SkipStrategy.class)
+    void openTrailerUrl(int position);
 }

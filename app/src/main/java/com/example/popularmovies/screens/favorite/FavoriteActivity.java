@@ -7,7 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import com.arellomobile.mvp.MvpAppCompatActivity;
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.example.popularmovies.R;
-import com.example.popularmovies.adapter.MovieAdapter;
+import com.example.popularmovies.adapters.movies.MoviesAdapter;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -19,7 +19,7 @@ public class FavoriteActivity extends MvpAppCompatActivity implements FavoriteCo
     @InjectPresenter
     FavoritePresenter presenter;
 
-    MovieAdapter movieAdapter;
+    MoviesAdapter moviesAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,8 +31,8 @@ public class FavoriteActivity extends MvpAppCompatActivity implements FavoriteCo
     }
 
     private void initAdapter() {
-        movieAdapter = new MovieAdapter(this);
-        recyclerView.setAdapter(movieAdapter);
+        moviesAdapter = new MoviesAdapter(this);
+        recyclerView.setAdapter(moviesAdapter);
     }
 
     private void initRecyclerView() {

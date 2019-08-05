@@ -16,9 +16,11 @@ import android.widget.Toast;
 
 import com.arellomobile.mvp.MvpAppCompatActivity;
 import com.arellomobile.mvp.presenter.InjectPresenter;
+import com.arellomobile.mvp.presenter.ProvidePresenter;
 import com.example.popularmovies.R;
-import com.example.popularmovies.adapter.MovieAdapter;
+import com.example.popularmovies.adapters.movies.MoviesAdapter;
 import com.example.popularmovies.pojo.Movie;
+import com.example.popularmovies.repository.MoviesService;
 import com.example.popularmovies.screens.detail.DetailActivity;
 import com.example.popularmovies.screens.favorite.FavoriteActivity;
 
@@ -43,7 +45,12 @@ public class MainActivity extends MvpAppCompatActivity implements MainContract {
 
     @InjectPresenter
     MainPresenter presenter;
-    private MovieAdapter movieAdapter;
+    private MoviesAdapter moviesAdapter;
+
+    @ProvidePresenter
+    MainPresenter providePresenter() {
+        return new MainPresenter(MoviesService.getInstance().getMoviesApi());
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -57,9 +64,6 @@ public class MainActivity extends MvpAppCompatActivity implements MainContract {
         switch (item.getItemId()) {
             case R.id.itemFavorite:
                 presenter.onItemFavoriteClicked();
-                break;
-            case R.id.itemMain:
-                presenter.onItemMainClicked();
                 break;
         }
         return super.onOptionsItemSelected(item);
@@ -91,11 +95,11 @@ public class MainActivity extends MvpAppCompatActivity implements MainContract {
     }
 
     private void initAdapter() {
-        movieAdapter = new MovieAdapter(this);
-        movieAdapter.setClickListener(position -> {
+        moviesAdapter = new MoviesAdapter(this);
+        moviesAdapter.setClickListener(position -> {
             presenter.onMovieClicked(position);
         });
-        recyclerView.setAdapter(movieAdapter);
+        recyclerView.setAdapter(moviesAdapter);
     }
 
     private void initSwitch() {
@@ -144,12 +148,12 @@ public class MainActivity extends MvpAppCompatActivity implements MainContract {
 
     @Override
     public void setMovies(List<Movie> movies) {
-        movieAdapter.setMovies(movies);
+        moviesAdapter.setMovies(movies);
     }
 
     @Override
     public void addMovies(List<Movie> movies) {
-        movieAdapter.addMovies(movies);
+        moviesAdapter.addMovies(movies);
     }
 
     @Override
@@ -169,15 +173,9 @@ public class MainActivity extends MvpAppCompatActivity implements MainContract {
     }
 
     @Override
-    public void openMainScreen() {
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
-    }
-
-    @Override
     public void openDetailScreen(int position) {
         Intent intent = new Intent(this, DetailActivity.class);
-        intent.putExtra("id", movieAdapter.getItem(position).getId());
+        intent.putExtra("id", moviesAdapter.getItem(position).getId());
         startActivity(intent);
     }
 }

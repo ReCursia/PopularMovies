@@ -1,4 +1,4 @@
-package com.example.popularmovies.adapter;
+package com.example.popularmovies.adapters.movies;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -10,25 +10,26 @@ import android.view.ViewGroup;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.example.popularmovies.R;
+import com.example.popularmovies.adapters.OnItemClickListener;
 import com.example.popularmovies.pojo.Movie;
 import com.example.popularmovies.utils.NetworkUtils;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MovieAdapter extends RecyclerView.Adapter<MovieViewHolder> {
+public class MoviesAdapter extends RecyclerView.Adapter<MovieViewHolder> {
     private final static int FADE_OUT_DURATION = 100; //ms
 
     private final Context context;
     private List<Movie> movies;
-    private OnMovieClickListener clickListener;
+    private OnItemClickListener clickListener;
 
-    public MovieAdapter(Context context) {
+    public MoviesAdapter(Context context) {
         this.context = context;
         movies = new ArrayList<>();
     }
 
-    public void setClickListener(OnMovieClickListener clickListener) {
+    public void setClickListener(OnItemClickListener clickListener) {
         this.clickListener = clickListener;
     }
 
@@ -65,7 +66,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieViewHolder> {
 
         movieViewHolder.itemView.setOnClickListener(v -> {
             if (clickListener != null) {
-                clickListener.onMovieClick(movieViewHolder.getAdapterPosition());
+                clickListener.onItemClick(movieViewHolder.getAdapterPosition());
             }
         });
     }

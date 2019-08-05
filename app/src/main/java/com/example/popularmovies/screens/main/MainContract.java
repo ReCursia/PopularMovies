@@ -40,7 +40,4 @@ public interface MainContract extends MvpView {
 
     @StateStrategyType(SkipStrategy.class)
     void openFavoriteScreen();
-
-    @StateStrategyType(SkipStrategy.class)
-    void openMainScreen();
 }

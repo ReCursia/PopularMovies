@@ -13,4 +13,5 @@
     <string name="removed_favorite">Removed from favorite</string>
     <string name="item_favorite">Favorite</string>
     <string name="item_main">Main</string>
+    <string name="play_button">Play button</string>
 </resources>

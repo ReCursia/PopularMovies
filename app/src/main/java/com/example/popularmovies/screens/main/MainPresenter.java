@@ -6,7 +6,6 @@ import com.example.popularmovies.R;
 import com.example.popularmovies.pojo.DiscoverMovies;
 import com.example.popularmovies.pojo.Movie;
 import com.example.popularmovies.repository.MoviesApi;
-import com.example.popularmovies.repository.MoviesService;
 import com.example.popularmovies.utils.NetworkUtils;
 
 import java.util.List;
@@ -23,8 +22,8 @@ public class MainPresenter extends MvpPresenter<MainContract> {
     private String sortBy;
     private boolean tabIsChanged;
 
-    public MainPresenter() {
-        client = MoviesService.getInstance().getMoviesApi();
+    public MainPresenter(MoviesApi client) {
+        this.client = client;
         getViewState().setSwitchOff();
         onSwitchValueChanged(false);
     }
@@ -105,9 +104,5 @@ public class MainPresenter extends MvpPresenter<MainContract> {
 
     public void onItemFavoriteClicked() {
         getViewState().openFavoriteScreen();
-    }
-
-    public void onItemMainClicked() {
-        getViewState().openMainScreen();
     }
 }

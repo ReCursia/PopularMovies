@@ -1,7 +1,10 @@
 package com.example.popularmovies.screens.detail;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -11,8 +14,13 @@ import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.arellomobile.mvp.presenter.ProvidePresenter;
 import com.bumptech.glide.Glide;
 import com.example.popularmovies.R;
+import com.example.popularmovies.adapters.trailers.TrailersAdapter;
 import com.example.popularmovies.pojo.Movie;
+import com.example.popularmovies.pojo.Trailer;
+import com.example.popularmovies.repository.MoviesService;
 import com.example.popularmovies.utils.NetworkUtils;
+
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -31,20 +39,34 @@ public class DetailActivity extends MvpAppCompatActivity implements DetailContra
     TextView releaseDateTextView;
     @BindView(R.id.posterImage)
     ImageView posterImage;
+    @BindView(R.id.recyclerViewTrailers)
+    RecyclerView recyclerView;
     @BindView(R.id.favoriteIcon)
     ImageView favoriteIcon;
     @InjectPresenter
     DetailPresenter presenter;
+
+    private TrailersAdapter adapter;
+
+    @Override
+    public void setTrailers(List<Trailer> trailers) {
+        adapter.setTrailers(trailers);
+    }
 
     @OnClick(R.id.favoriteIcon)
     public void onFavoriteIconClicked() {
         presenter.onFavoriteIconClicked();
     }
 
+    @Override
+    public void showErrorMessage(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_LONG).show();
+    }
+
     @ProvidePresenter
     DetailPresenter providePresenter() {
         Intent intent = getIntent();
-        return new DetailPresenter(intent.getIntExtra("id", 0));
+        return new DetailPresenter(MoviesService.getInstance().getMoviesApi(), intent.getIntExtra("id", 0));
     }
 
     @Override
@@ -72,6 +94,25 @@ public class DetailActivity extends MvpAppCompatActivity implements DetailContra
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
         ButterKnife.bind(this);
+        initRecyclerView();
+        initAdapter();
+    }
+
+    @Override
+    public void openTrailerUrl(int position) {
+        Intent browserIntent = new Intent(Intent.ACTION_VIEW,Uri.parse(NetworkUtils.TRAILER_BASE_URL + adapter.getItem(position).getSite()));
+        //TODO я думаю надо в презентер передавать TRAILER и уже там решать что делать... А не так как сейчас (аля логика в UI)
+        startActivity(browserIntent);
+    }
+
+    private void initRecyclerView() {
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+    }
+
+    private void initAdapter() {
+        adapter = new TrailersAdapter();
+        adapter.setClickListener(position -> presenter.onTrailerPlayButtonClicked(position));
+        recyclerView.setAdapter(adapter);
     }
 
     @Override
@@ -81,7 +122,7 @@ public class DetailActivity extends MvpAppCompatActivity implements DetailContra
         originalTitleTextView.setText(movie.getOriginalTitle());
         releaseDateTextView.setText(movie.getReleaseDate());
         descriptionTextView.setText(movie.getOverview());
-        ratingTextView.setText(movie.getVoteAverage() + "");
+        ratingTextView.setText(Double.toString(movie.getVoteAverage()));
         //Image
         Glide.with(this)
                 .load(NetworkUtils.BASE_POSTER_URL + NetworkUtils.BIG_POSTER_SIZE + movie.getPosterPath())

@@ -1,4 +1,4 @@
-package com.example.popularmovies.adapter;
+package com.example.popularmovies.adapters.movies;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -10,7 +10,7 @@ import com.example.popularmovies.R;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-class MovieViewHolder extends RecyclerView.ViewHolder {
+public class MovieViewHolder extends RecyclerView.ViewHolder {
     @BindView(R.id.smallMoviePoster)
     ImageView moviePoster;
 
