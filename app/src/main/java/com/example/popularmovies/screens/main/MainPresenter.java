@@ -32,7 +32,7 @@ public class MainPresenter extends MvpPresenter<MainContract> {
         initViewModel();
         client = MoviesService.getInstance().getMoviesApi();
         getViewState().setSwitchOff();
-        onSwitchValueChanged(false);
+        //onSwitchValueChanged(false);
     }
 
     private void initViewModel() {
