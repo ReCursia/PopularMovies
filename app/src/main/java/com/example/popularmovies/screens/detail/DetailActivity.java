@@ -7,11 +7,14 @@ import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.arellomobile.mvp.MvpAppCompatActivity;
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.arellomobile.mvp.presenter.ProvidePresenter;
+import com.bumptech.glide.Glide;
 import com.example.popularmovies.R;
 import com.example.popularmovies.adapters.trailers.TrailersAdapter;
 import com.example.popularmovies.pojo.Movie;
@@ -25,9 +28,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class DetailActivity extends MvpAppCompatActivity implements DetailContract {
-    /*
-    @BindView(R.id.titleTextView)
-    TextView titleTextView;
     @BindView(R.id.descriptionTextView)
     TextView descriptionTextView;
     @BindView(R.id.ratingTextView)
@@ -36,15 +36,10 @@ public class DetailActivity extends MvpAppCompatActivity implements DetailContra
     TextView originalTitleTextView;
     @BindView(R.id.releaseDateTextView)
     TextView releaseDateTextView;
+    @BindView(R.id.recycleViewTrailers)
+    RecyclerView recyclerView;
     @BindView(R.id.posterImage)
     ImageView posterImage;
-    */
-    @BindView(R.id.recyclerViewTrailers)
-    RecyclerView recyclerView;
-    /*
-    @BindView(R.id.favoriteIcon)
-    ImageView favoriteIcon;
-    */
     @BindView(R.id.toolbar)
     Toolbar toolbar;
     @BindView(R.id.collapsingToolbar)
@@ -59,12 +54,6 @@ public class DetailActivity extends MvpAppCompatActivity implements DetailContra
     public void setTrailers(List<Trailer> trailers) {
         adapter.setTrailers(trailers);
     }
-    /*
-    @OnClick(R.id.favoriteIcon)
-    public void onFavoriteIconClicked() {
-        presenter.onFavoriteIconClicked();
-    }
-    */
 
     @Override
     public void showErrorMessage(String message) {
@@ -98,14 +87,27 @@ public class DetailActivity extends MvpAppCompatActivity implements DetailContra
     }
 
     @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return super.onSupportNavigateUp();
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
         ButterKnife.bind(this);
         initRecyclerView();
         initAdapter();
+        initToolbar();
         initCollapsingToolbarLayout();
+    }
+
+    private void initToolbar() {
         setSupportActionBar(toolbar);
+        //add back arrow
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
     }
 
     private void initCollapsingToolbarLayout() {
@@ -115,8 +117,7 @@ public class DetailActivity extends MvpAppCompatActivity implements DetailContra
 
     @Override
     public void openTrailerUrl(int position) {
-        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(NetworkUtils.TRAILER_BASE_URL + adapter.getItem(position).getSite()));
-        //TODO я думаю надо в презентер передавать TRAILER и уже там решать что делать... А не так как сейчас (аля логика в UI)
+        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(NetworkUtils.TRAILER_BASE_URL + adapter.getItem(position).getKey()));
         startActivity(browserIntent);
     }
 
@@ -132,17 +133,14 @@ public class DetailActivity extends MvpAppCompatActivity implements DetailContra
 
     @Override
     public void setMovieDetail(Movie movie) {
-        getSupportActionBar().setTitle(movie.getTitle());
-        //titleTextView.setText(movie.getTitle());
-        //originalTitleTextView.setText(movie.getOriginalTitle());
-        //releaseDateTextView.setText(movie.getReleaseDate());
-        //descriptionTextView.setText(movie.getOverview());
-        //ratingTextView.setText(Double.toString(movie.getVoteAverage()));
+        collapsingToolbarLayout.setTitle(movie.getTitle());
+        originalTitleTextView.setText(movie.getOriginalTitle());
+        releaseDateTextView.setText(movie.getReleaseDate());
+        descriptionTextView.setText(movie.getOverview());
+        ratingTextView.setText(Double.toString(movie.getVoteAverage()));
         //Image
-        /*
         Glide.with(this)
                 .load(NetworkUtils.BASE_POSTER_URL + NetworkUtils.BIG_POSTER_SIZE + movie.getPosterPath())
                 .into(posterImage);
-                */
     }
 }

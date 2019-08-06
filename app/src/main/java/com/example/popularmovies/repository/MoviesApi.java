@@ -1,6 +1,7 @@
 package com.example.popularmovies.repository;
 
 import com.example.popularmovies.pojo.DiscoverMovies;
+import com.example.popularmovies.pojo.Movie;
 import com.example.popularmovies.pojo.MovieTrailers;
 
 import retrofit2.Call;
@@ -17,4 +18,7 @@ public interface MoviesApi {
 
     @GET("/3/movie/{id}/videos?api_key=" + API_KEY)
     Call<MovieTrailers> getMovieTrailersById(@Path("id") int id);
+
+    @GET("3/movie/{id}?api_key=" + API_KEY + "&language=" + LANGUAGE_VALUE)
+    Call<Movie> getMovieById(@Path("id") int id);
 }

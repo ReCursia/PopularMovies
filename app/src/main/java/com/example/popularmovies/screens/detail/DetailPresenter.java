@@ -2,6 +2,7 @@ package com.example.popularmovies.screens.detail;
 
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
+import com.example.popularmovies.pojo.Movie;
 import com.example.popularmovies.pojo.MovieTrailers;
 import com.example.popularmovies.repository.MoviesApi;
 
@@ -20,6 +21,26 @@ public class DetailPresenter extends MvpPresenter<DetailContract> {
         setMovieData();
         setIconStatus();
         initTrailers();
+        initMovieData();
+    }
+
+    private void initMovieData() {
+        Call<Movie> call = client.getMovieById(movieId);
+        call.enqueue(new Callback<Movie>() {
+            @Override
+            public void onResponse(Call<Movie> call, Response<Movie> response) {
+                if (response.isSuccessful()) {
+                    getViewState().setMovieDetail(response.body());
+                } else {
+                    getViewState().showErrorMessage(response.message());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Movie> call, Throwable t) {
+                getViewState().showErrorMessage(t.getLocalizedMessage());
+            }
+        });
     }
 
     private void initTrailers() {
