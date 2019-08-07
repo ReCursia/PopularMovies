@@ -23,6 +23,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.example.popularmovies.R;
 import com.example.popularmovies.adapters.trailers.TrailersAdapter;
+import com.example.popularmovies.database.MovieDatabase;
 import com.example.popularmovies.pojo.Movie;
 import com.example.popularmovies.pojo.Trailer;
 import com.example.popularmovies.repository.MoviesService;
@@ -74,7 +75,8 @@ public class DetailActivity extends MvpAppCompatActivity implements DetailContra
     @ProvidePresenter
     DetailPresenter providePresenter() {
         Intent intent = getIntent();
-        return new DetailPresenter(MoviesService.getInstance().getMoviesApi(), intent.getIntExtra("id", 0));
+        MovieDatabase db = MovieDatabase.getInstance(this);
+        return new DetailPresenter(MoviesService.getInstance().getMoviesApi(), db.movieDao(), db.trailerDao(), intent.getIntExtra("id", 0));
     }
 
     @Override

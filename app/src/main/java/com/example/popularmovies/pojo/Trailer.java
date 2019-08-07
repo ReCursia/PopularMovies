@@ -1,9 +1,19 @@
 package com.example.popularmovies.pojo;
 
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.PrimaryKey;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+/*
+POJO class with Room and GSON annotation
+ */
+
+@Entity(tableName = "trailers")
 public class Trailer {
+    @PrimaryKey
+    private int movieId;
     @SerializedName("id")
     @Expose
     private String id;
@@ -28,6 +38,28 @@ public class Trailer {
     @SerializedName("type")
     @Expose
     private String type;
+
+    public Trailer(int movieId, String id, String iso6391, String iso31661,
+                   String key, String name, String site,
+                   int size, String type) {
+        this.movieId = movieId;
+        this.id = id;
+        this.iso6391 = iso6391;
+        this.iso31661 = iso31661;
+        this.key = key;
+        this.name = name;
+        this.site = site;
+        this.size = size;
+        this.type = type;
+    }
+
+    public int getMovieId() {
+        return movieId;
+    }
+
+    public void setMovieId(int movieId) {
+        this.movieId = movieId;
+    }
 
     public String getId() {
         return id;

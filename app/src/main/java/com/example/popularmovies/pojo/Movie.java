@@ -1,16 +1,26 @@
 package com.example.popularmovies.pojo;
 
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.Ignore;
+import android.arch.persistence.room.PrimaryKey;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
+/*
+POJO class with Room and GSON annotation
+ */
+
+@Entity(tableName = "movies")
 public class Movie {
     @SerializedName("vote_count")
     @Expose
     private int voteCount;
     @SerializedName("id")
     @Expose
+    @PrimaryKey
     private int id;
     @SerializedName("video")
     @Expose
@@ -35,6 +45,7 @@ public class Movie {
     private String originalTitle;
     @SerializedName("genre_ids")
     @Expose
+    @Ignore
     private List<Integer> genreIds = null;
     @SerializedName("backdrop_path")
     @Expose
@@ -48,6 +59,27 @@ public class Movie {
     @SerializedName("release_date")
     @Expose
     private String releaseDate;
+
+    public Movie(int voteCount, int id, boolean video,
+                 double voteAverage, String title,
+                 double popularity, String posterPath,
+                 String originalLanguage, String originalTitle,
+                 String backdropPath,
+                 boolean adult, String overview, String releaseDate) {
+        this.voteCount = voteCount;
+        this.id = id;
+        this.video = video;
+        this.voteAverage = voteAverage;
+        this.title = title;
+        this.popularity = popularity;
+        this.posterPath = posterPath;
+        this.originalLanguage = originalLanguage;
+        this.originalTitle = originalTitle;
+        this.backdropPath = backdropPath;
+        this.adult = adult;
+        this.overview = overview;
+        this.releaseDate = releaseDate;
+    }
 
     public int getVoteCount() {
         return voteCount;
