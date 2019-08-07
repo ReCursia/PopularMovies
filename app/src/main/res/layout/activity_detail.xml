@@ -67,7 +67,7 @@
                 android:elevation="0dp"
                 app:cardBackgroundColor="@color/darkGray"
                 app:cardCornerRadius="30dp"
-                app:contentPadding="15dp">
+                app:contentPadding="20dp">
 
                 <android.support.constraint.ConstraintLayout
                     android:layout_width="match_parent"
@@ -78,7 +78,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="24dp"
-                        android:layout_marginTop="32dp"
+                        android:layout_marginTop="24dp"
                         android:textColor="@color/white"
                         android:textSize="16sp"
                         app:layout_constraintStart_toEndOf="@+id/textView3"
@@ -88,7 +88,7 @@
                         android:id="@+id/textView3"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="32dp"
+                        android:layout_marginTop="24dp"
                         android:text="@string/release_date"
                         android:textColor="@color/white"
                         android:textSize="16sp"
@@ -101,7 +101,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="24dp"
-                        android:layout_marginTop="32dp"
+                        android:layout_marginTop="24dp"
                         android:textColor="@color/white"
                         android:textSize="16sp"
                         app:layout_constraintStart_toEndOf="@+id/textView1"
@@ -121,7 +121,7 @@
                         android:id="@+id/textView1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="32dp"
+                        android:layout_marginTop="24dp"
                         android:text="@string/rating"
                         android:textColor="@color/white"
                         android:textSize="16sp"
@@ -151,7 +151,7 @@
                 android:elevation="0dp"
                 app:cardBackgroundColor="@color/darkGray"
                 app:cardCornerRadius="30dp"
-                app:contentPadding="15dp">
+                app:contentPadding="20dp">
 
                 <android.support.constraint.ConstraintLayout
                     android:layout_width="match_parent"

@@ -31,6 +31,8 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class MainActivity extends MvpAppCompatActivity implements MainContract {
+    private static final int SPAN_COUNT = 3;
+    private static final int DIRECTION_UP = 1;
 
     @BindView(R.id.switchFilter)
     Switch switchFilter;
@@ -111,12 +113,12 @@ public class MainActivity extends MvpAppCompatActivity implements MainContract {
     }
 
     private void initRecyclerView() {
-        recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
+        recyclerView.setLayoutManager(new GridLayoutManager(this, SPAN_COUNT));
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
-                boolean isBottomReached = !recyclerView.canScrollVertically(1);
+                boolean isBottomReached = !recyclerView.canScrollVertically(DIRECTION_UP);
                 if (isBottomReached) {
                     presenter.bottomIsReached();
                 }

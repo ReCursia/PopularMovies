@@ -60,7 +60,7 @@ public class MoviesAdapter extends RecyclerView.Adapter<MovieViewHolder> {
     public void onBindViewHolder(@NonNull final MovieViewHolder movieViewHolder, int i) {
         Movie movie = movies.get(i);
         Glide.with(context)
-                .load(NetworkUtils.BASE_POSTER_URL + NetworkUtils.BIG_POSTER_SIZE + movie.getPosterPath())
+                .load(NetworkUtils.BASE_POSTER_URL + NetworkUtils.SMALL_POSTER_SIZE + movie.getPosterPath())
                 .transition(DrawableTransitionOptions.withCrossFade(FADE_OUT_DURATION))
                 .into(movieViewHolder.moviePoster);
 

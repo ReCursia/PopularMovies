@@ -7,6 +7,9 @@ import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -52,6 +55,7 @@ public class DetailActivity extends MvpAppCompatActivity implements DetailContra
     DetailPresenter presenter;
 
     private TrailersAdapter adapter;
+    private Menu menu;
 
     @Override
     public void setTrailers(List<Trailer> trailers) {
@@ -71,7 +75,17 @@ public class DetailActivity extends MvpAppCompatActivity implements DetailContra
 
     @Override
     public void setFavoriteIconOn() {
-        //favoriteIcon.setImageDrawable(getDrawable(R.drawable.favorite_icon_on));
+        if (menu != null) {
+            menu.findItem(R.id.favoriteIcon).setIcon(getDrawable(R.drawable.favorite_icon_on));
+        }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.favoriteIcon) {
+            presenter.onFavoriteIconClicked();
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
@@ -86,13 +100,24 @@ public class DetailActivity extends MvpAppCompatActivity implements DetailContra
 
     @Override
     public void setFavoriteIconOff() {
-        //favoriteIcon.setImageDrawable(getDrawable(R.drawable.favorite_icon_off));
+        if (menu != null) {
+            menu.findItem(R.id.favoriteIcon).setIcon(getDrawable(R.drawable.favorite_icon_off));
+        }
     }
 
     @Override
     public boolean onSupportNavigateUp() {
         onBackPressed();
         return super.onSupportNavigateUp();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.detail_menu, menu);
+        this.menu = menu;
+        presenter.menuIsInflated();
+        return super.onCreateOptionsMenu(menu);
     }
 
     @Override
@@ -109,8 +134,10 @@ public class DetailActivity extends MvpAppCompatActivity implements DetailContra
     private void initToolbar() {
         setSupportActionBar(toolbar);
         //add back arrow
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setDisplayShowHomeEnabled(true);
+        }
     }
 
     private void initCollapsingToolbarLayout() {

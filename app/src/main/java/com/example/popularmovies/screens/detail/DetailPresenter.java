@@ -18,8 +18,6 @@ public class DetailPresenter extends MvpPresenter<DetailContract> {
     public DetailPresenter(MoviesApi client, int movieId) {
         this.client = client;
         this.movieId = movieId;
-        setMovieData();
-        setIconStatus();
         initTrailers();
         initMovieData();
     }
@@ -58,21 +56,14 @@ public class DetailPresenter extends MvpPresenter<DetailContract> {
         });
     }
 
-    private void setIconStatus() {
-        /*
-        if (favoriteMovie != null) {
-            getViewState().setFavoriteIconOn();
-        } else {
-            getViewState().setFavoriteIconOff();
-        }
-        */
-    }
-
-    private void setMovieData() {
-        //getViewState().setMovieDetail(movie);
+    private void setDefaultFavoriteIcon() {
+        //TODO implement
+        getViewState().setFavoriteIconOff();
     }
 
     public void onFavoriteIconClicked() {
+        getViewState().setFavoriteIconOn();
+        getViewState().showMovieAddedMessage();
         /*
         FavoriteMovie favoriteMovie = movieViewModel.getFavoriteMovieById(movieId);
         if (favoriteMovie == null) {
@@ -90,5 +81,9 @@ public class DetailPresenter extends MvpPresenter<DetailContract> {
 
     public void onTrailerPlayButtonClicked(int position) {
         getViewState().openTrailerUrl(position);
+    }
+
+    public void menuIsInflated() {
+        setDefaultFavoriteIcon();
     }
 }
