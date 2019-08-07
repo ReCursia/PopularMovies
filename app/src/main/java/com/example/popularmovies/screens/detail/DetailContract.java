@@ -21,6 +21,10 @@ public interface DetailContract extends MvpView {
     //List
     void setTrailers(List<Trailer> trailers);
 
+    void hideTrailers();
+
+    void showTrailers();
+
     @StateStrategyType(SkipStrategy.class)
     void showErrorMessage(String message);
 

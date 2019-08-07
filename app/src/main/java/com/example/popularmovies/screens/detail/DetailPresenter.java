@@ -1,10 +1,15 @@
 package com.example.popularmovies.screens.detail;
 
+import android.util.Log;
+
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
 import com.example.popularmovies.pojo.Movie;
 import com.example.popularmovies.pojo.MovieTrailers;
+import com.example.popularmovies.pojo.Trailer;
 import com.example.popularmovies.repository.MoviesApi;
+
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -18,6 +23,7 @@ public class DetailPresenter extends MvpPresenter<DetailContract> {
     public DetailPresenter(MoviesApi client, int movieId) {
         this.client = client;
         this.movieId = movieId;
+        getViewState().hideTrailers();
         initTrailers();
         initMovieData();
     }
@@ -28,7 +34,7 @@ public class DetailPresenter extends MvpPresenter<DetailContract> {
             @Override
             public void onResponse(Call<MovieTrailers> call, Response<MovieTrailers> response) {
                 if (response.isSuccessful()) {
-                    getViewState().setTrailers(response.body().getTrailers());
+                    handleSuccessfulResponse(response);
                 }
             }
 
@@ -37,6 +43,16 @@ public class DetailPresenter extends MvpPresenter<DetailContract> {
                 getViewState().showErrorMessage(t.getLocalizedMessage());
             }
         });
+    }
+
+    private void handleSuccessfulResponse(Response<MovieTrailers> response) {
+        List<Trailer> trailers = response.body().getTrailers();
+        if (!trailers.isEmpty()) {
+            getViewState().setTrailers(trailers);
+            getViewState().showTrailers();
+        } else {
+            getViewState().hideTrailers();
+        }
     }
 
     private void initMovieData() {
@@ -59,19 +75,7 @@ public class DetailPresenter extends MvpPresenter<DetailContract> {
     public void onFavoriteIconClicked() {
         getViewState().setFavoriteIconOn();
         getViewState().showMovieAddedMessage();
-        /*
-        FavoriteMovie favoriteMovie = movieViewModel.getFavoriteMovieById(movieId);
-        if (favoriteMovie == null) {
-            Movie movie = movieViewModel.getMovieById(movieId);
-            movieViewModel.insertFavoriteMovie(FavoriteMovie.fromMovie(movie));
-            getViewState().setFavoriteIconOn();
-            getViewState().showMovieAddedMessage();
-        } else {
-            movieViewModel.deleteFavoriteMovie(favoriteMovie);
-            getViewState().setFavoriteIconOff();
-            getViewState().showMovieRemovedMessage();
-        }
-        */
+        //TODO implement
     }
 
     public void onTrailerPlayButtonClicked(int position) {

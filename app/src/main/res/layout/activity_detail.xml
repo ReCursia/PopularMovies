@@ -6,7 +6,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/black"
-    android:fitsSystemWindows="true"
     tools:context=".screens.detail.DetailActivity">
 
     <android.support.design.widget.AppBarLayout
@@ -24,7 +23,8 @@
 
             <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/expanded_detail_layout">
+                android:layout_height="@dimen/expanded_detail_layout"
+                app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
                 <ImageView
                     android:id="@+id/posterImage"
@@ -181,6 +181,7 @@
             </android.support.v7.widget.CardView>
 
             <android.support.v7.widget.CardView
+                android:id="@+id/trailersCardView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/card_margin_horizontal"
