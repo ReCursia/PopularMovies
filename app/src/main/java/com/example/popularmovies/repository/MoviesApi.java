@@ -4,6 +4,7 @@ import com.example.popularmovies.pojo.DiscoverMovies;
 import com.example.popularmovies.pojo.Movie;
 import com.example.popularmovies.pojo.MovieTrailers;
 
+import io.reactivex.Observable;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
@@ -14,12 +15,12 @@ public interface MoviesApi {
     String LANGUAGE_VALUE = "ru-RU";
 
     @GET("3/discover/movie?api_key=" + API_KEY + "&language=" + LANGUAGE_VALUE)
-    Call<DiscoverMovies> discoverMovies(@Query("sort_by") String sortBy, @Query("page") int page);
+    Observable<DiscoverMovies> discoverMovies(@Query("sort_by") String sortBy, @Query("page") int page);
 
     @GET("/3/movie/{id}/videos?api_key=" + API_KEY)
-    Call<MovieTrailers> getMovieTrailersById(@Path("id") int id);
+    Observable<MovieTrailers> getMovieTrailersById(@Path("id") int id);
 
     @GET("3/movie/{id}?api_key=" + API_KEY + "&language=" + LANGUAGE_VALUE)
-    Call<Movie> getMovieById(@Path("id") int id);
+    Observable<Movie> getMovieById(@Path("id") int id);
 
 }

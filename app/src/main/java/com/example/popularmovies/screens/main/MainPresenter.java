@@ -1,5 +1,7 @@
 package com.example.popularmovies.screens.main;
 
+import android.annotation.SuppressLint;
+
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
 import com.example.popularmovies.R;
@@ -10,9 +12,8 @@ import com.example.popularmovies.utils.NetworkUtils;
 
 import java.util.List;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 
 @InjectViewState
 public class MainPresenter extends MvpPresenter<MainContract> {
@@ -51,31 +52,17 @@ public class MainPresenter extends MvpPresenter<MainContract> {
         getViewState().setRatedTextColor(R.color.white);
     }
 
+    @SuppressWarnings("ResultOfMethodCallIgnored")
+    @SuppressLint("CheckResult")
     private void loadMovies() {
-        Call<DiscoverMovies> call = client.discoverMovies(sortBy, currentPage);
-
-        if (tabIsChanged) {
-            getViewState().showLoading();
-        }
-
-        call.enqueue(new Callback<DiscoverMovies>() {
-            @Override
-            public void onResponse(Call<DiscoverMovies> call, Response<DiscoverMovies> response) {
-                if (response.isSuccessful()) {
-                    handleSuccessfulResponse(response);
-                }
-            }
-
-            @Override
-            public void onFailure(Call<DiscoverMovies> call, Throwable t) {
-                getViewState().hideLoading();
-                getViewState().showErrorMessage(t.getLocalizedMessage());
-            }
-        });
+        client.discoverMovies(sortBy, currentPage)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(this::handleSuccessfulResponse, this::handleErrorResponse); //Reflection
     }
 
-    private void handleSuccessfulResponse(Response<DiscoverMovies> response) {
-        List<Movie> movies = response.body().getMovies();
+    private void handleSuccessfulResponse(DiscoverMovies discoverMovies) {
+        List<Movie> movies = discoverMovies.getMovies();
         if (tabIsChanged) {
             getViewState().setMovies(movies);
             getViewState().hideLoading();
@@ -84,6 +71,11 @@ public class MainPresenter extends MvpPresenter<MainContract> {
             getViewState().addMovies(movies);
         }
         currentPage++;
+    }
+
+    private void handleErrorResponse(Throwable t) {
+        getViewState().hideLoading();
+        getViewState().showErrorMessage(t.getLocalizedMessage());
     }
 
     public void onPopularTextViewClicked() {

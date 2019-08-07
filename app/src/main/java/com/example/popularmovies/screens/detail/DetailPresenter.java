@@ -1,6 +1,6 @@
 package com.example.popularmovies.screens.detail;
 
-import android.util.Log;
+import android.annotation.SuppressLint;
 
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
@@ -11,9 +11,8 @@ import com.example.popularmovies.repository.MoviesApi;
 
 import java.util.List;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 
 @InjectViewState
 public class DetailPresenter extends MvpPresenter<DetailContract> {
@@ -28,25 +27,26 @@ public class DetailPresenter extends MvpPresenter<DetailContract> {
         initMovieData();
     }
 
+    @SuppressWarnings("ResultOfMethodCallIgnored")
+    @SuppressLint("CheckResult")
     private void initTrailers() {
-        Call<MovieTrailers> call = client.getMovieTrailersById(movieId);
-        call.enqueue(new Callback<MovieTrailers>() {
-            @Override
-            public void onResponse(Call<MovieTrailers> call, Response<MovieTrailers> response) {
-                if (response.isSuccessful()) {
-                    handleSuccessfulResponse(response);
-                }
-            }
-
-            @Override
-            public void onFailure(Call<MovieTrailers> call, Throwable t) {
-                getViewState().showErrorMessage(t.getLocalizedMessage());
-            }
-        });
+        client.getMovieTrailersById(movieId)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(this::handleSuccessfulResponse, this::handleErrorResponse);
     }
 
-    private void handleSuccessfulResponse(Response<MovieTrailers> response) {
-        List<Trailer> trailers = response.body().getTrailers();
+    @SuppressWarnings("ResultOfMethodCallIgnored")
+    @SuppressLint("CheckResult")
+    private void initMovieData() {
+        client.getMovieById(movieId)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(this::handleSuccessfulResponse, this::handleErrorResponse);
+    }
+
+    private void handleSuccessfulResponse(MovieTrailers movieTrailers) {
+        List<Trailer> trailers = movieTrailers.getTrailers();
         if (!trailers.isEmpty()) {
             getViewState().setTrailers(trailers);
             getViewState().showTrailers();
@@ -55,21 +55,12 @@ public class DetailPresenter extends MvpPresenter<DetailContract> {
         }
     }
 
-    private void initMovieData() {
-        Call<Movie> call = client.getMovieById(movieId);
-        call.enqueue(new Callback<Movie>() {
-            @Override
-            public void onResponse(Call<Movie> call, Response<Movie> response) {
-                if (response.isSuccessful()) {
-                    getViewState().setMovieDetail(response.body());
-                }
-            }
+    private void handleErrorResponse(Throwable t) {
+        getViewState().showErrorMessage(t.getLocalizedMessage());
+    }
 
-            @Override
-            public void onFailure(Call<Movie> call, Throwable t) {
-                getViewState().showErrorMessage(t.getLocalizedMessage());
-            }
-        });
+    private void handleSuccessfulResponse(Movie movie) {
+        getViewState().setMovieDetail(movie);
     }
 
     public void onFavoriteIconClicked() {
