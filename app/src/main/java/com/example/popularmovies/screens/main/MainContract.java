@@ -10,6 +10,7 @@ import java.util.List;
 
 @StateStrategyType(AddToEndSingleStrategy.class)
 public interface MainContract extends MvpView {
+
     //Switch
     void setSwitchOff();
 
@@ -40,4 +41,5 @@ public interface MainContract extends MvpView {
 
     @StateStrategyType(SkipStrategy.class)
     void openFavoriteScreen();
+
 }

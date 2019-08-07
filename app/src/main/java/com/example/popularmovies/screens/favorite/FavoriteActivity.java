@@ -30,12 +30,13 @@ public class FavoriteActivity extends MvpAppCompatActivity implements FavoriteCo
         initAdapter();
     }
 
+    private void initRecyclerView() {
+        recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
+    }
+
     private void initAdapter() {
         moviesAdapter = new MoviesAdapter(this);
         recyclerView.setAdapter(moviesAdapter);
     }
 
-    private void initRecyclerView() {
-        recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
-    }
 }

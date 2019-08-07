@@ -51,4 +51,5 @@ public class DiscoverMovies {
     public void setMovies(List<Movie> movies) {
         this.movies = movies;
     }
+
 }

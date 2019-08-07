@@ -25,4 +25,5 @@ public class MoviesService {
     public MoviesApi getMoviesApi() {
         return retrofit.create(MoviesApi.class);
     }
+
 }

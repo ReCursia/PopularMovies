@@ -96,14 +96,6 @@ public class MainActivity extends MvpAppCompatActivity implements MainContract {
         initAdapter();
     }
 
-    private void initAdapter() {
-        moviesAdapter = new MoviesAdapter(this);
-        moviesAdapter.setClickListener(position -> {
-            presenter.onMovieClicked(position);
-        });
-        recyclerView.setAdapter(moviesAdapter);
-    }
-
     private void initSwitch() {
         switchFilter.setOnCheckedChangeListener(
                 (buttonView, isChecked) -> {
@@ -124,6 +116,14 @@ public class MainActivity extends MvpAppCompatActivity implements MainContract {
                 }
             }
         });
+    }
+
+    private void initAdapter() {
+        moviesAdapter = new MoviesAdapter(this);
+        moviesAdapter.setClickListener(position -> {
+            presenter.onMovieClicked(position);
+        });
+        recyclerView.setAdapter(moviesAdapter);
     }
 
     @Override
@@ -180,4 +180,5 @@ public class MainActivity extends MvpAppCompatActivity implements MainContract {
         intent.putExtra("id", moviesAdapter.getItem(position).getId());
         startActivity(intent);
     }
+
 }

@@ -28,4 +28,5 @@ public class MovieTrailers {
     public void setTrailers(List<Trailer> trailers) {
         this.trailers = trailers;
     }
+
 }

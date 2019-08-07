@@ -21,4 +21,5 @@ public interface MoviesApi {
 
     @GET("3/movie/{id}?api_key=" + API_KEY + "&language=" + LANGUAGE_VALUE)
     Call<Movie> getMovieById(@Path("id") int id);
+
 }

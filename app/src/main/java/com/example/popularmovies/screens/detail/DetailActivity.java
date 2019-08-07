@@ -131,6 +131,16 @@ public class DetailActivity extends MvpAppCompatActivity implements DetailContra
         initCollapsingToolbarLayout();
     }
 
+    private void initRecyclerView() {
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+    }
+
+    private void initAdapter() {
+        adapter = new TrailersAdapter();
+        adapter.setClickListener(position -> presenter.onTrailerPlayButtonClicked(position));
+        recyclerView.setAdapter(adapter);
+    }
+
     private void initToolbar() {
         setSupportActionBar(toolbar);
         //add back arrow
@@ -151,16 +161,6 @@ public class DetailActivity extends MvpAppCompatActivity implements DetailContra
         startActivity(browserIntent);
     }
 
-    private void initRecyclerView() {
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-    }
-
-    private void initAdapter() {
-        adapter = new TrailersAdapter();
-        adapter.setClickListener(position -> presenter.onTrailerPlayButtonClicked(position));
-        recyclerView.setAdapter(adapter);
-    }
-
     @Override
     public void setMovieDetail(Movie movie) {
         collapsingToolbarLayout.setTitle(movie.getTitle());
@@ -174,4 +174,5 @@ public class DetailActivity extends MvpAppCompatActivity implements DetailContra
                 .transition(DrawableTransitionOptions.withCrossFade(FADE_OUT_DURATION))
                 .into(posterImage);
     }
+
 }

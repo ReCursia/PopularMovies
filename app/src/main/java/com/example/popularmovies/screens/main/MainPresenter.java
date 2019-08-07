@@ -28,6 +28,29 @@ public class MainPresenter extends MvpPresenter<MainContract> {
         onSwitchValueChanged(false);
     }
 
+    public void onSwitchValueChanged(boolean isChecked) {
+        if (isChecked) {
+            makeAccentRatedText();
+            sortBy = NetworkUtils.TOP_RATED;
+        } else {
+            makeAccentPopularText();
+            sortBy = NetworkUtils.POPULARITY;
+        }
+        tabIsChanged = true;
+        currentPage = 1;
+        loadMovies();
+    }
+
+    private void makeAccentRatedText() {
+        getViewState().setPopularTextColor(R.color.white);
+        getViewState().setRatedTextColor(R.color.colorAccent);
+    }
+
+    private void makeAccentPopularText() {
+        getViewState().setPopularTextColor(R.color.colorAccent);
+        getViewState().setRatedTextColor(R.color.white);
+    }
+
     private void loadMovies() {
         Call<DiscoverMovies> call = client.discoverMovies(sortBy, currentPage);
 
@@ -75,29 +98,6 @@ public class MainPresenter extends MvpPresenter<MainContract> {
         loadMovies();
     }
 
-    public void onSwitchValueChanged(boolean isChecked) {
-        if (isChecked) {
-            makeAccentRatedText();
-            sortBy = NetworkUtils.TOP_RATED;
-        } else {
-            makeAccentPopularText();
-            sortBy = NetworkUtils.POPULARITY;
-        }
-        tabIsChanged = true;
-        currentPage = 1;
-        loadMovies();
-    }
-
-    private void makeAccentPopularText() {
-        getViewState().setPopularTextColor(R.color.colorAccent);
-        getViewState().setRatedTextColor(R.color.white);
-    }
-
-    private void makeAccentRatedText() {
-        getViewState().setPopularTextColor(R.color.white);
-        getViewState().setRatedTextColor(R.color.colorAccent);
-    }
-
     public void onMovieClicked(int position) {
         getViewState().openDetailScreen(position);
     }
@@ -105,4 +105,5 @@ public class MainPresenter extends MvpPresenter<MainContract> {
     public void onItemFavoriteClicked() {
         getViewState().openFavoriteScreen();
     }
+
 }

@@ -57,4 +57,5 @@ public class TrailersAdapter extends RecyclerView.Adapter<TrailerViewHolder> {
     public int getItemCount() {
         return trailers.size();
     }
+
 }

@@ -22,23 +22,6 @@ public class DetailPresenter extends MvpPresenter<DetailContract> {
         initMovieData();
     }
 
-    private void initMovieData() {
-        Call<Movie> call = client.getMovieById(movieId);
-        call.enqueue(new Callback<Movie>() {
-            @Override
-            public void onResponse(Call<Movie> call, Response<Movie> response) {
-                if (response.isSuccessful()) {
-                    getViewState().setMovieDetail(response.body());
-                }
-            }
-
-            @Override
-            public void onFailure(Call<Movie> call, Throwable t) {
-                getViewState().showErrorMessage(t.getLocalizedMessage());
-            }
-        });
-    }
-
     private void initTrailers() {
         Call<MovieTrailers> call = client.getMovieTrailersById(movieId);
         call.enqueue(new Callback<MovieTrailers>() {
@@ -56,9 +39,21 @@ public class DetailPresenter extends MvpPresenter<DetailContract> {
         });
     }
 
-    private void setDefaultFavoriteIcon() {
-        //TODO implement
-        getViewState().setFavoriteIconOff();
+    private void initMovieData() {
+        Call<Movie> call = client.getMovieById(movieId);
+        call.enqueue(new Callback<Movie>() {
+            @Override
+            public void onResponse(Call<Movie> call, Response<Movie> response) {
+                if (response.isSuccessful()) {
+                    getViewState().setMovieDetail(response.body());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Movie> call, Throwable t) {
+                getViewState().showErrorMessage(t.getLocalizedMessage());
+            }
+        });
     }
 
     public void onFavoriteIconClicked() {
@@ -86,4 +81,10 @@ public class DetailPresenter extends MvpPresenter<DetailContract> {
     public void menuIsInflated() {
         setDefaultFavoriteIcon();
     }
+
+    private void setDefaultFavoriteIcon() {
+        //TODO implement
+        getViewState().setFavoriteIconOff();
+    }
+
 }

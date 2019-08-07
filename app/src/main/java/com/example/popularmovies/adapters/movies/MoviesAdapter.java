@@ -37,7 +37,6 @@ public class MoviesAdapter extends RecyclerView.Adapter<MovieViewHolder> {
         return movies.get(position);
     }
 
-
     public void setMovies(List<Movie> movies) {
         this.movies = movies;
         notifyDataSetChanged();
@@ -47,6 +46,11 @@ public class MoviesAdapter extends RecyclerView.Adapter<MovieViewHolder> {
         int posBefore = getItemCount();
         movies.addAll(newMovies);
         notifyItemRangeInserted(posBefore, newMovies.size());
+    }
+
+    @Override
+    public int getItemCount() {
+        return movies.size();
     }
 
     @NonNull
@@ -71,8 +75,4 @@ public class MoviesAdapter extends RecyclerView.Adapter<MovieViewHolder> {
         });
     }
 
-    @Override
-    public int getItemCount() {
-        return movies.size();
-    }
 }
