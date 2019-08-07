@@ -31,8 +31,6 @@ public class DetailPresenter extends MvpPresenter<DetailContract> {
             public void onResponse(Call<Movie> call, Response<Movie> response) {
                 if (response.isSuccessful()) {
                     getViewState().setMovieDetail(response.body());
-                } else {
-                    getViewState().showErrorMessage(response.message());
                 }
             }
 

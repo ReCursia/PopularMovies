@@ -15,6 +15,7 @@ import com.arellomobile.mvp.MvpAppCompatActivity;
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.arellomobile.mvp.presenter.ProvidePresenter;
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.example.popularmovies.R;
 import com.example.popularmovies.adapters.trailers.TrailersAdapter;
 import com.example.popularmovies.pojo.Movie;
@@ -28,6 +29,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class DetailActivity extends MvpAppCompatActivity implements DetailContract {
+    private final static int FADE_OUT_DURATION = 100; //ms
+
     @BindView(R.id.descriptionTextView)
     TextView descriptionTextView;
     @BindView(R.id.ratingTextView)
@@ -141,6 +144,7 @@ public class DetailActivity extends MvpAppCompatActivity implements DetailContra
         //Image
         Glide.with(this)
                 .load(NetworkUtils.BASE_POSTER_URL + NetworkUtils.BIG_POSTER_SIZE + movie.getPosterPath())
+                .transition(DrawableTransitionOptions.withCrossFade(FADE_OUT_DURATION))
                 .into(posterImage);
     }
 }

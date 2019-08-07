@@ -11,6 +11,7 @@ import java.util.List;
 
 @StateStrategyType(AddToEndSingleStrategy.class)
 public interface DetailContract extends MvpView {
+
     void setMovieDetail(Movie movie);
 
     void setFavoriteIconOn();
