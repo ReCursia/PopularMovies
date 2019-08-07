@@ -37,4 +37,8 @@ public class FavoritePresenter extends MvpPresenter<FavoriteContract> {
         getViewState().showErrorMessage(t.getLocalizedMessage());
     }
 
+    public void onItemClicked(int position) {
+        getViewState().openDetailScreen(position);
+    }
+
 }

@@ -8,7 +8,7 @@ import android.content.Context;
 import com.example.popularmovies.pojo.Movie;
 import com.example.popularmovies.pojo.Trailer;
 
-@Database(entities = {Movie.class, Trailer.class}, version = 5, exportSchema = false)
+@Database(entities = {Movie.class, Trailer.class}, version = 9, exportSchema = false)
 public abstract class MovieDatabase extends RoomDatabase {
     private static final String DB_NAME = "movies2.db";
     private static MovieDatabase instance;
@@ -25,5 +25,6 @@ public abstract class MovieDatabase extends RoomDatabase {
     public abstract MovieDao movieDao();
 
     public abstract TrailerDao trailerDao();
+
 }
 

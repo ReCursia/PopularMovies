@@ -34,26 +34,6 @@ public class DetailPresenter extends MvpPresenter<DetailContract> {
         this.trailerDao = trailerDao;
         this.movieId = movieId;
         getViewState().hideTrailers();
-        initTrailers(); //из интернета
-        initMovieData(); //из интернета
-    }
-
-    @SuppressWarnings("ResultOfMethodCallIgnored")
-    @SuppressLint("CheckResult")
-    private void initTrailers() {
-        client.getMovieTrailersById(movieId)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(this::handleSuccessfulResponse, this::handleErrorResponse);
-    }
-
-    @SuppressWarnings("ResultOfMethodCallIgnored")
-    @SuppressLint("CheckResult")
-    private void initMovieData() {
-        client.getMovieById(movieId)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(this::handleSuccessfulResponse, this::handleErrorResponse);
     }
 
     private void handleSuccessfulResponse(MovieTrailers movieTrailers) {
@@ -88,32 +68,43 @@ public class DetailPresenter extends MvpPresenter<DetailContract> {
     @SuppressLint("CheckResult")
     private void deleteFavoriteMovie() {
         //Delete movie
-        Completable.fromAction(() -> movieDao.deleteMovie(movie));
+        Completable.fromAction(() -> movieDao.deleteMovie(movie))
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe();
         //Delete trailers
-        /*
-        Completable.fromAction(() -> trailerDao.deleteTrailers(trailers));
+        for (Trailer trailer : trailers) {
+            Completable.fromAction(() -> trailerDao.deleteTrailer(trailer))
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe();
+        }
         getViewState().setFavoriteIconOff();
         getViewState().showMovieRemovedMessage();
-        */
     }
 
     @SuppressLint("CheckResult")
     private void insertFavoriteMovie() {
         //Save movie
-        Completable.fromAction(() -> movieDao.insertMovie(movie));
+        Completable.fromAction(() -> movieDao.insertMovie(movie))
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe();
         //Save trailers
-        /*
         bindMovieIdToEachTrailer(); //TODO think about better solution
-
-        Completable.fromAction(() -> trailerDao.insertTrailers(trailers));
-        */
+        for (Trailer trailer : trailers) {
+            Completable.fromAction(() -> trailerDao.insertTrailer(trailer))
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe();
+        }
         getViewState().setFavoriteIconOn();
         getViewState().showMovieAddedMessage();
     }
 
     private void bindMovieIdToEachTrailer() {
         for (Trailer trailer : trailers) {
-            trailer.setMovieId(movie.getId());
+            trailer.setMovieId(movieId);
         }
     }
 
@@ -132,9 +123,12 @@ public class DetailPresenter extends MvpPresenter<DetailContract> {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new DisposableSingleObserver<Movie>() {
                     @Override
-                    public void onSuccess(Movie movie) {
+                    public void onSuccess(Movie movieFromDb) {
+                        movie = movieFromDb;
                         if (movie != null) {
                             getViewState().setFavoriteIconOn();
+                            getViewState().setMovieDetail(movieFromDb);
+                            loadTrailersFromDb();
                             isFavorite = true;
                         }
                     }
@@ -142,9 +136,46 @@ public class DetailPresenter extends MvpPresenter<DetailContract> {
                     @Override
                     public void onError(Throwable e) {
                         getViewState().setFavoriteIconOff();
-                        getViewState().showErrorMessage(e.getLocalizedMessage());
+                        //trying to load from network
+                        initMovieData();
+                        initTrailers();
                     }
                 });
+    }
+
+    @SuppressWarnings("ResultOfMethodCallIgnored")
+    @SuppressLint("CheckResult")
+    private void loadTrailersFromDb() {
+        trailerDao.getTrailersById(movieId)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(trailers -> {
+                    this.trailers = trailers;
+                    if (!trailers.isEmpty()) {
+                        getViewState().setTrailers(trailers);
+                        getViewState().showTrailers();
+                    } else {
+                        getViewState().hideTrailers();
+                    }
+                });
+    }
+
+    @SuppressWarnings("ResultOfMethodCallIgnored")
+    @SuppressLint("CheckResult")
+    private void initMovieData() {
+        client.getMovieById(movieId)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(this::handleSuccessfulResponse, this::handleErrorResponse);
+    }
+
+    @SuppressWarnings("ResultOfMethodCallIgnored")
+    @SuppressLint("CheckResult")
+    private void initTrailers() {
+        client.getMovieTrailersById(movieId)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(this::handleSuccessfulResponse, this::handleErrorResponse);
     }
 
 }

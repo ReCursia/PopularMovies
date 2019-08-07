@@ -10,9 +10,14 @@ import java.util.List;
 
 @StateStrategyType(AddToEndSingleStrategy.class)
 public interface FavoriteContract extends MvpView {
+
     //List
     void setMovies(List<Movie> movies);
 
     @StateStrategyType(SkipStrategy.class)
     void showErrorMessage(String message);
+
+    @StateStrategyType(SkipStrategy.class)
+    void openDetailScreen(int position);
+
 }
