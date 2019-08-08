@@ -1,4 +1,4 @@
-package com.example.popularmovies.adapters.movies;
+package com.example.popularmovies.ui.adapters.movies;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -10,8 +10,8 @@ import android.view.ViewGroup;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.example.popularmovies.R;
-import com.example.popularmovies.adapters.OnItemClickListener;
 import com.example.popularmovies.pojo.Movie;
+import com.example.popularmovies.ui.adapters.OnItemClickListener;
 import com.example.popularmovies.utils.NetworkUtils;
 
 import java.util.ArrayList;

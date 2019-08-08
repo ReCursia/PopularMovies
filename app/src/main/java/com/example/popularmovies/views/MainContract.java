@@ -1,4 +1,4 @@
-package com.example.popularmovies.screens.main;
+package com.example.popularmovies.views;
 
 import com.arellomobile.mvp.MvpView;
 import com.arellomobile.mvp.viewstate.strategy.AddToEndSingleStrategy;

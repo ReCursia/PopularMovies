@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/black"
-    tools:context=".screens.favorite.FavoriteActivity">
+    tools:context=".ui.activities.FavoriteActivity">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"

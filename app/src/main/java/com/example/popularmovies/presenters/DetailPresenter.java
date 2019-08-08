@@ -1,4 +1,4 @@
-package com.example.popularmovies.screens.detail;
+package com.example.popularmovies.presenters;
 
 import android.annotation.SuppressLint;
 
@@ -11,6 +11,7 @@ import com.example.popularmovies.pojo.Movie;
 import com.example.popularmovies.pojo.MovieTrailers;
 import com.example.popularmovies.pojo.Trailer;
 import com.example.popularmovies.utils.NetworkUtils;
+import com.example.popularmovies.views.DetailContract;
 
 import java.util.List;
 
@@ -28,7 +29,7 @@ public class DetailPresenter extends MvpPresenter<DetailContract> {
     private int movieId;
     private boolean isFavorite;
 
-    DetailPresenter(MoviesApi client, MovieDao movieDao, TrailerDao trailerDao, int movieId) {
+    public DetailPresenter(MoviesApi client, MovieDao movieDao, TrailerDao trailerDao, int movieId) {
         this.client = client;
         this.movieDao = movieDao;
         this.trailerDao = trailerDao;
@@ -54,8 +55,7 @@ public class DetailPresenter extends MvpPresenter<DetailContract> {
         getViewState().showErrorMessage(t.getLocalizedMessage());
     }
 
-    @SuppressLint("CheckResult")
-    void onFavoriteIconClicked() {
+    public void onFavoriteIconClicked() {
         if (isFavorite) {
             deleteFavoriteMovie();
         } else {
@@ -120,11 +120,11 @@ public class DetailPresenter extends MvpPresenter<DetailContract> {
         }
     }
 
-    void onTrailerPlayButtonClicked(int position) {
+    public void onTrailerPlayButtonClicked(int position) {
         getViewState().openTrailerUrl(position);
     }
 
-    void menuIsInflated() {
+    public void menuIsInflated() {
         setDefaultFavoriteIcon();
     }
 

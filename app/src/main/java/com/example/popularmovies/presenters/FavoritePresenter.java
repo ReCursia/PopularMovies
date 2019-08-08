@@ -1,4 +1,4 @@
-package com.example.popularmovies.screens.favorite;
+package com.example.popularmovies.presenters;
 
 import android.annotation.SuppressLint;
 
@@ -6,6 +6,7 @@ import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
 import com.example.popularmovies.database.MovieDao;
 import com.example.popularmovies.pojo.Movie;
+import com.example.popularmovies.views.FavoriteContract;
 
 import java.util.List;
 
@@ -16,7 +17,7 @@ import io.reactivex.schedulers.Schedulers;
 public class FavoritePresenter extends MvpPresenter<FavoriteContract> {
     private MovieDao movieDao;
 
-    FavoritePresenter(MovieDao movieDao) {
+    public FavoritePresenter(MovieDao movieDao) {
         this.movieDao = movieDao;
         initMovies();
     }
@@ -38,7 +39,7 @@ public class FavoritePresenter extends MvpPresenter<FavoriteContract> {
         getViewState().showErrorMessage(t.getLocalizedMessage());
     }
 
-    void onItemClicked(int position) {
+    public void onItemClicked(int position) {
         getViewState().openDetailScreen(position);
     }
 

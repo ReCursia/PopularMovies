@@ -1,4 +1,4 @@
-package com.example.popularmovies.screens.detail;
+package com.example.popularmovies.ui.activities;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -22,12 +22,14 @@ import com.arellomobile.mvp.presenter.ProvidePresenter;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.example.popularmovies.R;
-import com.example.popularmovies.adapters.trailers.TrailersAdapter;
 import com.example.popularmovies.database.MovieDatabase;
 import com.example.popularmovies.network.MoviesService;
 import com.example.popularmovies.pojo.Movie;
 import com.example.popularmovies.pojo.Trailer;
+import com.example.popularmovies.presenters.DetailPresenter;
+import com.example.popularmovies.ui.adapters.trailers.TrailersAdapter;
 import com.example.popularmovies.utils.NetworkUtils;
+import com.example.popularmovies.views.DetailContract;
 
 import java.util.List;
 

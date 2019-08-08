@@ -1,4 +1,4 @@
-package com.example.popularmovies.screens.main;
+package com.example.popularmovies.ui.activities;
 
 import android.app.AlertDialog;
 import android.content.ActivityNotFoundException;
@@ -22,12 +22,12 @@ import com.arellomobile.mvp.MvpAppCompatActivity;
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.arellomobile.mvp.presenter.ProvidePresenter;
 import com.example.popularmovies.R;
-import com.example.popularmovies.adapters.movies.MoviesAdapter;
 import com.example.popularmovies.network.MoviesService;
 import com.example.popularmovies.pojo.Movie;
-import com.example.popularmovies.screens.detail.DetailActivity;
-import com.example.popularmovies.screens.favorite.FavoriteActivity;
+import com.example.popularmovies.presenters.MainPresenter;
+import com.example.popularmovies.ui.adapters.movies.MoviesAdapter;
 import com.example.popularmovies.utils.NetworkUtils;
+import com.example.popularmovies.views.MainContract;
 
 import java.util.List;
 

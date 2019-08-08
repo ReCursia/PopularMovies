@@ -11,9 +11,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".screens.favorite.FavoriteActivity"></activity>
-        <activity android:name=".screens.detail.DetailActivity" />
-        <activity android:name=".screens.main.MainActivity">
+        <activity android:name=".ui.activities.FavoriteActivity"></activity>
+        <activity android:name=".ui.activities.DetailActivity" />
+        <activity android:name=".ui.activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -1,4 +1,4 @@
-package com.example.popularmovies.screens.main;
+package com.example.popularmovies.presenters;
 
 import android.annotation.SuppressLint;
 
@@ -9,6 +9,7 @@ import com.example.popularmovies.network.MoviesApi;
 import com.example.popularmovies.pojo.DiscoverMovies;
 import com.example.popularmovies.pojo.Movie;
 import com.example.popularmovies.utils.NetworkUtils;
+import com.example.popularmovies.views.MainContract;
 
 import java.util.List;
 
@@ -23,13 +24,13 @@ public class MainPresenter extends MvpPresenter<MainContract> {
     private String sortBy;
     private boolean tabIsChanged;
 
-    MainPresenter(MoviesApi client) {
+    public MainPresenter(MoviesApi client) {
         this.client = client;
         getViewState().setSwitchOff();
         onSwitchValueChanged(false);
     }
 
-    void onSwitchValueChanged(boolean isChecked) {
+    public void onSwitchValueChanged(boolean isChecked) {
         if (isChecked) {
             makeAccentRatedText();
             sortBy = NetworkUtils.TOP_RATED;
@@ -55,7 +56,7 @@ public class MainPresenter extends MvpPresenter<MainContract> {
     @SuppressWarnings("ResultOfMethodCallIgnored")
     @SuppressLint("CheckResult")
     private void loadMovies() {
-        getViewState().showLoading();
+        if (tabIsChanged) getViewState().showLoading();
         client.discoverMovies(sortBy, currentPage, NetworkUtils.getDefaultLanguage())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -79,39 +80,39 @@ public class MainPresenter extends MvpPresenter<MainContract> {
         getViewState().showErrorMessage(t.getLocalizedMessage());
     }
 
-    void onPopularTextViewClicked() {
+    public void onPopularTextViewClicked() {
         getViewState().setSwitchOff();
     }
 
-    void onRatedTextViewClicked() {
+    public void onRatedTextViewClicked() {
         getViewState().setSwitchOn();
     }
 
-    void bottomIsReached() {
+    public void bottomIsReached() {
         loadMovies();
     }
 
-    void onMovieClicked(int position) {
+    public void onMovieClicked(int position) {
         getViewState().openDetailScreen(position);
     }
 
-    void onItemFavoriteClicked() {
+    public void onItemFavoriteClicked() {
         getViewState().openFavoriteScreen();
     }
 
-    void onItemAboutClicked() {
+    public void onItemAboutClicked() {
         getViewState().openAboutDialog();
     }
 
-    void onDismissDialog() {
+    public void onDismissDialog() {
         getViewState().hideAboutDialog();
     }
 
-    void onPositiveDialogButtonClicked() {
+    public void onPositiveDialogButtonClicked() {
         getViewState().openGooglePlayPage();
     }
 
-    void onNegativeDialogButtonClicked() {
+    public void onNegativeDialogButtonClicked() {
         getViewState().hideAboutDialog();
     }
 }

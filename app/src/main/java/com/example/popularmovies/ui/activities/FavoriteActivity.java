@@ -1,4 +1,4 @@
-package com.example.popularmovies.screens.favorite;
+package com.example.popularmovies.ui.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,10 +11,11 @@ import com.arellomobile.mvp.MvpAppCompatActivity;
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.arellomobile.mvp.presenter.ProvidePresenter;
 import com.example.popularmovies.R;
-import com.example.popularmovies.adapters.movies.MoviesAdapter;
 import com.example.popularmovies.database.MovieDatabase;
 import com.example.popularmovies.pojo.Movie;
-import com.example.popularmovies.screens.detail.DetailActivity;
+import com.example.popularmovies.presenters.FavoritePresenter;
+import com.example.popularmovies.ui.adapters.movies.MoviesAdapter;
+import com.example.popularmovies.views.FavoriteContract;
 
 import java.util.List;
 
