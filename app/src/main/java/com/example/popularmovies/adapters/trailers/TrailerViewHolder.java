@@ -17,7 +17,7 @@ public class TrailerViewHolder extends RecyclerView.ViewHolder {
     @BindView(R.id.trailerTitle)
     TextView trailerTitle;
 
-    public TrailerViewHolder(@NonNull View itemView) {
+    TrailerViewHolder(@NonNull View itemView) {
         super(itemView);
         ButterKnife.bind(this, itemView);
     }

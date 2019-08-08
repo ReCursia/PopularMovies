@@ -22,9 +22,6 @@ public interface TrailerDao {
     void insertTrailers(List<Trailer> trailers);
 
     @Delete
-    void deleteTrailer(Trailer trailer);
-
-    @Delete
     void deleteTrailers(List<Trailer> trailers);
 
 }

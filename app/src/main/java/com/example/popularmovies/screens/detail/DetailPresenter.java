@@ -28,7 +28,7 @@ public class DetailPresenter extends MvpPresenter<DetailContract> {
     private int movieId;
     private boolean isFavorite;
 
-    public DetailPresenter(MoviesApi client, MovieDao movieDao, TrailerDao trailerDao, int movieId) {
+    DetailPresenter(MoviesApi client, MovieDao movieDao, TrailerDao trailerDao, int movieId) {
         this.client = client;
         this.movieDao = movieDao;
         this.trailerDao = trailerDao;
@@ -55,7 +55,7 @@ public class DetailPresenter extends MvpPresenter<DetailContract> {
     }
 
     @SuppressLint("CheckResult")
-    public void onFavoriteIconClicked() {
+    void onFavoriteIconClicked() {
         if (isFavorite) {
             deleteFavoriteMovie();
         } else {
@@ -120,11 +120,11 @@ public class DetailPresenter extends MvpPresenter<DetailContract> {
         }
     }
 
-    public void onTrailerPlayButtonClicked(int position) {
+    void onTrailerPlayButtonClicked(int position) {
         getViewState().openTrailerUrl(position);
     }
 
-    public void menuIsInflated() {
+    void menuIsInflated() {
         setDefaultFavoriteIcon();
     }
 

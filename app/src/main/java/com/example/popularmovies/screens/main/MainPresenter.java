@@ -23,13 +23,13 @@ public class MainPresenter extends MvpPresenter<MainContract> {
     private String sortBy;
     private boolean tabIsChanged;
 
-    public MainPresenter(MoviesApi client) {
+    MainPresenter(MoviesApi client) {
         this.client = client;
         getViewState().setSwitchOff();
         onSwitchValueChanged(false);
     }
 
-    public void onSwitchValueChanged(boolean isChecked) {
+    void onSwitchValueChanged(boolean isChecked) {
         if (isChecked) {
             makeAccentRatedText();
             sortBy = NetworkUtils.TOP_RATED;
@@ -78,23 +78,23 @@ public class MainPresenter extends MvpPresenter<MainContract> {
         getViewState().showErrorMessage(t.getLocalizedMessage());
     }
 
-    public void onPopularTextViewClicked() {
+    void onPopularTextViewClicked() {
         getViewState().setSwitchOff();
     }
 
-    public void onRatedTextViewClicked() {
+    void onRatedTextViewClicked() {
         getViewState().setSwitchOn();
     }
 
-    public void bottomIsReached() {
+    void bottomIsReached() {
         loadMovies();
     }
 
-    public void onMovieClicked(int position) {
+    void onMovieClicked(int position) {
         getViewState().openDetailScreen(position);
     }
 
-    public void onItemFavoriteClicked() {
+    void onItemFavoriteClicked() {
         getViewState().openFavoriteScreen();
     }
 

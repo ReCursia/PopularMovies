@@ -24,12 +24,13 @@ import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.example.popularmovies.R;
 import com.example.popularmovies.adapters.trailers.TrailersAdapter;
 import com.example.popularmovies.database.MovieDatabase;
+import com.example.popularmovies.network.MoviesService;
 import com.example.popularmovies.pojo.Movie;
 import com.example.popularmovies.pojo.Trailer;
-import com.example.popularmovies.network.MoviesService;
 import com.example.popularmovies.utils.NetworkUtils;
 
 import java.util.List;
+import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -183,7 +184,7 @@ public class DetailActivity extends MvpAppCompatActivity implements DetailContra
         originalTitleTextView.setText(movie.getOriginalTitle());
         releaseDateTextView.setText(movie.getReleaseDate());
         descriptionTextView.setText(movie.getOverview());
-        ratingTextView.setText(Double.toString(movie.getVoteAverage()));
+        ratingTextView.setText(String.format(Locale.getDefault(), "%f", movie.getVoteAverage()));
         //Image
         Glide.with(this)
                 .load(NetworkUtils.BASE_POSTER_URL + NetworkUtils.BIG_POSTER_SIZE + movie.getPosterPath())

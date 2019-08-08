@@ -19,8 +19,8 @@ import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.arellomobile.mvp.presenter.ProvidePresenter;
 import com.example.popularmovies.R;
 import com.example.popularmovies.adapters.movies.MoviesAdapter;
-import com.example.popularmovies.pojo.Movie;
 import com.example.popularmovies.network.MoviesService;
+import com.example.popularmovies.pojo.Movie;
 import com.example.popularmovies.screens.detail.DetailActivity;
 import com.example.popularmovies.screens.favorite.FavoriteActivity;
 
@@ -98,10 +98,7 @@ public class MainActivity extends MvpAppCompatActivity implements MainContract {
 
     private void initSwitch() {
         switchFilter.setOnCheckedChangeListener(
-                (buttonView, isChecked) -> {
-                    presenter.onSwitchValueChanged(isChecked);
-                }
-        );
+                (buttonView, isChecked) -> presenter.onSwitchValueChanged(isChecked));
     }
 
     private void initRecyclerView() {
@@ -120,9 +117,7 @@ public class MainActivity extends MvpAppCompatActivity implements MainContract {
 
     private void initAdapter() {
         moviesAdapter = new MoviesAdapter(this);
-        moviesAdapter.setClickListener(position -> {
-            presenter.onMovieClicked(position);
-        });
+        moviesAdapter.setClickListener(position -> presenter.onMovieClicked(position));
         recyclerView.setAdapter(moviesAdapter);
     }
 

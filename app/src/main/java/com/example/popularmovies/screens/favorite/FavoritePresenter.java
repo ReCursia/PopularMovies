@@ -16,7 +16,7 @@ import io.reactivex.schedulers.Schedulers;
 public class FavoritePresenter extends MvpPresenter<FavoriteContract> {
     private MovieDao movieDao;
 
-    public FavoritePresenter(MovieDao movieDao) {
+    FavoritePresenter(MovieDao movieDao) {
         this.movieDao = movieDao;
         initMovies();
     }
@@ -38,7 +38,7 @@ public class FavoritePresenter extends MvpPresenter<FavoriteContract> {
         getViewState().showErrorMessage(t.getLocalizedMessage());
     }
 
-    public void onItemClicked(int position) {
+    void onItemClicked(int position) {
         getViewState().openDetailScreen(position);
     }
 
