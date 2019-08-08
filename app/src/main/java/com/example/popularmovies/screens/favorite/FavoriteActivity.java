@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.widget.Toast;
 
 import com.arellomobile.mvp.MvpAppCompatActivity;
@@ -25,6 +26,8 @@ public class FavoriteActivity extends MvpAppCompatActivity implements FavoriteCo
 
     @BindView(R.id.favoriteRecycleView)
     RecyclerView recyclerView;
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
     @InjectPresenter
     FavoritePresenter presenter;
     MoviesAdapter moviesAdapter;
@@ -55,9 +58,14 @@ public class FavoriteActivity extends MvpAppCompatActivity implements FavoriteCo
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_favorite);
         ButterKnife.bind(this);
+        initToolbar();
         initRecyclerView();
         initAdapter();
         initActionBar();
+    }
+
+    private void initToolbar() {
+        setSupportActionBar(toolbar);
     }
 
     private void initRecyclerView() {

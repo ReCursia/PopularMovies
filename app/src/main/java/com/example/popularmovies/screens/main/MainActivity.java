@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -48,6 +49,8 @@ public class MainActivity extends MvpAppCompatActivity implements MainContract {
     TextView ratedTextView;
     @BindView(R.id.progressBar)
     ProgressBar progressBar;
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
 
     @InjectPresenter
     MainPresenter presenter;
@@ -76,8 +79,8 @@ public class MainActivity extends MvpAppCompatActivity implements MainContract {
         aboutDialog = new AlertDialog.Builder(this)
                 .setTitle(getString(R.string.about))
                 .setMessage(getString(R.string.about_description))
-                .setPositiveButton("RATE APP", (dialog, which) -> presenter.onPositiveDialogButtonClicked())
-                .setNegativeButton("NOT NOW", (dialog, which) -> presenter.onNegativeDialogButtonClicked())
+                .setPositiveButton(getString(R.string.rate_app_dialog_positive_button), (dialog, which) -> presenter.onPositiveDialogButtonClicked())
+                .setNegativeButton(getString(R.string.rate_app_negative_button), (dialog, which) -> presenter.onNegativeDialogButtonClicked())
                 .setOnDismissListener(dialog -> presenter.onDismissDialog())
                 .show();
     }
@@ -129,9 +132,14 @@ public class MainActivity extends MvpAppCompatActivity implements MainContract {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+        initToolbar();
         initSwitch();
         initRecyclerView();
         initAdapter();
+    }
+
+    private void initToolbar() {
+        setSupportActionBar(toolbar);
     }
 
     private void initSwitch() {

@@ -55,6 +55,7 @@ public class MainPresenter extends MvpPresenter<MainContract> {
     @SuppressWarnings("ResultOfMethodCallIgnored")
     @SuppressLint("CheckResult")
     private void loadMovies() {
+        getViewState().showLoading();
         client.discoverMovies(sortBy, currentPage, NetworkUtils.getDefaultLanguage())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
