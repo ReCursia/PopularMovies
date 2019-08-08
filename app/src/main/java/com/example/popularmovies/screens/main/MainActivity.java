@@ -1,6 +1,9 @@
 package com.example.popularmovies.screens.main;
 
+import android.app.AlertDialog;
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.GridLayoutManager;
@@ -23,6 +26,7 @@ import com.example.popularmovies.network.MoviesService;
 import com.example.popularmovies.pojo.Movie;
 import com.example.popularmovies.screens.detail.DetailActivity;
 import com.example.popularmovies.screens.favorite.FavoriteActivity;
+import com.example.popularmovies.utils.NetworkUtils;
 
 import java.util.List;
 
@@ -48,10 +52,34 @@ public class MainActivity extends MvpAppCompatActivity implements MainContract {
     @InjectPresenter
     MainPresenter presenter;
     private MoviesAdapter moviesAdapter;
+    private AlertDialog aboutDialog;
 
     @ProvidePresenter
     MainPresenter providePresenter() {
         return new MainPresenter(MoviesService.getInstance().getMoviesApi());
+    }
+
+    @Override
+    public void openGooglePlayPage() {
+        Uri uri = Uri.parse(NetworkUtils.GOOGLE_PLAY_NATIVE + getPackageName());
+        Intent goToMarket = new Intent(Intent.ACTION_VIEW, uri);
+        try {
+            startActivity(goToMarket);
+        } catch (ActivityNotFoundException e) {
+            startActivity(new Intent(Intent.ACTION_VIEW,
+                    Uri.parse(NetworkUtils.GOOGLE_PLAY_URL + getPackageName())));
+        }
+    }
+
+    @Override
+    public void openAboutDialog() {
+        aboutDialog = new AlertDialog.Builder(this)
+                .setTitle(getString(R.string.about))
+                .setMessage(getString(R.string.about_description))
+                .setPositiveButton("RATE APP", (dialog, which) -> presenter.onPositiveDialogButtonClicked())
+                .setNegativeButton("NOT NOW", (dialog, which) -> presenter.onNegativeDialogButtonClicked())
+                .setOnDismissListener(dialog -> presenter.onDismissDialog())
+                .show();
     }
 
     @Override
@@ -62,10 +90,20 @@ public class MainActivity extends MvpAppCompatActivity implements MainContract {
     }
 
     @Override
+    public void hideAboutDialog() {
+        if (aboutDialog != null) {
+            aboutDialog.dismiss();
+        }
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.itemFavorite:
                 presenter.onItemFavoriteClicked();
+                break;
+            case R.id.itemAbout:
+                presenter.onItemAboutClicked();
                 break;
         }
         return super.onOptionsItemSelected(item);
@@ -141,6 +179,15 @@ public class MainActivity extends MvpAppCompatActivity implements MainContract {
     public void hideLoading() {
         recyclerView.setVisibility(View.VISIBLE);
         progressBar.setVisibility(View.GONE);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (aboutDialog != null) {
+            aboutDialog.setOnDismissListener(null);
+            aboutDialog.dismiss();
+        }
     }
 
     @Override

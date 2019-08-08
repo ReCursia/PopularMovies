@@ -30,7 +30,6 @@ import com.example.popularmovies.pojo.Trailer;
 import com.example.popularmovies.utils.NetworkUtils;
 
 import java.util.List;
-import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -184,7 +183,7 @@ public class DetailActivity extends MvpAppCompatActivity implements DetailContra
         originalTitleTextView.setText(movie.getOriginalTitle());
         releaseDateTextView.setText(movie.getReleaseDate());
         descriptionTextView.setText(movie.getOverview());
-        ratingTextView.setText(String.format(Locale.getDefault(), "%f", movie.getVoteAverage()));
+        ratingTextView.setText(Double.toString(movie.getVoteAverage()));
         //Image
         Glide.with(this)
                 .load(NetworkUtils.BASE_POSTER_URL + NetworkUtils.BIG_POSTER_SIZE + movie.getPosterPath())

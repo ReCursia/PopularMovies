@@ -10,6 +10,9 @@ public class NetworkUtils {
     //Sorting
     public static final String TOP_RATED = "vote_average.desc";
     public static final String POPULARITY = "popularity.desc";
+    //Google play store
+    public static final String GOOGLE_PLAY_NATIVE = "market://details?id=";
+    public static final String GOOGLE_PLAY_URL = "http://play.google.com/store/apps/details?id=";
 
     public static String getDefaultLanguage() {
         return Locale.getDefault().toString();

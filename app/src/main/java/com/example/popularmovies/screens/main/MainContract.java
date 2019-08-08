@@ -31,6 +31,15 @@ public interface MainContract extends MvpView {
 
     void addMovies(List<Movie> movies);
 
+    //Dialog
+
+    void openAboutDialog();
+
+    void hideAboutDialog();
+
+    @StateStrategyType(SkipStrategy.class)
+    void openGooglePlayPage();
+
     //Text
     void setPopularTextColor(int color);
 

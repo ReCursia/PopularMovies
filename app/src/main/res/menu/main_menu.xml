@@ -3,4 +3,7 @@
     <item
         android:id="@+id/itemFavorite"
         android:title="@string/item_favorite" />
+    <item
+        android:id="@+id/itemAbout"
+        android:title="@string/item_about"/>
 </menu>

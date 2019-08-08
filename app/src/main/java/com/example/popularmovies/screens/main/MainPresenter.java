@@ -5,9 +5,9 @@ import android.annotation.SuppressLint;
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
 import com.example.popularmovies.R;
+import com.example.popularmovies.network.MoviesApi;
 import com.example.popularmovies.pojo.DiscoverMovies;
 import com.example.popularmovies.pojo.Movie;
-import com.example.popularmovies.network.MoviesApi;
 import com.example.popularmovies.utils.NetworkUtils;
 
 import java.util.List;
@@ -98,4 +98,19 @@ public class MainPresenter extends MvpPresenter<MainContract> {
         getViewState().openFavoriteScreen();
     }
 
+    void onItemAboutClicked() {
+        getViewState().openAboutDialog();
+    }
+
+    void onDismissDialog() {
+        getViewState().hideAboutDialog();
+    }
+
+    void onPositiveDialogButtonClicked() {
+        getViewState().openGooglePlayPage();
+    }
+
+    void onNegativeDialogButtonClicked() {
+        getViewState().hideAboutDialog();
+    }
 }
