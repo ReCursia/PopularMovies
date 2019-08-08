@@ -35,5 +35,5 @@ public interface DetailContract extends MvpView {
     void showMovieRemovedMessage();
 
     @StateStrategyType(SkipStrategy.class)
-    void openTrailerUrl(int position);
+    void openTrailerUrl(Trailer trailer);
 }

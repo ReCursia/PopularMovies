@@ -1,4 +1,4 @@
-package com.example.popularmovies.ui.adapters.trailers;
+package com.example.popularmovies.ui.adapters.trailersList;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -7,8 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.popularmovies.R;
-import com.example.popularmovies.ui.adapters.OnItemClickListener;
 import com.example.popularmovies.pojo.Trailer;
+import com.example.popularmovies.ui.adapters.OnItemClickListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,13 +16,13 @@ import java.util.List;
 public class TrailersAdapter extends RecyclerView.Adapter<TrailerViewHolder> {
 
     private List<Trailer> trailers;
-    private OnItemClickListener clickListener;
+    private OnItemClickListener<Trailer> clickListener;
 
     public TrailersAdapter() {
         trailers = new ArrayList<>();
     }
 
-    public void setClickListener(OnItemClickListener clickListener) {
+    public void setClickListener(OnItemClickListener<Trailer> clickListener) {
         this.clickListener = clickListener;
     }
 
@@ -48,7 +48,7 @@ public class TrailersAdapter extends RecyclerView.Adapter<TrailerViewHolder> {
         trailerViewHolder.trailerTitle.setText(trailer.getName());
         trailerViewHolder.playButton.setOnClickListener(v -> {
             if (clickListener != null) {
-                clickListener.onItemClick(trailerViewHolder.getAdapterPosition());
+                clickListener.onItemClick(trailer);
             }
         });
     }

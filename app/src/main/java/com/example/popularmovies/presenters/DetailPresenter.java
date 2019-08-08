@@ -120,8 +120,8 @@ public class DetailPresenter extends MvpPresenter<DetailContract> {
         }
     }
 
-    public void onTrailerPlayButtonClicked(int position) {
-        getViewState().openTrailerUrl(position);
+    public void onTrailerPlayButtonClicked(Trailer trailer) {
+        getViewState().openTrailerUrl(trailer);
     }
 
     public void menuIsInflated() {

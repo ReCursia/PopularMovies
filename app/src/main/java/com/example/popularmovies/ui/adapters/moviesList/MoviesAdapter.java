@@ -1,4 +1,4 @@
-package com.example.popularmovies.ui.adapters.movies;
+package com.example.popularmovies.ui.adapters.moviesList;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -22,14 +22,14 @@ public class MoviesAdapter extends RecyclerView.Adapter<MovieViewHolder> {
 
     private final Context context;
     private List<Movie> movies;
-    private OnItemClickListener clickListener;
+    private OnItemClickListener<Movie> clickListener;
 
     public MoviesAdapter(Context context) {
         this.context = context;
         movies = new ArrayList<>();
     }
 
-    public void setClickListener(OnItemClickListener clickListener) {
+    public void setClickListener(OnItemClickListener<Movie> clickListener) {
         this.clickListener = clickListener;
     }
 
@@ -70,7 +70,7 @@ public class MoviesAdapter extends RecyclerView.Adapter<MovieViewHolder> {
 
         movieViewHolder.itemView.setOnClickListener(v -> {
             if (clickListener != null) {
-                clickListener.onItemClick(movieViewHolder.getAdapterPosition());
+                clickListener.onItemClick(movie);
             }
         });
     }

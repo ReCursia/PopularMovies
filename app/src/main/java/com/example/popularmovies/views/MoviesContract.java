@@ -9,15 +9,22 @@ import com.example.popularmovies.pojo.Movie;
 import java.util.List;
 
 @StateStrategyType(AddToEndSingleStrategy.class)
-public interface FavoriteContract extends MvpView {
+public interface MoviesContract extends MvpView {
+    //Loading
+    @StateStrategyType(SkipStrategy.class)
+    void showLoading();
 
-    //List
-    void setMovies(List<Movie> movies);
+    @StateStrategyType(SkipStrategy.class)
+    void hideLoading();
 
     @StateStrategyType(SkipStrategy.class)
     void showErrorMessage(String message);
 
-    @StateStrategyType(SkipStrategy.class)
-    void openDetailScreen(Movie movie);
+    //List
+    void setMovies(List<Movie> movies);
 
+    void addMovies(List<Movie> movies);
+
+    @StateStrategyType(SkipStrategy.class)
+    void openMovieDetailInformation(Movie movie);
 }

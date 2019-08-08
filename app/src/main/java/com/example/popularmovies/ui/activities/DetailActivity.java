@@ -27,7 +27,7 @@ import com.example.popularmovies.network.MoviesService;
 import com.example.popularmovies.pojo.Movie;
 import com.example.popularmovies.pojo.Trailer;
 import com.example.popularmovies.presenters.DetailPresenter;
-import com.example.popularmovies.ui.adapters.trailers.TrailersAdapter;
+import com.example.popularmovies.ui.adapters.trailersList.TrailersAdapter;
 import com.example.popularmovies.utils.NetworkUtils;
 import com.example.popularmovies.views.DetailContract;
 
@@ -145,7 +145,7 @@ public class DetailActivity extends MvpAppCompatActivity implements DetailContra
 
     private void initAdapter() {
         adapter = new TrailersAdapter();
-        adapter.setClickListener(position -> presenter.onTrailerPlayButtonClicked(position));
+        adapter.setClickListener(item -> presenter.onTrailerPlayButtonClicked(item));
         recyclerView.setAdapter(adapter);
     }
 
@@ -174,8 +174,8 @@ public class DetailActivity extends MvpAppCompatActivity implements DetailContra
     }
 
     @Override
-    public void openTrailerUrl(int position) {
-        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(NetworkUtils.TRAILER_BASE_URL + adapter.getItem(position).getKey()));
+    public void openTrailerUrl(Trailer trailer) {
+        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(NetworkUtils.TRAILER_BASE_URL + trailer.getKey()));
         startActivity(browserIntent);
     }
 

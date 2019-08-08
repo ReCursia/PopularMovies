@@ -14,7 +14,7 @@ import com.example.popularmovies.R;
 import com.example.popularmovies.database.MovieDatabase;
 import com.example.popularmovies.pojo.Movie;
 import com.example.popularmovies.presenters.FavoritePresenter;
-import com.example.popularmovies.ui.adapters.movies.MoviesAdapter;
+import com.example.popularmovies.ui.adapters.moviesList.MoviesAdapter;
 import com.example.popularmovies.views.FavoriteContract;
 
 import java.util.List;
@@ -75,7 +75,7 @@ public class FavoriteActivity extends MvpAppCompatActivity implements FavoriteCo
 
     private void initAdapter() {
         moviesAdapter = new MoviesAdapter(this);
-        moviesAdapter.setClickListener(position -> presenter.onItemClicked(position));
+        moviesAdapter.setClickListener(item -> presenter.onItemClicked(item));
         recyclerView.setAdapter(moviesAdapter);
     }
 
@@ -88,9 +88,9 @@ public class FavoriteActivity extends MvpAppCompatActivity implements FavoriteCo
     }
 
     @Override
-    public void openDetailScreen(int position) {
+    public void openDetailScreen(Movie movie) {
         Intent intent = new Intent(this, DetailActivity.class);
-        intent.putExtra("id", moviesAdapter.getItem(position).getId());
+        intent.putExtra("id", movie.getId());
         startActivity(intent);
     }
 

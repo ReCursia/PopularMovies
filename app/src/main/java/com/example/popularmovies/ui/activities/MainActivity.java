@@ -5,62 +5,40 @@ import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import android.support.design.widget.TabLayout;
+import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.ProgressBar;
-import android.widget.Switch;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.arellomobile.mvp.MvpAppCompatActivity;
 import com.arellomobile.mvp.presenter.InjectPresenter;
-import com.arellomobile.mvp.presenter.ProvidePresenter;
 import com.example.popularmovies.R;
-import com.example.popularmovies.network.MoviesService;
 import com.example.popularmovies.pojo.Movie;
 import com.example.popularmovies.presenters.MainPresenter;
-import com.example.popularmovies.ui.adapters.movies.MoviesAdapter;
+import com.example.popularmovies.ui.adapters.moviesPager.MoviesPagerAdapter;
 import com.example.popularmovies.utils.NetworkUtils;
 import com.example.popularmovies.views.MainContract;
 
-import java.util.List;
+import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 public class MainActivity extends MvpAppCompatActivity implements MainContract {
-    private static final int SPAN_COUNT = 3;
-    private static final int DIRECTION_UP = 1;
 
-    @BindView(R.id.switchFilter)
-    Switch switchFilter;
-    @BindView(R.id.recyclerViewPosters)
-    RecyclerView recyclerView;
-    @BindView(R.id.popularTextView)
-    TextView popularTextView;
-    @BindView(R.id.ratedTextView)
-    TextView ratedTextView;
-    @BindView(R.id.progressBar)
-    ProgressBar progressBar;
     @BindView(R.id.toolbar)
     Toolbar toolbar;
+    @BindView(R.id.tabs)
+    TabLayout tabLayout;
+    @BindView(R.id.movies_view_pager)
+    ViewPager moviesViewPager;
 
     @InjectPresenter
     MainPresenter presenter;
-    private MoviesAdapter moviesAdapter;
     private AlertDialog aboutDialog;
-
-    @ProvidePresenter
-    MainPresenter providePresenter() {
-        return new MainPresenter(MoviesService.getInstance().getMoviesApi());
-    }
 
     @Override
     public void openGooglePlayPage() {
@@ -113,80 +91,32 @@ public class MainActivity extends MvpAppCompatActivity implements MainContract {
     }
 
     @Override
-    public void showErrorMessage(String message) {
-        Toast.makeText(this, message, Toast.LENGTH_LONG).show();
-    }
-
-    @OnClick(R.id.popularTextView)
-    public void onPopularTextViewClicked() {
-        presenter.onPopularTextViewClicked();
-    }
-
-    @OnClick(R.id.ratedTextView)
-    public void onRatedTextViewClicked() {
-        presenter.onRatedTextViewClicked();
-    }
-
-    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         initToolbar();
-        initSwitch();
-        initRecyclerView();
-        initAdapter();
+        initViewPager();
+        initTabLayout();
+    }
+
+    private void initTabLayout() {
+        tabLayout.setupWithViewPager(moviesViewPager);
+    }
+
+    private void initViewPager() {
+        //TODO think about clear arch
+        ArrayList<String> args = new ArrayList<>();
+        args.add(NetworkUtils.POPULARITY);
+        args.add(NetworkUtils.TOP_RATED);
+        MoviesPagerAdapter pagerAdapter = new MoviesPagerAdapter(getSupportFragmentManager(), args);
+        Log.i("NOTIFY", "Устанвливаем листнер к адаптеру");
+        pagerAdapter.setClickListener(item -> presenter.onMovieClicked(item));
+        moviesViewPager.setAdapter(pagerAdapter);
     }
 
     private void initToolbar() {
         setSupportActionBar(toolbar);
-    }
-
-    private void initSwitch() {
-        switchFilter.setOnCheckedChangeListener(
-                (buttonView, isChecked) -> presenter.onSwitchValueChanged(isChecked));
-    }
-
-    private void initRecyclerView() {
-        recyclerView.setLayoutManager(new GridLayoutManager(this, SPAN_COUNT));
-        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
-                super.onScrollStateChanged(recyclerView, newState);
-                boolean isBottomReached = !recyclerView.canScrollVertically(DIRECTION_UP);
-                if (isBottomReached) {
-                    presenter.bottomIsReached();
-                }
-            }
-        });
-    }
-
-    private void initAdapter() {
-        moviesAdapter = new MoviesAdapter(this);
-        moviesAdapter.setClickListener(position -> presenter.onMovieClicked(position));
-        recyclerView.setAdapter(moviesAdapter);
-    }
-
-    @Override
-    public void setSwitchOff() {
-        switchFilter.setChecked(false);
-    }
-
-    @Override
-    public void setSwitchOn() {
-        switchFilter.setChecked(true);
-    }
-
-    @Override
-    public void showLoading() {
-        recyclerView.setVisibility(View.GONE);
-        progressBar.setVisibility(View.VISIBLE);
-    }
-
-    @Override
-    public void hideLoading() {
-        recyclerView.setVisibility(View.VISIBLE);
-        progressBar.setVisibility(View.GONE);
     }
 
     @Override
@@ -199,35 +129,15 @@ public class MainActivity extends MvpAppCompatActivity implements MainContract {
     }
 
     @Override
-    public void setMovies(List<Movie> movies) {
-        moviesAdapter.setMovies(movies);
-    }
-
-    @Override
-    public void addMovies(List<Movie> movies) {
-        moviesAdapter.addMovies(movies);
-    }
-
-    @Override
-    public void setPopularTextColor(int color) {
-        popularTextView.setTextColor(getResources().getColor(color));
-    }
-
-    @Override
-    public void setRatedTextColor(int color) {
-        ratedTextView.setTextColor(getResources().getColor(color));
-    }
-
-    @Override
     public void openFavoriteScreen() {
         Intent intent = new Intent(this, FavoriteActivity.class);
         startActivity(intent);
     }
 
     @Override
-    public void openDetailScreen(int position) {
+    public void openDetailScreen(Movie movie) {
         Intent intent = new Intent(this, DetailActivity.class);
-        intent.putExtra("id", moviesAdapter.getItem(position).getId());
+        intent.putExtra("id", movie.getId());
         startActivity(intent);
     }
 
