@@ -36,5 +36,4 @@ public interface DetailContract extends MvpView {
 
     @StateStrategyType(SkipStrategy.class)
     void openTrailerUrl(int position);
-
 }

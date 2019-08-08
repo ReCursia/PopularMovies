@@ -22,9 +22,6 @@ public interface MovieDao {
     @Query("SELECT * FROM movies WHERE id == :movieId")
     Single<Movie> getMovieById(int movieId);
 
-    @Query("DELETE FROM movies")
-    void deleteAllMovies();
-
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertMovie(Movie movie);
 

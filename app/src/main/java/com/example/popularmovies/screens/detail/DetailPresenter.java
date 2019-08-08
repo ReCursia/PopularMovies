@@ -6,16 +6,16 @@ import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
 import com.example.popularmovies.database.MovieDao;
 import com.example.popularmovies.database.TrailerDao;
+import com.example.popularmovies.network.MoviesApi;
 import com.example.popularmovies.pojo.Movie;
 import com.example.popularmovies.pojo.MovieTrailers;
 import com.example.popularmovies.pojo.Trailer;
-import com.example.popularmovies.repository.MoviesApi;
+import com.example.popularmovies.utils.NetworkUtils;
 
 import java.util.List;
 
 import io.reactivex.Completable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.observers.DisposableSingleObserver;
 import io.reactivex.schedulers.Schedulers;
 
 @InjectViewState
@@ -37,7 +37,11 @@ public class DetailPresenter extends MvpPresenter<DetailContract> {
     }
 
     private void handleSuccessfulResponse(MovieTrailers movieTrailers) {
-        this.trailers = movieTrailers.getTrailers();
+        handleSuccessfulResponse(movieTrailers.getTrailers());
+    }
+
+    private void handleSuccessfulResponse(List<Trailer> trailers) {
+        this.trailers = trailers;
         if (!trailers.isEmpty()) {
             getViewState().setTrailers(trailers);
             getViewState().showTrailers();
@@ -48,11 +52,6 @@ public class DetailPresenter extends MvpPresenter<DetailContract> {
 
     private void handleErrorResponse(Throwable t) {
         getViewState().showErrorMessage(t.getLocalizedMessage());
-    }
-
-    private void handleSuccessfulResponse(Movie movie) {
-        this.movie = movie;
-        getViewState().setMovieDetail(movie);
     }
 
     @SuppressLint("CheckResult")
@@ -68,38 +67,51 @@ public class DetailPresenter extends MvpPresenter<DetailContract> {
     @SuppressLint("CheckResult")
     private void deleteFavoriteMovie() {
         //Delete movie
-        Completable.fromAction(() -> movieDao.deleteMovie(movie))
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe();
+        deleteMovie();
         //Delete trailers
-        for (Trailer trailer : trailers) {
-            Completable.fromAction(() -> trailerDao.deleteTrailer(trailer))
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe();
-        }
+        deleteTrailers();
+
         getViewState().setFavoriteIconOff();
         getViewState().showMovieRemovedMessage();
     }
 
+    private void deleteMovie() {
+        Completable.fromAction(() -> movieDao.deleteMovie(movie))
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe();
+    }
+
+    private void deleteTrailers() {
+        Completable.fromAction(() -> trailerDao.deleteTrailers(trailers))
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe();
+    }
+
     @SuppressLint("CheckResult")
     private void insertFavoriteMovie() {
-        //Save movie
+        saveMovie();
+        saveTrailers();
+
+        getViewState().setFavoriteIconOn();
+        getViewState().showMovieAddedMessage();
+    }
+
+    private void saveMovie() {
         Completable.fromAction(() -> movieDao.insertMovie(movie))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe();
-        //Save trailers
-        bindMovieIdToEachTrailer(); //TODO think about better solution
-        for (Trailer trailer : trailers) {
-            Completable.fromAction(() -> trailerDao.insertTrailer(trailer))
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe();
-        }
-        getViewState().setFavoriteIconOn();
-        getViewState().showMovieAddedMessage();
+    }
+
+    private void saveTrailers() {
+        //before save, we need to save movieId for each trailer
+        bindMovieIdToEachTrailer();
+        Completable.fromAction(() -> trailerDao.insertTrailers(trailers))
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe();
     }
 
     private void bindMovieIdToEachTrailer() {
@@ -116,31 +128,28 @@ public class DetailPresenter extends MvpPresenter<DetailContract> {
         setDefaultFavoriteIcon();
     }
 
+    @SuppressWarnings("ResultOfMethodCallIgnored")
     @SuppressLint("CheckResult")
     private void setDefaultFavoriteIcon() {
         movieDao.getMovieById(movieId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new DisposableSingleObserver<Movie>() {
-                    @Override
-                    public void onSuccess(Movie movieFromDb) {
-                        movie = movieFromDb;
-                        if (movie != null) {
-                            getViewState().setFavoriteIconOn();
-                            getViewState().setMovieDetail(movieFromDb);
-                            loadTrailersFromDb();
-                            isFavorite = true;
-                        }
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        getViewState().setFavoriteIconOff();
-                        //trying to load from network
-                        initMovieData();
-                        initTrailers();
-                    }
+                .subscribe((movie) -> {
+                    handleSuccessfulResponse(movie);
+                    getViewState().setFavoriteIconOn();
+                    isFavorite = true;
+                    loadTrailersFromDb();
+                }, e -> {
+                    getViewState().setFavoriteIconOff();
+                    //trying to load from network
+                    initMovieData();
+                    initTrailers();
                 });
+    }
+
+    private void handleSuccessfulResponse(Movie movie) {
+        this.movie = movie;
+        getViewState().setMovieDetail(movie);
     }
 
     @SuppressWarnings("ResultOfMethodCallIgnored")
@@ -149,21 +158,13 @@ public class DetailPresenter extends MvpPresenter<DetailContract> {
         trailerDao.getTrailersById(movieId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(trailers -> {
-                    this.trailers = trailers;
-                    if (!trailers.isEmpty()) {
-                        getViewState().setTrailers(trailers);
-                        getViewState().showTrailers();
-                    } else {
-                        getViewState().hideTrailers();
-                    }
-                });
+                .subscribe(this::handleSuccessfulResponse, this::handleErrorResponse);
     }
 
     @SuppressWarnings("ResultOfMethodCallIgnored")
     @SuppressLint("CheckResult")
     private void initMovieData() {
-        client.getMovieById(movieId)
+        client.getMovieById(movieId, NetworkUtils.getDefaultLanguage())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(this::handleSuccessfulResponse, this::handleErrorResponse);

@@ -20,7 +20,7 @@ import com.arellomobile.mvp.presenter.ProvidePresenter;
 import com.example.popularmovies.R;
 import com.example.popularmovies.adapters.movies.MoviesAdapter;
 import com.example.popularmovies.pojo.Movie;
-import com.example.popularmovies.repository.MoviesService;
+import com.example.popularmovies.network.MoviesService;
 import com.example.popularmovies.screens.detail.DetailActivity;
 import com.example.popularmovies.screens.favorite.FavoriteActivity;
 

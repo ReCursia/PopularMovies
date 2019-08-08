@@ -10,7 +10,6 @@ import com.arellomobile.mvp.MvpAppCompatActivity;
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.arellomobile.mvp.presenter.ProvidePresenter;
 import com.example.popularmovies.R;
-import com.example.popularmovies.adapters.OnItemClickListener;
 import com.example.popularmovies.adapters.movies.MoviesAdapter;
 import com.example.popularmovies.database.MovieDatabase;
 import com.example.popularmovies.pojo.Movie;
@@ -22,7 +21,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class FavoriteActivity extends MvpAppCompatActivity implements FavoriteContract {
-    private static final int SPAN_COUNT = 2;
+    private static final int SPAN_COUNT = 3;
 
     @BindView(R.id.favoriteRecycleView)
     RecyclerView recyclerView;
@@ -46,12 +45,19 @@ public class FavoriteActivity extends MvpAppCompatActivity implements FavoriteCo
     }
 
     @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return super.onSupportNavigateUp();
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_favorite);
         ButterKnife.bind(this);
         initRecyclerView();
         initAdapter();
+        initActionBar();
     }
 
     private void initRecyclerView() {
@@ -60,13 +66,16 @@ public class FavoriteActivity extends MvpAppCompatActivity implements FavoriteCo
 
     private void initAdapter() {
         moviesAdapter = new MoviesAdapter(this);
-        moviesAdapter.setClickListener(new OnItemClickListener() {
-            @Override
-            public void onItemClick(int position) {
-                presenter.onItemClicked(position);
-            }
-        });
+        moviesAdapter.setClickListener(position -> presenter.onItemClicked(position));
         recyclerView.setAdapter(moviesAdapter);
+    }
+
+    private void initActionBar() {
+        //add back arrow
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setDisplayShowHomeEnabled(true);
+        }
     }
 
     @Override

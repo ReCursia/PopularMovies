@@ -21,6 +21,7 @@ public class FavoritePresenter extends MvpPresenter<FavoriteContract> {
         initMovies();
     }
 
+    @SuppressWarnings("ResultOfMethodCallIgnored")
     @SuppressLint("CheckResult")
     private void initMovies() {
         movieDao.getAllMovies()

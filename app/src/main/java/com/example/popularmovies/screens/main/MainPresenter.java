@@ -7,7 +7,7 @@ import com.arellomobile.mvp.MvpPresenter;
 import com.example.popularmovies.R;
 import com.example.popularmovies.pojo.DiscoverMovies;
 import com.example.popularmovies.pojo.Movie;
-import com.example.popularmovies.repository.MoviesApi;
+import com.example.popularmovies.network.MoviesApi;
 import com.example.popularmovies.utils.NetworkUtils;
 
 import java.util.List;
@@ -55,7 +55,7 @@ public class MainPresenter extends MvpPresenter<MainContract> {
     @SuppressWarnings("ResultOfMethodCallIgnored")
     @SuppressLint("CheckResult")
     private void loadMovies() {
-        client.discoverMovies(sortBy, currentPage)
+        client.discoverMovies(sortBy, currentPage, NetworkUtils.getDefaultLanguage())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(this::handleSuccessfulResponse, this::handleErrorResponse); //Reflection

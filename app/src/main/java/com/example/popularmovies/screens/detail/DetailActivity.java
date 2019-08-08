@@ -26,7 +26,7 @@ import com.example.popularmovies.adapters.trailers.TrailersAdapter;
 import com.example.popularmovies.database.MovieDatabase;
 import com.example.popularmovies.pojo.Movie;
 import com.example.popularmovies.pojo.Trailer;
-import com.example.popularmovies.repository.MoviesService;
+import com.example.popularmovies.network.MoviesService;
 import com.example.popularmovies.utils.NetworkUtils;
 
 import java.util.List;

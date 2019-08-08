@@ -1,4 +1,4 @@
-package com.example.popularmovies.repository;
+package com.example.popularmovies.network;
 
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
