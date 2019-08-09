@@ -3,13 +3,13 @@ package com.example.popularmovies.ui.fragments;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.arellomobile.mvp.MvpAppCompatFragment;
@@ -21,6 +21,10 @@ import com.example.popularmovies.pojo.Movie;
 import com.example.popularmovies.presenters.MoviesFragmentPresenter;
 import com.example.popularmovies.ui.adapters.OnItemClickListener;
 import com.example.popularmovies.ui.adapters.moviesList.MoviesAdapter;
+import com.example.popularmovies.utils.discover.DiscoverStrategy;
+import com.example.popularmovies.utils.NetworkUtils;
+import com.example.popularmovies.utils.discover.PopularityDiscoverStrategy;
+import com.example.popularmovies.utils.discover.TopRatedDiscoverStrategy;
 import com.example.popularmovies.views.MoviesContract;
 
 import java.util.List;
@@ -34,8 +38,8 @@ public class MoviesFragment extends MvpAppCompatFragment implements MoviesContra
 
     @BindView(R.id.recyclerViewPosters)
     RecyclerView recyclerView;
-    @BindView(R.id.progressBar)
-    ProgressBar progressBar;
+    @BindView(R.id.swipeIndicator)
+    SwipeRefreshLayout swipeIndicator;
 
     @InjectPresenter
     MoviesFragmentPresenter presenter;
@@ -49,7 +53,13 @@ public class MoviesFragment extends MvpAppCompatFragment implements MoviesContra
 
     @ProvidePresenter
     MoviesFragmentPresenter providePresenter() {
-        return new MoviesFragmentPresenter(MoviesService.getInstance().getMoviesApi(), getArguments().getString("sortBy"));
+        String sortStrategy = getArguments().getString("sortBy");
+
+        DiscoverStrategy strategy = (sortStrategy.equals(NetworkUtils.TOP_RATED)) ?
+                new TopRatedDiscoverStrategy() :
+                new PopularityDiscoverStrategy();
+
+        return new MoviesFragmentPresenter(MoviesService.getInstance().getMoviesApi(), strategy);
     }
 
     @Override
@@ -58,6 +68,32 @@ public class MoviesFragment extends MvpAppCompatFragment implements MoviesContra
         ButterKnife.bind(this, view);
         initAdapter();
         initRecyclerView();
+        initSwipeToRefreshLayout();
+    }
+
+    private void initAdapter() {
+        moviesAdapter = new MoviesAdapter(getActivity());
+        moviesAdapter.setClickListener(item -> presenter.onMovieClicked(item));
+        recyclerView.setAdapter(moviesAdapter);
+    }
+
+    private void initRecyclerView() {
+        recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), SPAN_COUNT));
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+                boolean isBottomReached = !recyclerView.canScrollVertically(DIRECTION_UP);
+                if (isBottomReached) {
+                    presenter.bottomIsReached();
+                }
+            }
+        });
+    }
+
+    private void initSwipeToRefreshLayout() {
+        swipeIndicator.setOnRefreshListener(() -> presenter.onSwipeRefreshed());
+        swipeIndicator.setColorSchemeColors(getResources().getColor(R.color.colorAccent));
     }
 
     @Nullable
@@ -68,14 +104,14 @@ public class MoviesFragment extends MvpAppCompatFragment implements MoviesContra
 
     @Override
     public void showLoading() {
-        recyclerView.setVisibility(View.GONE);
-        progressBar.setVisibility(View.VISIBLE);
+        swipeIndicator.setRefreshing(true);
     }
 
     @Override
     public void hideLoading() {
-        recyclerView.setVisibility(View.VISIBLE);
-        progressBar.setVisibility(View.GONE);
+        if (swipeIndicator.isRefreshing()) {
+            swipeIndicator.setRefreshing(false);
+        }
     }
 
     @Override
@@ -93,20 +129,6 @@ public class MoviesFragment extends MvpAppCompatFragment implements MoviesContra
         moviesAdapter.addMovies(movies);
     }
 
-    private void initRecyclerView() {
-        recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), SPAN_COUNT));
-        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
-                super.onScrollStateChanged(recyclerView, newState);
-                boolean isBottomReached = !recyclerView.canScrollVertically(DIRECTION_UP);
-                if (isBottomReached) {
-                    presenter.bottomIsReached();
-                }
-            }
-        });
-    }
-
     @Override
     public void openMovieDetailInformation(Movie movie) {
         Log.i("NOTIFY", "Проверяем есть ли");
@@ -116,9 +138,4 @@ public class MoviesFragment extends MvpAppCompatFragment implements MoviesContra
         }
     }
 
-    private void initAdapter() {
-        moviesAdapter = new MoviesAdapter(getActivity());
-        moviesAdapter.setClickListener(item -> presenter.onMovieClicked(item));
-        recyclerView.setAdapter(moviesAdapter);
-    }
 }

@@ -12,11 +12,10 @@ import com.example.popularmovies.ui.adapters.OnItemClickListener;
 import com.example.popularmovies.ui.fragments.MoviesFragment;
 
 import java.util.List;
-//TODO еще раз разобраться в чем разница между FragmentPagerAdapter и FragmentStatePageAdapter
 
 public class MoviesPagerAdapter extends FragmentStatePagerAdapter {
     private final int TAB_COUNT = 2;
-    //TODO extract resourses, i quess Context is needed
+
     private final String[] titles = {"POPULAR", "TOP RATED"};
     private final List<String> argsList;
     private OnItemClickListener<Movie> listener;
@@ -59,4 +58,5 @@ public class MoviesPagerAdapter extends FragmentStatePagerAdapter {
     public int getCount() {
         return TAB_COUNT;
     }
+
 }

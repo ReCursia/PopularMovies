@@ -100,8 +100,8 @@ public class MainActivity extends MvpAppCompatActivity implements MainContract {
         initTabLayout();
     }
 
-    private void initTabLayout() {
-        tabLayout.setupWithViewPager(moviesViewPager);
+    private void initToolbar() {
+        setSupportActionBar(toolbar);
     }
 
     private void initViewPager() {
@@ -115,8 +115,8 @@ public class MainActivity extends MvpAppCompatActivity implements MainContract {
         moviesViewPager.setAdapter(pagerAdapter);
     }
 
-    private void initToolbar() {
-        setSupportActionBar(toolbar);
+    private void initTabLayout() {
+        tabLayout.setupWithViewPager(moviesViewPager);
     }
 
     @Override

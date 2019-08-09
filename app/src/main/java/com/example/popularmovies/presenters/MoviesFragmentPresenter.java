@@ -7,6 +7,7 @@ import com.arellomobile.mvp.MvpPresenter;
 import com.example.popularmovies.network.MoviesApi;
 import com.example.popularmovies.pojo.DiscoverMovies;
 import com.example.popularmovies.pojo.Movie;
+import com.example.popularmovies.utils.discover.DiscoverStrategy;
 import com.example.popularmovies.utils.NetworkUtils;
 import com.example.popularmovies.views.MoviesContract;
 
@@ -19,12 +20,12 @@ import io.reactivex.schedulers.Schedulers;
 public class MoviesFragmentPresenter extends MvpPresenter<MoviesContract> {
     private MoviesApi client;
     private int currentPage;
-    private String sortBy;
+    private DiscoverStrategy discoverStrategy;
+    private boolean isRefreshing;
 
-    //TODO inject sorting
-    public MoviesFragmentPresenter(MoviesApi client, String sortBy) {
+    public MoviesFragmentPresenter(MoviesApi client, DiscoverStrategy discoverStrategy) {
         this.client = client;
-        this.sortBy = sortBy;
+        this.discoverStrategy = discoverStrategy;
         currentPage = 1;
         loadMovies();
     }
@@ -32,20 +33,38 @@ public class MoviesFragmentPresenter extends MvpPresenter<MoviesContract> {
     @SuppressWarnings("ResultOfMethodCallIgnored")
     @SuppressLint("CheckResult")
     private void loadMovies() {
-        client.discoverMovies(sortBy, currentPage, NetworkUtils.getDefaultLanguage())
+        client.discoverMovies(discoverStrategy.getSortBy(), currentPage, NetworkUtils.getDefaultLanguage(), discoverStrategy.getVoteCount())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(this::handleSuccessfulResponse, this::handleErrorResponse); //Reflection
     }
 
+    public void setDiscoverStrategy(DiscoverStrategy newStrategy) {
+        this.discoverStrategy = newStrategy;
+    }
+
+    public void onSwipeRefreshed() {
+        getViewState().showLoading();
+        isRefreshing = true;
+        loadMovies();
+    }
+
     private void handleSuccessfulResponse(DiscoverMovies discoverMovies) {
         List<Movie> movies = discoverMovies.getMovies();
+        if (isRefreshing) {
+            getViewState().setMovies(movies);
+        } else {
+            getViewState().addMovies(movies);
+        }
         getViewState().addMovies(movies);
+        getViewState().hideLoading();
+        isRefreshing = false;
         currentPage++;
     }
 
     private void handleErrorResponse(Throwable t) {
-        //getViewState().hideLoading();
+        getViewState().hideLoading();
+        isRefreshing = false;
         getViewState().showErrorMessage(t.getLocalizedMessage());
     }
 

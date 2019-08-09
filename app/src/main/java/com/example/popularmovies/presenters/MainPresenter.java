@@ -35,4 +35,5 @@ public class MainPresenter extends MvpPresenter<MainContract> {
     public void onNegativeDialogButtonClicked() {
         getViewState().hideAboutDialog();
     }
+
 }
