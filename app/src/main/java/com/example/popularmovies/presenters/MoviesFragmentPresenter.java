@@ -7,8 +7,8 @@ import com.arellomobile.mvp.MvpPresenter;
 import com.example.popularmovies.network.MoviesApi;
 import com.example.popularmovies.pojo.DiscoverMovies;
 import com.example.popularmovies.pojo.Movie;
-import com.example.popularmovies.utils.discover.DiscoverStrategy;
 import com.example.popularmovies.utils.NetworkUtils;
+import com.example.popularmovies.utils.discover.DiscoverStrategy;
 import com.example.popularmovies.views.MoviesContract;
 
 import java.util.List;
@@ -56,7 +56,6 @@ public class MoviesFragmentPresenter extends MvpPresenter<MoviesContract> {
         } else {
             getViewState().addMovies(movies);
         }
-        getViewState().addMovies(movies);
         getViewState().hideLoading();
         isRefreshing = false;
         currentPage++;

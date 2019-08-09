@@ -1,4 +1,4 @@
-package com.example.popularmovies.ui.adapters.moviesList;
+package com.example.popularmovies.ui.adapters.moviesRecyclerView;
 
 import android.content.Context;
 import android.support.annotation.NonNull;

@@ -14,6 +14,10 @@ public interface FavoriteContract extends MvpView {
     //List
     void setMovies(List<Movie> movies);
 
+    void showNoFavoriteScreen();
+
+    void hideNoFavoriteScreen();
+
     @StateStrategyType(SkipStrategy.class)
     void showErrorMessage(String message);
 

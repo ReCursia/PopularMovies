@@ -19,4 +19,6 @@
     <string name="about_description">This application allows you to discover interesting movies, look detail information and also save movies to favorite list</string>
     <string name="rate_app_dialog_positive_button">RATE APP</string>
     <string name="rate_app_negative_button">NOT NOW</string>
+    <string name="no_favorite_movies">You have no favorites movies yet!</string>
+    <string name="no_favorite_movies_icon">No favorite movies icon</string>
 </resources>

@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
 import android.widget.Toast;
 
 import com.arellomobile.mvp.MvpAppCompatActivity;
@@ -14,7 +15,7 @@ import com.example.popularmovies.R;
 import com.example.popularmovies.database.MovieDatabase;
 import com.example.popularmovies.pojo.Movie;
 import com.example.popularmovies.presenters.FavoritePresenter;
-import com.example.popularmovies.ui.adapters.moviesList.MoviesAdapter;
+import com.example.popularmovies.ui.adapters.moviesRecyclerView.MoviesAdapter;
 import com.example.popularmovies.views.FavoriteContract;
 
 import java.util.List;
@@ -29,9 +30,23 @@ public class FavoriteActivity extends MvpAppCompatActivity implements FavoriteCo
     RecyclerView recyclerView;
     @BindView(R.id.toolbar)
     Toolbar toolbar;
+    @BindView(R.id.noFavoriteMoviesScreen)
+    View noFavoriteMoviesScreen;
     @InjectPresenter
     FavoritePresenter presenter;
     MoviesAdapter moviesAdapter;
+
+    @Override
+    public void showNoFavoriteScreen() {
+        noFavoriteMoviesScreen.setVisibility(View.VISIBLE);
+        recyclerView.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void hideNoFavoriteScreen() {
+        noFavoriteMoviesScreen.setVisibility(View.GONE);
+        recyclerView.setVisibility(View.VISIBLE);
+    }
 
     @Override
     public void setMovies(List<Movie> movies) {
@@ -43,15 +58,16 @@ public class FavoriteActivity extends MvpAppCompatActivity implements FavoriteCo
         return new FavoritePresenter(MovieDatabase.getInstance(this).movieDao());
     }
 
-    @Override
-    public void showErrorMessage(String message) {
-        Toast.makeText(this, message, Toast.LENGTH_LONG).show();
-    }
 
     @Override
     public boolean onSupportNavigateUp() {
         onBackPressed();
         return super.onSupportNavigateUp();
+    }
+
+    @Override
+    public void showErrorMessage(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_LONG).show();
     }
 
     @Override

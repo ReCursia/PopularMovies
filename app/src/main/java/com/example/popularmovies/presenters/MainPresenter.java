@@ -8,10 +8,6 @@ import com.example.popularmovies.views.MainContract;
 @InjectViewState
 public class MainPresenter extends MvpPresenter<MainContract> {
 
-    public MainPresenter() {
-
-    }
-
     public void onMovieClicked(Movie movie) {
         getViewState().openDetailScreen(movie);
     }

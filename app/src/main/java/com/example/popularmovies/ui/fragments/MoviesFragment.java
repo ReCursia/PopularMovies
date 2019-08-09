@@ -6,7 +6,6 @@ import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,9 +19,9 @@ import com.example.popularmovies.network.MoviesService;
 import com.example.popularmovies.pojo.Movie;
 import com.example.popularmovies.presenters.MoviesFragmentPresenter;
 import com.example.popularmovies.ui.adapters.OnItemClickListener;
-import com.example.popularmovies.ui.adapters.moviesList.MoviesAdapter;
-import com.example.popularmovies.utils.discover.DiscoverStrategy;
+import com.example.popularmovies.ui.adapters.moviesRecyclerView.MoviesAdapter;
 import com.example.popularmovies.utils.NetworkUtils;
+import com.example.popularmovies.utils.discover.DiscoverStrategy;
 import com.example.popularmovies.utils.discover.PopularityDiscoverStrategy;
 import com.example.popularmovies.utils.discover.TopRatedDiscoverStrategy;
 import com.example.popularmovies.views.MoviesContract;
@@ -131,9 +130,7 @@ public class MoviesFragment extends MvpAppCompatFragment implements MoviesContra
 
     @Override
     public void openMovieDetailInformation(Movie movie) {
-        Log.i("NOTIFY", "Проверяем есть ли");
         if (listener != null) {
-            Log.i("NOTIFY", "Нажали на фильм: " + movie.getTitle() + " Оповещаем листерен");
             listener.onItemClick(movie);
         }
     }

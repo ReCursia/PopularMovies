@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -18,11 +17,9 @@ import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.example.popularmovies.R;
 import com.example.popularmovies.pojo.Movie;
 import com.example.popularmovies.presenters.MainPresenter;
-import com.example.popularmovies.ui.adapters.moviesPager.MoviesPagerAdapter;
+import com.example.popularmovies.ui.adapters.moviesViewPager.MoviesPagerAdapter;
 import com.example.popularmovies.utils.NetworkUtils;
 import com.example.popularmovies.views.MainContract;
-
-import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -45,8 +42,10 @@ public class MainActivity extends MvpAppCompatActivity implements MainContract {
         Uri uri = Uri.parse(NetworkUtils.GOOGLE_PLAY_NATIVE + getPackageName());
         Intent goToMarket = new Intent(Intent.ACTION_VIEW, uri);
         try {
+            //Trying to open installed Google play
             startActivity(goToMarket);
         } catch (ActivityNotFoundException e) {
+            //Opening web version
             startActivity(new Intent(Intent.ACTION_VIEW,
                     Uri.parse(NetworkUtils.GOOGLE_PLAY_URL + getPackageName())));
         }
@@ -105,12 +104,7 @@ public class MainActivity extends MvpAppCompatActivity implements MainContract {
     }
 
     private void initViewPager() {
-        //TODO think about clear arch
-        ArrayList<String> args = new ArrayList<>();
-        args.add(NetworkUtils.POPULARITY);
-        args.add(NetworkUtils.TOP_RATED);
-        MoviesPagerAdapter pagerAdapter = new MoviesPagerAdapter(getSupportFragmentManager(), args);
-        Log.i("NOTIFY", "Устанвливаем листнер к адаптеру");
+        MoviesPagerAdapter pagerAdapter = new MoviesPagerAdapter(getSupportFragmentManager());
         pagerAdapter.setClickListener(item -> presenter.onMovieClicked(item));
         moviesViewPager.setAdapter(pagerAdapter);
     }

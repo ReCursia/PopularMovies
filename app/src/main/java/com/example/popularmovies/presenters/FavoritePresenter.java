@@ -19,6 +19,7 @@ public class FavoritePresenter extends MvpPresenter<FavoriteContract> {
 
     public FavoritePresenter(MovieDao movieDao) {
         this.movieDao = movieDao;
+        getViewState().hideNoFavoriteScreen();
         initMovies();
     }
 
@@ -32,7 +33,12 @@ public class FavoritePresenter extends MvpPresenter<FavoriteContract> {
     }
 
     private void handleResult(List<Movie> movies) {
-        getViewState().setMovies(movies);
+        if (!movies.isEmpty()) {
+            getViewState().setMovies(movies);
+            getViewState().hideNoFavoriteScreen();
+        } else {
+            getViewState().showNoFavoriteScreen();
+        }
     }
 
     private void handleError(Throwable t) {

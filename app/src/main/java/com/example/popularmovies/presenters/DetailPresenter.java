@@ -64,7 +64,6 @@ public class DetailPresenter extends MvpPresenter<DetailContract> {
         isFavorite = !isFavorite;
     }
 
-    @SuppressLint("CheckResult")
     private void deleteFavoriteMovie() {
         //Delete movie
         deleteMovie();

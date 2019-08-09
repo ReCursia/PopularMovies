@@ -10,6 +10,7 @@ import java.util.List;
 
 @StateStrategyType(AddToEndSingleStrategy.class)
 public interface MoviesContract extends MvpView {
+
     //Loading
     @StateStrategyType(SkipStrategy.class)
     void showLoading();
@@ -27,4 +28,5 @@ public interface MoviesContract extends MvpView {
 
     @StateStrategyType(SkipStrategy.class)
     void openMovieDetailInformation(Movie movie);
+
 }

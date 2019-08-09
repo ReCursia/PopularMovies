@@ -1,32 +1,36 @@
-package com.example.popularmovies.ui.adapters.moviesPager;
+package com.example.popularmovies.ui.adapters.moviesViewPager;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
-import android.util.Log;
 
 import com.example.popularmovies.pojo.Movie;
 import com.example.popularmovies.ui.adapters.OnItemClickListener;
 import com.example.popularmovies.ui.fragments.MoviesFragment;
-
-import java.util.List;
+import com.example.popularmovies.utils.NetworkUtils;
 
 public class MoviesPagerAdapter extends FragmentStatePagerAdapter {
     private final int TAB_COUNT = 2;
 
     private final String[] titles = {"POPULAR", "TOP RATED"};
-    private final List<String> argsList;
+    private final String[] argsList = {NetworkUtils.POPULARITY, NetworkUtils.TOP_RATED};
+
     private OnItemClickListener<Movie> listener;
 
-    public MoviesPagerAdapter(FragmentManager fm, List<String> argsList) {
+    public MoviesPagerAdapter(FragmentManager fm) {
         super(fm);
-        this.argsList = argsList;
     }
 
     public void setClickListener(OnItemClickListener<Movie> newListener) {
         this.listener = newListener;
+    }
+
+    @Override
+    public int getItemPosition(@NonNull Object object) {
+        return POSITION_NONE;
     }
 
     @Nullable
@@ -42,14 +46,14 @@ public class MoviesPagerAdapter extends FragmentStatePagerAdapter {
 
     private Fragment getInstance(int index) {
         MoviesFragment fragment = new MoviesFragment();
-        Log.i("FRAGMENT_LISTENER", "adding listener to fragment with index: " + index);
+        //Setting listeners, so we can provide clicked movie to main activity
         fragment.setOnMovieClickedListener(item -> {
             if (listener != null) {
                 listener.onItemClick(item);
             }
         });
         Bundle args = new Bundle();
-        args.putString("sortBy", argsList.get(index));
+        args.putString("sortBy", argsList[index]);
         fragment.setArguments(args);
         return fragment;
     }
