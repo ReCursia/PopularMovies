@@ -23,7 +23,8 @@
         <android.support.v7.widget.RecyclerView
             android:id="@+id/favoriteRecycleView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:scrollbars="vertical" />
 
         <include layout="@layout/no_favorite_movies_screen" />
     </FrameLayout>
