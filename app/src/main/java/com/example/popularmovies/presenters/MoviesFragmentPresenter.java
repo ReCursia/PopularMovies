@@ -4,9 +4,9 @@ import android.annotation.SuppressLint;
 
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
-import com.example.popularmovies.network.MoviesApi;
-import com.example.popularmovies.pojo.DiscoverMovies;
-import com.example.popularmovies.pojo.Movie;
+import com.example.popularmovies.models.network.MoviesApi;
+import com.example.popularmovies.models.pojo.DiscoverMovies;
+import com.example.popularmovies.models.pojo.Movie;
 import com.example.popularmovies.utils.NetworkUtils;
 import com.example.popularmovies.utils.discover.DiscoverStrategy;
 import com.example.popularmovies.views.MoviesContract;

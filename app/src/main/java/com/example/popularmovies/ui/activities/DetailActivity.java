@@ -3,11 +3,14 @@ package com.example.popularmovies.ui.activities;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.chip.Chip;
+import android.support.design.chip.ChipGroup;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -22,12 +25,13 @@ import com.arellomobile.mvp.presenter.ProvidePresenter;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.example.popularmovies.R;
-import com.example.popularmovies.database.MovieDatabase;
-import com.example.popularmovies.network.MoviesService;
-import com.example.popularmovies.pojo.Movie;
-import com.example.popularmovies.pojo.Trailer;
+import com.example.popularmovies.models.database.MovieDatabase;
+import com.example.popularmovies.models.network.MoviesService;
+import com.example.popularmovies.models.pojo.Genre;
+import com.example.popularmovies.models.pojo.Movie;
+import com.example.popularmovies.models.pojo.Trailer;
 import com.example.popularmovies.presenters.DetailPresenter;
-import com.example.popularmovies.ui.adapters.trailersList.TrailersAdapter;
+import com.example.popularmovies.ui.adapters.trailers.TrailersAdapter;
 import com.example.popularmovies.utils.NetworkUtils;
 import com.example.popularmovies.views.DetailContract;
 
@@ -57,6 +61,8 @@ public class DetailActivity extends MvpAppCompatActivity implements DetailContra
     CollapsingToolbarLayout collapsingToolbarLayout;
     @BindView(R.id.trailersCardView)
     CardView trailersCardView;
+    @BindView(R.id.genresGroup)
+    ChipGroup genresGroup;
 
     @InjectPresenter
     DetailPresenter presenter;
@@ -74,11 +80,22 @@ public class DetailActivity extends MvpAppCompatActivity implements DetailContra
         Toast.makeText(this, message, Toast.LENGTH_LONG).show();
     }
 
+    @Override
+    public void setGenres(List<Genre> genres) {
+        LayoutInflater layoutInflater = LayoutInflater.from(this);
+        for (Genre genre : genres) {
+            Chip chip = (Chip) layoutInflater.inflate(R.layout.genre_chip, null, false);
+            chip.setText(genre.getName());
+            genresGroup.addView(chip);
+        }
+    }
+
     @ProvidePresenter
     DetailPresenter providePresenter() {
         Intent intent = getIntent();
         MovieDatabase db = MovieDatabase.getInstance(this);
-        return new DetailPresenter(MoviesService.getInstance().getMoviesApi(), db.movieDao(), db.trailerDao(), intent.getIntExtra("id", 0));
+        //db.movieDao()
+        return new DetailPresenter(MoviesService.getInstance().getMoviesApi(),db.movieDao(), db.trailerDao(), db.genreDao(), intent.getIntExtra("id", 0));
     }
 
     @Override

@@ -15,9 +15,9 @@ import android.view.MenuItem;
 import com.arellomobile.mvp.MvpAppCompatActivity;
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.example.popularmovies.R;
-import com.example.popularmovies.pojo.Movie;
+import com.example.popularmovies.models.pojo.Movie;
 import com.example.popularmovies.presenters.MainPresenter;
-import com.example.popularmovies.ui.adapters.moviesViewPager.MoviesPagerAdapter;
+import com.example.popularmovies.ui.adapters.movies.MoviesPagerAdapter;
 import com.example.popularmovies.utils.NetworkUtils;
 import com.example.popularmovies.views.MainContract;
 

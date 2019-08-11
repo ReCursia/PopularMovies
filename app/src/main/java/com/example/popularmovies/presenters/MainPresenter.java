@@ -2,7 +2,7 @@ package com.example.popularmovies.presenters;
 
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
-import com.example.popularmovies.pojo.Movie;
+import com.example.popularmovies.models.pojo.Movie;
 import com.example.popularmovies.views.MainContract;
 
 @InjectViewState

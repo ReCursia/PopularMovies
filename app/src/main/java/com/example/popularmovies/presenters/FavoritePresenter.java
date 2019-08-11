@@ -4,8 +4,8 @@ import android.annotation.SuppressLint;
 
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
-import com.example.popularmovies.database.MovieDao;
-import com.example.popularmovies.pojo.Movie;
+import com.example.popularmovies.models.database.MovieDao;
+import com.example.popularmovies.models.pojo.Movie;
 import com.example.popularmovies.views.FavoriteContract;
 
 import java.util.List;

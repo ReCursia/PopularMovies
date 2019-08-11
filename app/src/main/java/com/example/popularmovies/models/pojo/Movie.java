@@ -1,4 +1,4 @@
-package com.example.popularmovies.pojo;
+package com.example.popularmovies.models.pojo;
 
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.Ignore;
@@ -6,8 +6,6 @@ import android.arch.persistence.room.PrimaryKey;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-
-import java.util.List;
 
 /*
 POJO class with Room and GSON annotation
@@ -46,7 +44,7 @@ public class Movie {
     @SerializedName("genre_ids")
     @Expose
     @Ignore
-    private List<Integer> genreIds = null;
+    private int[] genreIds = null;
     @SerializedName("backdrop_path")
     @Expose
     private String backdropPath;
@@ -60,12 +58,7 @@ public class Movie {
     @Expose
     private String releaseDate;
 
-    public Movie(int voteCount, int id, boolean video,
-                 double voteAverage, String title,
-                 double popularity, String posterPath,
-                 String originalLanguage, String originalTitle,
-                 String backdropPath,
-                 boolean adult, String overview, String releaseDate) {
+    public Movie(int voteCount, int id, boolean video, double voteAverage, String title, double popularity, String posterPath, String originalLanguage, String originalTitle, String backdropPath, boolean adult, String overview, String releaseDate) {
         this.voteCount = voteCount;
         this.id = id;
         this.video = video;
@@ -109,7 +102,7 @@ public class Movie {
         return voteAverage;
     }
 
-    public void setVoteAverage(double voteAverage) {
+    public void setVoteAverage(int voteAverage) {
         this.voteAverage = voteAverage;
     }
 
@@ -153,11 +146,11 @@ public class Movie {
         this.originalTitle = originalTitle;
     }
 
-    public List<Integer> getGenreIds() {
+    public int[] getGenreIds() {
         return genreIds;
     }
 
-    public void setGenreIds(List<Integer> genreIds) {
+    public void setGenreIds(int[] genreIds) {
         this.genreIds = genreIds;
     }
 

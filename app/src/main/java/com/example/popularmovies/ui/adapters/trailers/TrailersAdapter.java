@@ -1,4 +1,4 @@
-package com.example.popularmovies.ui.adapters.trailersList;
+package com.example.popularmovies.ui.adapters.trailers;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -7,7 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.popularmovies.R;
-import com.example.popularmovies.pojo.Trailer;
+import com.example.popularmovies.models.pojo.Trailer;
 import com.example.popularmovies.ui.adapters.OnItemClickListener;
 
 import java.util.ArrayList;

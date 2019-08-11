@@ -1,4 +1,4 @@
-package com.example.popularmovies.pojo;
+package com.example.popularmovies.models.pojo;
 
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;

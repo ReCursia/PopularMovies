@@ -12,10 +12,10 @@ import com.arellomobile.mvp.MvpAppCompatActivity;
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.arellomobile.mvp.presenter.ProvidePresenter;
 import com.example.popularmovies.R;
-import com.example.popularmovies.database.MovieDatabase;
-import com.example.popularmovies.pojo.Movie;
+import com.example.popularmovies.models.database.MovieDatabase;
+import com.example.popularmovies.models.pojo.Movie;
 import com.example.popularmovies.presenters.FavoritePresenter;
-import com.example.popularmovies.ui.adapters.moviesRecyclerView.MoviesAdapter;
+import com.example.popularmovies.ui.adapters.movies.MoviesAdapter;
 import com.example.popularmovies.views.FavoriteContract;
 
 import java.util.List;

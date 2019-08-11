@@ -1,4 +1,4 @@
-package com.example.popularmovies.database;
+package com.example.popularmovies.models.database;
 
 import android.arch.persistence.room.Dao;
 import android.arch.persistence.room.Delete;
@@ -6,7 +6,7 @@ import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.OnConflictStrategy;
 import android.arch.persistence.room.Query;
 
-import com.example.popularmovies.pojo.Trailer;
+import com.example.popularmovies.models.pojo.Trailer;
 
 import java.util.List;
 

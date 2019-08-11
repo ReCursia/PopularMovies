@@ -1,4 +1,4 @@
-package com.example.popularmovies.ui.adapters.moviesViewPager;
+package com.example.popularmovies.ui.adapters.movies;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -7,7 +7,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
-import com.example.popularmovies.pojo.Movie;
+import com.example.popularmovies.models.pojo.Movie;
 import com.example.popularmovies.ui.adapters.OnItemClickListener;
 import com.example.popularmovies.ui.fragments.MoviesFragment;
 import com.example.popularmovies.utils.NetworkUtils;
