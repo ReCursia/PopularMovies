@@ -2,6 +2,7 @@ package com.example.popularmovies.views;
 
 import com.arellomobile.mvp.MvpView;
 import com.arellomobile.mvp.viewstate.strategy.AddToEndSingleStrategy;
+import com.arellomobile.mvp.viewstate.strategy.OneExecutionStateStrategy;
 import com.arellomobile.mvp.viewstate.strategy.SkipStrategy;
 import com.arellomobile.mvp.viewstate.strategy.StateStrategyType;
 import com.example.popularmovies.models.pojo.Genre;
@@ -15,18 +16,23 @@ public interface DetailContract extends MvpView {
 
     void setMovieDetail(Movie movie);
 
+    @StateStrategyType(OneExecutionStateStrategy.class)
     void setFavoriteIconOn();
 
+    @StateStrategyType(OneExecutionStateStrategy.class)
     void setFavoriteIconOff();
 
     //Trailers
     void setTrailers(List<Trailer> trailers);
 
+    @StateStrategyType(OneExecutionStateStrategy.class)
     void hideTrailers();
 
+    @StateStrategyType(OneExecutionStateStrategy.class)
     void showTrailers();
 
     //Genres
+    @StateStrategyType(OneExecutionStateStrategy.class)
     void setGenres(List<Genre> genres);
 
     @StateStrategyType(SkipStrategy.class)
@@ -40,4 +46,5 @@ public interface DetailContract extends MvpView {
 
     @StateStrategyType(SkipStrategy.class)
     void openTrailerUrl(Trailer trailer);
+
 }

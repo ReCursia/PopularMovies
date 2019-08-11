@@ -28,5 +28,4 @@ public interface MoviesContract extends MvpView {
 
     @StateStrategyType(SkipStrategy.class)
     void openMovieDetailInformation(Movie movie);
-
 }

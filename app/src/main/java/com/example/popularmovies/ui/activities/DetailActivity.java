@@ -30,6 +30,8 @@ import com.example.popularmovies.models.network.MoviesService;
 import com.example.popularmovies.models.pojo.Genre;
 import com.example.popularmovies.models.pojo.Movie;
 import com.example.popularmovies.models.pojo.Trailer;
+import com.example.popularmovies.models.repository.MovieRepository;
+import com.example.popularmovies.models.repository.MovieLocalRepositoryImpl;
 import com.example.popularmovies.presenters.DetailPresenter;
 import com.example.popularmovies.ui.adapters.trailers.TrailersAdapter;
 import com.example.popularmovies.utils.NetworkUtils;
@@ -94,8 +96,8 @@ public class DetailActivity extends MvpAppCompatActivity implements DetailContra
     DetailPresenter providePresenter() {
         Intent intent = getIntent();
         MovieDatabase db = MovieDatabase.getInstance(this);
-        //db.movieDao()
-        return new DetailPresenter(MoviesService.getInstance().getMoviesApi(),db.movieDao(), db.trailerDao(), db.genreDao(), intent.getIntExtra("id", 0));
+        MovieRepository movieRepository = new MovieLocalRepositoryImpl(db.movieDao(), db.trailerDao(), db.genreDao());
+        return new DetailPresenter(MoviesService.getInstance().getMoviesApi(), movieRepository, intent.getIntExtra("id", 0));
     }
 
     @Override

@@ -15,9 +15,8 @@ import com.example.popularmovies.utils.NetworkUtils;
 public class MoviesPagerAdapter extends FragmentStatePagerAdapter {
     private final int TAB_COUNT = 2;
 
-    private final String[] titles = {"POPULAR", "TOP RATED"};
     private final String[] argsList = {NetworkUtils.POPULARITY, NetworkUtils.TOP_RATED};
-
+    private final String[] titles = {"POPULAR", "TOP RATED"};
     private OnItemClickListener<Movie> listener;
 
     public MoviesPagerAdapter(FragmentManager fm) {

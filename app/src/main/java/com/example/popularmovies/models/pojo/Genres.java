@@ -17,4 +17,5 @@ public class Genres {
     public void setGenres(List<Genre> genres) {
         this.genres = genres;
     }
+
 }

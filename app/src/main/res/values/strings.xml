@@ -12,13 +12,12 @@
     <string name="added_favorite">Added to favorite</string>
     <string name="removed_favorite">Removed from favorite</string>
     <string name="item_favorite">Favorite</string>
-    <string name="item_main">Main</string>
-    <string name="play_button">Play button</string>
     <string name="item_about">About</string>
     <string name="about">About</string>
     <string name="about_description">This application allows you to discover interesting movies, look detail information and also save movies to favorite list</string>
     <string name="rate_app_dialog_positive_button">RATE APP</string>
-    <string name="rate_app_negative_button">NOT NOW</string>
+    <string name="rate_app_negative_button">LATER</string>
     <string name="no_favorite_movies">You have no favorites movies yet!</string>
     <string name="no_favorite_movies_icon">No favorite movies icon</string>
+    <string name="play_button">Play trailer button</string>
 </resources>

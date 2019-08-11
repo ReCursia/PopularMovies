@@ -23,4 +23,5 @@ public interface GenreDao {
 
     @Delete
     void deleteGenres(List<Genre> genres);
+
 }

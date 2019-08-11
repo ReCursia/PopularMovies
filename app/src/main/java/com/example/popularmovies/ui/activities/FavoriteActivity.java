@@ -58,7 +58,6 @@ public class FavoriteActivity extends MvpAppCompatActivity implements FavoriteCo
         return new FavoritePresenter(MovieDatabase.getInstance(this).movieDao());
     }
 
-
     @Override
     public boolean onSupportNavigateUp() {
         onBackPressed();

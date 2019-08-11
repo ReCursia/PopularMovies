@@ -10,7 +10,7 @@ import com.example.popularmovies.R;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MovieViewHolder extends RecyclerView.ViewHolder {
+class MovieViewHolder extends RecyclerView.ViewHolder {
     @BindView(R.id.smallMoviePoster)
     ImageView moviePoster;
 

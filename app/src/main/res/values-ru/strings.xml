@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Популярные фильмы</string>
+    <string name="about">О приложении</string>
+    <string name="about_description">Данное приложение позволяет находить интересные фильмы, смотреть детальную информацию о фильме, а также сохранять любимые фильмы в избранный список</string>
+    <string name="added_favorite">Добавлено в избранное</string>
+    <string name="description">Описание:</string>
+    <string name="favorite_icon">Иконка избранного фильма</string>
+    <string name="item_about">О приложении</string>
+    <string name="item_favorite">Избранное</string>
+    <string name="movie_poster">Постер фильма</string>
+    <string name="no_favorite_movies">У вас еще нет избранных фильмов!</string>
+    <string name="no_favorite_movies_icon">Иконка, сообщающая об отсутствии избранных фильмов</string>
+    <string name="original_title">Оригинальное название:</string>
+    <string name="popular">Популярные</string>
+    <string name="rate_app_dialog_positive_button">ОЦЕНИТЬ</string>
+    <string name="rate_app_negative_button">ПОЗЖЕ</string>
+    <string name="rating">Рейтинг:</string>
+    <string name="release_date">Дата выхода:</string>
+    <string name="removed_favorite">Удалено из избранного</string>
+    <string name="title">Название:</string>
+    <string name="top_rated">Самые рейтинговые</string>
+</resources>

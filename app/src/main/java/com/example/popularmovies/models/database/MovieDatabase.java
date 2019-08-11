@@ -9,7 +9,7 @@ import com.example.popularmovies.models.pojo.Genre;
 import com.example.popularmovies.models.pojo.Movie;
 import com.example.popularmovies.models.pojo.Trailer;
 
-@Database(entities = {Movie.class, Trailer.class, Genre.class}, version = 14, exportSchema = false)
+@Database(entities = {Movie.class, Trailer.class, Genre.class}, version = 16, exportSchema = false)
 public abstract class MovieDatabase extends RoomDatabase {
     private static final String DB_NAME = "movies2.db";
     private static MovieDatabase instance;
@@ -28,5 +28,6 @@ public abstract class MovieDatabase extends RoomDatabase {
     public abstract TrailerDao trailerDao();
 
     public abstract GenreDao genreDao();
+
 }
 

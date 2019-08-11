@@ -31,10 +31,6 @@ public class TrailersAdapter extends RecyclerView.Adapter<TrailerViewHolder> {
         notifyDataSetChanged();
     }
 
-    public Trailer getItem(int position) {
-        return trailers.get(position);
-    }
-
     @NonNull
     @Override
     public TrailerViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {

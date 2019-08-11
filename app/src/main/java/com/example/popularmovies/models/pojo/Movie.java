@@ -58,7 +58,11 @@ public class Movie {
     @Expose
     private String releaseDate;
 
-    public Movie(int voteCount, int id, boolean video, double voteAverage, String title, double popularity, String posterPath, String originalLanguage, String originalTitle, String backdropPath, boolean adult, String overview, String releaseDate) {
+    public Movie(int voteCount, int id, boolean video, double voteAverage,
+                 String title, double popularity, String posterPath,
+                 String originalLanguage, String originalTitle,
+                 String backdropPath, boolean adult, String overview,
+                 String releaseDate) {
         this.voteCount = voteCount;
         this.id = id;
         this.video = video;

@@ -33,10 +33,6 @@ public class MoviesAdapter extends RecyclerView.Adapter<MovieViewHolder> {
         this.clickListener = clickListener;
     }
 
-    public Movie getItem(int position) {
-        return movies.get(position);
-    }
-
     public void setMovies(List<Movie> movies) {
         this.movies = movies;
         notifyDataSetChanged();
