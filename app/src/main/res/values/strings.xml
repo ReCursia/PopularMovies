@@ -20,4 +20,5 @@
     <string name="no_favorite_movies">You have no favorites movies yet!</string>
     <string name="no_favorite_movies_icon">No favorite movies icon</string>
     <string name="play_button">Play trailer button</string>
+    <string name="favorite_title">Favorite</string>
 </resources>

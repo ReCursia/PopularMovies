@@ -36,6 +36,7 @@ public class MainActivity extends MvpAppCompatActivity implements MainContract {
     @InjectPresenter
     MainPresenter presenter;
     private AlertDialog aboutDialog;
+    private MoviesPagerAdapter pagerAdapter;
 
     @Override
     public void openGooglePlayPage() {
@@ -104,7 +105,7 @@ public class MainActivity extends MvpAppCompatActivity implements MainContract {
     }
 
     private void initViewPager() {
-        MoviesPagerAdapter pagerAdapter = new MoviesPagerAdapter(getSupportFragmentManager());
+        pagerAdapter = new MoviesPagerAdapter(getSupportFragmentManager());
         pagerAdapter.setClickListener(item -> presenter.onMovieClicked(item));
         moviesViewPager.setAdapter(pagerAdapter);
     }

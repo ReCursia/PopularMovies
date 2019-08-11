@@ -20,4 +20,6 @@
     <string name="removed_favorite">Удалено из избранного</string>
     <string name="title">Название:</string>
     <string name="top_rated">Самые рейтинговые</string>
+    <string name="play_button">Кнопка открыть трейлер</string>
+    <string name="favorite_title">Избранное</string>
 </resources>
