@@ -82,7 +82,6 @@ public class FavoriteActivity extends MvpAppCompatActivity implements FavoriteCo
 
     private void initToolbar() {
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle(getString(R.string.favorite_title));
     }
 
     private void initRecyclerView() {
@@ -96,10 +95,11 @@ public class FavoriteActivity extends MvpAppCompatActivity implements FavoriteCo
     }
 
     private void initActionBar() {
-        //add back arrow
+        //add back arrow and title
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setDisplayShowHomeEnabled(true);
+            getSupportActionBar().setTitle(getString(R.string.favorite_title));
         }
     }
 
