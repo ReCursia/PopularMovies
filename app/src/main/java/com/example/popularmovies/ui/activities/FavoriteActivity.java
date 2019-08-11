@@ -82,7 +82,7 @@ public class FavoriteActivity extends MvpAppCompatActivity implements FavoriteCo
 
     private void initToolbar() {
         setSupportActionBar(toolbar);
-        toolbar.setTitle(getString(R.string.favorite_title));
+        getSupportActionBar().setTitle(getString(R.string.favorite_title));
     }
 
     private void initRecyclerView() {
