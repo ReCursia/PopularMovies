@@ -9,11 +9,10 @@ import com.example.popularmovies.models.pojo.Movie;
 
 @StateStrategyType(AddToEndSingleStrategy.class)
 public interface MainContract extends MvpView {
+
     //Dialog
-    @StateStrategyType(OneExecutionStateStrategy.class)
     void openAboutDialog();
 
-    @StateStrategyType(OneExecutionStateStrategy.class)
     void hideAboutDialog();
 
     @StateStrategyType(SkipStrategy.class)

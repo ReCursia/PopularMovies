@@ -18,7 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MoviesAdapter extends RecyclerView.Adapter<MovieViewHolder> {
-    private final static int FADE_OUT_DURATION = 100; //ms
+    private static final int FADE_OUT_DURATION = 100; //ms
 
     private final Context context;
     private List<Movie> movies;

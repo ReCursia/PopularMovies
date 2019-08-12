@@ -16,23 +16,18 @@ public interface DetailContract extends MvpView {
 
     void setMovieDetail(Movie movie);
 
-    @StateStrategyType(OneExecutionStateStrategy.class)
     void setFavoriteIconOn();
 
-    @StateStrategyType(OneExecutionStateStrategy.class)
     void setFavoriteIconOff();
 
     //Trailers
     void setTrailers(List<Trailer> trailers);
 
-    @StateStrategyType(OneExecutionStateStrategy.class)
     void hideTrailers();
 
-    @StateStrategyType(OneExecutionStateStrategy.class)
     void showTrailers();
 
     //Genres
-    @StateStrategyType(OneExecutionStateStrategy.class)
     void setGenres(List<Genre> genres);
 
     @StateStrategyType(SkipStrategy.class)

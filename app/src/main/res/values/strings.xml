@@ -21,4 +21,7 @@
     <string name="no_favorite_movies_icon">No favorite movies icon</string>
     <string name="play_button">Play trailer button</string>
     <string name="favorite_title">Favorite</string>
+    <string name="next_button">Next</string>
+    <string name="previous_button">Previous</string>
+    <string name="finish_button">Done</string>
 </resources>

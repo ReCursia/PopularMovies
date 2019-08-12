@@ -60,4 +60,5 @@ dependencies {
     testImplementation "android.arch.persistence.room:testing:$room_version"
     //Cannot build .apk without it
     androidTestImplementation 'com.google.code.findbugs:jsr305:1.3.9'
+    implementation 'com.android.support:support-v4:28.0.0'
 }
