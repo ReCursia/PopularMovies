@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Популярные фильмы</string>
+    <string name="app_name">Popular movies</string>
     <string name="about">О приложении</string>
     <string name="about_description">Данное приложение позволяет находить интересные фильмы, смотреть детальную информацию о фильме, а также сохранять любимые фильмы в избранный список</string>
     <string name="added_favorite">Добавлено в избранное</string>

@@ -11,9 +11,11 @@ import android.widget.TextView;
 
 import com.arellomobile.mvp.MvpAppCompatActivity;
 import com.arellomobile.mvp.presenter.InjectPresenter;
+import com.arellomobile.mvp.presenter.ProvidePresenter;
 import com.example.popularmovies.R;
 import com.example.popularmovies.presenters.IntroPresenter;
 import com.example.popularmovies.ui.adapters.intro.SectionsPagerAdapter;
+import com.example.popularmovies.utils.intro.PrefUtilsImpl;
 import com.example.popularmovies.views.IntroContract;
 
 import java.util.ArrayList;
@@ -41,6 +43,11 @@ public class IntroActivity extends MvpAppCompatActivity implements IntroContract
     IntroPresenter presenter;
     private SectionsPagerAdapter sectionsPagerAdapter;
     private List<TextView> dots;
+
+    @ProvidePresenter
+    IntroPresenter providePresenter() {
+        return new IntroPresenter(new PrefUtilsImpl(this));
+    }
 
     @OnClick(R.id.next_button)
     public void onNextButtonClicked() {

@@ -2,15 +2,26 @@ package com.example.popularmovies.presenters;
 
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
+import com.example.popularmovies.utils.intro.PrefUtils;
 import com.example.popularmovies.views.IntroContract;
 
 @InjectViewState
 public class IntroPresenter extends MvpPresenter<IntroContract> {
     private static final int SIZE = 3;
     private int currentSection;
+    private PrefUtils prefUtils;
 
-    public IntroPresenter() {
-        setCurrentSection(0);
+    public IntroPresenter(PrefUtils prefUtils) {
+        this.prefUtils = prefUtils;
+        if (isFirstLaunch()) {
+            setCurrentSection(0);
+        } else {
+            getViewState().openMainScreen();
+        }
+    }
+
+    private boolean isFirstLaunch() {
+        return prefUtils.getValue();
     }
 
     private void setCurrentSection(int index) {
@@ -51,6 +62,7 @@ public class IntroPresenter extends MvpPresenter<IntroContract> {
     }
 
     public void onFinishButtonClicked() {
+        prefUtils.putValue(false); //now this is not first launch
         getViewState().openMainScreen();
     }
 
