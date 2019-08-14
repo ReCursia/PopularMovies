@@ -143,6 +143,7 @@ public class DetailPresenter extends MvpPresenter<DetailContract> {
     }
 
     public void onFavoriteIconClicked() {
+        //TODO make valid checking
         if (isFavorite) {
             repository.deleteMovie(movie);
             repository.deleteTrailers(trailers);

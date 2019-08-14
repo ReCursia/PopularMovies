@@ -1,6 +1,7 @@
 package com.example.popularmovies.models.pojo;
 
 import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
 import android.support.annotation.NonNull;
 
@@ -21,9 +22,11 @@ public class Trailer {
     private String id;
     @SerializedName("iso_639_1")
     @Expose
+    @Ignore
     private String iso6391;
     @SerializedName("iso_3166_1")
     @Expose
+    @Ignore
     private String iso31661;
     @SerializedName("key")
     @Expose
@@ -41,14 +44,11 @@ public class Trailer {
     @Expose
     private String type;
 
-    public Trailer(int movieId, @NonNull String id,
-                   String iso6391, String iso31661,
-                   String key, String name, String site,
-                   int size, String type) {
+    public Trailer(int movieId, @NonNull String id, String key,
+                   String name, String site, int size,
+                   String type) {
         this.movieId = movieId;
         this.id = id;
-        this.iso6391 = iso6391;
-        this.iso31661 = iso31661;
         this.key = key;
         this.name = name;
         this.site = site;

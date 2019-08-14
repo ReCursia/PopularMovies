@@ -39,10 +39,6 @@ public class MoviesFragmentPresenter extends MvpPresenter<MoviesContract> {
                 .subscribe(this::handleSuccessfulResponse, this::handleErrorResponse); //Reflection
     }
 
-    public void setDiscoverStrategy(DiscoverStrategy newStrategy) {
-        this.discoverStrategy = newStrategy;
-    }
-
     public void onSwipeRefreshed() {
         getViewState().showLoading();
         isRefreshing = true;

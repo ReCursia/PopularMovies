@@ -14,12 +14,12 @@ import io.reactivex.Single;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
-public class MovieLocalRepositoryImpl implements MovieRepository {
+public class MovieLocalRepository implements MovieRepository {
     private MovieDao movieDao;
     private TrailerDao trailerDao;
     private GenreDao genreDao;
 
-    public MovieLocalRepositoryImpl(MovieDao movieDao, TrailerDao trailerDao, GenreDao genreDao) {
+    public MovieLocalRepository(MovieDao movieDao, TrailerDao trailerDao, GenreDao genreDao) {
         this.movieDao = movieDao;
         this.trailerDao = trailerDao;
         this.genreDao = genreDao;

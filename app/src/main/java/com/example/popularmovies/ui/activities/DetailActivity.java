@@ -30,7 +30,7 @@ import com.example.popularmovies.models.network.MoviesService;
 import com.example.popularmovies.models.pojo.Genre;
 import com.example.popularmovies.models.pojo.Movie;
 import com.example.popularmovies.models.pojo.Trailer;
-import com.example.popularmovies.models.repository.MovieLocalRepositoryImpl;
+import com.example.popularmovies.models.repository.MovieLocalRepository;
 import com.example.popularmovies.models.repository.MovieRepository;
 import com.example.popularmovies.presenters.DetailPresenter;
 import com.example.popularmovies.ui.adapters.trailers.TrailersAdapter;
@@ -84,6 +84,8 @@ public class DetailActivity extends MvpAppCompatActivity implements DetailContra
 
     @Override
     public void setGenres(List<Genre> genres) {
+        //Before set genres remove previous one
+        genresGroup.removeAllViews();
         LayoutInflater layoutInflater = LayoutInflater.from(this);
         for (Genre genre : genres) {
             Chip chip = (Chip) layoutInflater.inflate(R.layout.genre_chip, null, false);
@@ -96,7 +98,7 @@ public class DetailActivity extends MvpAppCompatActivity implements DetailContra
     DetailPresenter providePresenter() {
         Intent intent = getIntent();
         MovieDatabase db = MovieDatabase.getInstance(this);
-        MovieRepository movieRepository = new MovieLocalRepositoryImpl(db.movieDao(), db.trailerDao(), db.genreDao());
+        MovieRepository movieRepository = new MovieLocalRepository(db.movieDao(), db.trailerDao(), db.genreDao());
         return new DetailPresenter(MoviesService.getInstance().getMoviesApi(), movieRepository, intent.getIntExtra("id", 0));
     }
 

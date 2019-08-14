@@ -7,19 +7,21 @@ POJO class for Intro activity
 import java.io.Serializable;
 
 public class SectionItem implements Serializable {
-    private int imageId;
+    private String fileName;
     private String description;
 
-    public SectionItem(int imageId, String description) {
-        this.imageId = imageId;
-        this.description = description;
-    }
-
-    public int getImageId() {
-        return imageId;
+    public String getFileName() {
+        return fileName;
     }
 
     public String getDescription() {
         return description;
     }
+
+    public SectionItem(String fileName, String description) {
+        this.fileName = fileName;
+        this.description = description;
+    }
+
 }
+

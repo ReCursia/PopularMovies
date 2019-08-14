@@ -3,6 +3,9 @@ package com.example.popularmovies.views;
 import com.arellomobile.mvp.MvpView;
 import com.arellomobile.mvp.viewstate.strategy.AddToEndSingleStrategy;
 import com.arellomobile.mvp.viewstate.strategy.StateStrategyType;
+import com.example.popularmovies.models.pojo.SectionItem;
+
+import java.util.List;
 
 @StateStrategyType(AddToEndSingleStrategy.class)
 public interface IntroContract extends MvpView {
@@ -27,5 +30,8 @@ public interface IntroContract extends MvpView {
     void showFinishButton();
 
     void hideFinishButton();
+
+    //View pager
+    void setViewPagerData(List<SectionItem> sectionItems);
 
 }

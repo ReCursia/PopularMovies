@@ -9,6 +9,7 @@ import com.example.popularmovies.models.pojo.Movie;
 import com.example.popularmovies.ui.adapters.OnItemClickListener;
 import com.example.popularmovies.ui.fragments.MoviesFragment;
 import com.example.popularmovies.utils.NetworkUtils;
+import com.example.popularmovies.utils.TagUtils;
 
 public class MoviesPagerAdapter extends FragmentStatePagerAdapter {
     private static final int TAB_COUNT = 2;
@@ -44,7 +45,7 @@ public class MoviesPagerAdapter extends FragmentStatePagerAdapter {
             }
         });
         Bundle args = new Bundle();
-        args.putString("sortBy", argsList[index]);
+        args.putString(TagUtils.FRAGMENT_MOVIES, argsList[index]);
         fragment.setArguments(args);
         return fragment;
     }

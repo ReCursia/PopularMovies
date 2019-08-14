@@ -21,6 +21,7 @@ import com.example.popularmovies.presenters.MoviesFragmentPresenter;
 import com.example.popularmovies.ui.adapters.OnItemClickListener;
 import com.example.popularmovies.ui.adapters.movies.MoviesAdapter;
 import com.example.popularmovies.utils.NetworkUtils;
+import com.example.popularmovies.utils.TagUtils;
 import com.example.popularmovies.utils.discover.DiscoverStrategy;
 import com.example.popularmovies.utils.discover.PopularityDiscoverStrategy;
 import com.example.popularmovies.utils.discover.TopRatedDiscoverStrategy;
@@ -52,7 +53,7 @@ public class MoviesFragment extends MvpAppCompatFragment implements MoviesContra
 
     @ProvidePresenter
     MoviesFragmentPresenter providePresenter() {
-        String sortStrategy = getArguments().getString("sortBy");
+        String sortStrategy = getArguments().getString(TagUtils.FRAGMENT_MOVIES);
 
         DiscoverStrategy strategy = (sortStrategy.equals(NetworkUtils.TOP_RATED)) ?
                 new TopRatedDiscoverStrategy() :

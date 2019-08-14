@@ -2,26 +2,32 @@ package com.example.popularmovies.presenters;
 
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
+import com.example.popularmovies.models.pojo.SectionItem;
 import com.example.popularmovies.utils.intro.PrefUtils;
 import com.example.popularmovies.views.IntroContract;
 
+import java.util.List;
+
 @InjectViewState
 public class IntroPresenter extends MvpPresenter<IntroContract> {
-    private static final int SIZE = 3;
     private int currentSection;
     private PrefUtils prefUtils;
+    private List<SectionItem> sectionItems;
 
-    public IntroPresenter(PrefUtils prefUtils) {
+    public IntroPresenter(List<SectionItem> sectionItems, PrefUtils prefUtils) {
+        this.sectionItems = sectionItems;
         this.prefUtils = prefUtils;
+        //TODO uncomment
+        /*
         if (isFirstLaunch()) {
+            getViewState().setViewPagerData(sectionItems);
             setCurrentSection(0);
         } else {
             getViewState().openMainScreen();
-        }
-    }
-
-    private boolean isFirstLaunch() {
-        return prefUtils.getValue();
+        }*/
+        //TODO remove next line
+        getViewState().setViewPagerData(sectionItems);
+        setCurrentSection(0);
     }
 
     private void setCurrentSection(int index) {
@@ -46,11 +52,19 @@ public class IntroPresenter extends MvpPresenter<IntroContract> {
     }
 
     private boolean isInRangeExclude() {
-        return (currentSection > 0) && (currentSection < (SIZE - 1));
+        return (currentSection > 0) && (currentSection < (getSectionsCount() - 1));
+    }
+
+    private int getSectionsCount() {
+        return sectionItems.size();
     }
 
     private boolean isEndPosition() {
-        return currentSection == (SIZE - 1);
+        return currentSection == (getSectionsCount() - 1);
+    }
+
+    private boolean isFirstLaunch() {
+        return prefUtils.getValue();
     }
 
     public void onNextButtonClicked() {

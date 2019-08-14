@@ -15,7 +15,7 @@ public class SectionFragmentPresenter extends MvpPresenter<SectionContract> {
     }
 
     private void initData() {
-        getViewState().setData(item);
+        getViewState().setSectionData(item);
     }
 
 }

@@ -6,9 +6,4 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="colorControlNormal">@color/white</item>
     </style>
-
-    <style name="ChipCustomStyle" parent="Widget.MaterialComponents.Chip.Action">
-        <item name="checkedIconEnabled">false</item>
-        <item name="checkedIcon">@null</item>
-    </style>
 </resources>

@@ -13,6 +13,7 @@ import com.arellomobile.mvp.MvpAppCompatActivity;
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.arellomobile.mvp.presenter.ProvidePresenter;
 import com.example.popularmovies.R;
+import com.example.popularmovies.models.pojo.SectionItem;
 import com.example.popularmovies.presenters.IntroPresenter;
 import com.example.popularmovies.ui.adapters.intro.SectionsPagerAdapter;
 import com.example.popularmovies.utils.intro.PrefUtilsImpl;
@@ -46,7 +47,12 @@ public class IntroActivity extends MvpAppCompatActivity implements IntroContract
 
     @ProvidePresenter
     IntroPresenter providePresenter() {
-        return new IntroPresenter(new PrefUtilsImpl(this));
+        List<SectionItem> sectionItems = new ArrayList<>();
+        sectionItems.add(new SectionItem("movie.json", "Watch new popular and top rated movies,\n explore movies to watch them tonight!"));
+        sectionItems.add(new SectionItem("detail.json", "Watch detail movie information\n for every movie in top rated or popular category!"));
+        sectionItems.add(new SectionItem("heart.json", "Save your favorite movies\n into local database!"));
+        sectionItems.add(new SectionItem("coder.json", "Just beautiful animation\nthis also allows me to take a look on\nthree line text!"));
+        return new IntroPresenter(sectionItems, new PrefUtilsImpl(this));
     }
 
     @OnClick(R.id.next_button)
@@ -70,7 +76,6 @@ public class IntroActivity extends MvpAppCompatActivity implements IntroContract
         setContentView(R.layout.activity_intro);
         ButterKnife.bind(this);
         initViewPager();
-        initDots();
     }
 
     private void initViewPager() {
@@ -98,6 +103,12 @@ public class IntroActivity extends MvpAppCompatActivity implements IntroContract
             dot.setTextColor(getResources().getColor(R.color.colorTransparentWhite));
         }
         dots.get(position).setTextColor(getResources().getColor(R.color.white));
+    }
+
+    @Override
+    public void setViewPagerData(List<SectionItem> sectionItems) {
+        sectionsPagerAdapter.setSections(sectionItems);
+        initDots();
     }
 
     private void initDots() {
