@@ -27,13 +27,16 @@ import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.example.popularmovies.R;
 import com.example.popularmovies.models.database.MovieDatabase;
 import com.example.popularmovies.models.network.MoviesService;
+import com.example.popularmovies.models.pojo.Cast;
 import com.example.popularmovies.models.pojo.Genre;
 import com.example.popularmovies.models.pojo.Movie;
 import com.example.popularmovies.models.pojo.Trailer;
 import com.example.popularmovies.models.repository.MovieLocalRepository;
 import com.example.popularmovies.models.repository.MovieRepository;
 import com.example.popularmovies.presenters.DetailPresenter;
+import com.example.popularmovies.ui.adapters.credits.CreditsAdapter;
 import com.example.popularmovies.ui.adapters.trailers.TrailersAdapter;
+import com.example.popularmovies.utils.DateUtils;
 import com.example.popularmovies.utils.NetworkUtils;
 import com.example.popularmovies.views.DetailContract;
 
@@ -44,37 +47,54 @@ import butterknife.ButterKnife;
 
 public class DetailActivity extends MvpAppCompatActivity implements DetailContract {
     private final static int FADE_OUT_DURATION = 100; //ms
-
+    @BindView(R.id.timeTextView)
+    TextView timeTextView;
     @BindView(R.id.descriptionTextView)
     TextView descriptionTextView;
     @BindView(R.id.ratingTextView)
     TextView ratingTextView;
-    @BindView(R.id.originalTitleTextView)
-    TextView originalTitleTextView;
+    @BindView(R.id.statusTextView)
+    TextView statusTextView;
     @BindView(R.id.releaseDateTextView)
     TextView releaseDateTextView;
     @BindView(R.id.recycleViewTrailers)
-    RecyclerView recyclerView;
+    RecyclerView recyclerViewTrailers;
     @BindView(R.id.posterImage)
     ImageView posterImage;
     @BindView(R.id.toolbar)
     Toolbar toolbar;
     @BindView(R.id.collapsingToolbar)
     CollapsingToolbarLayout collapsingToolbarLayout;
-    @BindView(R.id.trailersCardView)
-    CardView trailersCardView;
     @BindView(R.id.genresGroup)
     ChipGroup genresGroup;
-
+    @BindView(R.id.recyclerViewCast)
+    RecyclerView recyclerViewCast;
+    @BindView(R.id.castCardView)
+    CardView castCardView;
     @InjectPresenter
     DetailPresenter presenter;
-
-    private TrailersAdapter adapter;
+    private TrailersAdapter trailersAdapter;
+    private CreditsAdapter creditsAdapter;
     private Menu menu;
 
     @Override
+    public void setCast(List<Cast> cast) {
+        creditsAdapter.setCast(cast);
+    }
+
+    @Override
+    public void showCast() {
+        castCardView.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void hideCast() {
+        castCardView.setVisibility(View.GONE);
+    }
+
+    @Override
     public void setTrailers(List<Trailer> trailers) {
-        adapter.setTrailers(trailers);
+        trailersAdapter.setTrailers(trailers);
     }
 
     @Override
@@ -154,20 +174,31 @@ public class DetailActivity extends MvpAppCompatActivity implements DetailContra
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
         ButterKnife.bind(this);
-        initRecyclerView();
-        initAdapter();
+        initTrailerRecyclerView();
+        initCastRecyclerView();
+        initTrailersAdapter();
+        initCreditsAdapter();
         initToolbar();
         initCollapsingToolbarLayout();
     }
 
-    private void initRecyclerView() {
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+    private void initTrailerRecyclerView() {
+        recyclerViewTrailers.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
     }
 
-    private void initAdapter() {
-        adapter = new TrailersAdapter();
-        adapter.setClickListener(item -> presenter.onTrailerPlayButtonClicked(item));
-        recyclerView.setAdapter(adapter);
+    private void initCastRecyclerView() {
+        recyclerViewCast.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+    }
+
+    private void initTrailersAdapter() {
+        trailersAdapter = new TrailersAdapter(this);
+        trailersAdapter.setClickListener(item -> presenter.onTrailerPlayButtonClicked(item));
+        recyclerViewTrailers.setAdapter(trailersAdapter);
+    }
+
+    private void initCreditsAdapter() {
+        creditsAdapter = new CreditsAdapter(this);
+        recyclerViewCast.setAdapter(creditsAdapter);
     }
 
     private void initToolbar() {
@@ -186,12 +217,12 @@ public class DetailActivity extends MvpAppCompatActivity implements DetailContra
 
     @Override
     public void hideTrailers() {
-        trailersCardView.setVisibility(View.GONE);
+        recyclerViewTrailers.setVisibility(View.GONE);
     }
 
     @Override
     public void showTrailers() {
-        trailersCardView.setVisibility(View.VISIBLE);
+        recyclerViewTrailers.setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -203,13 +234,14 @@ public class DetailActivity extends MvpAppCompatActivity implements DetailContra
     @Override
     public void setMovieDetail(Movie movie) {
         collapsingToolbarLayout.setTitle(movie.getTitle());
-        originalTitleTextView.setText(movie.getOriginalTitle());
-        releaseDateTextView.setText(movie.getReleaseDate());
+        statusTextView.setText(movie.getStatus());
+        timeTextView.setText(DateUtils.formatTime(movie.getRuntime()));
+        releaseDateTextView.setText(DateUtils.formatDate(movie.getReleaseDate()));
         descriptionTextView.setText(movie.getOverview());
         ratingTextView.setText(Double.toString(movie.getVoteAverage()));
         //Image
         Glide.with(this)
-                .load(NetworkUtils.BASE_POSTER_URL + NetworkUtils.BIG_POSTER_SIZE + movie.getPosterPath())
+                .load(NetworkUtils.BASE_IMAGE_URL + NetworkUtils.BIG_POSTER_SIZE + movie.getPosterPath())
                 .transition(DrawableTransitionOptions.withCrossFade(FADE_OUT_DURATION))
                 .into(posterImage);
     }

@@ -1,4 +1,4 @@
-package com.example.popularmovies.ui.adapters.trailers;
+package com.example.popularmovies.ui.adapters.credits;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -11,15 +11,13 @@ import com.example.popularmovies.R;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class TrailerViewHolder extends RecyclerView.ViewHolder {
-    @BindView(R.id.playButton)
-    ImageView playButton;
-    @BindView(R.id.trailerTitle)
-    TextView trailerTitle;
-    @BindView(R.id.trailerImage)
-    ImageView trailerImage;
+public class CreditViewHolder extends RecyclerView.ViewHolder {
+    @BindView(R.id.castImage)
+    ImageView castImage;
+    @BindView(R.id.castName)
+    TextView castName;
 
-    TrailerViewHolder(@NonNull View itemView) {
+    public CreditViewHolder(@NonNull View itemView) {
         super(itemView);
         ButterKnife.bind(this, itemView);
     }

@@ -1,8 +1,5 @@
 package com.example.popularmovies.models.pojo;
 
-import android.arch.persistence.room.Entity;
-import android.arch.persistence.room.PrimaryKey;
-
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -10,24 +7,19 @@ import com.google.gson.annotations.SerializedName;
 POJO class with Room and GSON annotation
  */
 
-@Entity(tableName = "genres")
+//@Entity(tableName = "genres")
 public class Genre {
-    @PrimaryKey(autoGenerate = true)
-    private int tableId;
 
-    private int movieId;
+    @SerializedName("id")
     @Expose
     private int id;
     @SerializedName("name")
     @Expose
     private String name;
 
-    public int getTableId() {
-        return tableId;
-    }
-
-    public void setTableId(int tableId) {
-        this.tableId = tableId;
+    public Genre(int id, String name) {
+        this.id = id;
+        this.name = name;
     }
 
     public int getId() {
@@ -36,14 +28,6 @@ public class Genre {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public int getMovieId() {
-        return movieId;
-    }
-
-    public void setMovieId(int movieId) {
-        this.movieId = movieId;
     }
 
     public String getName() {

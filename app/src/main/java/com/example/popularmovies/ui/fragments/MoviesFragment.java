@@ -1,5 +1,6 @@
 package com.example.popularmovies.ui.fragments;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -18,7 +19,6 @@ import com.example.popularmovies.R;
 import com.example.popularmovies.models.network.MoviesService;
 import com.example.popularmovies.models.pojo.Movie;
 import com.example.popularmovies.presenters.MoviesFragmentPresenter;
-import com.example.popularmovies.ui.adapters.OnItemClickListener;
 import com.example.popularmovies.ui.adapters.movies.MoviesAdapter;
 import com.example.popularmovies.utils.NetworkUtils;
 import com.example.popularmovies.utils.TagUtils;
@@ -45,11 +45,7 @@ public class MoviesFragment extends MvpAppCompatFragment implements MoviesContra
     MoviesFragmentPresenter presenter;
 
     private MoviesAdapter moviesAdapter;
-    private OnItemClickListener<Movie> listener;
-
-    public void setOnMovieClickedListener(OnItemClickListener<Movie> listener) {
-        this.listener = listener;
-    }
+    private OnFragmentMoviesInteractionListener listener;
 
     @ProvidePresenter
     MoviesFragmentPresenter providePresenter() {
@@ -96,6 +92,21 @@ public class MoviesFragment extends MvpAppCompatFragment implements MoviesContra
         swipeIndicator.setColorSchemeColors(getResources().getColor(R.color.colorAccent));
     }
 
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        setInteractionListener();
+    }
+
+    private void setInteractionListener() {
+        //Getting activity and setting listener
+        try {
+            listener = (OnFragmentMoviesInteractionListener) getActivity();
+        } catch (ClassCastException er) {
+            throw new ClassCastException(getActivity().toString() + "must implement interface");
+        }
+    }
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -132,8 +143,12 @@ public class MoviesFragment extends MvpAppCompatFragment implements MoviesContra
     @Override
     public void openMovieDetailInformation(Movie movie) {
         if (listener != null) {
-            listener.onItemClick(movie);
+            listener.onFragmentMovieClicked(movie);
         }
+    }
+
+    public interface OnFragmentMoviesInteractionListener {
+        void onFragmentMovieClicked(Movie movie);
     }
 
 }

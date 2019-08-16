@@ -17,15 +17,18 @@ public class IntroPresenter extends MvpPresenter<IntroContract> {
     public IntroPresenter(List<SectionItem> sectionItems, PrefUtils prefUtils) {
         this.sectionItems = sectionItems;
         this.prefUtils = prefUtils;
-        //TODO uncomment
-        /*
         if (isFirstLaunch()) {
-            getViewState().setViewPagerData(sectionItems);
-            setCurrentSection(0);
+            initViewState();
         } else {
             getViewState().openMainScreen();
-        }*/
-        //TODO remove next line
+        }
+    }
+
+    private boolean isFirstLaunch() {
+        return prefUtils.getValue();
+    }
+
+    private void initViewState() {
         getViewState().setViewPagerData(sectionItems);
         setCurrentSection(0);
     }
@@ -61,10 +64,6 @@ public class IntroPresenter extends MvpPresenter<IntroContract> {
 
     private boolean isEndPosition() {
         return currentSection == (getSectionsCount() - 1);
-    }
-
-    private boolean isFirstLaunch() {
-        return prefUtils.getValue();
     }
 
     public void onNextButtonClicked() {

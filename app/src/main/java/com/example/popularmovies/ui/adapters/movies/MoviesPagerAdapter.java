@@ -5,8 +5,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
-import com.example.popularmovies.models.pojo.Movie;
-import com.example.popularmovies.ui.adapters.OnItemClickListener;
 import com.example.popularmovies.ui.fragments.MoviesFragment;
 import com.example.popularmovies.utils.NetworkUtils;
 import com.example.popularmovies.utils.TagUtils;
@@ -16,14 +14,9 @@ public class MoviesPagerAdapter extends FragmentStatePagerAdapter {
 
     private final String[] argsList = {NetworkUtils.POPULARITY, NetworkUtils.TOP_RATED};
     private final String[] titles = {"POPULAR", "TOP RATED"};
-    private OnItemClickListener<Movie> listener;
 
     public MoviesPagerAdapter(FragmentManager fm) {
         super(fm);
-    }
-
-    public void setClickListener(OnItemClickListener<Movie> newListener) {
-        this.listener = newListener;
     }
 
     @Override
@@ -38,12 +31,7 @@ public class MoviesPagerAdapter extends FragmentStatePagerAdapter {
 
     private Fragment getInstance(int index) {
         MoviesFragment fragment = new MoviesFragment();
-        //Setting listeners, so we can provide clicked movie to main activity
-        fragment.setOnMovieClickedListener(item -> {
-            if (listener != null) {
-                listener.onItemClick(item);
-            }
-        });
+        //Passing args
         Bundle args = new Bundle();
         args.putString(TagUtils.FRAGMENT_MOVIES, argsList[index]);
         fragment.setArguments(args);

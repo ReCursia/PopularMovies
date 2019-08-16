@@ -10,17 +10,17 @@ public class SectionItem implements Serializable {
     private String fileName;
     private String description;
 
+    public SectionItem(String fileName, String description) {
+        this.fileName = fileName;
+        this.description = description;
+    }
+
     public String getFileName() {
         return fileName;
     }
 
     public String getDescription() {
         return description;
-    }
-
-    public SectionItem(String fileName, String description) {
-        this.fileName = fileName;
-        this.description = description;
     }
 
 }

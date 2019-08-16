@@ -32,6 +32,7 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
     private Fragment getInstance(int index) {
         SectionFragment fragment = new SectionFragment();
+        //Passing args
         Bundle args = new Bundle();
         args.putSerializable(TagUtils.FRAGMENT_INTRO, sectionItemList.get(index));
         fragment.setArguments(args);

@@ -2,9 +2,9 @@ package com.example.popularmovies.views;
 
 import com.arellomobile.mvp.MvpView;
 import com.arellomobile.mvp.viewstate.strategy.AddToEndSingleStrategy;
-import com.arellomobile.mvp.viewstate.strategy.OneExecutionStateStrategy;
 import com.arellomobile.mvp.viewstate.strategy.SkipStrategy;
 import com.arellomobile.mvp.viewstate.strategy.StateStrategyType;
+import com.example.popularmovies.models.pojo.Cast;
 import com.example.popularmovies.models.pojo.Genre;
 import com.example.popularmovies.models.pojo.Movie;
 import com.example.popularmovies.models.pojo.Trailer;
@@ -19,6 +19,13 @@ public interface DetailContract extends MvpView {
     void setFavoriteIconOn();
 
     void setFavoriteIconOff();
+
+    //Cast
+    void setCast(List<Cast> cast);
+
+    void showCast();
+
+    void hideCast();
 
     //Trailers
     void setTrailers(List<Trailer> trailers);

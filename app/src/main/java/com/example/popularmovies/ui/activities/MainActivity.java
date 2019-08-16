@@ -18,13 +18,14 @@ import com.example.popularmovies.R;
 import com.example.popularmovies.models.pojo.Movie;
 import com.example.popularmovies.presenters.MainPresenter;
 import com.example.popularmovies.ui.adapters.movies.MoviesPagerAdapter;
+import com.example.popularmovies.ui.fragments.MoviesFragment;
 import com.example.popularmovies.utils.NetworkUtils;
 import com.example.popularmovies.views.MainContract;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MainActivity extends MvpAppCompatActivity implements MainContract {
+public class MainActivity extends MvpAppCompatActivity implements MainContract, MoviesFragment.OnFragmentMoviesInteractionListener {
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
@@ -36,7 +37,6 @@ public class MainActivity extends MvpAppCompatActivity implements MainContract {
     @InjectPresenter
     MainPresenter presenter;
     private AlertDialog aboutDialog;
-    private MoviesPagerAdapter pagerAdapter;
 
     @Override
     public void openGooglePlayPage() {
@@ -105,8 +105,7 @@ public class MainActivity extends MvpAppCompatActivity implements MainContract {
     }
 
     private void initViewPager() {
-        pagerAdapter = new MoviesPagerAdapter(getSupportFragmentManager());
-        pagerAdapter.setClickListener(item -> presenter.onMovieClicked(item));
+        MoviesPagerAdapter pagerAdapter = new MoviesPagerAdapter(getSupportFragmentManager());
         moviesViewPager.setAdapter(pagerAdapter);
     }
 
@@ -134,6 +133,11 @@ public class MainActivity extends MvpAppCompatActivity implements MainContract {
         Intent intent = new Intent(this, DetailActivity.class);
         intent.putExtra("id", movie.getId());
         startActivity(intent);
+    }
+
+    @Override
+    public void onFragmentMovieClicked(Movie movie) {
+        presenter.onMovieClicked(movie);
     }
 
 }

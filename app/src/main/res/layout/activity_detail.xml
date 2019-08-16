@@ -74,7 +74,7 @@
                         android:id="@+id/releaseDateTextView"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="24dp"
+                        android:layout_marginStart="16dp"
                         android:layout_marginTop="16dp"
                         android:textColor="@color/white"
                         android:textSize="16sp"
@@ -97,7 +97,7 @@
                         android:id="@+id/ratingTextView"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="24dp"
+                        android:layout_marginStart="16dp"
                         android:layout_marginTop="16dp"
                         android:textColor="@color/white"
                         android:textSize="16sp"
@@ -105,10 +105,10 @@
                         app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
                     <TextView
-                        android:id="@+id/originalTitleTextView"
+                        android:id="@+id/statusTextView"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="24dp"
+                        android:layout_marginStart="16dp"
                         android:textColor="@color/white"
                         android:textSize="16sp"
                         app:layout_constraintStart_toEndOf="@+id/textView4"
@@ -130,7 +130,7 @@
                         android:id="@+id/textView4"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/original_title"
+                        android:text="@string/status"
                         android:textColor="@color/white"
                         android:textSize="16sp"
                         android:textStyle="bold"
@@ -145,6 +145,15 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/textView3" />
+
+                    <TextView
+                        android:id="@+id/timeTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/white"
+                        android:textStyle="italic"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
                 </android.support.constraint.ConstraintLayout>
             </android.support.v7.widget.CardView>
 
@@ -186,8 +195,14 @@
                 </android.support.constraint.ConstraintLayout>
             </android.support.v7.widget.CardView>
 
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recycleViewTrailers"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp" />
+
             <android.support.v7.widget.CardView
-                android:id="@+id/trailersCardView"
+                android:id="@+id/castCardView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/card_margin_horizontal"
@@ -195,13 +210,36 @@
                 android:layout_marginEnd="@dimen/card_margin_horizontal"
                 android:elevation="0dp"
                 app:cardBackgroundColor="@color/darkGray"
-                app:cardCornerRadius="30dp"
-                app:contentPadding="15dp">
+                app:cardCornerRadius="30dp">
 
-                <android.support.v7.widget.RecyclerView
-                    android:id="@+id/recycleViewTrailers"
+                <android.support.constraint.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:paddingTop="20dp"
+                    android:paddingBottom="20dp">
+
+                    <TextView
+                        android:id="@+id/castTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:text="@string/cast"
+                        android:textColor="@color/white"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/recyclerViewCast"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/castTitle">
+
+                    </android.support.v7.widget.RecyclerView>
+                </android.support.constraint.ConstraintLayout>
             </android.support.v7.widget.CardView>
         </LinearLayout>
 

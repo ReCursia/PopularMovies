@@ -1,9 +1,6 @@
 package com.example.popularmovies.models.pojo;
 
-import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.Ignore;
-import android.arch.persistence.room.PrimaryKey;
-import android.support.annotation.NonNull;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
@@ -12,13 +9,13 @@ import com.google.gson.annotations.SerializedName;
 POJO class with Room and GSON annotation
  */
 
-@Entity(tableName = "trailers")
+//@Entity(tableName = "trailers")
 public class Trailer {
-    private int movieId;
+    //private int movieId;
     @SerializedName("id")
     @Expose
-    @PrimaryKey
-    @NonNull
+    //@PrimaryKey
+    //@NonNull
     private String id;
     @SerializedName("iso_639_1")
     @Expose
@@ -44,24 +41,15 @@ public class Trailer {
     @Expose
     private String type;
 
-    public Trailer(int movieId, @NonNull String id, String key,
+    public Trailer(String id, String key,
                    String name, String site, int size,
                    String type) {
-        this.movieId = movieId;
         this.id = id;
         this.key = key;
         this.name = name;
         this.site = site;
         this.size = size;
         this.type = type;
-    }
-
-    public int getMovieId() {
-        return movieId;
-    }
-
-    public void setMovieId(int movieId) {
-        this.movieId = movieId;
     }
 
     public String getId() {
