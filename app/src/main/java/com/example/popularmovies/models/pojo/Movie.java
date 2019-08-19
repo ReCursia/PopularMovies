@@ -9,7 +9,6 @@ import java.util.List;
 POJO class with Room and GSON annotation
  */
 
-//@Entity(tableName = "movies")
 public class Movie {
     @SerializedName("budget")
     @Expose

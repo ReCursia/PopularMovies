@@ -129,7 +129,7 @@ public class IntroActivity extends MvpAppCompatActivity implements IntroContract
         Intent intent = new Intent(this, MainActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
-        finish(); // call this to finish the current activity
+        finish(); // call this to finish the intro activity
     }
 
     @Override

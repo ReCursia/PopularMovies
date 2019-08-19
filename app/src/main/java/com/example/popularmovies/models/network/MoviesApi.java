@@ -25,4 +25,7 @@ public interface MoviesApi {
     @GET("3/movie/{id}/credits?api_key=" + API_KEY)
     Single<Credits> getMovieCreditsById(@Path("id") int id);
 
+    @GET("3/movie/{id}/recommendations?api_key=" + API_KEY)
+    Single<DiscoverMovies> getMovieRecommendations(@Path("id") int id, @Query("page") int page, @Query("language") String language);
+
 }

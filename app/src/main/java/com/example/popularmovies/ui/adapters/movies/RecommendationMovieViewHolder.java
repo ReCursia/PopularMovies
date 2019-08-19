@@ -11,7 +11,7 @@ import com.example.popularmovies.R;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-class MovieViewHolder extends RecyclerView.ViewHolder {
+public class RecommendationMovieViewHolder extends RecyclerView.ViewHolder {
     @BindView(R.id.smallMoviePoster)
     ImageView moviePoster;
     @BindView(R.id.movieTitleTextView)
@@ -19,7 +19,7 @@ class MovieViewHolder extends RecyclerView.ViewHolder {
     @BindView(R.id.movieRatingTextView)
     TextView movieRatingTextView;
 
-    MovieViewHolder(@NonNull View itemView) {
+    public RecommendationMovieViewHolder(@NonNull View itemView) {
         super(itemView);
         ButterKnife.bind(this, itemView);
     }

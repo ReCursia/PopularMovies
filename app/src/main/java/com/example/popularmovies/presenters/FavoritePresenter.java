@@ -2,7 +2,6 @@ package com.example.popularmovies.presenters;
 
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
-import com.example.popularmovies.models.database.MovieDao;
 import com.example.popularmovies.models.pojo.Movie;
 import com.example.popularmovies.views.FavoriteContract;
 
@@ -12,22 +11,23 @@ import io.reactivex.disposables.CompositeDisposable;
 
 @InjectViewState
 public class FavoritePresenter extends MvpPresenter<FavoriteContract> {
-    private MovieDao movieDao;
     private CompositeDisposable compositeDisposable;
 
-    public FavoritePresenter(MovieDao movieDao) {
-        this.movieDao = movieDao;
+    public FavoritePresenter() {
         this.compositeDisposable = new CompositeDisposable();
         getViewState().hideNoFavoriteScreen();
         initMovies();
     }
 
     private void initMovies() {
-        /*Disposable d = movieDao.getAllMovies()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(this::handleResult, this::handleError);
-        compositeDisposable.add(d);*/
+        //TODO implement database favorite movies call
+        //TODO dont forget about DISPOSABLE
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        compositeDisposable.dispose();
     }
 
     private void handleResult(List<Movie> movies) {

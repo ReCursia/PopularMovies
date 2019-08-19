@@ -3,6 +3,7 @@ package com.example.popularmovies.models.pojo;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class DiscoverMovies {
@@ -19,6 +20,10 @@ public class DiscoverMovies {
     @SerializedName("results")
     @Expose
     private List<Movie> movies = null;
+
+    public DiscoverMovies() {
+        this.movies = new ArrayList<>();
+    }
 
     public int getPage() {
         return page;

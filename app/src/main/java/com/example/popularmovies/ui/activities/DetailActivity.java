@@ -1,11 +1,13 @@
 package com.example.popularmovies.ui.activities;
 
 import android.content.Intent;
+import android.graphics.Matrix;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.chip.Chip;
 import android.support.design.chip.ChipGroup;
 import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -25,36 +27,36 @@ import com.arellomobile.mvp.presenter.ProvidePresenter;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.example.popularmovies.R;
-import com.example.popularmovies.models.database.MovieDatabase;
 import com.example.popularmovies.models.network.MoviesService;
 import com.example.popularmovies.models.pojo.Cast;
 import com.example.popularmovies.models.pojo.Genre;
 import com.example.popularmovies.models.pojo.Movie;
 import com.example.popularmovies.models.pojo.Trailer;
-import com.example.popularmovies.models.repository.MovieLocalRepository;
-import com.example.popularmovies.models.repository.MovieRepository;
 import com.example.popularmovies.presenters.DetailPresenter;
 import com.example.popularmovies.ui.adapters.credits.CreditsAdapter;
+import com.example.popularmovies.ui.adapters.movies.MoviesAdapter;
 import com.example.popularmovies.ui.adapters.trailers.TrailersAdapter;
+import com.example.popularmovies.ui.decorations.MarginItemDecoration;
 import com.example.popularmovies.utils.DateUtils;
 import com.example.popularmovies.utils.NetworkUtils;
+import com.example.popularmovies.utils.TagUtils;
 import com.example.popularmovies.views.DetailContract;
 
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class DetailActivity extends MvpAppCompatActivity implements DetailContract {
     private final static int FADE_OUT_DURATION = 100; //ms
-    @BindView(R.id.timeTextView)
-    TextView timeTextView;
+    private final static boolean IS_RECOMMENDATION_MOVIES = true;
     @BindView(R.id.descriptionTextView)
     TextView descriptionTextView;
     @BindView(R.id.ratingTextView)
     TextView ratingTextView;
-    @BindView(R.id.statusTextView)
-    TextView statusTextView;
+    @BindView(R.id.originalTitleTextView)
+    TextView originalTitleTextView;
     @BindView(R.id.releaseDateTextView)
     TextView releaseDateTextView;
     @BindView(R.id.recycleViewTrailers)
@@ -71,11 +73,26 @@ public class DetailActivity extends MvpAppCompatActivity implements DetailContra
     RecyclerView recyclerViewCast;
     @BindView(R.id.castCardView)
     CardView castCardView;
+    @BindView(R.id.descriptionCardView)
+    CardView descriptionCardView;
+    @BindView(R.id.detailCardView)
+    CardView detailCardView;
+    @BindView(R.id.favoriteIcon)
+    FloatingActionButton floatingActionButton;
+    @BindView(R.id.recyclerViewMovieRecommendations)
+    RecyclerView recyclerViewMovieRecommendations;
+    @BindView(R.id.movieRecommendationCardView)
+    CardView movieRecommendationCardView;
     @InjectPresenter
     DetailPresenter presenter;
     private TrailersAdapter trailersAdapter;
     private CreditsAdapter creditsAdapter;
-    private Menu menu;
+    private MoviesAdapter moviesAdapter;
+
+    @OnClick(R.id.favoriteIcon)
+    public void onFavoriteIconClicked() {
+        presenter.onFavoriteIconClicked();
+    }
 
     @Override
     public void setCast(List<Cast> cast) {
@@ -85,6 +102,28 @@ public class DetailActivity extends MvpAppCompatActivity implements DetailContra
     @Override
     public void showCast() {
         castCardView.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void setRecommendationMovies(List<Movie> movies) {
+        moviesAdapter.setMovies(movies);
+    }
+
+    @Override
+    public void showMovies() {
+        movieRecommendationCardView.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void hideMovies() {
+        movieRecommendationCardView.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void openDetailScreen(Movie movie) {
+        Intent intent = new Intent(this, DetailActivity.class);
+        intent.putExtra("id", movie.getId());
+        startActivity(intent);
     }
 
     @Override
@@ -108,7 +147,7 @@ public class DetailActivity extends MvpAppCompatActivity implements DetailContra
         genresGroup.removeAllViews();
         LayoutInflater layoutInflater = LayoutInflater.from(this);
         for (Genre genre : genres) {
-            Chip chip = (Chip) layoutInflater.inflate(R.layout.genre_chip, null, false);
+            Chip chip = (Chip) layoutInflater.inflate(R.layout.genre_chip, genresGroup, false);
             chip.setText(genre.getName());
             genresGroup.addView(chip);
         }
@@ -117,22 +156,19 @@ public class DetailActivity extends MvpAppCompatActivity implements DetailContra
     @ProvidePresenter
     DetailPresenter providePresenter() {
         Intent intent = getIntent();
-        MovieDatabase db = MovieDatabase.getInstance(this);
-        MovieRepository movieRepository = new MovieLocalRepository(db.movieDao(), db.trailerDao(), db.genreDao());
-        return new DetailPresenter(MoviesService.getInstance().getMoviesApi(), movieRepository, intent.getIntExtra("id", 0));
+        return new DetailPresenter(MoviesService.getInstance().getMoviesApi(), intent.getIntExtra(TagUtils.MOVIE_ID, 0));
     }
 
     @Override
     public void setFavoriteIconOn() {
-        if (menu != null) {
-            menu.findItem(R.id.favoriteIcon).setIcon(getDrawable(R.drawable.favorite_icon_on));
-        }
+        floatingActionButton.setImageDrawable(getDrawable(R.drawable.ic_favorite_on));
+        floatingActionButton.setImageMatrix(new Matrix()); //trick, bug is not fixed yet
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.favoriteIcon) {
-            presenter.onFavoriteIconClicked();
+        if (item.getItemId() == R.id.shareItem) {
+            presenter.onShareIconClicked();
         }
         return super.onOptionsItemSelected(item);
     }
@@ -148,10 +184,36 @@ public class DetailActivity extends MvpAppCompatActivity implements DetailContra
     }
 
     @Override
+    public void shareMovie(Movie movie) {
+        String shareMessage = getShareMessage(movie);
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.putExtra(Intent.EXTRA_TEXT, shareMessage);
+        intent.setType("text/plain");
+        Intent chosenIntent = Intent.createChooser(intent, getString(R.string.share_to));
+        startActivity(chosenIntent);
+    }
+
+    private String getShareMessage(Movie movie) {
+        return String.format(getString(R.string.share_message), movie.getTitle(), NetworkUtils.getBigPosterUrl(movie.getPosterPath()));
+    }
+
+    @Override
+    public void hideMovieDetail() {
+        //Detail cardView
+        detailCardView.setVisibility(View.GONE);
+        descriptionCardView.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void showMovieDetail() {
+        detailCardView.setVisibility(View.VISIBLE);
+        descriptionCardView.setVisibility(View.VISIBLE);
+    }
+
+    @Override
     public void setFavoriteIconOff() {
-        if (menu != null) {
-            menu.findItem(R.id.favoriteIcon).setIcon(getDrawable(R.drawable.favorite_icon_off));
-        }
+        floatingActionButton.setImageDrawable(getDrawable(R.drawable.ic_favorite_off));
+        floatingActionButton.setImageMatrix(new Matrix()); //trick, bug is not fixed yet
     }
 
     @Override
@@ -164,8 +226,6 @@ public class DetailActivity extends MvpAppCompatActivity implements DetailContra
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.detail_menu, menu);
-        this.menu = menu;
-        presenter.menuIsInflated();
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -174,20 +234,24 @@ public class DetailActivity extends MvpAppCompatActivity implements DetailContra
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
         ButterKnife.bind(this);
+        //Trailers
         initTrailerRecyclerView();
-        initCastRecyclerView();
         initTrailersAdapter();
+        //Cast
+        initCastRecyclerView();
         initCreditsAdapter();
+        //Movie recommendation
+        initMovieRecommendationRecyclerView();
+        initMovieRecommendationAdapter();
+
         initToolbar();
         initCollapsingToolbarLayout();
     }
 
     private void initTrailerRecyclerView() {
         recyclerViewTrailers.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
-    }
-
-    private void initCastRecyclerView() {
-        recyclerViewCast.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+        recyclerViewTrailers.addItemDecoration(
+                new MarginItemDecoration(this, 7, 7, 0, 0));
     }
 
     private void initTrailersAdapter() {
@@ -196,9 +260,27 @@ public class DetailActivity extends MvpAppCompatActivity implements DetailContra
         recyclerViewTrailers.setAdapter(trailersAdapter);
     }
 
+    private void initCastRecyclerView() {
+        recyclerViewCast.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+        recyclerViewCast.addItemDecoration(
+                new MarginItemDecoration(this, 20, 0, 0, 0));
+    }
+
     private void initCreditsAdapter() {
         creditsAdapter = new CreditsAdapter(this);
         recyclerViewCast.setAdapter(creditsAdapter);
+    }
+
+    private void initMovieRecommendationRecyclerView() {
+        recyclerViewMovieRecommendations.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+        recyclerViewMovieRecommendations.addItemDecoration(
+                new MarginItemDecoration(this, 7, 7, 0, 0));
+    }
+
+    private void initMovieRecommendationAdapter() {
+        moviesAdapter = new MoviesAdapter(this, IS_RECOMMENDATION_MOVIES);
+        moviesAdapter.setClickListener(item -> presenter.onMovieClicked(item));
+        recyclerViewMovieRecommendations.setAdapter(moviesAdapter);
     }
 
     private void initToolbar() {
@@ -234,14 +316,13 @@ public class DetailActivity extends MvpAppCompatActivity implements DetailContra
     @Override
     public void setMovieDetail(Movie movie) {
         collapsingToolbarLayout.setTitle(movie.getTitle());
-        statusTextView.setText(movie.getStatus());
-        timeTextView.setText(DateUtils.formatTime(movie.getRuntime()));
+        originalTitleTextView.setText(movie.getOriginalTitle());
         releaseDateTextView.setText(DateUtils.formatDate(movie.getReleaseDate()));
         descriptionTextView.setText(movie.getOverview());
         ratingTextView.setText(Double.toString(movie.getVoteAverage()));
         //Image
         Glide.with(this)
-                .load(NetworkUtils.BASE_IMAGE_URL + NetworkUtils.BIG_POSTER_SIZE + movie.getPosterPath())
+                .load(NetworkUtils.getBigPosterUrl(movie.getPosterPath()))
                 .transition(DrawableTransitionOptions.withCrossFade(FADE_OUT_DURATION))
                 .into(posterImage);
     }

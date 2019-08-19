@@ -7,7 +7,6 @@ import com.google.gson.annotations.SerializedName;
 POJO class with Room and GSON annotation
  */
 
-//@Entity(tableName = "genres")
 public class Genre {
 
     @SerializedName("id")

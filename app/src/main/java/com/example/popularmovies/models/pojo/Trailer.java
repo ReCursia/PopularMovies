@@ -9,13 +9,9 @@ import com.google.gson.annotations.SerializedName;
 POJO class with Room and GSON annotation
  */
 
-//@Entity(tableName = "trailers")
 public class Trailer {
-    //private int movieId;
     @SerializedName("id")
     @Expose
-    //@PrimaryKey
-    //@NonNull
     private String id;
     @SerializedName("iso_639_1")
     @Expose

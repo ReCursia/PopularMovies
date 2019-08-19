@@ -50,7 +50,7 @@ public class CreditsAdapter extends RecyclerView.Adapter<CreditViewHolder> {
         //Image
         if (castItem.getProfilePath() != null) {
             Glide.with(context)
-                    .load(NetworkUtils.BASE_IMAGE_URL + NetworkUtils.MEDIUM_PROFILE_SIZE + castItem.getProfilePath())
+                    .load(NetworkUtils.getMediumProfileUrl(castItem.getProfilePath()))
                     .transition(DrawableTransitionOptions.withCrossFade(FADE_OUT_DURATION))
                     .into(movieViewHolder.castImage);
         } else {

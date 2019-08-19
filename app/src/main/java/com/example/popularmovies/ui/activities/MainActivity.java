@@ -20,6 +20,7 @@ import com.example.popularmovies.presenters.MainPresenter;
 import com.example.popularmovies.ui.adapters.movies.MoviesPagerAdapter;
 import com.example.popularmovies.ui.fragments.MoviesFragment;
 import com.example.popularmovies.utils.NetworkUtils;
+import com.example.popularmovies.utils.TagUtils;
 import com.example.popularmovies.views.MainContract;
 
 import butterknife.BindView;
@@ -131,7 +132,7 @@ public class MainActivity extends MvpAppCompatActivity implements MainContract, 
     @Override
     public void openDetailScreen(Movie movie) {
         Intent intent = new Intent(this, DetailActivity.class);
-        intent.putExtra("id", movie.getId());
+        intent.putExtra(TagUtils.MOVIE_ID, movie.getId());
         startActivity(intent);
     }
 

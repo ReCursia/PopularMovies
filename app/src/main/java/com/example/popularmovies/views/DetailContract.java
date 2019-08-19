@@ -14,11 +14,20 @@ import java.util.List;
 @StateStrategyType(AddToEndSingleStrategy.class)
 public interface DetailContract extends MvpView {
 
+    //Movie detail
     void setMovieDetail(Movie movie);
 
+    void hideMovieDetail();
+
+    void showMovieDetail();
+
+    //Favorite icon
     void setFavoriteIconOn();
 
     void setFavoriteIconOff();
+
+    //Share
+    void shareMovie(Movie movie);
 
     //Cast
     void setCast(List<Cast> cast);
@@ -26,6 +35,13 @@ public interface DetailContract extends MvpView {
     void showCast();
 
     void hideCast();
+
+    void showMovies();
+
+    void hideMovies();
+
+    @StateStrategyType(SkipStrategy.class)
+    void openDetailScreen(Movie movie);
 
     //Trailers
     void setTrailers(List<Trailer> trailers);
@@ -48,5 +64,9 @@ public interface DetailContract extends MvpView {
 
     @StateStrategyType(SkipStrategy.class)
     void openTrailerUrl(Trailer trailer);
+
+    void setRecommendationMovies(List<Movie> movies);
+
+    //Movie recommendations
 
 }

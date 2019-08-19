@@ -33,8 +33,9 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class MoviesFragment extends MvpAppCompatFragment implements MoviesContract {
-    private static final int SPAN_COUNT = 3;
+    private static final int SPAN_COUNT = 2;
     private static final int DIRECTION_UP = 1;
+    private static final boolean IS_RECOMMENDATION_MOVIES = false;
 
     @BindView(R.id.recyclerViewPosters)
     RecyclerView recyclerView;
@@ -54,7 +55,6 @@ public class MoviesFragment extends MvpAppCompatFragment implements MoviesContra
         DiscoverStrategy strategy = (sortStrategy.equals(NetworkUtils.TOP_RATED)) ?
                 new TopRatedDiscoverStrategy() :
                 new PopularityDiscoverStrategy();
-
         return new MoviesFragmentPresenter(MoviesService.getInstance().getMoviesApi(), strategy);
     }
 
@@ -68,7 +68,7 @@ public class MoviesFragment extends MvpAppCompatFragment implements MoviesContra
     }
 
     private void initAdapter() {
-        moviesAdapter = new MoviesAdapter(getActivity());
+        moviesAdapter = new MoviesAdapter(getActivity(), IS_RECOMMENDATION_MOVIES);
         moviesAdapter.setClickListener(item -> presenter.onMovieClicked(item));
         recyclerView.setAdapter(moviesAdapter);
     }

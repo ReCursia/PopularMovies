@@ -30,20 +30,30 @@
                     android:id="@+id/posterImage"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@drawable/gradient"
+                    android:background="@drawable/gradient_collapsing_layout"
                     android:contentDescription="@string/movie_poster"
                     android:scaleType="centerCrop" />
 
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@drawable/gradient" />
+                    android:background="@drawable/gradient_collapsing_layout" />
             </FrameLayout>
 
             <include layout="@layout/toolbar" />
 
         </android.support.design.widget.CollapsingToolbarLayout>
     </android.support.design.widget.AppBarLayout>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/favoriteIcon"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:layout_marginEnd="32dp"
+        android:src="@drawable/ic_favorite_off"
+        android:tint="@color/white"
+        app:layout_anchor="@id/appBarLayout"
+        app:layout_anchorGravity="bottom|right" />
 
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -56,10 +66,10 @@
             android:orientation="vertical">
 
             <android.support.v7.widget.CardView
+                android:id="@+id/detailCardView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/card_margin_horizontal"
-                android:layout_marginTop="16dp"
                 android:layout_marginEnd="@dimen/card_margin_horizontal"
                 android:elevation="0dp"
                 app:cardBackgroundColor="@color/darkGray"
@@ -79,7 +89,7 @@
                         android:textColor="@color/white"
                         android:textSize="16sp"
                         app:layout_constraintStart_toEndOf="@+id/textView3"
-                        app:layout_constraintTop_toBottomOf="@+id/textView1" />
+                        app:layout_constraintTop_toBottomOf="@+id/ratingTextView" />
 
                     <TextView
                         android:id="@+id/textView3"
@@ -91,7 +101,7 @@
                         android:textSize="16sp"
                         android:textStyle="bold"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/textView1" />
+                        app:layout_constraintTop_toBottomOf="@+id/ratingTextView" />
 
                     <TextView
                         android:id="@+id/ratingTextView"
@@ -102,15 +112,17 @@
                         android:textColor="@color/white"
                         android:textSize="16sp"
                         app:layout_constraintStart_toEndOf="@+id/textView1"
-                        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+                        app:layout_constraintTop_toBottomOf="@+id/originalTitleTextView" />
 
                     <TextView
-                        android:id="@+id/statusTextView"
-                        android:layout_width="wrap_content"
+                        android:id="@+id/originalTitleTextView"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
+                        android:layout_marginEnd="61dp"
                         android:textColor="@color/white"
                         android:textSize="16sp"
+                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@+id/textView4"
                         app:layout_constraintTop_toTopOf="parent" />
 
@@ -124,13 +136,13 @@
                         android:textSize="16sp"
                         android:textStyle="bold"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+                        app:layout_constraintTop_toBottomOf="@+id/originalTitleTextView" />
 
                     <TextView
                         android:id="@+id/textView4"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/status"
+                        android:text="@string/original_title"
                         android:textColor="@color/white"
                         android:textSize="16sp"
                         android:textStyle="bold"
@@ -145,19 +157,11 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/textView3" />
-
-                    <TextView
-                        android:id="@+id/timeTextView"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/white"
-                        android:textStyle="italic"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
                 </android.support.constraint.ConstraintLayout>
             </android.support.v7.widget.CardView>
 
             <android.support.v7.widget.CardView
+                android:id="@+id/descriptionCardView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/card_margin_horizontal"
@@ -237,6 +241,47 @@
                         android:layout_marginTop="8dp"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/castTitle">
+
+                    </android.support.v7.widget.RecyclerView>
+                </android.support.constraint.ConstraintLayout>
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/movieRecommendationCardView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/card_margin_horizontal"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="@dimen/card_margin_horizontal"
+                android:elevation="0dp"
+                app:cardBackgroundColor="@color/darkGray"
+                app:cardCornerRadius="30dp">
+
+                <android.support.constraint.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="20dp"
+                    android:paddingBottom="20dp">
+
+                    <TextView
+                        android:id="@+id/movieRecommendationTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:text="@string/movie_recommendations"
+                        android:textColor="@color/white"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/recyclerViewMovieRecommendations"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/movieRecommendationTitle">
 
                     </android.support.v7.widget.RecyclerView>
                 </android.support.constraint.ConstraintLayout>

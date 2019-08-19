@@ -25,4 +25,9 @@
     <string name="cast">Cast:</string>
     <string name="cast_image">Cast image</string>
     <string name="status">Status:</string>
+    <string name="share_icon">Share icon</string>
+    <string name="share_to">Who you want to send movie detail?</string>
+    <string name="share_message">Hey, i recommend you that movie:\n%s\n%s</string>
+    <string name="movie_recommendations">Recommendations:</string>
+    <string name="original_title">Original title:</string>
 </resources>
