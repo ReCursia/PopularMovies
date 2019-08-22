@@ -10,7 +10,9 @@ import android.widget.Toast;
 
 import com.arellomobile.mvp.MvpAppCompatActivity;
 import com.arellomobile.mvp.presenter.InjectPresenter;
+import com.arellomobile.mvp.presenter.ProvidePresenter;
 import com.example.popularmovies.R;
+import com.example.popularmovies.models.database.MovieDatabase;
 import com.example.popularmovies.models.pojo.Movie;
 import com.example.popularmovies.presenters.FavoritePresenter;
 import com.example.popularmovies.ui.adapters.movies.MoviesAdapter;
@@ -35,6 +37,11 @@ public class FavoriteActivity extends MvpAppCompatActivity implements FavoriteCo
     @InjectPresenter
     FavoritePresenter presenter;
     MoviesAdapter moviesAdapter;
+
+    @ProvidePresenter
+    FavoritePresenter providePresenter() {
+        return new FavoritePresenter(MovieDatabase.getInstance(this).movieDao());
+    }
 
     @Override
     public void showNoFavoriteScreen() {

@@ -2,12 +2,14 @@ package com.example.popularmovies.presenters;
 
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
+import com.example.popularmovies.models.database.MovieDao;
 import com.example.popularmovies.models.network.MoviesApi;
 import com.example.popularmovies.models.pojo.Cast;
 import com.example.popularmovies.models.pojo.Credits;
 import com.example.popularmovies.models.pojo.DiscoverMovies;
 import com.example.popularmovies.models.pojo.Genre;
 import com.example.popularmovies.models.pojo.Movie;
+import com.example.popularmovies.models.pojo.MovieExtra;
 import com.example.popularmovies.models.pojo.MovieTrailers;
 import com.example.popularmovies.models.pojo.Trailer;
 import com.example.popularmovies.utils.NetworkUtils;
@@ -15,6 +17,7 @@ import com.example.popularmovies.views.DetailContract;
 
 import java.util.List;
 
+import io.reactivex.Completable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
@@ -24,17 +27,17 @@ import io.reactivex.schedulers.Schedulers;
 public class DetailPresenter extends MvpPresenter<DetailContract> {
     private static final int MOVIE_RECOMMENDATION_PAGE = 1;
     private MoviesApi client;
-    private Movie movie;
-    private List<Trailer> trailers;
-    private List<Genre> genres;
-    private List<Cast> cast;
+    private MovieDao movieDao;
+    private MovieExtra movieExtra;
     private boolean isFavorite;
     private CompositeDisposable compositeDisposable;
     private int movieId;
 
-    public DetailPresenter(MoviesApi client, int movieId) {
+    public DetailPresenter(MoviesApi client, MovieDao movieDao, MovieExtra movieExtra, int movieId) {
         this.client = client;
+        this.movieDao = movieDao;
         this.movieId = movieId;
+        this.movieExtra = movieExtra;
         this.compositeDisposable = new CompositeDisposable();
         getViewState().hideTrailers();
         getViewState().hideCast();
@@ -44,7 +47,16 @@ public class DetailPresenter extends MvpPresenter<DetailContract> {
     }
 
     private void setDefaultFavoriteIcon() {
-        //TODO implement database call
+        Disposable d = movieDao.getMovieById(movieId)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(this::handleLocalMovie, this::handleErrorLocalMovie);
+        compositeDisposable.add(d);
+    }
+
+    private void handleErrorLocalMovie(Throwable throwable) {
+        isFavorite = false;
+        getViewState().setFavoriteIconOff();
         loadDataFromNetwork();
     }
 
@@ -59,8 +71,13 @@ public class DetailPresenter extends MvpPresenter<DetailContract> {
         Disposable d = client.getMovieById(movieId, NetworkUtils.getDefaultLanguage())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(this::setMovieData, this::handleErrorMessage);
+                .subscribe(this::handleRemoteMovie, this::handleErrorMessage);
         compositeDisposable.add(d);
+    }
+
+    private void handleRemoteMovie(Movie movie) {
+        setMovieData(movie);
+        setGenresData(movie.getGenres());
     }
 
     private void loadTrailersFromNetwork() {
@@ -87,16 +104,43 @@ public class DetailPresenter extends MvpPresenter<DetailContract> {
         compositeDisposable.add(d);
     }
 
-    private void setTrailersData(MovieTrailers trailers) {
-        setTrailersData(trailers.getTrailers());
+    private void handleLocalMovie(MovieExtra movie) {
+        isFavorite = true;
+        getViewState().setFavoriteIconOn();
+        setMovieData(movie.getMovie());
+        setCastData(movie.getCast());
+        setGenresData(movie.getGenres());
+        setTrailersData(movie.getTrailers());
+    }
+
+    private void setGenresData(List<Genre> genres) {
+        getViewState().setGenres(genres);
+    }
+
+    private void setMovieData(Movie movie) {
+        movieExtra.setMovie(movie);
+        getViewState().setMovieDetail(movie);
+        getViewState().showMovieDetail();
+    }
+
+    private void setCastData(List<Cast> cast) {
+        movieExtra.setCast(cast);
+        if (!cast.isEmpty()) {
+            getViewState().setCast(cast);
+            getViewState().showCast();
+        }
     }
 
     private void setTrailersData(List<Trailer> trailers) {
-        this.trailers = trailers;
+        movieExtra.setTrailers(trailers);
         if (!trailers.isEmpty()) {
             getViewState().setTrailers(trailers);
             getViewState().showTrailers();
         }
+    }
+
+    private void setTrailersData(MovieTrailers trailers) {
+        setTrailersData(trailers.getTrailers());
     }
 
     public void onTrailerPlayButtonClicked(Trailer trailer) {
@@ -120,24 +164,8 @@ public class DetailPresenter extends MvpPresenter<DetailContract> {
         compositeDisposable.dispose(); //our activity is destroyed, disposing all subscriptions
     }
 
-    private void setMovieData(Movie movie) {
-        this.movie = movie;
-        this.genres = movie.getGenres();
-        getViewState().setMovieDetail(movie);
-        getViewState().setGenres(genres);
-        getViewState().showMovieDetail();
-    }
-
     private void setCastData(Credits credits) {
         setCastData(credits.getCast());
-    }
-
-    private void setCastData(List<Cast> cast) {
-        this.cast = cast;
-        if (!cast.isEmpty()) {
-            getViewState().setCast(cast);
-            getViewState().showCast();
-        }
     }
 
     private void handleErrorMessage(Throwable throwable) {
@@ -145,20 +173,29 @@ public class DetailPresenter extends MvpPresenter<DetailContract> {
     }
 
     public void onFavoriteIconClicked() {
-        //TODO implement save and delete movie from database
+        Disposable d;
         if (isFavorite) {
+            d = Completable.fromAction(() -> movieDao.deleteMovieExtra(movieExtra))
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe();
             getViewState().setFavoriteIconOff();
             getViewState().showMovieRemovedMessage();
         } else {
+            d = Completable.fromAction(() -> movieDao.insertMovieExtra(movieExtra))
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe();
             getViewState().setFavoriteIconOn();
             getViewState().showMovieAddedMessage();
         }
+        compositeDisposable.add(d);
         isFavorite = !isFavorite;
     }
 
     public void onShareIconClicked() {
         //TODO check if valid
-        getViewState().shareMovie(movie);
+        getViewState().shareMovie(movieExtra.getMovie());
     }
 
     public void onMovieClicked(Movie movie) {

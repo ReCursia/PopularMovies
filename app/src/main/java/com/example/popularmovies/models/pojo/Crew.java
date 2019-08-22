@@ -26,16 +26,6 @@ public class Crew {
     @Expose
     private String profilePath;
 
-    public Crew(String creditId, String department, int gender, int id, String job, String name, String profilePath) {
-        this.creditId = creditId;
-        this.department = department;
-        this.gender = gender;
-        this.id = id;
-        this.job = job;
-        this.name = name;
-        this.profilePath = profilePath;
-    }
-
     public String getCreditId() {
         return creditId;
     }

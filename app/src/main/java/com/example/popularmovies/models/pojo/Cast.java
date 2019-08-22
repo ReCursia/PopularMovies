@@ -1,9 +1,21 @@
 package com.example.popularmovies.models.pojo;
 
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.ForeignKey;
+import android.support.annotation.NonNull;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+@Entity(
+        foreignKeys = @ForeignKey(entity = Movie.class,
+                parentColumns = "id",
+                childColumns = "movieId",
+                onDelete = ForeignKey.CASCADE),
+        primaryKeys = {"movieId", "name"}
+)
 public class Cast {
+    private int movieId;
     @SerializedName("cast_id")
     @Expose
     private int castId;
@@ -21,6 +33,7 @@ public class Cast {
     private int id;
     @SerializedName("name")
     @Expose
+    @NonNull
     private String name;
     @SerializedName("order")
     @Expose
@@ -29,15 +42,12 @@ public class Cast {
     @Expose
     private String profilePath;
 
-    public Cast(int castId, String character, String creditId, int gender, int id, String name, int order, String profilePath) {
-        this.castId = castId;
-        this.character = character;
-        this.creditId = creditId;
-        this.gender = gender;
-        this.id = id;
-        this.name = name;
-        this.order = order;
-        this.profilePath = profilePath;
+    public int getMovieId() {
+        return movieId;
+    }
+
+    public void setMovieId(int movieId) {
+        this.movieId = movieId;
     }
 
     public int getCastId() {
@@ -103,5 +113,4 @@ public class Cast {
     public void setProfilePath(String profilePath) {
         this.profilePath = profilePath;
     }
-
 }

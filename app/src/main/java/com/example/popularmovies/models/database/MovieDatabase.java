@@ -5,9 +5,12 @@ import android.arch.persistence.room.Room;
 import android.arch.persistence.room.RoomDatabase;
 import android.content.Context;
 
-import com.example.popularmovies.models.pojo.Placeholder;
+import com.example.popularmovies.models.pojo.Cast;
+import com.example.popularmovies.models.pojo.Genre;
+import com.example.popularmovies.models.pojo.Movie;
+import com.example.popularmovies.models.pojo.Trailer;
 
-@Database(entities = {Placeholder.class}, version = 17, exportSchema = false)
+@Database(entities = {Movie.class, Genre.class, Trailer.class, Cast.class}, version = 21, exportSchema = false)
 public abstract class MovieDatabase extends RoomDatabase {
     private static final String DB_NAME = "movies2.db";
     private static MovieDatabase instance;
@@ -22,10 +25,5 @@ public abstract class MovieDatabase extends RoomDatabase {
     }
 
     public abstract MovieDao movieDao();
-
-    public abstract TrailerDao trailerDao();
-
-    public abstract GenreDao genreDao();
-
 }
 

@@ -16,12 +16,6 @@ public class Credits {
     @Expose
     private List<Crew> crew;
 
-    public Credits(int id, List<Cast> cast, List<Crew> crew) {
-        this.id = id;
-        this.cast = cast;
-        this.crew = crew;
-    }
-
     public int getId() {
         return id;
     }

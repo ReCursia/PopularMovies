@@ -17,24 +17,11 @@ public class MockedApi implements MoviesApi {
     public Single<DiscoverMovies> discoverMovies(String sortBy, int page, int voteCount, String language) {
         DiscoverMovies discoverMovies = new DiscoverMovies();
         List<Movie> movies = new ArrayList<>();
+        /*
         movies.add(new Movie(0, null, 429203, "en", null,
                 null, 0.0, "/a4BfxRK8dBgbQqbRxPs8kmLd8LG.jpg",
-                null, 11, null, null, "New Era, resolution LONG TITLE for example", false, 5.3, 0));
-        movies.add(new Movie(0, null, 429203, "en", null,
-                null, 0.0, "/a4BfxRK8dBgbQqbRxPs8kmLd8LG.jpg",
-                null, 11, null, null, "New Era, resolution LONG TITLE for example", false, 5.3, 0));
-        movies.add(new Movie(0, null, 429203, "en", null,
-                null, 0.0, "/a4BfxRK8dBgbQqbRxPs8kmLd8LG.jpg",
-                null, 11, null, null, "New Era, resolution LONG TITLE for example", false, 5.3, 0));
-        movies.add(new Movie(0, null, 429203, "en", null,
-                null, 0.0, "/a4BfxRK8dBgbQqbRxPs8kmLd8LG.jpg",
-                null, 11, null, null, "New Era, resolution LONG TITLE for example", false, 5.3, 0));
-        movies.add(new Movie(0, null, 429203, "en", null,
-                null, 0.0, "/a4BfxRK8dBgbQqbRxPs8kmLd8LG.jpg",
-                null, 11, null, null, "New Era, resolution LONG TITLE for example", false, 5.3, 0));
-        movies.add(new Movie(0, null, 429203, "en", null,
-                null, 0.0, "/a4BfxRK8dBgbQqbRxPs8kmLd8LG.jpg",
-                null, 11, null, null, "New Era, resolution LONG TITLE for example", false, 5.3, 0));
+                null, 11, null, null, "New Era, resolution LONG TITLE for example", false, 5.3, 0,null));
+         */
         discoverMovies.getMovies().addAll(movies);
         return Single.just(discoverMovies);
     }

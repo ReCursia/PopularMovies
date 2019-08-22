@@ -1,5 +1,9 @@
 package com.example.popularmovies.models.pojo;
 
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.Ignore;
+import android.arch.persistence.room.PrimaryKey;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -9,15 +13,18 @@ import java.util.List;
 POJO class with Room and GSON annotation
  */
 
+@Entity(tableName = "movies")
 public class Movie {
     @SerializedName("budget")
     @Expose
     private int budget;
     @SerializedName("genres")
     @Expose
+    @Ignore
     private List<Genre> genres;
     @SerializedName("id")
     @Expose
+    @PrimaryKey
     private int id;
     @SerializedName("original_language")
     @Expose
@@ -58,29 +65,9 @@ public class Movie {
     @SerializedName("vote_count")
     @Expose
     private int voteCount;
-
-    public Movie(int budget, List<Genre> genres, int id, String originalLanguage,
-                 String originalTitle, String overview, double popularity,
-                 String posterPath, String releaseDate, int runtime,
-                 String status, String tagline, String title, boolean video,
-                 double voteAverage, int voteCount) {
-        this.budget = budget;
-        this.genres = genres;
-        this.id = id;
-        this.originalLanguage = originalLanguage;
-        this.originalTitle = originalTitle;
-        this.overview = overview;
-        this.popularity = popularity;
-        this.posterPath = posterPath;
-        this.releaseDate = releaseDate;
-        this.runtime = runtime;
-        this.status = status;
-        this.tagline = tagline;
-        this.title = title;
-        this.video = video;
-        this.voteAverage = voteAverage;
-        this.voteCount = voteCount;
-    }
+    @SerializedName("backdrop_path")
+    @Expose
+    private String backdropPath;
 
     public int getBudget() {
         return budget;
@@ -210,4 +197,11 @@ public class Movie {
         this.voteCount = voteCount;
     }
 
+    public String getBackdropPath() {
+        return backdropPath;
+    }
+
+    public void setBackdropPath(String backdropPath) {
+        this.backdropPath = backdropPath;
+    }
 }

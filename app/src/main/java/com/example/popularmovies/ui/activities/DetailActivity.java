@@ -27,10 +27,12 @@ import com.arellomobile.mvp.presenter.ProvidePresenter;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.example.popularmovies.R;
+import com.example.popularmovies.models.database.MovieDatabase;
 import com.example.popularmovies.models.network.MoviesService;
 import com.example.popularmovies.models.pojo.Cast;
 import com.example.popularmovies.models.pojo.Genre;
 import com.example.popularmovies.models.pojo.Movie;
+import com.example.popularmovies.models.pojo.MovieExtra;
 import com.example.popularmovies.models.pojo.Trailer;
 import com.example.popularmovies.presenters.DetailPresenter;
 import com.example.popularmovies.ui.adapters.credits.CreditsAdapter;
@@ -156,7 +158,10 @@ public class DetailActivity extends MvpAppCompatActivity implements DetailContra
     @ProvidePresenter
     DetailPresenter providePresenter() {
         Intent intent = getIntent();
-        return new DetailPresenter(MoviesService.getInstance().getMoviesApi(), intent.getIntExtra(TagUtils.MOVIE_ID, 0));
+        return new DetailPresenter(MoviesService.getInstance().getMoviesApi(),
+                MovieDatabase.getInstance(this).movieDao(),
+                new MovieExtra(),
+                intent.getIntExtra(TagUtils.MOVIE_ID, 0));
     }
 
     @Override
@@ -322,7 +327,7 @@ public class DetailActivity extends MvpAppCompatActivity implements DetailContra
         ratingTextView.setText(Double.toString(movie.getVoteAverage()));
         //Image
         Glide.with(this)
-                .load(NetworkUtils.getBigPosterUrl(movie.getPosterPath()))
+                .load(NetworkUtils.getBigPosterUrl(movie.getBackdropPath()))
                 .transition(DrawableTransitionOptions.withCrossFade(FADE_OUT_DURATION))
                 .into(posterImage);
     }
