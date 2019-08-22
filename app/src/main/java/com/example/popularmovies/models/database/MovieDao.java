@@ -19,74 +19,54 @@ import io.reactivex.Flowable;
 import io.reactivex.Single;
 
 @Dao
-public interface MovieDao {
+public abstract class MovieDao {
 
     @Transaction
     @Query("SELECT * FROM movies")
-    Flowable<List<MovieExtra>> getAllMovies();
+    public abstract Flowable<List<MovieExtra>> getAllMovies();
 
     @Transaction
     @Query("SELECT * FROM movies WHERE id == :movieId")
-    Single<MovieExtra> getMovieById(int movieId);
+    public abstract Single<MovieExtra> getMovieById(int movieId);
 
     @Transaction
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
-    void insertMovieExtra(MovieExtra movie);
+    public void insertMovieExtra(MovieExtra movie) {
         insertMovie(movie.getMovie());
         //Genre
         for (Genre genre : movie.getGenres()) {
+            genre.setMovieId(movie.getMovie().getId());
             insertGenre(genre);
         }
         //Trailer
         for (Trailer trailer : movie.getTrailers()) {
+            trailer.setMovieId(movie.getMovie().getId());
             insertTrailer(trailer);
         }
         //Cast
         for (Cast cast : movie.getCast()) {
+            cast.setMovieId(movie.getMovie().getId());
             insertCast(cast);
         }
     }
 
-    @Transaction
-    @Delete
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    abstract void insertMovie(Movie movie);
+
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    abstract void insertGenre(Genre genre);
+
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    abstract void insertTrailer(Trailer trailer);
+
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    abstract void insertCast(Cast cast);
+
     public void deleteMovieExtra(MovieExtra movie) {
         deleteMovie(movie.getMovie());
-        //Genre
-        for (Genre genre : movie.getGenres()) {
-            deleteGenre(genre);
-        }
-        //Trailer
-        for (Trailer trailer : movie.getTrailers()) {
-            deleteTrailer(trailer);
-        }
-        //Cast
-        for (Cast cast : movie.getCast()) {
-            deleteCast(cast);
-        }
     }
 
-    @Insert
-    public abstract void insertMovie(Movie movie);
-
     @Delete
-    public abstract void deleteMovie(Movie movie);
+    abstract void deleteMovie(Movie movie);
 
-    @Insert
-    public abstract void insertCast(Cast cast);
-
-    @Delete
-    public abstract void deleteCast(Cast cast);
-
-    @Insert
-    public abstract void insertGenre(Genre genre);
-
-    @Delete
-    public abstract void deleteGenre(Genre genre);
-
-    @Insert
-    public abstract void insertTrailer(Trailer trailer);
-
-    @Delete
-    public abstract void deleteTrailer(Trailer trailer);
 }
 

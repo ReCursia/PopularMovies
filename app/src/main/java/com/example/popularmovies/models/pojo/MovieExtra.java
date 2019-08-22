@@ -54,4 +54,5 @@ public class MovieExtra {
     public void setTrailers(List<Trailer> trailers) {
         this.trailers = trailers;
     }
+
 }

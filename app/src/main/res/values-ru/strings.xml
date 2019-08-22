@@ -5,7 +5,6 @@
     <string name="about_description">Данное приложение позволяет находить интересные фильмы, смотреть детальную информацию о фильме, а также сохранять любимые фильмы в избранный список</string>
     <string name="added_favorite">Добавлено в избранное</string>
     <string name="description">Описание:</string>
-    <string name="favorite_icon">Иконка избранного фильма</string>
     <string name="item_about">О приложении</string>
     <string name="item_favorite">Избранное</string>
     <string name="movie_poster">Постер фильма</string>
@@ -16,7 +15,6 @@
     <string name="rating">Рейтинг:</string>
     <string name="release_date">Дата выхода:</string>
     <string name="removed_favorite">Удалено из избранного</string>
-    <string name="title">Название:</string>
     <string name="play_button">Кнопка открыть трейлер</string>
     <string name="favorite_title">Избранное</string>
     <string name="cast">Актерский состав:</string>
@@ -24,6 +22,5 @@
     <string name="next_button">Далее</string>
     <string name="previous_button">Назад</string>
     <string name="finish_button">Начать</string>
-    <string name="status">Статус:</string>
     <string name="trailer_thumbnail">Обложка трейлера</string>
 </resources>

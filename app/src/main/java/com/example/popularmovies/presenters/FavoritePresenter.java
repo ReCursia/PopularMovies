@@ -23,6 +23,11 @@ public class FavoritePresenter extends MvpPresenter<FavoriteContract> {
     public FavoritePresenter(MovieDao movieDao) {
         this.movieDao = movieDao;
         this.compositeDisposable = new CompositeDisposable();
+    }
+
+    @Override
+    protected void onFirstViewAttach() {
+        super.onFirstViewAttach();
         getViewState().hideNoFavoriteScreen();
         initMovies();
     }
@@ -36,11 +41,8 @@ public class FavoritePresenter extends MvpPresenter<FavoriteContract> {
     }
 
     private void handleResult(List<MovieExtra> moviesExtra) {
-        //TODO костыль
-        List<Movie> movies = new ArrayList<>();
-        for (MovieExtra movieExtra : moviesExtra) {
-            movies.add(movieExtra.getMovie());
-        }
+        List<Movie> movies = getAllMovies(moviesExtra);
+
         if (!movies.isEmpty()) {
             getViewState().setMovies(movies);
             getViewState().hideNoFavoriteScreen();
@@ -49,12 +51,19 @@ public class FavoritePresenter extends MvpPresenter<FavoriteContract> {
         }
     }
 
+    private List<Movie> getAllMovies(List<MovieExtra> moviesExtra) {
+        List<Movie> movies = new ArrayList<>();
+        for (MovieExtra movieExtra : moviesExtra) {
+            movies.add(movieExtra.getMovie());
+        }
+        return movies;
+    }
+
     @Override
     public void onDestroy() {
         super.onDestroy();
         compositeDisposable.dispose();
     }
-
 
     private void handleError(Throwable t) {
         getViewState().showErrorMessage(t.getLocalizedMessage());

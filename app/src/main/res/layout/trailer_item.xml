@@ -8,6 +8,7 @@
     app:cardCornerRadius="30dp">
 
     <ImageView
+        android:adjustViewBounds="true"
         android:id="@+id/trailerImage"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

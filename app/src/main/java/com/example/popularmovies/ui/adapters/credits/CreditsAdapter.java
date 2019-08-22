@@ -48,14 +48,11 @@ public class CreditsAdapter extends RecyclerView.Adapter<CreditViewHolder> {
     public void onBindViewHolder(@NonNull final CreditViewHolder movieViewHolder, int i) {
         Cast castItem = cast.get(i);
         //Image
-        if (castItem.getProfilePath() != null) {
-            Glide.with(context)
-                    .load(NetworkUtils.getMediumProfileUrl(castItem.getProfilePath()))
-                    .transition(DrawableTransitionOptions.withCrossFade(FADE_OUT_DURATION))
-                    .into(movieViewHolder.castImage);
-        } else {
-            //TODO create no profile image placeholder
-        }
+        Glide.with(context)
+                .load(NetworkUtils.getMediumProfileUrl(castItem.getProfilePath()))
+                .placeholder(R.drawable.ic_user_placeholder)
+                .transition(DrawableTransitionOptions.withCrossFade(FADE_OUT_DURATION))
+                .into(movieViewHolder.castImage);
         //Name
         movieViewHolder.castName.setText(castItem.getName());
     }

@@ -15,6 +15,7 @@ public class NetworkUtils {
     public static final String GOOGLE_PLAY_URL = "http://play.google.com/store/apps/details?id=";
     private static final String BASE_IMAGE_URL = "https://image.tmdb.org/t/p/";
     private static final String BIG_POSTER_SIZE = "w780";
+    private static final String ORIGINAL_SIZE = "original";
     private static final String MEDIUM_PROFILE_SIZE = "w185";
 
     public static String getDefaultLanguage() {
@@ -23,6 +24,10 @@ public class NetworkUtils {
 
     public static String getBigPosterUrl(String imagePath) {
         return BASE_IMAGE_URL + BIG_POSTER_SIZE + imagePath;
+    }
+
+    public static String getOriginalPosterUrl(String imagePath) {
+        return BASE_IMAGE_URL + ORIGINAL_SIZE + imagePath;
     }
 
     public static String getMediumProfileUrl(String imagePath) {

@@ -39,6 +39,11 @@ public class DetailPresenter extends MvpPresenter<DetailContract> {
         this.movieId = movieId;
         this.movieExtra = movieExtra;
         this.compositeDisposable = new CompositeDisposable();
+    }
+
+    @Override
+    protected void onFirstViewAttach() {
+        super.onFirstViewAttach();
         getViewState().hideTrailers();
         getViewState().hideCast();
         getViewState().hideMovieDetail();
@@ -75,11 +80,6 @@ public class DetailPresenter extends MvpPresenter<DetailContract> {
         compositeDisposable.add(d);
     }
 
-    private void handleRemoteMovie(Movie movie) {
-        setMovieData(movie);
-        setGenresData(movie.getGenres());
-    }
-
     private void loadTrailersFromNetwork() {
         Disposable d = client.getMovieTrailersById(movieId, NetworkUtils.getDefaultLanguage())
                 .subscribeOn(Schedulers.io())
@@ -104,6 +104,22 @@ public class DetailPresenter extends MvpPresenter<DetailContract> {
         compositeDisposable.add(d);
     }
 
+    private void handleRemoteMovie(Movie movie) {
+        setMovieData(movie);
+        setGenresData(movie.getGenres());
+    }
+
+    private void setMovieData(Movie movie) {
+        movieExtra.setMovie(movie);
+        getViewState().setMovieDetail(movie);
+        getViewState().showMovieDetail();
+    }
+
+    private void setGenresData(List<Genre> genres) {
+        movieExtra.setGenres(genres);
+        getViewState().setGenres(genres);
+    }
+
     private void handleLocalMovie(MovieExtra movie) {
         isFavorite = true;
         getViewState().setFavoriteIconOn();
@@ -111,16 +127,8 @@ public class DetailPresenter extends MvpPresenter<DetailContract> {
         setCastData(movie.getCast());
         setGenresData(movie.getGenres());
         setTrailersData(movie.getTrailers());
-    }
-
-    private void setGenresData(List<Genre> genres) {
-        getViewState().setGenres(genres);
-    }
-
-    private void setMovieData(Movie movie) {
-        movieExtra.setMovie(movie);
-        getViewState().setMovieDetail(movie);
-        getViewState().showMovieDetail();
+        //try to load recommendations
+        loadMovieRecommendationsNetwork();
     }
 
     private void setCastData(List<Cast> cast) {
@@ -200,6 +208,10 @@ public class DetailPresenter extends MvpPresenter<DetailContract> {
 
     public void onMovieClicked(Movie movie) {
         getViewState().openDetailScreen(movie);
+    }
+
+    public void onBackdropImageClicked() {
+        getViewState().openPhotoDetail(movieExtra.getMovie().getBackdropPath());
     }
 
 }

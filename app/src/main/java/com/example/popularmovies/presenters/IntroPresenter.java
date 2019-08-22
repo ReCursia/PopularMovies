@@ -17,6 +17,11 @@ public class IntroPresenter extends MvpPresenter<IntroContract> {
     public IntroPresenter(List<SectionItem> sectionItems, PrefUtils prefUtils) {
         this.sectionItems = sectionItems;
         this.prefUtils = prefUtils;
+    }
+
+    @Override
+    protected void onFirstViewAttach() {
+        super.onFirstViewAttach();
         if (isFirstLaunch()) {
             initViewState();
         } else {

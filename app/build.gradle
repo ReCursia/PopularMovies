@@ -26,6 +26,8 @@ android {
 }
 
 dependencies {
+    //TouchImageView
+    implementation 'com.github.MikeOrtiz:TouchImageView:1.4.0'
     //Lottie
     implementation 'com.airbnb.android:lottie:2.7.0'
     //Rxjava

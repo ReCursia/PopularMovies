@@ -51,6 +51,7 @@ public class TrailersAdapter extends RecyclerView.Adapter<TrailerViewHolder> {
         //Image
         Glide.with(context)
                 .load(String.format(NetworkUtils.TRAILER_IMAGE_FORMAT_URL, trailer.getKey()))
+                .placeholder(R.drawable.ic_trailer_placeholder)
                 .transition(DrawableTransitionOptions.withCrossFade(FADE_OUT_DURATION))
                 .into(trailerViewHolder.trailerImage);
         //Title

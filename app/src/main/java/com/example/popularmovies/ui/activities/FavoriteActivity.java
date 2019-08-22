@@ -79,11 +79,16 @@ public class FavoriteActivity extends MvpAppCompatActivity implements FavoriteCo
         initToolbar();
         initRecyclerView();
         initAdapter();
-        initActionBar();
     }
 
     private void initToolbar() {
         setSupportActionBar(toolbar);
+        //add back arrow and title
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setDisplayShowHomeEnabled(true);
+            getSupportActionBar().setTitle(getString(R.string.favorite_title));
+        }
     }
 
     private void initRecyclerView() {
@@ -94,15 +99,6 @@ public class FavoriteActivity extends MvpAppCompatActivity implements FavoriteCo
         moviesAdapter = new MoviesAdapter(this, IS_RECOMMENDATION_MOVIES);
         moviesAdapter.setClickListener(item -> presenter.onItemClicked(item));
         recyclerView.setAdapter(moviesAdapter);
-    }
-
-    private void initActionBar() {
-        //add back arrow and title
-        if (getSupportActionBar() != null) {
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            getSupportActionBar().setDisplayShowHomeEnabled(true);
-            getSupportActionBar().setTitle(getString(R.string.favorite_title));
-        }
     }
 
     @Override

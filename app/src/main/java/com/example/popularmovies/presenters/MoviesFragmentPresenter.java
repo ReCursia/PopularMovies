@@ -29,6 +29,11 @@ public class MoviesFragmentPresenter extends MvpPresenter<MoviesContract> {
         this.discoverStrategy = discoverStrategy;
         this.compositeDisposable = new CompositeDisposable();
         currentPage = 1;
+    }
+
+    @Override
+    protected void onFirstViewAttach() {
+        super.onFirstViewAttach();
         loadMovies();
     }
 

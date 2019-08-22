@@ -4,29 +4,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.activities.FavoriteActivity">
+    tools:context=".ui.activities.PhotoActivity">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <include layout="@layout/toolbar"/>
-
+        <include layout="@layout/toolbar" />
     </android.support.design.widget.AppBarLayout>
 
-    <FrameLayout
+    <com.ortiz.touchview.TouchImageView
+        android:id="@+id/backdropImage"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/favoriteRecycleView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scrollbars="vertical" />
-
-        <include layout="@layout/no_favorite_movies_screen" />
-    </FrameLayout>
-
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
 </android.support.design.widget.CoordinatorLayout>

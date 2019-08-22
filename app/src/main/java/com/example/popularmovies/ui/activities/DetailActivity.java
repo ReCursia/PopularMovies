@@ -59,12 +59,14 @@ public class DetailActivity extends MvpAppCompatActivity implements DetailContra
     TextView ratingTextView;
     @BindView(R.id.originalTitleTextView)
     TextView originalTitleTextView;
+    @BindView(R.id.favoriteIcon)
+    FloatingActionButton favoriteIcon;
     @BindView(R.id.releaseDateTextView)
     TextView releaseDateTextView;
     @BindView(R.id.recycleViewTrailers)
     RecyclerView recyclerViewTrailers;
-    @BindView(R.id.posterImage)
-    ImageView posterImage;
+    @BindView(R.id.backdropImage)
+    ImageView backdropImage;
     @BindView(R.id.toolbar)
     Toolbar toolbar;
     @BindView(R.id.collapsingToolbar)
@@ -79,8 +81,6 @@ public class DetailActivity extends MvpAppCompatActivity implements DetailContra
     CardView descriptionCardView;
     @BindView(R.id.detailCardView)
     CardView detailCardView;
-    @BindView(R.id.favoriteIcon)
-    FloatingActionButton floatingActionButton;
     @BindView(R.id.recyclerViewMovieRecommendations)
     RecyclerView recyclerViewMovieRecommendations;
     @BindView(R.id.movieRecommendationCardView)
@@ -91,9 +91,21 @@ public class DetailActivity extends MvpAppCompatActivity implements DetailContra
     private CreditsAdapter creditsAdapter;
     private MoviesAdapter moviesAdapter;
 
+    @Override
+    public void openPhotoDetail(String imagePath) {
+        Intent intent = new Intent(this, PhotoActivity.class);
+        intent.putExtra(TagUtils.IMAGE_PATH, imagePath);
+        startActivity(intent);
+    }
+
     @OnClick(R.id.favoriteIcon)
     public void onFavoriteIconClicked() {
         presenter.onFavoriteIconClicked();
+    }
+
+    @OnClick(R.id.backdropImage)
+    public void onBackdropImageClicked() {
+        presenter.onBackdropImageClicked();
     }
 
     @Override
@@ -166,8 +178,8 @@ public class DetailActivity extends MvpAppCompatActivity implements DetailContra
 
     @Override
     public void setFavoriteIconOn() {
-        floatingActionButton.setImageDrawable(getDrawable(R.drawable.ic_favorite_on));
-        floatingActionButton.setImageMatrix(new Matrix()); //trick, bug is not fixed yet
+        favoriteIcon.setImageDrawable(getDrawable(R.drawable.ic_favorite_on));
+        favoriteIcon.setImageMatrix(new Matrix()); //trick, bug is not fixed yet
     }
 
     @Override
@@ -217,8 +229,8 @@ public class DetailActivity extends MvpAppCompatActivity implements DetailContra
 
     @Override
     public void setFavoriteIconOff() {
-        floatingActionButton.setImageDrawable(getDrawable(R.drawable.ic_favorite_off));
-        floatingActionButton.setImageMatrix(new Matrix()); //trick, bug is not fixed yet
+        favoriteIcon.setImageDrawable(getDrawable(R.drawable.ic_favorite_off));
+        favoriteIcon.setImageMatrix(new Matrix()); //trick, bug is not fixed yet
     }
 
     @Override
@@ -328,8 +340,9 @@ public class DetailActivity extends MvpAppCompatActivity implements DetailContra
         //Image
         Glide.with(this)
                 .load(NetworkUtils.getBigPosterUrl(movie.getBackdropPath()))
+                .placeholder(R.drawable.ic_poster_placeholder)
                 .transition(DrawableTransitionOptions.withCrossFade(FADE_OUT_DURATION))
-                .into(posterImage);
+                .into(backdropImage);
     }
 
 }

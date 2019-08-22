@@ -19,7 +19,7 @@ public class DiscoverMovies {
     private int totalPages;
     @SerializedName("results")
     @Expose
-    private List<Movie> movies = null;
+    private List<Movie> movies;
 
     public DiscoverMovies() {
         this.movies = new ArrayList<>();

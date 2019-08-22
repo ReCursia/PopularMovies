@@ -43,6 +43,10 @@ public interface DetailContract extends MvpView {
     @StateStrategyType(SkipStrategy.class)
     void openDetailScreen(Movie movie);
 
+    @StateStrategyType(SkipStrategy.class)
+    void openPhotoDetail(String imagePath);
+
+
     //Trailers
     void setTrailers(List<Trailer> trailers);
 
@@ -65,8 +69,7 @@ public interface DetailContract extends MvpView {
     @StateStrategyType(SkipStrategy.class)
     void openTrailerUrl(Trailer trailer);
 
-    void setRecommendationMovies(List<Movie> movies);
-
     //Movie recommendations
+    void setRecommendationMovies(List<Movie> movies);
 
 }

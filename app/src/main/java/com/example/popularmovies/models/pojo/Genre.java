@@ -7,10 +7,6 @@ import android.support.annotation.NonNull;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-/*
-POJO class with Room and GSON annotation
- */
-
 @Entity(
         foreignKeys = @ForeignKey(entity = Movie.class,
                 parentColumns = "id",
@@ -52,4 +48,5 @@ public class Genre {
     public void setName(String name) {
         this.name = name;
     }
+
 }

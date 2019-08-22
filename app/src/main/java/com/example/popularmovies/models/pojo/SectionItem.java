@@ -1,6 +1,5 @@
 package com.example.popularmovies.models.pojo;
 
-
 /*
 POJO class for Intro activity
  */

@@ -11,6 +11,11 @@ public class SectionFragmentPresenter extends MvpPresenter<SectionContract> {
 
     public SectionFragmentPresenter(SectionItem item) {
         this.item = item;
+    }
+
+    @Override
+    protected void onFirstViewAttach() {
+        super.onFirstViewAttach();
         initData();
     }
 

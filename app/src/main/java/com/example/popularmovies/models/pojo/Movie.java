@@ -9,10 +9,6 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-/*
-POJO class with Room and GSON annotation
- */
-
 @Entity(tableName = "movies")
 public class Movie {
     @SerializedName("budget")
@@ -204,4 +200,5 @@ public class Movie {
     public void setBackdropPath(String backdropPath) {
         this.backdropPath = backdropPath;
     }
+
 }

@@ -80,6 +80,7 @@ public class MoviesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         //Image
         Glide.with(context)
                 .load(NetworkUtils.getBigPosterUrl(movie.getPosterPath()))
+                .placeholder(R.drawable.ic_poster_placeholder)
                 .transition(DrawableTransitionOptions.withCrossFade(FADE_OUT_DURATION))
                 .into(movieViewHolder.moviePoster);
         //Listener
@@ -98,6 +99,7 @@ public class MoviesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         //Image
         Glide.with(context)
                 .load(NetworkUtils.getBigPosterUrl(movie.getPosterPath()))
+                .placeholder(R.drawable.ic_poster_placeholder)
                 .transition(DrawableTransitionOptions.withCrossFade(FADE_OUT_DURATION))
                 .into(movieViewHolder.moviePoster);
         //Listener
