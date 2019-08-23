@@ -22,11 +22,14 @@ public class IntroPresenter extends MvpPresenter<IntroContract> {
     @Override
     protected void onFirstViewAttach() {
         super.onFirstViewAttach();
+        initViewState();
+        /*
         if (isFirstLaunch()) {
             initViewState();
         } else {
             getViewState().openMainScreen();
         }
+         */
     }
 
     private boolean isFirstLaunch() {

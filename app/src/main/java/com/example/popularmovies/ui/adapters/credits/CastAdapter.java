@@ -16,13 +16,13 @@ import com.example.popularmovies.utils.NetworkUtils;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CreditsAdapter extends RecyclerView.Adapter<CreditViewHolder> {
+public class CastAdapter extends RecyclerView.Adapter<CastViewHolder> {
     private static final int FADE_OUT_DURATION = 100; //ms
 
     private final Context context;
     private List<Cast> cast;
 
-    public CreditsAdapter(Context context) {
+    public CastAdapter(Context context) {
         this.context = context;
         cast = new ArrayList<>();
     }
@@ -39,13 +39,13 @@ public class CreditsAdapter extends RecyclerView.Adapter<CreditViewHolder> {
 
     @NonNull
     @Override
-    public CreditViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+    public CastViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View itemView = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.cast_item, viewGroup, false);
-        return new CreditViewHolder(itemView);
+        return new CastViewHolder(itemView);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull final CreditViewHolder movieViewHolder, int i) {
+    public void onBindViewHolder(@NonNull final CastViewHolder movieViewHolder, int i) {
         Cast castItem = cast.get(i);
         //Image
         Glide.with(context)

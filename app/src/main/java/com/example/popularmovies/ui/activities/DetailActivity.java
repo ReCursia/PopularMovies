@@ -35,7 +35,7 @@ import com.example.popularmovies.models.pojo.Movie;
 import com.example.popularmovies.models.pojo.MovieExtra;
 import com.example.popularmovies.models.pojo.Trailer;
 import com.example.popularmovies.presenters.DetailPresenter;
-import com.example.popularmovies.ui.adapters.credits.CreditsAdapter;
+import com.example.popularmovies.ui.adapters.credits.CastAdapter;
 import com.example.popularmovies.ui.adapters.movies.MoviesAdapter;
 import com.example.popularmovies.ui.adapters.trailers.TrailersAdapter;
 import com.example.popularmovies.ui.decorations.MarginItemDecoration;
@@ -88,7 +88,7 @@ public class DetailActivity extends MvpAppCompatActivity implements DetailContra
     @InjectPresenter
     DetailPresenter presenter;
     private TrailersAdapter trailersAdapter;
-    private CreditsAdapter creditsAdapter;
+    private CastAdapter castAdapter;
     private MoviesAdapter moviesAdapter;
 
     @Override
@@ -110,7 +110,7 @@ public class DetailActivity extends MvpAppCompatActivity implements DetailContra
 
     @Override
     public void setCast(List<Cast> cast) {
-        creditsAdapter.setCast(cast);
+        castAdapter.setCast(cast);
     }
 
     @Override
@@ -179,7 +179,7 @@ public class DetailActivity extends MvpAppCompatActivity implements DetailContra
     @Override
     public void setFavoriteIconOn() {
         favoriteIcon.setImageDrawable(getDrawable(R.drawable.ic_favorite_on));
-        favoriteIcon.setImageMatrix(new Matrix()); //trick, bug is not fixed yet
+        favoriteIcon.setImageMatrix(new Matrix()); //trick
     }
 
     @Override
@@ -230,7 +230,7 @@ public class DetailActivity extends MvpAppCompatActivity implements DetailContra
     @Override
     public void setFavoriteIconOff() {
         favoriteIcon.setImageDrawable(getDrawable(R.drawable.ic_favorite_off));
-        favoriteIcon.setImageMatrix(new Matrix()); //trick, bug is not fixed yet
+        favoriteIcon.setImageMatrix(new Matrix()); //trick
     }
 
     @Override
@@ -267,6 +267,7 @@ public class DetailActivity extends MvpAppCompatActivity implements DetailContra
 
     private void initTrailerRecyclerView() {
         recyclerViewTrailers.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+        recyclerViewTrailers.setHasFixedSize(true);
         recyclerViewTrailers.addItemDecoration(
                 new MarginItemDecoration(this, 7, 7, 0, 0));
     }
@@ -279,17 +280,19 @@ public class DetailActivity extends MvpAppCompatActivity implements DetailContra
 
     private void initCastRecyclerView() {
         recyclerViewCast.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+        recyclerViewCast.setHasFixedSize(true);
         recyclerViewCast.addItemDecoration(
                 new MarginItemDecoration(this, 20, 0, 0, 0));
     }
 
     private void initCreditsAdapter() {
-        creditsAdapter = new CreditsAdapter(this);
-        recyclerViewCast.setAdapter(creditsAdapter);
+        castAdapter = new CastAdapter(this);
+        recyclerViewCast.setAdapter(castAdapter);
     }
 
     private void initMovieRecommendationRecyclerView() {
         recyclerViewMovieRecommendations.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+        recyclerViewMovieRecommendations.setHasFixedSize(true);
         recyclerViewMovieRecommendations.addItemDecoration(
                 new MarginItemDecoration(this, 7, 7, 0, 0));
     }

@@ -17,12 +17,6 @@ public class MovieExtra {
     @Relation(parentColumn = "id", entity = Trailer.class, entityColumn = "movieId")
     private List<Trailer> trailers;
 
-    public MovieExtra() {
-        genres = new ArrayList<>();
-        cast = new ArrayList<>();
-        trailers = new ArrayList<>();
-    }
-
     public Movie getMovie() {
         return movie;
     }

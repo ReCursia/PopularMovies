@@ -23,8 +23,8 @@
     <string name="cast">Cast:</string>
     <string name="cast_image">Cast image</string>
     <string name="share_icon">Share icon</string>
-    <string name="share_to">Who you want to send movie detail?</string>
-    <string name="share_message">Hey, i recommend you that movie:\n%s\n%s</string>
+    <string name="share_to">How you want to send movie detail?</string>
+    <string name="share_message">Hey, i recommend you that movie:\\n%s\\n%s</string>
     <string name="movie_recommendations">Recommendations:</string>
     <string name="original_title">Original title:</string>
     <string name="photo_detail">Photo detail</string>

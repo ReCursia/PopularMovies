@@ -79,7 +79,7 @@ public class MoviesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         movieViewHolder.movieRatingTextView.setText(Double.toString(movie.getVoteAverage()));
         //Image
         Glide.with(context)
-                .load(NetworkUtils.getBigPosterUrl(movie.getPosterPath()))
+                .load(NetworkUtils.getMediumPosterUrl(movie.getPosterPath()))
                 .placeholder(R.drawable.ic_poster_placeholder)
                 .transition(DrawableTransitionOptions.withCrossFade(FADE_OUT_DURATION))
                 .into(movieViewHolder.moviePoster);
@@ -98,7 +98,7 @@ public class MoviesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         movieViewHolder.movieRatingTextView.setText(Double.toString(movie.getVoteAverage()));
         //Image
         Glide.with(context)
-                .load(NetworkUtils.getBigPosterUrl(movie.getPosterPath()))
+                .load(NetworkUtils.getMediumPosterUrl(movie.getPosterPath()))
                 .placeholder(R.drawable.ic_poster_placeholder)
                 .transition(DrawableTransitionOptions.withCrossFade(FADE_OUT_DURATION))
                 .into(movieViewHolder.moviePoster);

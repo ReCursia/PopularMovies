@@ -93,6 +93,7 @@ public class FavoriteActivity extends MvpAppCompatActivity implements FavoriteCo
 
     private void initRecyclerView() {
         recyclerView.setLayoutManager(new GridLayoutManager(this, SPAN_COUNT));
+        recyclerView.setHasFixedSize(true); //items are same height
     }
 
     private void initAdapter() {

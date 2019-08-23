@@ -23,4 +23,10 @@
     <string name="previous_button">Назад</string>
     <string name="finish_button">Начать</string>
     <string name="trailer_thumbnail">Обложка трейлера</string>
+    <string name="movie_recommendations">Рекомендации:</string>
+    <string name="original_title">Оригинальное название:</string>
+    <string name="photo_detail">Детальное фото</string>
+    <string name="share_icon">Иконка поделиться</string>
+    <string name="share_message">Привет! Рекомендую тебе посмотреть данный фильм:\\n%s\\n%s</string>
+    <string name="share_to">Как вы хотите отправить информацию о фильме?</string>
 </resources>

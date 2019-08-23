@@ -75,6 +75,7 @@ public class MoviesFragment extends MvpAppCompatFragment implements MoviesContra
 
     private void initRecyclerView() {
         recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), SPAN_COUNT));
+        recyclerView.setHasFixedSize(true); //items are same height
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
