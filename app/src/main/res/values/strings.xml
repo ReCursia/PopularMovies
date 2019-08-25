@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Popular movies</string>
+    <string name="app_name" translatable="false">Popular Movies</string>
     <string name="movie_poster">Poster of movie</string>
     <string name="rating">Rating:</string>
     <string name="release_date">Release date:</string>
@@ -24,7 +24,7 @@
     <string name="cast_image">Cast image</string>
     <string name="share_icon">Share icon</string>
     <string name="share_to">How you want to send movie detail?</string>
-    <string name="share_message">Hey, i recommend you that movie:\\n%s\\n%s</string>
+    <string name="share_message">Hey, i recommend you that movie:\n%s\n%s</string>
     <string name="movie_recommendations">Recommendations:</string>
     <string name="original_title">Original title:</string>
     <string name="photo_detail">Photo detail</string>
