@@ -14,12 +14,12 @@ import com.arellomobile.mvp.presenter.ProvidePresenter;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.CustomTarget;
 import com.bumptech.glide.request.transition.Transition;
+import com.ortiz.touchview.TouchImageView;
 import com.recursia.popularmovies.R;
 import com.recursia.popularmovies.presenters.PhotoPresenter;
 import com.recursia.popularmovies.utils.NetworkUtils;
 import com.recursia.popularmovies.utils.TagUtils;
 import com.recursia.popularmovies.views.PhotoContract;
-import com.ortiz.touchview.TouchImageView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -80,4 +80,5 @@ public class PhotoActivity extends MvpAppCompatActivity implements PhotoContract
                     }
                 });
     }
+
 }

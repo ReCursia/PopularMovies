@@ -12,9 +12,6 @@ public class Credits {
     @SerializedName("cast")
     @Expose
     private List<Cast> cast;
-    @SerializedName("crew")
-    @Expose
-    private List<Crew> crew;
 
     public int getId() {
         return id;
@@ -30,14 +27,6 @@ public class Credits {
 
     public void setCast(List<Cast> cast) {
         this.cast = cast;
-    }
-
-    public List<Crew> getCrew() {
-        return crew;
-    }
-
-    public void setCrew(List<Crew> crew) {
-        this.crew = crew;
     }
 
 }

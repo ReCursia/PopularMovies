@@ -38,4 +38,5 @@ public class NetworkUtils {
     public static String getMediumPosterUrl(String imagePath) {
         return BASE_IMAGE_URL + MEDIUM_POSTER_SIZE + imagePath;
     }
+
 }

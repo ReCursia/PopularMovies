@@ -47,10 +47,12 @@ public class IntroActivity extends MvpAppCompatActivity implements IntroContract
 
     @ProvidePresenter
     IntroPresenter providePresenter() {
+        String[] descriptions = getResources().getStringArray(R.array.intro_descriptions);
+        String[] filePaths = getResources().getStringArray(R.array.intro_file_paths);
         List<SectionItem> sectionItems = new ArrayList<>();
-        sectionItems.add(new SectionItem("movie.json", "Watch new popular and top rated movies,\n explore movies to watch them tonight!"));
-        sectionItems.add(new SectionItem("detail.json", "Watch detail movie information\n for every movie in top rated or popular category!"));
-        //sectionItems.add(new SectionItem("heart.json", "Save your favorite movies\n into local database!"));
+        for (int i = 0; i < descriptions.length; i++) {
+            sectionItems.add(new SectionItem(filePaths[i], descriptions[i]));
+        }
         return new IntroPresenter(sectionItems, new PrefUtilsImpl(this));
     }
 

@@ -44,6 +44,7 @@ public class DetailPresenter extends MvpPresenter<DetailContract> {
     @Override
     protected void onFirstViewAttach() {
         super.onFirstViewAttach();
+        getViewState().hideFavoriteIcon();
         getViewState().hideTrailers();
         getViewState().hideCast();
         getViewState().hideMovieDetail();
@@ -110,6 +111,7 @@ public class DetailPresenter extends MvpPresenter<DetailContract> {
     }
 
     private void setMovieData(Movie movie) {
+        getViewState().showFavoriteIcon();
         movieExtra.setMovie(movie);
         getViewState().setMovieDetail(movie);
         getViewState().showMovieDetail();
@@ -202,8 +204,13 @@ public class DetailPresenter extends MvpPresenter<DetailContract> {
     }
 
     public void onShareIconClicked() {
-        //TODO check if valid
-        getViewState().shareMovie(movieExtra.getMovie());
+        if (dataIsValid()) {
+            getViewState().shareMovie(movieExtra.getMovie());
+        }
+    }
+
+    private boolean dataIsValid() {
+        return movieExtra.getMovie() != null;
     }
 
     public void onMovieClicked(Movie movie) {
@@ -211,7 +218,9 @@ public class DetailPresenter extends MvpPresenter<DetailContract> {
     }
 
     public void onBackdropImageClicked() {
-        getViewState().openPhotoDetail(movieExtra.getMovie().getBackdropPath());
+        if (dataIsValid()) {
+            getViewState().openPhotoDetail(movieExtra.getMovie().getBackdropPath());
+        }
     }
 
 }

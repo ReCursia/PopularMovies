@@ -92,6 +92,16 @@ public class DetailActivity extends MvpAppCompatActivity implements DetailContra
     private MoviesAdapter moviesAdapter;
 
     @Override
+    public void showFavoriteIcon() {
+        favoriteIcon.show();
+    }
+
+    @Override
+    public void hideFavoriteIcon() {
+        favoriteIcon.hide();
+    }
+
+    @Override
     public void openPhotoDetail(String imagePath) {
         Intent intent = new Intent(this, PhotoActivity.class);
         intent.putExtra(TagUtils.IMAGE_PATH, imagePath);

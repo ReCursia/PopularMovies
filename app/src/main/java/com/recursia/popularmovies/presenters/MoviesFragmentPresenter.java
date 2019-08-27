@@ -22,7 +22,7 @@ public class MoviesFragmentPresenter extends MvpPresenter<MoviesContract> {
     private int currentPage;
     private DiscoverStrategy discoverStrategy;
     private CompositeDisposable compositeDisposable;
-    private boolean isRefreshing;
+    private boolean isLoading;
 
     public MoviesFragmentPresenter(MoviesApi client, DiscoverStrategy discoverStrategy) {
         this.client = client;
@@ -53,30 +53,32 @@ public class MoviesFragmentPresenter extends MvpPresenter<MoviesContract> {
 
     public void onSwipeRefreshed() {
         getViewState().showLoading();
-        isRefreshing = true;
+        isLoading = true;
         loadMovies();
     }
 
     private void handleSuccessfulResponse(DiscoverMovies discoverMovies) {
         List<Movie> movies = discoverMovies.getMovies();
-        if (isRefreshing) {
+        if (isLoading) {
             getViewState().setMovies(movies);
         } else {
             getViewState().addMovies(movies);
         }
         getViewState().hideLoading();
-        isRefreshing = false;
+        isLoading = false;
         currentPage++;
     }
 
     private void handleErrorResponse(Throwable t) {
         getViewState().hideLoading();
-        isRefreshing = false;
+        isLoading = false;
         getViewState().showErrorMessage(t.getLocalizedMessage());
     }
 
     public void bottomIsReached() {
-        loadMovies();
+        if (!isLoading) {
+            onSwipeRefreshed();
+        }
     }
 
     public void onMovieClicked(Movie movie) {

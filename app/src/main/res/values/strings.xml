@@ -28,4 +28,21 @@
     <string name="movie_recommendations">Recommendations:</string>
     <string name="original_title">Original title:</string>
     <string name="photo_detail">Photo detail</string>
+    <string name="intro_description_item_00">Watch popular and top rated movies,\nexplore movies to watch tonight!</string>
+    <string name="intro_description_item_01">Watch movie recommendations\nand find something new for yourself!</string>
+    <string name="intro_description_item_02">Save your favorite movies\ninto local database!</string>
+    <string name="intro_file_path_item_00" translatable="false">movie.json</string>
+    <string name="intro_file_path_item_01" translatable="false">recommendation.json</string>
+    <string name="intro_file_path_item_02" translatable="false">heart.json</string>
+
+    <string-array name="intro_descriptions">
+        <item>@string/intro_description_item_00</item>
+        <item>@string/intro_description_item_01</item>
+        <item>@string/intro_description_item_02</item>
+    </string-array>
+    <string-array name="intro_file_paths">
+        <item>@string/intro_file_path_item_00</item>
+        <item>@string/intro_file_path_item_01</item>
+        <item>@string/intro_file_path_item_02</item>
+    </string-array>
 </resources>

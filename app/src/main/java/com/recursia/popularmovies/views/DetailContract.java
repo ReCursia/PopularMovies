@@ -26,6 +26,10 @@ public interface DetailContract extends MvpView {
 
     void setFavoriteIconOff();
 
+    void showFavoriteIcon();
+
+    void hideFavoriteIcon();
+
     //Share
     void shareMovie(Movie movie);
 

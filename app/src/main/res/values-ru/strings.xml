@@ -28,4 +28,7 @@
     <string name="share_icon">Иконка поделиться</string>
     <string name="share_message">Привет! Рекомендую тебе посмотреть данный фильм:\n%s\n%s</string>
     <string name="share_to">Как вы хотите отправить информацию о фильме?</string>
+    <string name="intro_description_item_00">Смотри популярные и самые рейтинговые фильмы,\nнаходи фильмы для просмотра!</string>
+    <string name="intro_description_item_01">Смотри рекомендации к фильму\nи находи что-то новое для себя!</string>
+    <string name="intro_description_item_02">Сохраняй любимые фильмы\nв базу данных!</string>
 </resources>
