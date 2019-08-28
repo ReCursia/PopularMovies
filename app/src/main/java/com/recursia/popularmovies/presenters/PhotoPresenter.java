@@ -6,7 +6,7 @@ import com.recursia.popularmovies.views.PhotoContract;
 
 @InjectViewState
 public class PhotoPresenter extends MvpPresenter<PhotoContract> {
-    private String imagePath;
+    private final String imagePath;
 
     public PhotoPresenter(String imagePath) {
         this.imagePath = imagePath;

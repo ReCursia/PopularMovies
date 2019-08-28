@@ -35,8 +35,8 @@ public class FavoriteActivity extends MvpAppCompatActivity implements FavoriteCo
     @BindView(R.id.noFavoriteMoviesScreen)
     View noFavoriteMoviesScreen;
     @InjectPresenter
-    FavoritePresenter presenter;
-    MoviesAdapter moviesAdapter;
+    private FavoritePresenter presenter;
+    private MoviesAdapter moviesAdapter;
 
     @ProvidePresenter
     FavoritePresenter providePresenter() {

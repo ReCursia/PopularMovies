@@ -18,11 +18,12 @@ import io.reactivex.schedulers.Schedulers;
 
 @InjectViewState
 public class MoviesFragmentPresenter extends MvpPresenter<MoviesContract> {
-    private MoviesApi client;
+    private final MoviesApi client;
+    private final DiscoverStrategy discoverStrategy;
+    private final CompositeDisposable compositeDisposable;
     private int currentPage;
-    private DiscoverStrategy discoverStrategy;
-    private CompositeDisposable compositeDisposable;
-    private boolean isLoading;
+    private boolean isRefreshing;
+    private boolean isLoadingMore;
 
     public MoviesFragmentPresenter(MoviesApi client, DiscoverStrategy discoverStrategy) {
         this.client = client;
@@ -53,31 +54,34 @@ public class MoviesFragmentPresenter extends MvpPresenter<MoviesContract> {
 
     public void onSwipeRefreshed() {
         getViewState().showLoading();
-        isLoading = true;
+        isRefreshing = true;
         loadMovies();
     }
 
     private void handleSuccessfulResponse(DiscoverMovies discoverMovies) {
         List<Movie> movies = discoverMovies.getMovies();
-        if (isLoading) {
+        if (isRefreshing) {
             getViewState().setMovies(movies);
         } else {
             getViewState().addMovies(movies);
         }
         getViewState().hideLoading();
-        isLoading = false;
+        isRefreshing = false;
+        isLoadingMore = false;
         currentPage++;
     }
 
     private void handleErrorResponse(Throwable t) {
         getViewState().hideLoading();
-        isLoading = false;
+        isRefreshing = false;
+        isLoadingMore = false;
         getViewState().showErrorMessage(t.getLocalizedMessage());
     }
 
     public void bottomIsReached() {
-        if (!isLoading) {
-            onSwipeRefreshed();
+        if (!isLoadingMore) {
+            isLoadingMore = true;
+            loadMovies();
         }
     }
 

@@ -10,9 +10,9 @@ import java.util.List;
 
 @InjectViewState
 public class IntroPresenter extends MvpPresenter<IntroContract> {
+    private final PrefUtils prefUtils;
+    private final List<SectionItem> sectionItems;
     private int currentSection;
-    private PrefUtils prefUtils;
-    private List<SectionItem> sectionItems;
 
     public IntroPresenter(List<SectionItem> sectionItems, PrefUtils prefUtils) {
         this.sectionItems = sectionItems;

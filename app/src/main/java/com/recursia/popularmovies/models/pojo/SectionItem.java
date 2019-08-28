@@ -7,8 +7,8 @@ POJO class for Intro activity
 import java.io.Serializable;
 
 public class SectionItem implements Serializable {
-    private String fileName;
-    private String description;
+    private final String fileName;
+    private final String description;
 
     public SectionItem(String fileName, String description) {
         this.fileName = fileName;

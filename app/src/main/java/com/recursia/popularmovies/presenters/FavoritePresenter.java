@@ -17,8 +17,8 @@ import io.reactivex.schedulers.Schedulers;
 
 @InjectViewState
 public class FavoritePresenter extends MvpPresenter<FavoriteContract> {
-    private CompositeDisposable compositeDisposable;
-    private MovieDao movieDao;
+    private final CompositeDisposable compositeDisposable;
+    private final MovieDao movieDao;
 
     public FavoritePresenter(MovieDao movieDao) {
         this.movieDao = movieDao;

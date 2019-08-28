@@ -24,9 +24,9 @@ import butterknife.ButterKnife;
 public class MoviesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private static final int FADE_OUT_DURATION = 100; //ms
     private final Context context;
+    private final boolean isRecommendationMovies;
     private List<Movie> movies;
     private OnItemClickListener<Movie> clickListener;
-    private boolean isRecommendationMovies;
 
     public MoviesAdapter(Context context, boolean isRecommendationMovies) {
         this.context = context;

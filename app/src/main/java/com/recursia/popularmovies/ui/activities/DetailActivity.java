@@ -86,6 +86,7 @@ public class DetailActivity extends MvpAppCompatActivity implements DetailContra
     @BindView(R.id.movieRecommendationCardView)
     CardView movieRecommendationCardView;
     @InjectPresenter
+    private
     DetailPresenter presenter;
     private TrailersAdapter trailersAdapter;
     private CastAdapter castAdapter;
@@ -146,7 +147,7 @@ public class DetailActivity extends MvpAppCompatActivity implements DetailContra
     @Override
     public void openDetailScreen(Movie movie) {
         Intent intent = new Intent(this, DetailActivity.class);
-        intent.putExtra("id", movie.getId());
+        intent.putExtra(TagUtils.MOVIE_ID, movie.getId());
         startActivity(intent);
     }
 
@@ -353,7 +354,6 @@ public class DetailActivity extends MvpAppCompatActivity implements DetailContra
         //Image
         Glide.with(this)
                 .load(NetworkUtils.getBigPosterUrl(movie.getBackdropPath()))
-                .placeholder(R.drawable.ic_poster_placeholder)
                 .transition(DrawableTransitionOptions.withCrossFade(FADE_OUT_DURATION))
                 .into(backdropImage);
     }

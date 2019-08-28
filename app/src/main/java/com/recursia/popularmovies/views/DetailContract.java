@@ -31,6 +31,7 @@ public interface DetailContract extends MvpView {
     void hideFavoriteIcon();
 
     //Share
+    @StateStrategyType(SkipStrategy.class)
     void shareMovie(Movie movie);
 
     //Cast

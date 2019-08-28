@@ -6,7 +6,7 @@ import android.preference.PreferenceManager;
 
 public class PrefUtilsImpl implements PrefUtils {
     private static final String TAG = "intro";
-    private Context context;
+    private final Context context;
 
     public PrefUtilsImpl(Context context) {
         this.context = context;

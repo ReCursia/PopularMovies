@@ -7,7 +7,7 @@ import com.recursia.popularmovies.views.SectionContract;
 
 @InjectViewState
 public class SectionFragmentPresenter extends MvpPresenter<SectionContract> {
-    private SectionItem item;
+    private final SectionItem item;
 
     public SectionFragmentPresenter(SectionItem item) {
         this.item = item;

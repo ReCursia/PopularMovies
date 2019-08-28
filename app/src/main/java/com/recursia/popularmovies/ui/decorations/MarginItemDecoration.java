@@ -9,10 +9,10 @@ import android.util.TypedValue;
 import android.view.View;
 
 public class MarginItemDecoration extends RecyclerView.ItemDecoration {
-    private int marginLeft;
-    private int marginRight;
-    private int marginTop;
-    private int marginBottom;
+    private final int marginLeft;
+    private final int marginRight;
+    private final int marginTop;
+    private final int marginBottom;
 
     public MarginItemDecoration(Context context, int marginLeft, int marginRight, int marginTop, int marginBottom) {
         DisplayMetrics metrics = context.getResources().getDisplayMetrics();

@@ -26,12 +26,12 @@ import io.reactivex.schedulers.Schedulers;
 @InjectViewState
 public class DetailPresenter extends MvpPresenter<DetailContract> {
     private static final int MOVIE_RECOMMENDATION_PAGE = 1;
-    private MoviesApi client;
-    private MovieDao movieDao;
-    private MovieExtra movieExtra;
+    private final MoviesApi client;
+    private final MovieDao movieDao;
+    private final MovieExtra movieExtra;
+    private final CompositeDisposable compositeDisposable;
+    private final int movieId;
     private boolean isFavorite;
-    private CompositeDisposable compositeDisposable;
-    private int movieId;
 
     public DetailPresenter(MoviesApi client, MovieDao movieDao, MovieExtra movieExtra, int movieId) {
         this.client = client;

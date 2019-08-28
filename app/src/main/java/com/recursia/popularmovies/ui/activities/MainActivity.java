@@ -36,7 +36,7 @@ public class MainActivity extends MvpAppCompatActivity implements MainContract, 
     ViewPager moviesViewPager;
 
     @InjectPresenter
-    MainPresenter presenter;
+    private MainPresenter presenter;
     private AlertDialog aboutDialog;
 
     @Override

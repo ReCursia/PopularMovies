@@ -2,6 +2,7 @@ package com.recursia.popularmovies.views;
 
 import com.arellomobile.mvp.MvpView;
 import com.arellomobile.mvp.viewstate.strategy.AddToEndSingleStrategy;
+import com.arellomobile.mvp.viewstate.strategy.AddToEndStrategy;
 import com.arellomobile.mvp.viewstate.strategy.SkipStrategy;
 import com.arellomobile.mvp.viewstate.strategy.StateStrategyType;
 import com.recursia.popularmovies.models.pojo.Movie;
@@ -24,6 +25,7 @@ public interface MoviesContract extends MvpView {
     //List
     void setMovies(List<Movie> movies);
 
+    @StateStrategyType(AddToEndStrategy.class)
     void addMovies(List<Movie> movies);
 
     @StateStrategyType(SkipStrategy.class)

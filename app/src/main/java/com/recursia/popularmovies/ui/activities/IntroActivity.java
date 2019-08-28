@@ -41,7 +41,7 @@ public class IntroActivity extends MvpAppCompatActivity implements IntroContract
     @BindView(R.id.dots_linear_layout)
     LinearLayout dotsLinearLayout;
     @InjectPresenter
-    IntroPresenter presenter;
+    private IntroPresenter presenter;
     private SectionsPagerAdapter sectionsPagerAdapter;
     private List<TextView> dots;
 
