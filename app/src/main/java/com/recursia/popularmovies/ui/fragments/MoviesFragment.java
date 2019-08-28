@@ -43,7 +43,7 @@ public class MoviesFragment extends MvpAppCompatFragment implements MoviesContra
     SwipeRefreshLayout swipeIndicator;
 
     @InjectPresenter
-    private MoviesFragmentPresenter presenter;
+    MoviesFragmentPresenter presenter;
 
     private MoviesAdapter moviesAdapter;
     private OnFragmentMoviesInteractionListener listener;

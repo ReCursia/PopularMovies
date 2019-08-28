@@ -86,7 +86,6 @@ public class DetailActivity extends MvpAppCompatActivity implements DetailContra
     @BindView(R.id.movieRecommendationCardView)
     CardView movieRecommendationCardView;
     @InjectPresenter
-    private
     DetailPresenter presenter;
     private TrailersAdapter trailersAdapter;
     private CastAdapter castAdapter;
