@@ -32,4 +32,7 @@ public class MainPresenter extends MvpPresenter<MainContract> {
         getViewState().hideAboutDialog();
     }
 
+    public void onItemSearchClicked() {
+        getViewState().openSearchScreen();
+    }
 }

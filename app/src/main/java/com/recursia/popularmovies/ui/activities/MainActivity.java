@@ -34,10 +34,15 @@ public class MainActivity extends MvpAppCompatActivity implements MainContract, 
     TabLayout tabLayout;
     @BindView(R.id.movies_view_pager)
     ViewPager moviesViewPager;
-
     @InjectPresenter
     MainPresenter presenter;
     private AlertDialog aboutDialog;
+
+    @Override
+    public void openSearchScreen() {
+        Intent intent = new Intent(this, SearchActivity.class);
+        startActivity(intent);
+    }
 
     @Override
     public void openGooglePlayPage() {
@@ -80,13 +85,8 @@ public class MainActivity extends MvpAppCompatActivity implements MainContract, 
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.itemFavorite:
-                presenter.onItemFavoriteClicked();
-                break;
-            case R.id.itemAbout:
-                presenter.onItemAboutClicked();
-                break;
+        if (item.getItemId() == R.id.searchItem) {
+            presenter.onItemSearchClicked();
         }
         return super.onOptionsItemSelected(item);
     }

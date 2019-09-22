@@ -6,23 +6,18 @@ import com.arellomobile.mvp.viewstate.strategy.SkipStrategy;
 import com.arellomobile.mvp.viewstate.strategy.StateStrategyType;
 import com.recursia.popularmovies.models.pojo.Movie;
 
+import java.util.List;
+
 @StateStrategyType(AddToEndSingleStrategy.class)
-public interface MainContract extends MvpView {
+public interface SearchContract extends MvpView {
+    void setMovies(List<Movie> movies);
 
-    void openAboutDialog();
-
-    void hideAboutDialog();
-
-    @StateStrategyType(SkipStrategy.class)
-    void openSearchScreen();
-
-    @StateStrategyType(SkipStrategy.class)
-    void openGooglePlayPage();
+    void addMovies(List<Movie> movies);
 
     @StateStrategyType(SkipStrategy.class)
     void openDetailScreen(Movie movie);
 
     @StateStrategyType(SkipStrategy.class)
-    void openFavoriteScreen();
+    void showErrorMessage(String message);
 
 }
