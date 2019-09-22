@@ -10,6 +10,7 @@ import java.util.List;
 
 @StateStrategyType(AddToEndSingleStrategy.class)
 public interface SearchContract extends MvpView {
+
     void setMovies(List<Movie> movies);
 
     void addMovies(List<Movie> movies);

@@ -6,7 +6,6 @@ import com.recursia.popularmovies.models.pojo.Movie;
 import com.recursia.popularmovies.models.pojo.MovieTrailers;
 
 import io.reactivex.Observable;
-import io.reactivex.ObservableSource;
 import io.reactivex.Single;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
@@ -31,6 +30,6 @@ public interface MoviesApi {
     Single<DiscoverMovies> getMovieRecommendations(@Path("id") int id, @Query("page") int page, @Query("language") String language);
 
     @GET("3/search/movie?api_key=" + API_KEY)
-    Observable<DiscoverMovies> getMovieByQuery(@Query("query") String query, @Query("page") int page, @Query("language") String language);
+    Observable<DiscoverMovies> getMoviesByQuery(@Query("query") String query, @Query("page") int page, @Query("language") String language);
 
 }

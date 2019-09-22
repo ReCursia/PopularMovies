@@ -35,4 +35,5 @@ public class MainPresenter extends MvpPresenter<MainContract> {
     public void onItemSearchClicked() {
         getViewState().openSearchScreen();
     }
+
 }

@@ -65,17 +65,6 @@ public class SearchActivity extends MvpAppCompatActivity implements SearchContra
         initAdapter();
     }
 
-    private void initAdapter() {
-        moviesAdapter = new MoviesAdapter(this, false);
-        moviesAdapter.setClickListener(item -> presenter.onItemClicked(item));
-        searchRecyclerView.setAdapter(moviesAdapter);
-    }
-
-    private void initRecyclerView() {
-        searchRecyclerView.setLayoutManager(new GridLayoutManager(this, SPAN_COUNT));
-        searchRecyclerView.setHasFixedSize(true);
-    }
-
     private void initToolbar() {
         setSupportActionBar(toolbar);
         if (getSupportActionBar() != null) {
@@ -83,6 +72,17 @@ public class SearchActivity extends MvpAppCompatActivity implements SearchContra
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setDisplayShowHomeEnabled(true);
         }
+    }
+
+    private void initRecyclerView() {
+        searchRecyclerView.setLayoutManager(new GridLayoutManager(this, SPAN_COUNT));
+        searchRecyclerView.setHasFixedSize(true);
+    }
+
+    private void initAdapter() {
+        moviesAdapter = new MoviesAdapter(this, false);
+        moviesAdapter.setClickListener(item -> presenter.onItemClicked(item));
+        searchRecyclerView.setAdapter(moviesAdapter);
     }
 
     @Override
@@ -124,4 +124,5 @@ public class SearchActivity extends MvpAppCompatActivity implements SearchContra
     public void addMovies(List<Movie> movies) {
         moviesAdapter.addMovies(movies);
     }
+
 }

@@ -51,7 +51,6 @@ public interface DetailContract extends MvpView {
     @StateStrategyType(SkipStrategy.class)
     void openPhotoDetail(String imagePath);
 
-
     //Trailers
     void setTrailers(List<Trailer> trailers);
 
