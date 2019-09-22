@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.recursia.popularmovies">
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -25,7 +26,4 @@
         <activity android:name=".ui.activities.DetailActivity" />
         <activity android:name=".ui.activities.MainActivity" />
     </application>
-
-    <uses-permission android:name="android.permission.INTERNET" />
-
 </manifest>
