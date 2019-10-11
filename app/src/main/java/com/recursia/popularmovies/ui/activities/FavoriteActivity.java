@@ -1,6 +1,5 @@
 package com.recursia.popularmovies.ui.activities;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -16,7 +15,7 @@ import com.recursia.popularmovies.models.database.MovieDatabase;
 import com.recursia.popularmovies.models.pojo.Movie;
 import com.recursia.popularmovies.presenters.FavoritePresenter;
 import com.recursia.popularmovies.ui.adapters.MoviesAdapter;
-import com.recursia.popularmovies.utils.TagUtils;
+import com.recursia.popularmovies.ui.navigation.Navigator;
 import com.recursia.popularmovies.views.FavoriteContract;
 
 import java.util.List;
@@ -104,9 +103,7 @@ public class FavoriteActivity extends MvpAppCompatActivity implements FavoriteCo
 
     @Override
     public void openDetailScreen(Movie movie) {
-        Intent intent = new Intent(this, DetailActivity.class);
-        intent.putExtra(TagUtils.MOVIE_ID, movie.getId());
-        startActivity(intent);
+        Navigator.openDetailScreen(this, movie.getId());
     }
 
 }

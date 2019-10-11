@@ -1,6 +1,5 @@
 package com.recursia.popularmovies.ui.activities;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.text.Html;
@@ -16,6 +15,7 @@ import com.recursia.popularmovies.R;
 import com.recursia.popularmovies.models.pojo.SectionItem;
 import com.recursia.popularmovies.presenters.IntroPresenter;
 import com.recursia.popularmovies.ui.adapters.SectionsPagerAdapter;
+import com.recursia.popularmovies.ui.navigation.Navigator;
 import com.recursia.popularmovies.utils.intro.PrefUtilsImpl;
 import com.recursia.popularmovies.views.IntroContract;
 
@@ -127,9 +127,7 @@ public class IntroActivity extends MvpAppCompatActivity implements IntroContract
 
     @Override
     public void openMainScreen() {
-        Intent intent = new Intent(this, MainActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        startActivity(intent);
+        Navigator.openMainScreen(this);
         finish();
     }
 

@@ -6,16 +6,12 @@
     <string name="description">Description:</string>
     <string name="added_favorite">Added to favorite</string>
     <string name="removed_favorite">Removed from favorite</string>
-    <string name="item_favorite">Favorite</string>
-    <string name="item_about">About</string>
-    <string name="about">About</string>
     <string name="about_description">This application allows you to discover interesting movies, look detail information and also save movies to favorite list</string>
     <string name="rate_app_dialog_positive_button">RATE APP</string>
     <string name="rate_app_negative_button">LATER</string>
     <string name="no_favorite_movies">You have no favorites movies yet!</string>
     <string name="no_favorite_movies_icon">No favorite movies icon</string>
     <string name="play_button">Play trailer button</string>
-    <string name="favorite_title">Favorite</string>
     <string name="next_button">Next</string>
     <string name="previous_button">Previous</string>
     <string name="finish_button">Done</string>
@@ -34,9 +30,11 @@
     <string name="intro_file_path_item_00" translatable="false">movie.json</string>
     <string name="intro_file_path_item_01" translatable="false">recommendation.json</string>
     <string name="intro_file_path_item_02" translatable="false">heart.json</string>
-    <string name="search_item">Search item</string>
-    <string name="search_hint">Start typing...</string>
+    <string name="search_item">Search</string>
+    <string name="search_hint">Start typing…</string>
     <string name="search_movie_title">Search movies</string>
+    <string name="favorite_item">Favorite</string>
+    <string name="about_item">About</string>
 
     <string-array name="intro_descriptions">
         <item>@string/intro_description_item_00</item>

@@ -18,7 +18,7 @@ public class SearchPresenter extends MvpPresenter<SearchContract> {
     private static final int TIMEOUT = 500; //ms
     private static final int QUERY_PAGE = 1;
     private final CompositeDisposable compositeDisposable;
-    private MoviesApi client;
+    private final MoviesApi client;
 
     public SearchPresenter(MoviesApi client) {
         this.client = client;

@@ -39,6 +39,7 @@ import com.recursia.popularmovies.ui.adapters.CastAdapter;
 import com.recursia.popularmovies.ui.adapters.MoviesAdapter;
 import com.recursia.popularmovies.ui.adapters.TrailersAdapter;
 import com.recursia.popularmovies.ui.decorations.MarginItemDecoration;
+import com.recursia.popularmovies.ui.navigation.Navigator;
 import com.recursia.popularmovies.utils.DateUtils;
 import com.recursia.popularmovies.utils.NetworkUtils;
 import com.recursia.popularmovies.utils.TagUtils;
@@ -103,9 +104,7 @@ public class DetailActivity extends MvpAppCompatActivity implements DetailContra
 
     @Override
     public void openPhotoDetail(String imagePath) {
-        Intent intent = new Intent(this, PhotoActivity.class);
-        intent.putExtra(TagUtils.IMAGE_PATH, imagePath);
-        startActivity(intent);
+        Navigator.openPhotoDetail(this,imagePath);
     }
 
     @OnClick(R.id.favoriteIcon)
@@ -145,9 +144,7 @@ public class DetailActivity extends MvpAppCompatActivity implements DetailContra
 
     @Override
     public void openDetailScreen(Movie movie) {
-        Intent intent = new Intent(this, DetailActivity.class);
-        intent.putExtra(TagUtils.MOVIE_ID, movie.getId());
-        startActivity(intent);
+        Navigator.openDetailScreen(this, movie.getId());
     }
 
     @Override

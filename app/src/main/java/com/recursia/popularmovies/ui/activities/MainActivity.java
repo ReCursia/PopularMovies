@@ -19,8 +19,8 @@ import com.recursia.popularmovies.models.pojo.Movie;
 import com.recursia.popularmovies.presenters.MainPresenter;
 import com.recursia.popularmovies.ui.adapters.MoviesPagerAdapter;
 import com.recursia.popularmovies.ui.fragments.MoviesFragment;
+import com.recursia.popularmovies.ui.navigation.Navigator;
 import com.recursia.popularmovies.utils.NetworkUtils;
-import com.recursia.popularmovies.utils.TagUtils;
 import com.recursia.popularmovies.views.MainContract;
 
 import butterknife.BindView;
@@ -40,8 +40,7 @@ public class MainActivity extends MvpAppCompatActivity implements MainContract, 
 
     @Override
     public void openSearchScreen() {
-        Intent intent = new Intent(this, SearchActivity.class);
-        startActivity(intent);
+        Navigator.openSearchScreen(this);
     }
 
     @Override
@@ -85,8 +84,16 @@ public class MainActivity extends MvpAppCompatActivity implements MainContract, 
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.searchItem) {
-            presenter.onItemSearchClicked();
+        switch (item.getItemId()) {
+            case R.id.searchItem:
+                presenter.onItemSearchClicked();
+                break;
+            case R.id.favoriteItem:
+                presenter.onItemFavoriteClicked();
+                break;
+            case R.id.aboutItem:
+                presenter.onItemAboutClicked();
+                break;
         }
         return super.onOptionsItemSelected(item);
     }
@@ -125,15 +132,12 @@ public class MainActivity extends MvpAppCompatActivity implements MainContract, 
 
     @Override
     public void openFavoriteScreen() {
-        Intent intent = new Intent(this, FavoriteActivity.class);
-        startActivity(intent);
+        Navigator.openFavoriteScreen(this);
     }
 
     @Override
     public void openDetailScreen(Movie movie) {
-        Intent intent = new Intent(this, DetailActivity.class);
-        intent.putExtra(TagUtils.MOVIE_ID, movie.getId());
-        startActivity(intent);
+        Navigator.openDetailScreen(this, movie.getId());
     }
 
     @Override

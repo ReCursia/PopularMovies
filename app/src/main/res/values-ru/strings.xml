@@ -1,11 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="about">О приложении</string>
     <string name="about_description">Данное приложение позволяет находить интересные фильмы, смотреть детальную информацию о фильме, а также сохранять любимые фильмы в избранный список</string>
     <string name="added_favorite">Добавлено в избранное</string>
     <string name="description">Описание:</string>
-    <string name="item_about">О приложении</string>
-    <string name="item_favorite">Избранное</string>
     <string name="movie_poster">Постер фильма</string>
     <string name="no_favorite_movies">У вас еще нет избранных фильмов!</string>
     <string name="no_favorite_movies_icon">Иконка, сообщающая об отсутствии избранных фильмов</string>
@@ -15,7 +12,6 @@
     <string name="release_date">Дата выхода:</string>
     <string name="removed_favorite">Удалено из избранного</string>
     <string name="play_button">Кнопка открыть трейлер</string>
-    <string name="favorite_title">Избранное</string>
     <string name="cast">Актерский состав:</string>
     <string name="cast_image">Изображение актера</string>
     <string name="next_button">Далее</string>
@@ -31,4 +27,9 @@
     <string name="intro_description_item_00">Смотри популярные и самые рейтинговые фильмы,\nнаходи фильмы для просмотра!</string>
     <string name="intro_description_item_01">Смотри рекомендации к фильму\nи находи что-то новое для себя!</string>
     <string name="intro_description_item_02">Сохраняй любимые фильмы\nв базу данных!</string>
+    <string name="about_item">О приложении</string>
+    <string name="favorite_item">Избранное</string>
+    <string name="search_hint">Начните печатать…</string>
+    <string name="search_movie_title">Поиск фильмов</string>
+    <string name="search_item">Поиск</string>
 </resources>
