@@ -86,7 +86,7 @@ public class FavoriteActivity extends MvpAppCompatActivity implements FavoriteCo
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setDisplayShowHomeEnabled(true);
-            getSupportActionBar().setTitle(getString(R.string.favorite_title));
+            getSupportActionBar().setTitle(getString(R.string.favorite_item));
         }
     }
 

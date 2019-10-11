@@ -60,7 +60,7 @@ public class MainActivity extends MvpAppCompatActivity implements MainContract, 
     @Override
     public void openAboutDialog() {
         aboutDialog = new AlertDialog.Builder(this)
-                .setTitle(getString(R.string.about))
+                .setTitle(getString(R.string.about_item))
                 .setMessage(getString(R.string.about_description))
                 .setPositiveButton(getString(R.string.rate_app_dialog_positive_button), (dialog, which) -> presenter.onPositiveDialogButtonClicked())
                 .setNegativeButton(getString(R.string.rate_app_negative_button), (dialog, which) -> presenter.onNegativeDialogButtonClicked())
