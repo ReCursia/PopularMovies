@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DiscoverMovies {
-    //hello
+
     @SerializedName("page")
     @Expose
     private int page;
