@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/black"
-    tools:context=".ui.activities.SearchActivity">
+    tools:context=".presentation.ui.activities.SearchScreenActivity">
 
     <FrameLayout
         android:layout_width="match_parent"

@@ -1,7 +1,5 @@
 package com.recursia.popularmovies.utils;
 
-import java.util.Locale;
-
 public class NetworkUtils {
     public static final String TRAILER_BASE_URL = "https://www.youtube.com/watch?v=";
     public static final String TRAILER_IMAGE_FORMAT_URL = "http://img.youtube.com/vi/%s/mqdefault.jpg"; //returns 320x180 image
@@ -18,10 +16,6 @@ public class NetworkUtils {
     private static final String BIG_POSTER_SIZE = "w780";
     private static final String ORIGINAL_SIZE = "original";
     private static final String MEDIUM_PROFILE_SIZE = "w185";
-
-    public static String getDefaultLanguage() {
-        return Locale.getDefault().toString();
-    }
 
     public static String getBigPosterUrl(String imagePath) {
         return BASE_IMAGE_URL + BIG_POSTER_SIZE + imagePath;
