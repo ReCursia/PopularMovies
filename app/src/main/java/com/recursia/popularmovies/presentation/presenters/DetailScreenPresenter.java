@@ -119,7 +119,9 @@ public class DetailScreenPresenter extends MvpPresenter<DetailScreenContract> {
     }
 
     public void onShareIconClicked(Movie movie) {
-        getViewState().shareMovie(movie);
+        if (movie != null) {
+            getViewState().shareMovie(movie);
+        }
     }
 
     public void onMovieClicked(Movie movie) {
