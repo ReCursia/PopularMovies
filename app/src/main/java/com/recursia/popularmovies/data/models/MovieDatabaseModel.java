@@ -210,4 +210,5 @@ public class MovieDatabaseModel {
     public void setFavorite(boolean favorite) {
         isFavorite = favorite;
     }
+
 }

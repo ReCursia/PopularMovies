@@ -8,7 +8,7 @@ import com.recursia.popularmovies.utils.Mapper;
 import java.util.List;
 
 public class DiscoverMovieResponseToMovieMapper extends Mapper<DiscoverMoviesResponse, List<Movie>> {
-    private MovieDatabaseModelToEntityMapper mapper;
+    private final MovieDatabaseModelToEntityMapper mapper;
 
     public DiscoverMovieResponseToMovieMapper(MovieDatabaseModelToEntityMapper mapper) {
         this.mapper = mapper;
@@ -18,4 +18,5 @@ public class DiscoverMovieResponseToMovieMapper extends Mapper<DiscoverMoviesRes
     public List<Movie> transform(DiscoverMoviesResponse response) {
         return mapper.transform(response.getMovies());
     }
+
 }

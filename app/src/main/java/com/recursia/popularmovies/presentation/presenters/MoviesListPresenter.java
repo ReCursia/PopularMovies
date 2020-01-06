@@ -1,7 +1,5 @@
 package com.recursia.popularmovies.presentation.presenters;
 
-import android.util.Log;
-
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
 import com.recursia.popularmovies.domain.MoviesListInteractor;
@@ -44,11 +42,11 @@ public class MoviesListPresenter extends MvpPresenter<MoviesListContract> {
                         discoverStrategy.getVoteCount(),
                         LangUtils.getDefaultLanguage())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(this::handleSuccessfulResponse, this::handleErrorResponse);
+                .subscribe(this::handleMovies, this::handleError);
         compositeDisposable.add(d);
     }
 
-    private void handleSuccessfulResponse(List<Movie> movies) {
+    private void handleMovies(List<Movie> movies) {
         if (isRefreshing) {
             getViewState().setMovies(movies);
         } else {
@@ -72,7 +70,7 @@ public class MoviesListPresenter extends MvpPresenter<MoviesListContract> {
         loadMovies();
     }
 
-    private void handleErrorResponse(Throwable t) {
+    private void handleError(Throwable t) {
         getViewState().hideLoading();
         isRefreshing = false;
         isLoadingMore = false;

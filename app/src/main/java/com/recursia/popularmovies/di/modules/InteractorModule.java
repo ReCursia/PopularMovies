@@ -1,6 +1,5 @@
 package com.recursia.popularmovies.di.modules;
 
-
 import com.recursia.popularmovies.domain.DetailScreenInteractor;
 import com.recursia.popularmovies.domain.DetailScreenInteractorImpl;
 import com.recursia.popularmovies.domain.FavoriteScreenInteractor;
@@ -36,4 +35,5 @@ public class InteractorModule {
     SearchScreenInteractor provideSearchScreenInteractor(MoviesRepository moviesRepository) {
         return new SearchScreenInteractorImpl(moviesRepository);
     }
+
 }

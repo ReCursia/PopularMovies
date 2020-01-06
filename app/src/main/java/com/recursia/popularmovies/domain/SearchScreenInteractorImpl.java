@@ -18,4 +18,5 @@ public class SearchScreenInteractorImpl implements SearchScreenInteractor {
     public Single<List<Movie>> getMoviesByQuery(String query, int page, String language) {
         return moviesRepository.getMoviesByQuery(query, page, language);
     }
+
 }

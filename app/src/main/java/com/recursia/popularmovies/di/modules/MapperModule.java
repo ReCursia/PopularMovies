@@ -18,6 +18,7 @@ import dagger.Provides;
 
 @Module
 public class MapperModule {
+
     @Provides
     CastDatabaseModelToEntityMapper provideCastDatabaseModelToEntityMapper() {
         return new CastDatabaseModelToEntityMapper();
@@ -81,4 +82,5 @@ public class MapperModule {
                                                                                        TrailerDatabaseModelToEntityMapper trailerDatabaseModelToEntityMapper) {
         return new MovieExtraDatabaseModelToEntityMapper(genreDatabaseModelToEntityMapper, castDatabaseModelToEntityMapper, trailerDatabaseModelToEntityMapper);
     }
+
 }

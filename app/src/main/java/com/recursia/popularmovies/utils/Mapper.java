@@ -20,9 +20,10 @@ abstract public class Mapper<T, V> {
         return collection;
     }
 
-    abstract public V transform(T t);
-
     private boolean isValid(Collection collection) {
         return (collection != null) && !(collection.isEmpty());
     }
+
+    abstract public V transform(T t);
+
 }

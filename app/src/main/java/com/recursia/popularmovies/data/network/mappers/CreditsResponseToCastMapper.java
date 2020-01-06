@@ -18,5 +18,6 @@ public class CreditsResponseToCastMapper extends Mapper<CreditsResponse, List<Ca
     public List<Cast> transform(CreditsResponse creditsResponse) {
         return mapper.transform(creditsResponse.getCast());
     }
+
 }
 

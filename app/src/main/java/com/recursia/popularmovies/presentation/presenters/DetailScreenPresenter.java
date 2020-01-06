@@ -39,6 +39,17 @@ public class DetailScreenPresenter extends MvpPresenter<DetailScreenContract> {
         loadMovieRecommendations();
     }
 
+    private void loadMovie() {
+        Disposable d = detailScreenInteractor
+                .getMovieById(movieId, LangUtils.getDefaultLanguage())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                        this::handleMovie,
+                        (t) -> getViewState().showErrorMessage(t.getLocalizedMessage())
+                );
+        compositeDisposable.add(d);
+    }
+
     private void loadMovieRecommendations() {
         Disposable d = detailScreenInteractor
                 .getMovieRecommendations(movieId, MOVIE_RECOMMENDATION_PAGE, LangUtils.getDefaultLanguage())
@@ -47,17 +58,6 @@ public class DetailScreenPresenter extends MvpPresenter<DetailScreenContract> {
                             getViewState().setRecommendationMovies(r);
                             getViewState().showRecommendationMovies();
                         },
-                        (t) -> getViewState().showErrorMessage(t.getLocalizedMessage())
-                );
-        compositeDisposable.add(d);
-    }
-
-    private void loadMovie() {
-        Disposable d = detailScreenInteractor
-                .getMovieById(movieId, LangUtils.getDefaultLanguage())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(
-                        this::handleMovie,
                         (t) -> getViewState().showErrorMessage(t.getLocalizedMessage())
                 );
         compositeDisposable.add(d);
@@ -74,7 +74,6 @@ public class DetailScreenPresenter extends MvpPresenter<DetailScreenContract> {
         getViewState().showFavoriteIcon();
     }
 
-
     @Override
     public void onDestroy() {
         super.onDestroy();
@@ -90,19 +89,6 @@ public class DetailScreenPresenter extends MvpPresenter<DetailScreenContract> {
 
     }
 
-    private void makeMovieFavorite(Movie movie) {
-        Disposable d = detailScreenInteractor
-                .makeFavoriteMovie(movie)
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(
-                        () -> {
-                            getViewState().setFavoriteIconOn();
-                            getViewState().showMovieAddedMessage();
-                        }
-                );
-        compositeDisposable.add(d);
-    }
-
     private void removeMovieFavorite(Movie movie) {
         Disposable d = detailScreenInteractor
                 .removeFavoriteMovie(movie)
@@ -116,10 +102,22 @@ public class DetailScreenPresenter extends MvpPresenter<DetailScreenContract> {
         compositeDisposable.add(d);
     }
 
+    private void makeMovieFavorite(Movie movie) {
+        Disposable d = detailScreenInteractor
+                .makeFavoriteMovie(movie)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                        () -> {
+                            getViewState().setFavoriteIconOn();
+                            getViewState().showMovieAddedMessage();
+                        }
+                );
+        compositeDisposable.add(d);
+    }
+
     public void onShareIconClicked(Movie movie) {
         getViewState().shareMovie(movie);
     }
-
 
     public void onMovieClicked(Movie movie) {
         getViewState().openDetailScreen(movie);
@@ -132,4 +130,5 @@ public class DetailScreenPresenter extends MvpPresenter<DetailScreenContract> {
     public void onTrailerPlayButtonClicked(Trailer trailer) {
         getViewState().openTrailerUrl(trailer);
     }
+
 }

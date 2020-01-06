@@ -34,4 +34,5 @@ public class DetailScreenInteractorImpl implements DetailScreenInteractor {
     public Completable removeFavoriteMovie(Movie movie) {
         return moviesRepository.removeFavoriteMovie(movie);
     }
+
 }

@@ -113,4 +113,5 @@ public class MoviesRepositoryImpl implements MoviesRepository {
                 .doOnSubscribe(disposable -> movie.setFavorite(false))
                 .subscribeOn(Schedulers.io());
     }
+
 }

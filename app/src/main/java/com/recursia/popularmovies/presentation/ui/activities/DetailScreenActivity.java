@@ -49,7 +49,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-
+//TODO return is empty checks back to presenter
 public class DetailScreenActivity extends MvpAppCompatActivity implements DetailScreenContract {
     private final static int FADE_OUT_DURATION = 100; //ms
     private final static boolean IS_RECOMMENDATION_MOVIES = true;
@@ -119,7 +119,9 @@ public class DetailScreenActivity extends MvpAppCompatActivity implements Detail
 
     @Override
     public void setRecommendationMovies(List<Movie> movies) {
-        moviesAdapter.setMovies(movies);
+        if (!movies.isEmpty()) {
+            moviesAdapter.setMovies(movies);
+        }
     }
 
     @Override
@@ -140,17 +142,6 @@ public class DetailScreenActivity extends MvpAppCompatActivity implements Detail
     @Override
     public void showErrorMessage(String message) {
         Toast.makeText(this, message, Toast.LENGTH_LONG).show();
-    }
-
-    private void setGenres(List<Genre> genres) {
-        //Before set genres remove previous one
-        genresGroup.removeAllViews();
-        LayoutInflater layoutInflater = LayoutInflater.from(this);
-        for (Genre genre : genres) {
-            Chip chip = (Chip) layoutInflater.inflate(R.layout.genre_chip, genresGroup, false);
-            chip.setText(genre.getName());
-            genresGroup.addView(chip);
-        }
     }
 
     @ProvidePresenter
@@ -340,6 +331,17 @@ public class DetailScreenActivity extends MvpAppCompatActivity implements Detail
                 .load(NetworkUtils.getBigPosterUrl(movie.getBackdropPath()))
                 .transition(DrawableTransitionOptions.withCrossFade(FADE_OUT_DURATION))
                 .into(backdropImage);
+    }
+
+    private void setGenres(List<Genre> genres) {
+        //Before set genres remove previous one
+        genresGroup.removeAllViews();
+        LayoutInflater layoutInflater = LayoutInflater.from(this);
+        for (Genre genre : genres) {
+            Chip chip = (Chip) layoutInflater.inflate(R.layout.genre_chip, genresGroup, false);
+            chip.setText(genre.getName());
+            genresGroup.addView(chip);
+        }
     }
 
 }

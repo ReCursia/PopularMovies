@@ -27,4 +27,5 @@ public class RoomModule {
     MovieDao provideMovieDao() {
         return movieDatabase.movieDao();
     }
+
 }

@@ -49,4 +49,5 @@ public class GenreDatabaseModel {
     public void setName(@NonNull String name) {
         this.name = name;
     }
+
 }

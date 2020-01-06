@@ -47,4 +47,5 @@ public class MovieExtraDatabaseModel {
     public void setTrailers(List<TrailerDatabaseModel> trailers) {
         this.trailers = trailers;
     }
+
 }

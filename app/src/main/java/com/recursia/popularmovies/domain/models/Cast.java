@@ -83,4 +83,5 @@ public class Cast {
     public void setProfilePath(String profilePath) {
         this.profilePath = profilePath;
     }
+
 }

@@ -41,4 +41,5 @@ public class RetrofitModule {
                 .addCallAdapterFactory(rxJava2CallAdapterFactory)
                 .build();
     }
+
 }

@@ -65,4 +65,5 @@ public class Trailer {
     public void setType(String type) {
         this.type = type;
     }
+
 }

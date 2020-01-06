@@ -51,10 +51,6 @@ public abstract class MovieDao {
         }
     }
 
-    public void deleteMovieExtra(MovieExtraDatabaseModel movie) {
-        deleteMovie(movie.getMovie());
-    }
-
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     abstract void insertMovie(MovieDatabaseModel movie);
 
@@ -66,6 +62,10 @@ public abstract class MovieDao {
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     abstract void insertCast(CastDatabaseModel cast);
+
+    public void deleteMovieExtra(MovieExtraDatabaseModel movie) {
+        deleteMovie(movie.getMovie());
+    }
 
     @Delete
     abstract void deleteMovie(MovieDatabaseModel movie);

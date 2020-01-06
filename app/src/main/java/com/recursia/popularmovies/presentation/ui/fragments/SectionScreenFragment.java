@@ -33,18 +33,18 @@ public class SectionScreenFragment extends MvpAppCompatFragment {
         setSectionData(item);
     }
 
-    @Nullable
-    @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_intro_section, container, false);
-    }
-
     private void setSectionData(SectionItem item) {
         //Image
         sectionImage.setAnimation(item.getFileName());
         sectionImage.playAnimation();
         //Text
         sectionText.setText(item.getDescription());
+    }
+
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        return inflater.inflate(R.layout.fragment_intro_section, container, false);
     }
 
 }

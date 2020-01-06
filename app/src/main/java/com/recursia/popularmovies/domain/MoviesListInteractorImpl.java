@@ -18,4 +18,5 @@ public class MoviesListInteractorImpl implements MoviesListInteractor {
     public Single<List<Movie>> discoverMovies(String sortBy, int page, int voteCount, String language) {
         return moviesRepository.discoverMovies(sortBy, page, voteCount, language);
     }
+
 }

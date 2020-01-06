@@ -18,4 +18,5 @@ public class FavoriteScreenInteractorImpl implements FavoriteScreenInteractor {
     public Flowable<List<Movie>> getAllFavoriteMovies() {
         return moviesRepository.getAllFavoriteMovies();
     }
+
 }
