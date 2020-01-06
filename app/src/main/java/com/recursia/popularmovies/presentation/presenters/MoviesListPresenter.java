@@ -26,6 +26,7 @@ public class MoviesListPresenter extends MvpPresenter<MoviesListContract> {
     public MoviesListPresenter(MoviesListInteractor moviesListInteractor, DiscoverStrategy discoverStrategy) {
         this.moviesListInteractor = moviesListInteractor;
         this.discoverStrategy = discoverStrategy;
+        this.currentPage = 1;
     }
 
     @Override
