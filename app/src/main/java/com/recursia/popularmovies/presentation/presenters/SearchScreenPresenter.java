@@ -2,9 +2,10 @@ package com.recursia.popularmovies.presentation.presenters;
 
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
+import com.recursia.popularmovies.Screens;
 import com.recursia.popularmovies.domain.SearchScreenInteractor;
 import com.recursia.popularmovies.domain.models.Movie;
-import com.recursia.popularmovies.presentation.views.SearchScreenContract;
+import com.recursia.popularmovies.presentation.views.contracts.SearchScreenContract;
 import com.recursia.popularmovies.utils.LangUtils;
 
 import java.util.concurrent.TimeUnit;
@@ -14,6 +15,7 @@ import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.subjects.BehaviorSubject;
 import io.reactivex.subjects.Subject;
+import ru.terrakok.cicerone.Router;
 
 @InjectViewState
 public class SearchScreenPresenter extends MvpPresenter<SearchScreenContract> {
@@ -23,9 +25,12 @@ public class SearchScreenPresenter extends MvpPresenter<SearchScreenContract> {
     private final SearchScreenInteractor searchScreenInteractor;
     private final CompositeDisposable compositeDisposable = new CompositeDisposable();
     private final Subject<String> subject = BehaviorSubject.create();
+    private final Router router;
 
-    public SearchScreenPresenter(SearchScreenInteractor searchScreenInteractor) {
+    public SearchScreenPresenter(SearchScreenInteractor searchScreenInteractor,
+                                 Router router) {
         this.searchScreenInteractor = searchScreenInteractor;
+        this.router = router;
     }
 
     @Override
@@ -59,13 +64,17 @@ public class SearchScreenPresenter extends MvpPresenter<SearchScreenContract> {
     }
 
     public void onItemClicked(Movie item) {
-        getViewState().openDetailScreen(item);
+        router.navigateTo(new Screens.DetailScreen(item.getId()));
     }
 
     public void onQueryTextChanged(String query) {
         if (!query.isEmpty()) {
             subject.onNext(query);
         }
+    }
+
+    public void onBackPressed() {
+        router.exit();
     }
 
 }

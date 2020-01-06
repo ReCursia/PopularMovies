@@ -2,21 +2,26 @@ package com.recursia.popularmovies.presentation.presenters;
 
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
+import com.recursia.popularmovies.Screens;
 import com.recursia.popularmovies.presentation.models.SectionItem;
-import com.recursia.popularmovies.presentation.views.IntroScreenContract;
+import com.recursia.popularmovies.presentation.views.contracts.IntroScreenContract;
 import com.recursia.popularmovies.utils.intro.PrefUtils;
 
 import java.util.List;
+
+import ru.terrakok.cicerone.Router;
 
 @InjectViewState
 public class IntroScreenPresenter extends MvpPresenter<IntroScreenContract> {
     private final PrefUtils prefUtils;
     private final List<SectionItem> sectionItems;
+    private final Router router;
     private int currentSection;
 
-    public IntroScreenPresenter(List<SectionItem> sectionItems, PrefUtils prefUtils) {
-        this.sectionItems = sectionItems;
+    public IntroScreenPresenter(PrefUtils prefUtils, List<SectionItem> sectionItems, Router router) {
         this.prefUtils = prefUtils;
+        this.sectionItems = sectionItems;
+        this.router = router;
     }
 
     @Override
@@ -25,7 +30,7 @@ public class IntroScreenPresenter extends MvpPresenter<IntroScreenContract> {
         if (isFirstLaunch()) {
             initViewState();
         } else {
-            getViewState().openMainScreen();
+            router.newRootScreen(new Screens.MainScreen());
         }
     }
 
@@ -81,7 +86,7 @@ public class IntroScreenPresenter extends MvpPresenter<IntroScreenContract> {
 
     public void onFinishButtonClicked() {
         prefUtils.putValue(false); //now this is not first launch
-        getViewState().openMainScreen();
+        router.newRootScreen(new Screens.MainScreen());
     }
 
     public void onPageSelected(int i) {

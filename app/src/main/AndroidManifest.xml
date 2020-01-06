@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.recursia.popularmovies">
+
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
@@ -12,19 +13,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".presentation.ui.activities.SearchScreenActivity"/>
         <activity
-            android:name=".presentation.ui.activities.SplashScreenActivity"
+            android:name=".presentation.views.activity.HolderActivity"
             android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".presentation.ui.activities.PhotoScreenActivity" />
-        <activity android:name=".presentation.ui.activities.IntroScreenActivity" />
-        <activity android:name=".presentation.ui.activities.FavoriteScreenActivity" />
-        <activity android:name=".presentation.ui.activities.DetailScreenActivity" />
-        <activity android:name=".presentation.ui.activities.MainScreenActivity" />
     </application>
 </manifest>

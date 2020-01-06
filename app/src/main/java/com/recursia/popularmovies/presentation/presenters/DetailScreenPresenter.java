@@ -2,26 +2,29 @@ package com.recursia.popularmovies.presentation.presenters;
 
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
+import com.recursia.popularmovies.Screens;
 import com.recursia.popularmovies.domain.DetailScreenInteractor;
 import com.recursia.popularmovies.domain.models.Movie;
 import com.recursia.popularmovies.domain.models.Trailer;
-import com.recursia.popularmovies.presentation.views.DetailScreenContract;
+import com.recursia.popularmovies.presentation.views.contracts.DetailScreenContract;
 import com.recursia.popularmovies.utils.LangUtils;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
+import ru.terrakok.cicerone.Router;
 
 @InjectViewState
 public class DetailScreenPresenter extends MvpPresenter<DetailScreenContract> {
     private static final int MOVIE_RECOMMENDATION_PAGE = 1;
     private final DetailScreenInteractor detailScreenInteractor;
     private final CompositeDisposable compositeDisposable = new CompositeDisposable();
+    private final Router router;
     private final int movieId;
 
-    public DetailScreenPresenter(DetailScreenInteractor detailScreenInteractor,
-                                 int movieId) {
+    public DetailScreenPresenter(DetailScreenInteractor detailScreenInteractor, Router router, int movieId) {
         this.detailScreenInteractor = detailScreenInteractor;
+        this.router = router;
         this.movieId = movieId;
     }
 
@@ -120,15 +123,21 @@ public class DetailScreenPresenter extends MvpPresenter<DetailScreenContract> {
     }
 
     public void onMovieClicked(Movie movie) {
-        getViewState().openDetailScreen(movie);
+        router.navigateTo(new Screens.DetailScreen(movie.getId()));
     }
 
     public void onBackdropImageClicked(Movie movie) {
-        getViewState().openPhotoDetail(movie.getBackdropPath());
+        if (movie != null) {
+            router.navigateTo(new Screens.PhotoScreen(movie.getBackdropPath()));
+        }
     }
 
     public void onTrailerPlayButtonClicked(Trailer trailer) {
         getViewState().openTrailerUrl(trailer);
+    }
+
+    public void onBackPressed() {
+        router.exit();
     }
 
 }

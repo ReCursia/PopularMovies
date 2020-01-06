@@ -2,18 +2,21 @@ package com.recursia.popularmovies.presentation.presenters;
 
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
-import com.recursia.popularmovies.domain.models.Movie;
-import com.recursia.popularmovies.presentation.views.MainScreenContract;
+import com.recursia.popularmovies.Screens;
+import com.recursia.popularmovies.presentation.views.contracts.MainScreenContract;
+
+import ru.terrakok.cicerone.Router;
 
 @InjectViewState
 public class MainScreenPresenter extends MvpPresenter<MainScreenContract> {
+    private final Router router;
 
-    public void onMovieClicked(Movie movie) {
-        getViewState().openDetailScreen(movie);
+    public MainScreenPresenter(Router router) {
+        this.router = router;
     }
 
     public void onItemFavoriteClicked() {
-        getViewState().openFavoriteScreen();
+        router.navigateTo(new Screens.FavoriteScreen());
     }
 
     public void onItemAboutClicked() {
@@ -33,7 +36,7 @@ public class MainScreenPresenter extends MvpPresenter<MainScreenContract> {
     }
 
     public void onItemSearchClicked() {
-        getViewState().openSearchScreen();
+        router.navigateTo(new Screens.SearchScreen());
     }
 
 }

@@ -2,23 +2,27 @@ package com.recursia.popularmovies.presentation.presenters;
 
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
+import com.recursia.popularmovies.Screens;
 import com.recursia.popularmovies.domain.FavoriteScreenInteractor;
 import com.recursia.popularmovies.domain.models.Movie;
-import com.recursia.popularmovies.presentation.views.FavoriteScreenContract;
+import com.recursia.popularmovies.presentation.views.contracts.FavoriteScreenContract;
 
 import java.util.List;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
+import ru.terrakok.cicerone.Router;
 
 @InjectViewState
 public class FavoriteScreenPresenter extends MvpPresenter<FavoriteScreenContract> {
     private final FavoriteScreenInteractor favoriteScreenInteractor;
+    private final Router router;
     private final CompositeDisposable compositeDisposable = new CompositeDisposable();
 
-    public FavoriteScreenPresenter(FavoriteScreenInteractor favoriteScreenInteractor) {
+    public FavoriteScreenPresenter(FavoriteScreenInteractor favoriteScreenInteractor, Router router) {
         this.favoriteScreenInteractor = favoriteScreenInteractor;
+        this.router = router;
     }
 
     @Override
@@ -55,7 +59,11 @@ public class FavoriteScreenPresenter extends MvpPresenter<FavoriteScreenContract
     }
 
     public void onItemClicked(Movie movie) {
-        getViewState().openDetailScreen(movie);
+        router.navigateTo(new Screens.DetailScreen(movie.getId()));
+    }
+
+    public void onBackPressed() {
+        router.exit();
     }
 
 }
