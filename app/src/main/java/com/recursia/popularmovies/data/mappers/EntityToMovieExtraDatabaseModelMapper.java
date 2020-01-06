@@ -1,4 +1,4 @@
-package com.recursia.popularmovies.data.db.mappers;
+package com.recursia.popularmovies.data.mappers;
 
 import com.recursia.popularmovies.data.models.MovieDatabaseModel;
 import com.recursia.popularmovies.data.models.MovieExtraDatabaseModel;

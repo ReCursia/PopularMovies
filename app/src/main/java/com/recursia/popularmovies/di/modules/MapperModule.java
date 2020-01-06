@@ -1,17 +1,17 @@
 package com.recursia.popularmovies.di.modules;
 
-import com.recursia.popularmovies.data.db.mappers.CastDatabaseModelToEntityMapper;
-import com.recursia.popularmovies.data.db.mappers.EntityToCastDatabaseModelMapper;
-import com.recursia.popularmovies.data.db.mappers.EntityToGenreDatabaseModelMapper;
-import com.recursia.popularmovies.data.db.mappers.EntityToMovieExtraDatabaseModelMapper;
-import com.recursia.popularmovies.data.db.mappers.EntityToTrailerDatabaseModelMapper;
-import com.recursia.popularmovies.data.db.mappers.GenreDatabaseModelToEntityMapper;
-import com.recursia.popularmovies.data.db.mappers.MovieDatabaseModelToEntityMapper;
-import com.recursia.popularmovies.data.db.mappers.MovieExtraDatabaseModelToEntityMapper;
-import com.recursia.popularmovies.data.db.mappers.TrailerDatabaseModelToEntityMapper;
-import com.recursia.popularmovies.data.network.mappers.CreditsResponseToCastMapper;
-import com.recursia.popularmovies.data.network.mappers.DiscoverMovieResponseToMovieMapper;
-import com.recursia.popularmovies.data.network.mappers.MovieTrailersResponseToTrailersMapper;
+import com.recursia.popularmovies.data.mappers.CastDatabaseModelToEntityMapper;
+import com.recursia.popularmovies.data.mappers.EntityToCastDatabaseModelMapper;
+import com.recursia.popularmovies.data.mappers.EntityToGenreDatabaseModelMapper;
+import com.recursia.popularmovies.data.mappers.EntityToMovieExtraDatabaseModelMapper;
+import com.recursia.popularmovies.data.mappers.EntityToTrailerDatabaseModelMapper;
+import com.recursia.popularmovies.data.mappers.GenreDatabaseModelToEntityMapper;
+import com.recursia.popularmovies.data.mappers.MovieDatabaseModelToEntityMapper;
+import com.recursia.popularmovies.data.mappers.MovieExtraDatabaseModelToEntityMapper;
+import com.recursia.popularmovies.data.mappers.TrailerDatabaseModelToEntityMapper;
+import com.recursia.popularmovies.data.mappers.CreditsResponseToCastMapper;
+import com.recursia.popularmovies.data.mappers.DiscoverMovieResponseToMovieMapper;
+import com.recursia.popularmovies.data.mappers.MovieTrailersResponseToTrailersMapper;
 
 import dagger.Module;
 import dagger.Provides;

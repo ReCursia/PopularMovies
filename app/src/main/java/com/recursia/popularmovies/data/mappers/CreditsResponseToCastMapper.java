@@ -1,6 +1,5 @@
-package com.recursia.popularmovies.data.network.mappers;
+package com.recursia.popularmovies.data.mappers;
 
-import com.recursia.popularmovies.data.db.mappers.CastDatabaseModelToEntityMapper;
 import com.recursia.popularmovies.data.models.CreditsResponse;
 import com.recursia.popularmovies.domain.models.Cast;
 import com.recursia.popularmovies.utils.Mapper;

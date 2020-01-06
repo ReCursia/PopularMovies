@@ -1,6 +1,5 @@
-package com.recursia.popularmovies.data.network.mappers;
+package com.recursia.popularmovies.data.mappers;
 
-import com.recursia.popularmovies.data.db.mappers.MovieDatabaseModelToEntityMapper;
 import com.recursia.popularmovies.data.models.DiscoverMoviesResponse;
 import com.recursia.popularmovies.domain.models.Movie;
 import com.recursia.popularmovies.utils.Mapper;
