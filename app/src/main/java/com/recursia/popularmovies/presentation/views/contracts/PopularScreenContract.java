@@ -6,7 +6,7 @@ import com.arellomobile.mvp.viewstate.strategy.SkipStrategy;
 import com.arellomobile.mvp.viewstate.strategy.StateStrategyType;
 
 @StateStrategyType(AddToEndSingleStrategy.class)
-public interface MainScreenContract extends MvpView {
+public interface PopularScreenContract extends MvpView {
 
     void openAboutDialog();
 

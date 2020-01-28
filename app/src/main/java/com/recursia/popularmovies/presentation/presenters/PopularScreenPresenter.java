@@ -3,15 +3,15 @@ package com.recursia.popularmovies.presentation.presenters;
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
 import com.recursia.popularmovies.Screens;
-import com.recursia.popularmovies.presentation.views.contracts.MainScreenContract;
+import com.recursia.popularmovies.presentation.views.contracts.PopularScreenContract;
 
 import ru.terrakok.cicerone.Router;
 
 @InjectViewState
-public class MainScreenPresenter extends MvpPresenter<MainScreenContract> {
+public class PopularScreenPresenter extends MvpPresenter<PopularScreenContract> {
     private final Router router;
 
-    public MainScreenPresenter(Router router) {
+    public PopularScreenPresenter(Router router) {
         this.router = router;
     }
 

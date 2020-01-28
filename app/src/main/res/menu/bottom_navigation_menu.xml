@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/navigation_popular"
+        android:icon="@drawable/ic_favorite_on"
+        android:title="Popular" />
+    <item
+        android:id="@+id/navigation_search"
+        android:icon="@drawable/ic_favorite_on"
+        android:title="Search" />
+    <item
+        android:id="@+id/navigation_favorite"
+        android:icon="@drawable/ic_favorite_on"
+        android:title="Favorite" />
+    <item
+        android:id="@+id/navigation_account"
+        android:icon="@drawable/ic_favorite_on"
+        android:title="Account" />
+</menu>
