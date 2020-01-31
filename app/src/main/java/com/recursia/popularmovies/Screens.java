@@ -5,8 +5,9 @@ import android.support.v4.app.Fragment;
 import com.recursia.popularmovies.presentation.views.fragments.DetailScreenFragment;
 import com.recursia.popularmovies.presentation.views.fragments.FavoriteScreenFragment;
 import com.recursia.popularmovies.presentation.views.fragments.IntroScreenFragment;
-import com.recursia.popularmovies.presentation.views.fragments.PopularScreenFragment;
+import com.recursia.popularmovies.presentation.views.fragments.MainScreenFragment;
 import com.recursia.popularmovies.presentation.views.fragments.PhotoScreenFragment;
+import com.recursia.popularmovies.presentation.views.fragments.PopularScreenFragment;
 import com.recursia.popularmovies.presentation.views.fragments.SearchScreenFragment;
 
 import ru.terrakok.cicerone.android.support.SupportAppScreen;
@@ -63,6 +64,13 @@ public class Screens {
         @Override
         public Fragment getFragment() {
             return SearchScreenFragment.getInstance();
+        }
+    }
+
+    public static final class MainScreen extends SupportAppScreen {
+        @Override
+        public Fragment getFragment() {
+            return MainScreenFragment.getInstance();
         }
     }
 

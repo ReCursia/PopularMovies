@@ -30,7 +30,7 @@ public class IntroScreenPresenter extends MvpPresenter<IntroScreenContract> {
         if (isFirstLaunch()) {
             initViewState();
         } else {
-            router.newRootScreen(new Screens.PopularScreen());
+            router.newRootScreen(new Screens.MainScreen());
         }
     }
 
@@ -86,7 +86,7 @@ public class IntroScreenPresenter extends MvpPresenter<IntroScreenContract> {
 
     public void onFinishButtonClicked() {
         prefUtils.putValue(false); //now this is not first launch
-        router.newRootScreen(new Screens.PopularScreen()); //TODO make open screen with navigation
+        router.newRootScreen(new Screens.MainScreen());
     }
 
     public void onPageSelected(int i) {
