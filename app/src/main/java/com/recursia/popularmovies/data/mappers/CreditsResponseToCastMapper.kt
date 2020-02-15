@@ -9,6 +9,4 @@ class CreditsResponseToCastMapper(private val mapper: CastDatabaseModelToEntityM
     override fun transform(creditsResponse: CreditsResponse): List<Cast> {
         return mapper.transform(creditsResponse.cast)
     }
-
 }
-

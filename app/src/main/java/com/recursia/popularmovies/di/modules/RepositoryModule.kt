@@ -21,14 +21,16 @@ class RepositoryModule {
 
     @Provides
     @Singleton
-    internal fun provideMoviesRepository(movieDao: MovieDao,
-                                         moviesApi: MoviesApi,
-                                         movieDatabaseModelToEntityMapper: MovieDatabaseModelToEntityMapper,
-                                         discoverMovieResponseToMovieMapper: DiscoverMovieResponseToMovieMapper,
-                                         creditsResponseToCastMapper: CreditsResponseToCastMapper,
-                                         movieTrailersResponseToTrailersMapper: MovieTrailersResponseToTrailersMapper,
-                                         movieExtraDatabaseModelToEntityMapper: MovieExtraDatabaseModelToEntityMapper,
-                                         entityToMovieExtraDatabaseModelMapper: EntityToMovieExtraDatabaseModelMapper): MoviesRepository {
+    internal fun provideMoviesRepository(
+        movieDao: MovieDao,
+        moviesApi: MoviesApi,
+        movieDatabaseModelToEntityMapper: MovieDatabaseModelToEntityMapper,
+        discoverMovieResponseToMovieMapper: DiscoverMovieResponseToMovieMapper,
+        creditsResponseToCastMapper: CreditsResponseToCastMapper,
+        movieTrailersResponseToTrailersMapper: MovieTrailersResponseToTrailersMapper,
+        movieExtraDatabaseModelToEntityMapper: MovieExtraDatabaseModelToEntityMapper,
+        entityToMovieExtraDatabaseModelMapper: EntityToMovieExtraDatabaseModelMapper
+    ): MoviesRepository {
         return MoviesRepositoryImpl(
                 movieDao,
                 moviesApi,

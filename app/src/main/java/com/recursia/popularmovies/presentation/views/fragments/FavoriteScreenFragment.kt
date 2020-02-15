@@ -71,7 +71,7 @@ class FavoriteScreenFragment : MvpAppCompatFragment(), FavoriteScreenContract {
 
     private fun initRecyclerView() {
         recyclerView.layoutManager = GridLayoutManager(context, SPAN_COUNT)
-        recyclerView.setHasFixedSize(true) //items are same height
+        recyclerView.setHasFixedSize(true) // items are same height
     }
 
     private fun initAdapter() {

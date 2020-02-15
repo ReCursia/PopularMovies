@@ -35,13 +35,13 @@ class CastAdapter(private val context: Context) : RecyclerView.Adapter<CastAdapt
 
     override fun onBindViewHolder(movieViewHolder: CastViewHolder, i: Int) {
         val castItem = cast[i]
-        //Image
+        // Image
         Glide.with(context)
                 .load(NetworkUtils.getMediumProfileUrl(castItem.profilePath ?: ""))
                 .placeholder(R.drawable.ic_user_placeholder)
                 .transition(DrawableTransitionOptions.withCrossFade(FADE_OUT_DURATION))
                 .into(movieViewHolder.castImage)
-        //Name
+        // Name
         movieViewHolder.castName.text = castItem.name
     }
 
@@ -57,6 +57,6 @@ class CastAdapter(private val context: Context) : RecyclerView.Adapter<CastAdapt
     }
 
     companion object {
-        private const val FADE_OUT_DURATION = 100 //ms
+        private const val FADE_OUT_DURATION = 100 // ms
     }
 }

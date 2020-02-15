@@ -14,7 +14,7 @@ class Screens {
 
     class FavoriteScreen : SupportAppScreen() {
         override fun getFragment(): Fragment {
-            return FavoriteScreenFragment.getInstance() //TODO make it val instance? with caps
+            return FavoriteScreenFragment.getInstance() // TODO make it val instance? with caps
         }
     }
 
@@ -48,5 +48,4 @@ class Screens {
             return MainScreenFragment.instance
         }
     }
-
 }

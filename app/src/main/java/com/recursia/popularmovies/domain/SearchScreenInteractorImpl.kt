@@ -9,5 +9,4 @@ class SearchScreenInteractorImpl(private val moviesRepository: MoviesRepository)
     override fun getMoviesByQuery(query: String, page: Int, language: String): Single<List<Movie>> {
         return moviesRepository.getMoviesByQuery(query, page, language)
     }
-
 }

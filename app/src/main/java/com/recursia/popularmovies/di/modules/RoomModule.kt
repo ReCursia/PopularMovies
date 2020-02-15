@@ -30,5 +30,4 @@ class RoomModule(application: Application) {
     companion object {
         private const val DB_NAME = "movies2.db"
     }
-
 }

@@ -5,5 +5,4 @@ interface PrefUtils {
     val value: Boolean
 
     fun putValue(value: Boolean)
-
 }

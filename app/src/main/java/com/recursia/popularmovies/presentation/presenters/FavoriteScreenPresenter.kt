@@ -11,7 +11,10 @@ import io.reactivex.disposables.CompositeDisposable
 import ru.terrakok.cicerone.Router
 
 @InjectViewState
-class FavoriteScreenPresenter(private val favoriteScreenInteractor: FavoriteScreenInteractor, private val router: Router) : MvpPresenter<FavoriteScreenContract>() {
+class FavoriteScreenPresenter(
+    private val favoriteScreenInteractor: FavoriteScreenInteractor,
+    private val router: Router
+) : MvpPresenter<FavoriteScreenContract>() {
     private val compositeDisposable = CompositeDisposable()
 
     override fun onFirstViewAttach() {
@@ -52,5 +55,4 @@ class FavoriteScreenPresenter(private val favoriteScreenInteractor: FavoriteScre
     fun onBackPressed() {
         router.exit()
     }
-
 }

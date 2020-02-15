@@ -10,7 +10,11 @@ import com.recursia.popularmovies.utils.intro.PrefUtils
 import ru.terrakok.cicerone.Router
 
 @InjectViewState
-class IntroScreenPresenter(private val prefUtils: PrefUtils, private val sectionItems: List<SectionItem>, private val router: Router) : MvpPresenter<IntroScreenContract>() {
+class IntroScreenPresenter(
+    private val prefUtils: PrefUtils,
+    private val sectionItems: List<SectionItem>,
+    private val router: Router
+) : MvpPresenter<IntroScreenContract>() {
     private var currentSection: Int = 0
 
     private val isFirstLaunch: Boolean
@@ -72,12 +76,11 @@ class IntroScreenPresenter(private val prefUtils: PrefUtils, private val section
     }
 
     fun onFinishButtonClicked() {
-        prefUtils.putValue(false) //now this is not first launch
+        prefUtils.putValue(false) // now this is not first launch
         router.newRootScreen(Screens.MainScreen())
     }
 
     fun onPageSelected(i: Int) {
         setCurrentSection(i)
     }
-
 }

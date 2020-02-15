@@ -9,7 +9,7 @@ import com.recursia.popularmovies.domain.models.Movie
 @StateStrategyType(AddToEndSingleStrategy::class)
 interface FavoriteScreenContract : MvpView {
 
-    //List
+    // List
     fun setMovies(movies: List<Movie>)
 
     fun showNoFavoriteScreen()
@@ -18,5 +18,4 @@ interface FavoriteScreenContract : MvpView {
 
     @StateStrategyType(SkipStrategy::class)
     fun showErrorMessage(message: String)
-
 }

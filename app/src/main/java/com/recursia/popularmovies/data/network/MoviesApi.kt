@@ -13,7 +13,12 @@ import retrofit2.http.Query
 interface MoviesApi {
 
     @GET("3/discover/movie?api_key=$API_KEY")
-    fun discoverMovies(@Query("sort_by") sortBy: String, @Query("page") page: Int, @Query("vote_count.gte") voteCount: Int, @Query("language") language: String): Single<DiscoverMoviesResponse>
+    fun discoverMovies(
+        @Query("sort_by") sortBy: String,
+        @Query("page") page: Int,
+        @Query("vote_count.gte") voteCount: Int,
+        @Query("language") language: String
+    ): Single<DiscoverMoviesResponse>
 
     @GET("3/movie/{id}/videos?api_key=$API_KEY")
     fun getMovieTrailersById(@Path("id") id: Int, @Query("language") language: String): Single<MovieTrailersResponse>
@@ -33,5 +38,4 @@ interface MoviesApi {
     companion object {
         const val API_KEY = "b158b97e42698b2da042bf942864f95f"
     }
-
 }

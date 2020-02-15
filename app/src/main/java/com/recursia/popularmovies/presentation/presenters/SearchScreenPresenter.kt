@@ -14,8 +14,10 @@ import ru.terrakok.cicerone.Router
 import java.util.concurrent.TimeUnit
 
 @InjectViewState
-class SearchScreenPresenter(private val searchScreenInteractor: SearchScreenInteractor,
-                            private val router: Router) : MvpPresenter<SearchScreenContract>() {
+class SearchScreenPresenter(
+    private val searchScreenInteractor: SearchScreenInteractor,
+    private val router: Router
+) : MvpPresenter<SearchScreenContract>() {
     private val compositeDisposable = CompositeDisposable()
     private val subject = BehaviorSubject.create<String>()
 
@@ -66,5 +68,4 @@ class SearchScreenPresenter(private val searchScreenInteractor: SearchScreenInte
         private val TIME_UNIT = TimeUnit.MILLISECONDS
         private const val QUERY_PAGE = 1
     }
-
 }

@@ -22,16 +22,16 @@ class SectionScreenFragment : MvpAppCompatFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         ButterKnife.bind(this, view)
-        //Setting data
+        // Setting data
         val bundle = arguments
         val item = bundle!!.getSerializable(FRAGMENT_INTRO) as SectionItem
         setSectionData(item)
     }
 
-    private fun setSectionData(item: SectionItem) { //Image
+    private fun setSectionData(item: SectionItem) { // Image
         sectionImage.setAnimation(item.fileName)
         sectionImage.playAnimation()
-        //Text
+        // Text
         sectionText.text = item.description
     }
 

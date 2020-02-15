@@ -9,5 +9,4 @@ class MovieTrailersResponseToTrailersMapper(private val mapper: TrailerDatabaseM
     override fun transform(movieTrailersResponse: MovieTrailersResponse): List<Trailer> {
         return mapper.transform(movieTrailersResponse.trailers)
     }
-
 }

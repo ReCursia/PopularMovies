@@ -58,17 +58,17 @@ class MoviesAdapter(private val context: Context, private val isRecommendationMo
     }
 
     private fun setRecommendationMovieData(movie: Movie, movieViewHolder: RecommendationMovieViewHolder) {
-        //Title
+        // Title
         movieViewHolder.movieTitleTextView.text = movie.title
-        //Rating
+        // Rating
         movieViewHolder.movieRatingTextView.text = movie.voteAverage.toString()
-        //Image
+        // Image
         Glide.with(context)
                 .load(NetworkUtils.getMediumPosterUrl(movie.posterPath!!))
                 .placeholder(R.drawable.ic_poster_placeholder)
                 .transition(DrawableTransitionOptions.withCrossFade(FADE_OUT_DURATION))
                 .into(movieViewHolder.moviePoster)
-        //Listener
+        // Listener
         movieViewHolder.itemView.setOnClickListener {
             if (clickListener != null) {
                 clickListener!!.onItemClick(movie)
@@ -77,17 +77,17 @@ class MoviesAdapter(private val context: Context, private val isRecommendationMo
     }
 
     private fun setPlainMovieData(movie: Movie, movieViewHolder: MovieViewHolder) {
-        //Title
+        // Title
         movieViewHolder.movieTitleTextView.text = movie.title
-        //Rating
+        // Rating
         movieViewHolder.movieRatingTextView.text = movie.voteAverage.toString()
-        //Image
+        // Image
         Glide.with(context)
                 .load(NetworkUtils.getMediumPosterUrl(movie.posterPath ?: ""))
                 .placeholder(R.drawable.ic_poster_placeholder)
                 .transition(DrawableTransitionOptions.withCrossFade(FADE_OUT_DURATION))
                 .into(movieViewHolder.moviePoster)
-        //Listener
+        // Listener
         movieViewHolder.itemView.setOnClickListener {
             if (clickListener != null) {
                 clickListener!!.onItemClick(movie)
@@ -122,7 +122,6 @@ class MoviesAdapter(private val context: Context, private val isRecommendationMo
     }
 
     companion object {
-        private const val FADE_OUT_DURATION = 100 //ms
+        private const val FADE_OUT_DURATION = 100 // ms
     }
-
 }

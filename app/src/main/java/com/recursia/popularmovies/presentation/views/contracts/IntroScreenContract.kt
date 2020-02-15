@@ -12,22 +12,21 @@ interface IntroScreenContract : MvpView {
 
     fun setPreviousSection()
 
-    //Next button
+    // Next button
     fun showNextButton()
 
     fun hideNextButton()
 
-    //Prev button
+    // Prev button
     fun showPreviousButton()
 
     fun hidePreviousButton()
 
-    //Finish button
+    // Finish button
     fun showFinishButton()
 
     fun hideFinishButton()
 
-    //View pager
+    // View pager
     fun setViewPagerData(sectionItems: List<SectionItem>)
-
 }

@@ -45,9 +45,11 @@ class MapperModule {
     }
 
     @Provides
-    internal fun provideEntityToMovieDatabaseModelMapper(entityToCastDatabaseModelMapper: EntityToCastDatabaseModelMapper,
-                                                         entityToGenreDatabaseModelMapper: EntityToGenreDatabaseModelMapper,
-                                                         entityToTrailerDatabaseModelMapper: EntityToTrailerDatabaseModelMapper): EntityToMovieExtraDatabaseModelMapper {
+    internal fun provideEntityToMovieDatabaseModelMapper(
+        entityToCastDatabaseModelMapper: EntityToCastDatabaseModelMapper,
+        entityToGenreDatabaseModelMapper: EntityToGenreDatabaseModelMapper,
+        entityToTrailerDatabaseModelMapper: EntityToTrailerDatabaseModelMapper
+    ): EntityToMovieExtraDatabaseModelMapper {
         return EntityToMovieExtraDatabaseModelMapper(entityToCastDatabaseModelMapper, entityToGenreDatabaseModelMapper, entityToTrailerDatabaseModelMapper)
     }
 
@@ -77,10 +79,11 @@ class MapperModule {
     }
 
     @Provides
-    internal fun provideMovieExtraDatabaseModelToEntityMapper(genreDatabaseModelToEntityMapper: GenreDatabaseModelToEntityMapper,
-                                                              castDatabaseModelToEntityMapper: CastDatabaseModelToEntityMapper,
-                                                              trailerDatabaseModelToEntityMapper: TrailerDatabaseModelToEntityMapper): MovieExtraDatabaseModelToEntityMapper {
+    internal fun provideMovieExtraDatabaseModelToEntityMapper(
+        genreDatabaseModelToEntityMapper: GenreDatabaseModelToEntityMapper,
+        castDatabaseModelToEntityMapper: CastDatabaseModelToEntityMapper,
+        trailerDatabaseModelToEntityMapper: TrailerDatabaseModelToEntityMapper
+    ): MovieExtraDatabaseModelToEntityMapper {
         return MovieExtraDatabaseModelToEntityMapper(genreDatabaseModelToEntityMapper, castDatabaseModelToEntityMapper, trailerDatabaseModelToEntityMapper)
     }
-
 }

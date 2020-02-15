@@ -1,6 +1,5 @@
 package com.recursia.popularmovies.di.modules
 
-
 import javax.inject.Singleton
 
 import dagger.Module

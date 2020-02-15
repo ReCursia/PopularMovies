@@ -7,5 +7,4 @@ import io.reactivex.Single
 interface SearchScreenInteractor {
 
     fun getMoviesByQuery(query: String, page: Int, language: String): Single<List<Movie>>
-
 }

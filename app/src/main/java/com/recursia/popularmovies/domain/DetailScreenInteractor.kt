@@ -14,5 +14,4 @@ interface DetailScreenInteractor {
     fun removeFavoriteMovie(movie: Movie): Completable
 
     fun getMovieRecommendations(movieId: Int, page: Int, language: String): Single<List<Movie>>
-
 }

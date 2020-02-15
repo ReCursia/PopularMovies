@@ -13,7 +13,11 @@ import io.reactivex.disposables.CompositeDisposable
 import ru.terrakok.cicerone.Router
 
 @InjectViewState
-class DetailScreenPresenter(private val detailScreenInteractor: DetailScreenInteractor, private val router: Router, private val movieId: Int) : MvpPresenter<DetailScreenContract>() {
+class DetailScreenPresenter(
+    private val detailScreenInteractor: DetailScreenInteractor,
+    private val router: Router,
+    private val movieId: Int
+) : MvpPresenter<DetailScreenContract>() {
     private val compositeDisposable = CompositeDisposable()
 
     override fun onFirstViewAttach() {
@@ -75,7 +79,6 @@ class DetailScreenPresenter(private val detailScreenInteractor: DetailScreenInte
         } else {
             makeMovieFavorite(movie)
         }
-
     }
 
     private fun removeMovieFavorite(movie: Movie) {
@@ -127,5 +130,4 @@ class DetailScreenPresenter(private val detailScreenInteractor: DetailScreenInte
     companion object {
         private const val MOVIE_RECOMMENDATION_PAGE = 1
     }
-
 }

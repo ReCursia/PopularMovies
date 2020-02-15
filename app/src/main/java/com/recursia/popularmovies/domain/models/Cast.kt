@@ -10,5 +10,4 @@ class Cast {
     var name: String? = null
     var order = 0
     var profilePath: String? = null
-
 }

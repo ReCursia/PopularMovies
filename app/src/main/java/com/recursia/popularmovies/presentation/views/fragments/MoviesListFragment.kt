@@ -34,7 +34,7 @@ class MoviesListFragment : MvpAppCompatFragment(), MoviesListContract {
     lateinit var presenter: MoviesListPresenter
     private lateinit var moviesAdapter: MoviesAdapter
     @ProvidePresenter
-    fun providePresenter(): MoviesListPresenter { //Strategy
+    fun providePresenter(): MoviesListPresenter { // Strategy
         val sortStrategy = arguments!!.getString(FRAGMENT_MOVIES)
         val strategy = if (sortStrategy == TOP_RATED) TopRatedDiscoverStrategy() else PopularityDiscoverStrategy()
         val app = TheApplication.getInstance().appComponent
@@ -61,7 +61,7 @@ class MoviesListFragment : MvpAppCompatFragment(), MoviesListContract {
 
     private fun initRecyclerView() {
         recyclerView.layoutManager = GridLayoutManager(activity, SPAN_COUNT)
-        recyclerView.setHasFixedSize(true) //items are same height
+        recyclerView.setHasFixedSize(true) // items are same height
         recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                 super.onScrollStateChanged(recyclerView, newState)

@@ -128,7 +128,7 @@ class DetailScreenFragment : MvpAppCompatFragment(), DetailScreenContract {
 
     override fun setFavoriteIconOn() {
         favoriteIcon.setImageDrawable(context!!.getDrawable(R.drawable.ic_favorite_on))
-        favoriteIcon.imageMatrix = Matrix() //trick
+        favoriteIcon.imageMatrix = Matrix() // trick
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -175,7 +175,7 @@ class DetailScreenFragment : MvpAppCompatFragment(), DetailScreenContract {
 
     override fun setFavoriteIconOff() {
         favoriteIcon.setImageDrawable(context!!.getDrawable(R.drawable.ic_favorite_off))
-        favoriteIcon.imageMatrix = Matrix() //trick
+        favoriteIcon.imageMatrix = Matrix() // trick
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -186,13 +186,13 @@ class DetailScreenFragment : MvpAppCompatFragment(), DetailScreenContract {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        //Trailers
+        // Trailers
         initTrailerRecyclerView()
         initTrailersAdapter()
-        //Cast
+        // Cast
         initCastRecyclerView()
         initCreditsAdapter()
-        //Movie recommendation
+        // Movie recommendation
         initMovieRecommendationRecyclerView()
         initMovieRecommendationAdapter()
 
@@ -271,28 +271,28 @@ class DetailScreenFragment : MvpAppCompatFragment(), DetailScreenContract {
 
     override fun setMovieDetail(movie: Movie) {
         this.movie = movie
-        //Trailers
+        // Trailers
         val trailers = movie.trailers
         if (trailers.isNotEmpty()) {
             trailersAdapter.setTrailers(trailers)
         }
-        //Genres
+        // Genres
         val genres = movie.genres
         if (genres.isNotEmpty()) {
             setGenres(genres)
         }
-        //Cast
+        // Cast
         val casts = movie.casts
         if (casts.isNotEmpty()) {
             castAdapter.setCast(casts)
         }
-        //Trailers
+        // Trailers
         collapsingToolbarLayout.title = movie.title
         originalTitleTextView.text = movie.originalTitle
         releaseDateTextView.text = DateUtils.formatDate(movie.releaseDate!!)
         descriptionTextView.text = movie.overview
         ratingTextView.text = movie.voteAverage.toString()
-        //Image
+        // Image
         Glide.with(this)
                 .load(NetworkUtils.getBigPosterUrl(movie.backdropPath!!))
                 .transition(DrawableTransitionOptions.withCrossFade(FADE_OUT_DURATION))
@@ -300,7 +300,7 @@ class DetailScreenFragment : MvpAppCompatFragment(), DetailScreenContract {
     }
 
     private fun setGenres(genres: List<Genre>) {
-        //Before set genres remove previous one
+        // Before set genres remove previous one
         genresGroup.removeAllViews()
         val layoutInflater = LayoutInflater.from(context)
         for (genre in genres) {
@@ -311,7 +311,7 @@ class DetailScreenFragment : MvpAppCompatFragment(), DetailScreenContract {
     }
 
     companion object {
-        private const val FADE_OUT_DURATION = 100 //ms
+        private const val FADE_OUT_DURATION = 100 // ms
         private const val IS_RECOMMENDATION_MOVIES = true
 
         fun getInstance(movieId: Int): DetailScreenFragment {
@@ -322,5 +322,4 @@ class DetailScreenFragment : MvpAppCompatFragment(), DetailScreenContract {
             return fragment
         }
     }
-
 }

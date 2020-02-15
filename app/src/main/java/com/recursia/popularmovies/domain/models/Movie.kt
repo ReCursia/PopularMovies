@@ -21,5 +21,4 @@ class Movie {
     var voteAverage = 0.0
     var voteCount = 0
     var backdropPath: String? = null
-
 }

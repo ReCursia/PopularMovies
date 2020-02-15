@@ -35,5 +35,4 @@ class InteractorModule {
     internal fun provideSearchScreenInteractor(moviesRepository: MoviesRepository): SearchScreenInteractor {
         return SearchScreenInteractorImpl(moviesRepository)
     }
-
 }

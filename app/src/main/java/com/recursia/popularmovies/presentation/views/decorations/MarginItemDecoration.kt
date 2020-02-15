@@ -27,5 +27,4 @@ class MarginItemDecoration(context: Context, marginLeft: Int, marginRight: Int, 
         outRect.bottom = marginBottom
         outRect.top = marginTop
     }
-
 }

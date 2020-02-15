@@ -15,6 +15,5 @@ object DateUtils {
         } catch (err: ParseException) {
             dateString
         }
-
     }
 }

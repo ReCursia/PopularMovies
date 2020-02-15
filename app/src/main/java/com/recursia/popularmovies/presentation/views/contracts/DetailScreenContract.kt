@@ -10,14 +10,14 @@ import com.recursia.popularmovies.domain.models.Trailer
 @StateStrategyType(AddToEndSingleStrategy::class)
 interface DetailScreenContract : MvpView {
 
-    //Movie detail
+    // Movie detail
     fun setMovieDetail(movie: Movie)
 
     fun hideMovieDetail()
 
     fun showMovieDetail()
 
-    //Favorite icon
+    // Favorite icon
     fun setFavoriteIconOn()
 
     fun setFavoriteIconOff()
@@ -26,7 +26,7 @@ interface DetailScreenContract : MvpView {
 
     fun hideFavoriteIcon()
 
-    //Share
+    // Share
     @StateStrategyType(SkipStrategy::class)
     fun shareMovie(movie: Movie)
 
@@ -42,11 +42,10 @@ interface DetailScreenContract : MvpView {
     @StateStrategyType(SkipStrategy::class)
     fun openTrailerUrl(trailer: Trailer)
 
-    //Movie recommendations
+    // Movie recommendations
     fun setRecommendationMovies(movies: List<Movie>)
 
     fun hideRecommendationMovies()
 
     fun showRecommendationMovies()
-
 }

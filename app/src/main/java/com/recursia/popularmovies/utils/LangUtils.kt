@@ -6,5 +6,4 @@ object LangUtils {
 
     val defaultLanguage: String
         get() = Locale.getDefault().toString()
-
 }

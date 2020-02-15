@@ -10,7 +10,7 @@ import com.recursia.popularmovies.domain.models.Movie
 @StateStrategyType(AddToEndSingleStrategy::class)
 interface MoviesListContract : MvpView {
 
-    //Loading
+    // Loading
     @StateStrategyType(SkipStrategy::class)
     fun showLoading()
 
@@ -20,10 +20,9 @@ interface MoviesListContract : MvpView {
     @StateStrategyType(SkipStrategy::class)
     fun showErrorMessage(message: String)
 
-    //List
+    // List
     fun setMovies(movies: List<Movie>)
 
     @StateStrategyType(AddToEndStrategy::class)
     fun addMovies(movies: List<Movie>)
-
 }

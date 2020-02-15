@@ -8,5 +8,4 @@ class Trailer {
     var site: String? = null
     var size = 0
     var type: String? = null
-
 }

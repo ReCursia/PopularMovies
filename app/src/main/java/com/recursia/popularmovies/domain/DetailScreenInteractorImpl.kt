@@ -5,8 +5,7 @@ import com.recursia.popularmovies.domain.models.Movie
 import io.reactivex.Completable
 import io.reactivex.Single
 
-
-//TODO delegate?
+// TODO delegate?
 class DetailScreenInteractorImpl(private val moviesRepository: MoviesRepository) : DetailScreenInteractor {
 
     override fun getMovieRecommendations(movieId: Int, page: Int, language: String): Single<List<Movie>> {
@@ -24,5 +23,4 @@ class DetailScreenInteractorImpl(private val moviesRepository: MoviesRepository)
     override fun removeFavoriteMovie(movie: Movie): Completable {
         return moviesRepository.removeFavoriteMovie(movie)
     }
-
 }

@@ -5,5 +5,4 @@ interface DiscoverStrategy {
     val sortBy: String
 
     val voteCount: Int
-
 }

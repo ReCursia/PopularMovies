@@ -36,15 +36,15 @@ class TrailersAdapter(private val context: Context) : RecyclerView.Adapter<Trail
 
     override fun onBindViewHolder(trailerViewHolder: TrailerViewHolder, i: Int) {
         val trailer = trailers[i]
-        //Image
+        // Image
         Glide.with(context)
                 .load(String.format(NetworkUtils.TRAILER_IMAGE_FORMAT_URL, trailer.key))
                 .placeholder(R.drawable.ic_trailer_placeholder)
                 .transition(DrawableTransitionOptions.withCrossFade(FADE_OUT_DURATION))
                 .into(trailerViewHolder.trailerImage)
-        //Title
+        // Title
         trailerViewHolder.trailerTitle.text = trailer.name
-        //Play button
+        // Play button
         trailerViewHolder.playButton.setOnClickListener { v ->
             if (clickListener != null) {
                 clickListener!!.onItemClick(trailer)
@@ -70,6 +70,6 @@ class TrailersAdapter(private val context: Context) : RecyclerView.Adapter<Trail
     }
 
     companion object {
-        private const val FADE_OUT_DURATION = 100 //ms
+        private const val FADE_OUT_DURATION = 100 // ms
     }
 }

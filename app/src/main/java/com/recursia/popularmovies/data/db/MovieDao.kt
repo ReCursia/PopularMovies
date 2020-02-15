@@ -21,17 +21,17 @@ abstract class MovieDao {
         val movie = movieExtra.movie
         insertMovie(movie)
 
-        //Genre
+        // Genre
         for (genre in movieExtra.genres) {
             genre.movieId = movie.id
             insertGenre(genre)
         }
-        //Trailer
+        // Trailer
         for (trailer in movieExtra.trailers) {
             trailer.movieId = movie.id
             insertTrailer(trailer)
         }
-        //Cast
+        // Cast
         for (cast in movieExtra.cast) {
             cast.movieId = movie.id
             insertCast(cast)
@@ -56,6 +56,4 @@ abstract class MovieDao {
 
     @Delete
     internal abstract fun deleteMovie(movie: MovieDatabaseModel)
-
 }
-

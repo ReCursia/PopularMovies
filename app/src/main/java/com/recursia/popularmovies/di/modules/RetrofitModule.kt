@@ -33,7 +33,10 @@ class RetrofitModule {
 
     @Provides
     @Singleton
-    internal fun retrofit(gsonConverterFactory: GsonConverterFactory, rxJava2CallAdapterFactory: RxJava2CallAdapterFactory): Retrofit {
+    internal fun retrofit(
+        gsonConverterFactory: GsonConverterFactory,
+        rxJava2CallAdapterFactory: RxJava2CallAdapterFactory
+    ): Retrofit {
         return Retrofit.Builder()
                 .baseUrl(BASE_URL)
                 .addConverterFactory(gsonConverterFactory)
@@ -44,5 +47,4 @@ class RetrofitModule {
     companion object {
         private const val BASE_URL = "https://api.themoviedb.org/"
     }
-
 }

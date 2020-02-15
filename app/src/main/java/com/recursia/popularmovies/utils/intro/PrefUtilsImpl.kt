@@ -19,5 +19,4 @@ class PrefUtilsImpl(private val context: Context) : PrefUtils {
     companion object {
         private const val TAG = "intro"
     }
-
 }

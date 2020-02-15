@@ -15,5 +15,4 @@ interface SearchScreenContract : MvpView {
 
     @StateStrategyType(SkipStrategy::class)
     fun showErrorMessage(message: String)
-
 }

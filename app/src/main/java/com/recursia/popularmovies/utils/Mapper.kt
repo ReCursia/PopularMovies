@@ -23,5 +23,4 @@ abstract class Mapper<T, V> {
     }
 
     abstract fun transform(t: T): V
-
 }

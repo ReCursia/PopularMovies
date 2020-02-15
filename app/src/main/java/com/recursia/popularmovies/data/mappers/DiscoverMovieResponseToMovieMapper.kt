@@ -9,5 +9,4 @@ class DiscoverMovieResponseToMovieMapper(private val mapper: MovieDatabaseModelT
     override fun transform(response: DiscoverMoviesResponse): List<Movie> {
         return mapper.transform(response.movies)
     }
-
 }
