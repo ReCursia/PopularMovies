@@ -14,9 +14,9 @@ import ru.terrakok.cicerone.Router
 
 @InjectViewState
 class DetailScreenPresenter(
-    private val detailScreenInteractor: DetailScreenInteractor,
-    private val router: Router,
-    private val movieId: Int
+        private val detailScreenInteractor: DetailScreenInteractor,
+        private val router: Router,
+        private val movieId: Int
 ) : MvpPresenter<DetailScreenContract>() {
     private val compositeDisposable = CompositeDisposable()
 
@@ -104,7 +104,7 @@ class DetailScreenPresenter(
     }
 
     fun onShareIconClicked(movie: Movie?) {
-        if (movie != null) {
+        movie?.let {
             viewState.shareMovie(movie)
         }
     }
@@ -114,8 +114,8 @@ class DetailScreenPresenter(
     }
 
     fun onBackdropImageClicked(movie: Movie?) {
-        if (movie != null) {
-            router.navigateTo(Screens.PhotoScreen(movie.backdropPath!!))
+        movie?.backdropPath?.let {
+            router.navigateTo(Screens.PhotoScreen(it))
         }
     }
 

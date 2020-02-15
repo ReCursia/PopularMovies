@@ -70,9 +70,7 @@ class MoviesAdapter(private val context: Context, private val isRecommendationMo
                 .into(movieViewHolder.moviePoster)
         // Listener
         movieViewHolder.itemView.setOnClickListener {
-            if (clickListener != null) {
-                clickListener!!.onItemClick(movie)
-            }
+            clickListener?.onItemClick(movie)
         }
     }
 
@@ -89,9 +87,7 @@ class MoviesAdapter(private val context: Context, private val isRecommendationMo
                 .into(movieViewHolder.moviePoster)
         // Listener
         movieViewHolder.itemView.setOnClickListener {
-            if (clickListener != null) {
-                clickListener!!.onItemClick(movie)
-            }
+            clickListener?.onItemClick(movie)
         }
     }
 

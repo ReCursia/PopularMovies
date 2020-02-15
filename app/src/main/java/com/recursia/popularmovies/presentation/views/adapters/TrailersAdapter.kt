@@ -45,10 +45,8 @@ class TrailersAdapter(private val context: Context) : RecyclerView.Adapter<Trail
         // Title
         trailerViewHolder.trailerTitle.text = trailer.name
         // Play button
-        trailerViewHolder.playButton.setOnClickListener { v ->
-            if (clickListener != null) {
-                clickListener!!.onItemClick(trailer)
-            }
+        trailerViewHolder.playButton.setOnClickListener {
+            clickListener?.onItemClick(trailer)
         }
     }
 

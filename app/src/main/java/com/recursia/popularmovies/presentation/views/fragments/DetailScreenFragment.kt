@@ -293,10 +293,12 @@ class DetailScreenFragment : MvpAppCompatFragment(), DetailScreenContract {
         descriptionTextView.text = movie.overview
         ratingTextView.text = movie.voteAverage.toString()
         // Image
-        Glide.with(this)
-                .load(NetworkUtils.getBigPosterUrl(movie.backdropPath!!))
-                .transition(DrawableTransitionOptions.withCrossFade(FADE_OUT_DURATION))
-                .into(backdropImage)
+        movie.backdropPath?.let {
+            Glide.with(this)
+                    .load(NetworkUtils.getBigPosterUrl(it))
+                    .transition(DrawableTransitionOptions.withCrossFade(FADE_OUT_DURATION))
+                    .into(backdropImage)
+        }
     }
 
     private fun setGenres(genres: List<Genre>) {
