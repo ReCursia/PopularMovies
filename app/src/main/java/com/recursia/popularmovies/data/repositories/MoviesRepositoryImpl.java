@@ -80,8 +80,8 @@ public class MoviesRepositoryImpl implements MoviesRepository {
         Single<List<Trailer>> trailerListSingle = moviesApi.getMovieTrailersById(movieId, language)
                 .map(movieTrailersResponseToTrailersMapper::transform);
         return Single.zip(movieSingle, castListSingle, trailerListSingle, (m, c, t) -> {
-            m.setCasts(c);
-            m.setTrailers(t);
+            m.casts = c;
+            m.trailers = t;
             return m;
         });
     }
