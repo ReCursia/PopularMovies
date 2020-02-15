@@ -38,7 +38,7 @@ class FavoriteScreenPresenter(private val favoriteScreenInteractor: FavoriteScre
 
     override fun onDestroy() {
         super.onDestroy()
-        compositeDisposable.dispose()
+        compositeDisposable.clear()
     }
 
     private fun handleError(t: Throwable) {

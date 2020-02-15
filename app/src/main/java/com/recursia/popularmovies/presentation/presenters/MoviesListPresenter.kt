@@ -50,7 +50,7 @@ class MoviesListPresenter(private val moviesListInteractor: MoviesListInteractor
 
     override fun onDestroy() {
         super.onDestroy()
-        compositeDisposable.dispose()
+        compositeDisposable.clear()
     }
 
     fun onSwipeRefreshed() {

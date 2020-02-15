@@ -66,7 +66,7 @@ class DetailScreenPresenter(private val detailScreenInteractor: DetailScreenInte
 
     override fun onDestroy() {
         super.onDestroy()
-        compositeDisposable.dispose() //our activity is destroyed, disposing all subscriptions
+        compositeDisposable.clear()
     }
 
     fun onFavoriteIconClicked(movie: Movie) {

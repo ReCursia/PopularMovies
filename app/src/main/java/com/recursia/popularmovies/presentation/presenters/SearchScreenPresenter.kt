@@ -7,15 +7,11 @@ import com.recursia.popularmovies.domain.SearchScreenInteractor
 import com.recursia.popularmovies.domain.models.Movie
 import com.recursia.popularmovies.presentation.views.contracts.SearchScreenContract
 import com.recursia.popularmovies.utils.LangUtils
-
-import java.util.concurrent.TimeUnit
-
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.disposables.Disposable
 import io.reactivex.subjects.BehaviorSubject
-import io.reactivex.subjects.Subject
 import ru.terrakok.cicerone.Router
+import java.util.concurrent.TimeUnit
 
 @InjectViewState
 class SearchScreenPresenter(private val searchScreenInteractor: SearchScreenInteractor,
@@ -48,7 +44,7 @@ class SearchScreenPresenter(private val searchScreenInteractor: SearchScreenInte
 
     override fun onDestroy() {
         super.onDestroy()
-        compositeDisposable.dispose()
+        compositeDisposable.clear()
     }
 
     fun onItemClicked(item: Movie) {
