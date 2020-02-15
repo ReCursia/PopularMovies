@@ -94,6 +94,7 @@ class FavoriteScreenFragment : MvpAppCompatFragment(), FavoriteScreenContract {
         private const val SPAN_COUNT = 2
         private const val IS_RECOMMENDATION_MOVIES = false
 
-        fun getInstance() = FavoriteScreenFragment()
+        val instance: FavoriteScreenFragment
+            get() = FavoriteScreenFragment()
     }
 }
