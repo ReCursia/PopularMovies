@@ -81,7 +81,7 @@ class DetailScreenFragment : MvpAppCompatFragment(), DetailScreenContract {
     private lateinit var trailersAdapter: TrailersAdapter
     private lateinit var castAdapter: CastAdapter
     private lateinit var moviesAdapter: MoviesAdapter
-    private lateinit var movie: Movie
+    private var movie: Movie? = null
 
     override fun showFavoriteIcon() {
         favoriteIcon.show()

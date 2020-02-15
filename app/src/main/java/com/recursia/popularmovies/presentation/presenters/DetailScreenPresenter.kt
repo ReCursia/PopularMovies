@@ -73,7 +73,7 @@ class DetailScreenPresenter(
         compositeDisposable.clear()
     }
 
-    fun onFavoriteIconClicked(movie: Movie) {
+    fun onFavoriteIconClicked(movie: Movie?) = movie?.let {
         if (movie.isFavorite) {
             removeMovieFavorite(movie)
         } else {
