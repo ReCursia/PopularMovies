@@ -43,7 +43,7 @@ class MainScreenFragment : MvpAppCompatFragment() {
     private fun openFavoriteScreen() {
         childFragmentManager
                 .beginTransaction()
-                .replace(R.id.fragment_container, FavoriteScreenFragment.getInstance())
+                .replace(R.id.fragment_container, FavoriteScreenFragment.instance)
                 .commit()
     }
 

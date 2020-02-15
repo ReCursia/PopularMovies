@@ -51,8 +51,4 @@ class FavoriteScreenPresenter(
     fun onItemClicked(movie: Movie) {
         router.navigateTo(Screens.DetailScreen(movie.id))
     }
-
-    fun onBackPressed() {
-        router.exit()
-    }
 }

@@ -15,8 +15,8 @@ import java.util.concurrent.TimeUnit
 
 @InjectViewState
 class SearchScreenPresenter(
-    private val searchScreenInteractor: SearchScreenInteractor,
-    private val router: Router
+        private val searchScreenInteractor: SearchScreenInteractor,
+        private val router: Router
 ) : MvpPresenter<SearchScreenContract>() {
     private val compositeDisposable = CompositeDisposable()
     private val subject = BehaviorSubject.create<String>()
@@ -57,10 +57,6 @@ class SearchScreenPresenter(
         if (query.isNotEmpty()) {
             subject.onNext(query)
         }
-    }
-
-    fun onBackPressed() {
-        router.exit()
     }
 
     companion object {

@@ -56,8 +56,6 @@ class SearchScreenFragment : MvpAppCompatFragment(), SearchScreenContract {
     private fun initToolbar() {
         toolbar.title = getString(R.string.search_movie_title)
         toolbar.setBackgroundColor(resources.getColor(R.color.black))
-        toolbar.setNavigationIcon(R.drawable.ic_arrow_back)
-        toolbar.setNavigationOnClickListener { v: View? -> presenter.onBackPressed() }
         toolbar.inflateMenu(R.menu.search_menu)
         val searchItem = toolbar.menu.findItem(R.id.searchItem)
         val searchView = searchItem.actionView as SearchView

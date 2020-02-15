@@ -63,8 +63,6 @@ class FavoriteScreenFragment : MvpAppCompatFragment(), FavoriteScreenContract {
     }
 
     private fun initToolbar() {
-        toolbar.setNavigationIcon(R.drawable.ic_arrow_back)
-        toolbar.setNavigationOnClickListener { v: View? -> presenter.onBackPressed() }
         toolbar.setBackgroundColor(resources.getColor(R.color.black))
         toolbar.title = getString(R.string.favorite_item)
     }
