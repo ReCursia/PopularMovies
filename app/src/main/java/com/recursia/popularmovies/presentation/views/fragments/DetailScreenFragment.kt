@@ -35,7 +35,6 @@ import com.recursia.popularmovies.domain.models.Trailer
 import com.recursia.popularmovies.presentation.presenters.DetailScreenPresenter
 import com.recursia.popularmovies.presentation.views.adapters.CastAdapter
 import com.recursia.popularmovies.presentation.views.adapters.MoviesAdapter
-import com.recursia.popularmovies.presentation.views.adapters.OnItemClickListener
 import com.recursia.popularmovies.presentation.views.adapters.TrailersAdapter
 import com.recursia.popularmovies.presentation.views.contracts.DetailScreenContract
 import com.recursia.popularmovies.presentation.views.decorations.MarginItemDecoration
@@ -46,36 +45,52 @@ import com.recursia.popularmovies.utils.TagUtils
 class DetailScreenFragment : MvpAppCompatFragment(), DetailScreenContract {
     @BindView(R.id.descriptionTextView)
     internal lateinit var descriptionTextView: TextView
+
     @BindView(R.id.ratingTextView)
     internal lateinit var ratingTextView: TextView
+
     @BindView(R.id.originalTitleTextView)
     internal lateinit var originalTitleTextView: TextView
+
     @BindView(R.id.favoriteIcon)
     internal lateinit var favoriteIcon: FloatingActionButton
+
     @BindView(R.id.releaseDateTextView)
     internal lateinit var releaseDateTextView: TextView
+
     @BindView(R.id.recycleViewTrailers)
     internal lateinit var recyclerViewTrailers: RecyclerView
+
     @BindView(R.id.backdropImage)
     internal lateinit var backdropImage: ImageView
+
     @BindView(R.id.toolbar)
     internal lateinit var toolbar: Toolbar
+
     @BindView(R.id.collapsingToolbar)
     internal lateinit var collapsingToolbarLayout: CollapsingToolbarLayout
+
     @BindView(R.id.genresGroup)
     internal lateinit var genresGroup: ChipGroup
+
     @BindView(R.id.recyclerViewCast)
     internal lateinit var recyclerViewCast: RecyclerView
+
     @BindView(R.id.castCardView)
     internal lateinit var castCardView: CardView
+
     @BindView(R.id.descriptionCardView)
     internal lateinit var descriptionCardView: CardView
+
     @BindView(R.id.detailCardView)
     internal lateinit var detailCardView: CardView
+
     @BindView(R.id.recyclerViewMovieRecommendations)
     internal lateinit var recyclerViewMovieRecommendations: RecyclerView
+
     @BindView(R.id.movieRecommendationCardView)
     internal lateinit var movieRecommendationCardView: CardView
+
     @InjectPresenter
     internal lateinit var presenter: DetailScreenPresenter
     private lateinit var trailersAdapter: TrailersAdapter
@@ -209,11 +224,9 @@ class DetailScreenFragment : MvpAppCompatFragment(), DetailScreenContract {
 
     private fun initTrailersAdapter() {
         trailersAdapter = TrailersAdapter(context!!)
-        trailersAdapter.setClickListener(object : OnItemClickListener<Trailer> {
-            override fun onItemClick(trailer: Trailer) {
-                presenter.onTrailerPlayButtonClicked(trailer)
-            }
-        })
+        trailersAdapter.setClickListener {
+            presenter.onTrailerPlayButtonClicked(it)
+        }
         recyclerViewTrailers.adapter = trailersAdapter
     }
 
@@ -238,11 +251,9 @@ class DetailScreenFragment : MvpAppCompatFragment(), DetailScreenContract {
 
     private fun initMovieRecommendationAdapter() {
         moviesAdapter = MoviesAdapter(context!!, IS_RECOMMENDATION_MOVIES)
-        moviesAdapter.setClickListener(object : OnItemClickListener<Movie> {
-            override fun onItemClick(movie: Movie) {
-                presenter.onMovieClicked(movie)
-            }
-        })
+        moviesAdapter.setClickListener {
+            presenter.onMovieClicked(it)
+        }
         recyclerViewMovieRecommendations.adapter = moviesAdapter
     }
 

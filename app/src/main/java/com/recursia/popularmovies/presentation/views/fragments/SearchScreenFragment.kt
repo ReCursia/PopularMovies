@@ -19,14 +19,15 @@ import com.recursia.popularmovies.TheApplication
 import com.recursia.popularmovies.domain.models.Movie
 import com.recursia.popularmovies.presentation.presenters.SearchScreenPresenter
 import com.recursia.popularmovies.presentation.views.adapters.MoviesAdapter
-import com.recursia.popularmovies.presentation.views.adapters.OnItemClickListener
 import com.recursia.popularmovies.presentation.views.contracts.SearchScreenContract
 
 class SearchScreenFragment : MvpAppCompatFragment(), SearchScreenContract {
     @BindView(R.id.searchRecyclerView)
     lateinit var searchRecyclerView: RecyclerView
+
     @BindView(R.id.toolbar)
     lateinit var toolbar: Toolbar
+
     @InjectPresenter
     lateinit var presenter: SearchScreenPresenter
     private lateinit var moviesAdapter: MoviesAdapter
@@ -79,11 +80,9 @@ class SearchScreenFragment : MvpAppCompatFragment(), SearchScreenContract {
 
     private fun initAdapter() {
         moviesAdapter = MoviesAdapter(context!!, false)
-        moviesAdapter.setClickListener(object : OnItemClickListener<Movie> {
-            override fun onItemClick(movie: Movie) {
-                presenter.onItemClicked(movie)
-            }
-        })
+        moviesAdapter.setClickListener {
+            presenter.onItemClicked(it)
+        }
         searchRecyclerView.adapter = moviesAdapter
     }
 

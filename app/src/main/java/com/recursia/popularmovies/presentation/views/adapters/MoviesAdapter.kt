@@ -17,9 +17,9 @@ import com.recursia.popularmovies.utils.NetworkUtils
 
 class MoviesAdapter(private val context: Context, private val isRecommendationMovies: Boolean) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private var movies: MutableList<Movie> = ArrayList()
-    private var clickListener: OnItemClickListener<Movie>? = null
+    private var clickListener: ((Movie) -> Unit)? = null
 
-    fun setClickListener(clickListener: OnItemClickListener<Movie>) {
+    fun setClickListener(clickListener: (Movie) -> Unit) {
         this.clickListener = clickListener
     }
 
@@ -70,7 +70,7 @@ class MoviesAdapter(private val context: Context, private val isRecommendationMo
                 .into(movieViewHolder.moviePoster)
         // Listener
         movieViewHolder.itemView.setOnClickListener {
-            clickListener?.onItemClick(movie)
+            clickListener?.invoke(movie)
         }
     }
 
@@ -87,15 +87,17 @@ class MoviesAdapter(private val context: Context, private val isRecommendationMo
                 .into(movieViewHolder.moviePoster)
         // Listener
         movieViewHolder.itemView.setOnClickListener {
-            clickListener?.onItemClick(movie)
+            clickListener?.invoke(movie)
         }
     }
 
     internal inner class MovieViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         @BindView(R.id.smallMoviePoster)
         lateinit var moviePoster: ImageView
+
         @BindView(R.id.movieTitleTextView)
         lateinit var movieTitleTextView: TextView
+
         @BindView(R.id.movieRatingTextView)
         lateinit var movieRatingTextView: TextView
 
@@ -107,8 +109,10 @@ class MoviesAdapter(private val context: Context, private val isRecommendationMo
     internal inner class RecommendationMovieViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         @BindView(R.id.smallMoviePoster)
         lateinit var moviePoster: ImageView
+
         @BindView(R.id.movieTitleTextView)
         lateinit var movieTitleTextView: TextView
+
         @BindView(R.id.movieRatingTextView)
         lateinit var movieRatingTextView: TextView
 

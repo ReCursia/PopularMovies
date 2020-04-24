@@ -18,9 +18,9 @@ import java.util.*
 
 class TrailersAdapter(private val context: Context) : RecyclerView.Adapter<TrailersAdapter.TrailerViewHolder>() {
     private var trailers: List<Trailer> = ArrayList()
-    private var clickListener: OnItemClickListener<Trailer>? = null
+    private var clickListener: ((Trailer) -> Unit)? = null
 
-    fun setClickListener(clickListener: OnItemClickListener<Trailer>) {
+    fun setClickListener(clickListener: (Trailer) -> Unit) {
         this.clickListener = clickListener
     }
 
@@ -46,7 +46,7 @@ class TrailersAdapter(private val context: Context) : RecyclerView.Adapter<Trail
         trailerViewHolder.trailerTitle.text = trailer.name
         // Play button
         trailerViewHolder.playButton.setOnClickListener {
-            clickListener?.onItemClick(trailer)
+            clickListener?.invoke(trailer)
         }
     }
 
@@ -57,8 +57,10 @@ class TrailersAdapter(private val context: Context) : RecyclerView.Adapter<Trail
     inner class TrailerViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         @BindView(R.id.playButton)
         lateinit var playButton: ImageView
+
         @BindView(R.id.trailerTitle)
         lateinit var trailerTitle: TextView
+
         @BindView(R.id.trailerImage)
         lateinit var trailerImage: ImageView
 
