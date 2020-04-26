@@ -6,6 +6,7 @@ class Movie {
     lateinit var genres: List<Genre>
     lateinit var trailers: List<Trailer>
     lateinit var casts: List<Cast>
+    lateinit var reviews: List<Review>
     var id = 0
     var originalLanguage: String? = null
     var originalTitle: String? = null

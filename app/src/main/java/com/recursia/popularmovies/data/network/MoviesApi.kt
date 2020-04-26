@@ -1,9 +1,6 @@
 package com.recursia.popularmovies.data.network
 
-import com.recursia.popularmovies.data.models.CreditsResponse
-import com.recursia.popularmovies.data.models.DiscoverMoviesResponse
-import com.recursia.popularmovies.data.models.MovieDatabaseModel
-import com.recursia.popularmovies.data.models.MovieTrailersResponse
+import com.recursia.popularmovies.data.models.*
 
 import io.reactivex.Single
 import retrofit2.http.GET
@@ -14,10 +11,10 @@ interface MoviesApi {
 
     @GET("3/discover/movie?api_key=$API_KEY")
     fun discoverMovies(
-        @Query("sort_by") sortBy: String,
-        @Query("page") page: Int,
-        @Query("vote_count.gte") voteCount: Int,
-        @Query("language") language: String
+            @Query("sort_by") sortBy: String,
+            @Query("page") page: Int,
+            @Query("vote_count.gte") voteCount: Int,
+            @Query("language") language: String
     ): Single<DiscoverMoviesResponse>
 
     @GET("3/movie/{id}/videos?api_key=$API_KEY")
@@ -34,6 +31,9 @@ interface MoviesApi {
 
     @GET("3/search/movie?api_key=$API_KEY")
     fun getMoviesByQuery(@Query("query") query: String, @Query("page") page: Int, @Query("language") language: String): Single<DiscoverMoviesResponse>
+
+    @GET("3/movie/{movie_id}/reviews?api_key=$API_KEY")
+    fun getMovieReviews(@Path("movie_id") id: Int, @Query("page") page: Int): Single<ReviewsResponse>
 
     companion object {
         const val API_KEY = "b158b97e42698b2da042bf942864f95f"

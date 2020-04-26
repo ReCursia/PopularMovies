@@ -1,17 +1,6 @@
 package com.recursia.popularmovies.di.modules
 
-import com.recursia.popularmovies.data.mappers.CastDatabaseModelToEntityMapper
-import com.recursia.popularmovies.data.mappers.EntityToCastDatabaseModelMapper
-import com.recursia.popularmovies.data.mappers.EntityToGenreDatabaseModelMapper
-import com.recursia.popularmovies.data.mappers.EntityToMovieExtraDatabaseModelMapper
-import com.recursia.popularmovies.data.mappers.EntityToTrailerDatabaseModelMapper
-import com.recursia.popularmovies.data.mappers.GenreDatabaseModelToEntityMapper
-import com.recursia.popularmovies.data.mappers.MovieDatabaseModelToEntityMapper
-import com.recursia.popularmovies.data.mappers.MovieExtraDatabaseModelToEntityMapper
-import com.recursia.popularmovies.data.mappers.TrailerDatabaseModelToEntityMapper
-import com.recursia.popularmovies.data.mappers.CreditsResponseToCastMapper
-import com.recursia.popularmovies.data.mappers.DiscoverMovieResponseToMovieMapper
-import com.recursia.popularmovies.data.mappers.MovieTrailersResponseToTrailersMapper
+import com.recursia.popularmovies.data.mappers.*
 
 import dagger.Module
 import dagger.Provides
@@ -46,9 +35,9 @@ class MapperModule {
 
     @Provides
     internal fun provideEntityToMovieDatabaseModelMapper(
-        entityToCastDatabaseModelMapper: EntityToCastDatabaseModelMapper,
-        entityToGenreDatabaseModelMapper: EntityToGenreDatabaseModelMapper,
-        entityToTrailerDatabaseModelMapper: EntityToTrailerDatabaseModelMapper
+            entityToCastDatabaseModelMapper: EntityToCastDatabaseModelMapper,
+            entityToGenreDatabaseModelMapper: EntityToGenreDatabaseModelMapper,
+            entityToTrailerDatabaseModelMapper: EntityToTrailerDatabaseModelMapper
     ): EntityToMovieExtraDatabaseModelMapper {
         return EntityToMovieExtraDatabaseModelMapper(entityToCastDatabaseModelMapper, entityToGenreDatabaseModelMapper, entityToTrailerDatabaseModelMapper)
     }
@@ -80,10 +69,22 @@ class MapperModule {
 
     @Provides
     internal fun provideMovieExtraDatabaseModelToEntityMapper(
-        genreDatabaseModelToEntityMapper: GenreDatabaseModelToEntityMapper,
-        castDatabaseModelToEntityMapper: CastDatabaseModelToEntityMapper,
-        trailerDatabaseModelToEntityMapper: TrailerDatabaseModelToEntityMapper
+            genreDatabaseModelToEntityMapper: GenreDatabaseModelToEntityMapper,
+            castDatabaseModelToEntityMapper: CastDatabaseModelToEntityMapper,
+            trailerDatabaseModelToEntityMapper: TrailerDatabaseModelToEntityMapper
     ): MovieExtraDatabaseModelToEntityMapper {
         return MovieExtraDatabaseModelToEntityMapper(genreDatabaseModelToEntityMapper, castDatabaseModelToEntityMapper, trailerDatabaseModelToEntityMapper)
+    }
+
+    @Provides
+    internal fun provideReviewNetworkModelToEntityMapper(): ReviewNetworkToEntityModelMapper {
+        return ReviewNetworkToEntityModelMapper()
+    }
+
+    @Provides
+    internal fun provideReviewsResponseToReviewMapper(
+            reviewNetworkToEntityModelMapper: ReviewNetworkToEntityModelMapper
+    ): ReviewsResponseToReviewMapper {
+        return ReviewsResponseToReviewMapper(reviewNetworkToEntityModelMapper)
     }
 }
