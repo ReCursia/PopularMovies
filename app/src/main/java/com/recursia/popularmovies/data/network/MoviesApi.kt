@@ -32,8 +32,8 @@ interface MoviesApi {
     @GET("3/search/movie?api_key=$API_KEY")
     fun getMoviesByQuery(@Query("query") query: String, @Query("page") page: Int, @Query("language") language: String): Single<DiscoverMoviesResponse>
 
-    @GET("3/movie/{movie_id}/reviews?api_key=$API_KEY")
-    fun getMovieReviews(@Path("movie_id") id: Int, @Query("page") page: Int): Single<ReviewsResponse>
+    @GET("3/movie/{id}/reviews?api_key=$API_KEY")
+    fun getMovieReviews(@Path("id") id: Int, @Query("page") page: Int): Single<ReviewsResponse>
 
     companion object {
         const val API_KEY = "b158b97e42698b2da042bf942864f95f"

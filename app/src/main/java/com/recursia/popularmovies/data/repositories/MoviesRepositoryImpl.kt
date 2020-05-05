@@ -14,15 +14,17 @@ import io.reactivex.Single
 import io.reactivex.functions.Function4
 import io.reactivex.schedulers.Schedulers
 
-class MoviesRepositoryImpl(private val movieDao: MovieDao,
-                           private val moviesApi: MoviesApi,
-                           private val movieDatabaseModelToEntityMapper: MovieDatabaseModelToEntityMapper,
-                           private val discoverMovieResponseToMovieMapper: DiscoverMovieResponseToMovieMapper,
-                           private val creditsResponseToCastMapper: CreditsResponseToCastMapper,
-                           private val movieTrailersResponseToTrailersMapper: MovieTrailersResponseToTrailersMapper,
-                           private val movieExtraDatabaseModelToEntityMapper: MovieExtraDatabaseModelToEntityMapper,
-                           private val entityToMovieExtraDatabaseModelMapper: EntityToMovieExtraDatabaseModelMapper,
-                           private val reviewsResponseToReviewMapper: ReviewsResponseToReviewMapper) : MoviesRepository {
+class MoviesRepositoryImpl(
+        private val movieDao: MovieDao,
+        private val moviesApi: MoviesApi,
+        private val movieDatabaseModelToEntityMapper: MovieDatabaseModelToEntityMapper,
+        private val discoverMovieResponseToMovieMapper: DiscoverMovieResponseToMovieMapper,
+        private val creditsResponseToCastMapper: CreditsResponseToCastMapper,
+        private val movieTrailersResponseToTrailersMapper: MovieTrailersResponseToTrailersMapper,
+        private val movieExtraDatabaseModelToEntityMapper: MovieExtraDatabaseModelToEntityMapper,
+        private val entityToMovieExtraDatabaseModelMapper: EntityToMovieExtraDatabaseModelMapper,
+        private val reviewsResponseToReviewMapper: ReviewsResponseToReviewMapper
+) : MoviesRepository {
 
     override fun discoverMovies(sortBy: String, page: Int, voteCount: Int, language: String): Single<List<Movie>> {
         return moviesApi.discoverMovies(sortBy, page, voteCount, language)
@@ -63,6 +65,7 @@ class MoviesRepositoryImpl(private val movieDao: MovieDao,
                     movie.reviews = reviews
                     movie
                 })
+                .subscribeOn(Schedulers.io())
     }
 
     override fun getMoviesByQuery(query: String, page: Int, language: String): Single<List<Movie>> {
@@ -92,5 +95,4 @@ class MoviesRepositoryImpl(private val movieDao: MovieDao,
     companion object {
         private const val REVIEWS_PAGE = 1
     }
-
 }

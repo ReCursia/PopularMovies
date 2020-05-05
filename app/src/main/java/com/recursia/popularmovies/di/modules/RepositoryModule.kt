@@ -47,9 +47,8 @@ class RepositoryModule {
     @Provides
     @Singleton
     internal fun provideTranslateRepository(
-            mapper: ReviewNetworkToEntityModelMapper,
             translateApi: TranslateApi
     ): TranslateRepository {
-        return TranslateRepositoryImpl(translateApi, mapper)
+        return TranslateRepositoryImpl(translateApi)
     }
 }

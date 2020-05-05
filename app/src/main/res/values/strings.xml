@@ -35,6 +35,9 @@
     <string name="search_movie_title">Search movies</string>
     <string name="favorite_item">Favorite</string>
     <string name="about_item">About</string>
+    <string name="review">Reviews:</string>
+    <string name="translate_button">Translate</string>
+    <string name="show_more">Show more…</string>
 
     <string-array name="intro_descriptions">
         <item>@string/intro_description_item_00</item>

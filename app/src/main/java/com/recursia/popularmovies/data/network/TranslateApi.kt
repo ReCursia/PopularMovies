@@ -7,7 +7,7 @@ import retrofit2.http.Query
 
 interface TranslateApi {
 
-    @GET("translate?key=$API_KEY")
+    @GET("/translate?key=$API_KEY")
     fun getTranslate(@Query("text") text: String, @Query("lang") lang: String): Single<TranslateNetworkModel>
 
     companion object {

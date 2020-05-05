@@ -5,6 +5,7 @@ import com.arellomobile.mvp.MvpPresenter
 import com.recursia.popularmovies.Screens
 import com.recursia.popularmovies.domain.DetailScreenInteractor
 import com.recursia.popularmovies.domain.models.Movie
+import com.recursia.popularmovies.domain.models.Review
 import com.recursia.popularmovies.domain.models.Trailer
 import com.recursia.popularmovies.presentation.views.contracts.DetailScreenContract
 import com.recursia.popularmovies.utils.LangUtils
@@ -125,6 +126,16 @@ class DetailScreenPresenter(
 
     fun onBackPressed() {
         router.exit()
+    }
+
+    fun onTranslateReviewTextClicked(review: Review, position: Int) {
+        val d = detailScreenInteractor
+                .translateReview(review, LangUtils.defaultLanguage)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                        { viewState.updateReview(review, position) },
+                        { t -> viewState.showErrorMessage(t.localizedMessage) })
+        compositeDisposable.add(d)
     }
 
     companion object {

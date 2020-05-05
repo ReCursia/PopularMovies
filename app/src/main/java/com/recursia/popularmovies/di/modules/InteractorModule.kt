@@ -1,14 +1,6 @@
 package com.recursia.popularmovies.di.modules
 
-import com.recursia.popularmovies.domain.DetailScreenInteractor
-import com.recursia.popularmovies.domain.DetailScreenInteractorImpl
-import com.recursia.popularmovies.domain.FavoriteScreenInteractor
-import com.recursia.popularmovies.domain.FavoriteScreenInteractorImpl
-import com.recursia.popularmovies.domain.MoviesListInteractor
-import com.recursia.popularmovies.domain.MoviesListInteractorImpl
-import com.recursia.popularmovies.domain.MoviesRepository
-import com.recursia.popularmovies.domain.SearchScreenInteractor
-import com.recursia.popularmovies.domain.SearchScreenInteractorImpl
+import com.recursia.popularmovies.domain.*
 
 import dagger.Module
 import dagger.Provides
@@ -17,8 +9,11 @@ import dagger.Provides
 class InteractorModule {
 
     @Provides
-    internal fun provideDetailScreenInteractor(moviesRepository: MoviesRepository): DetailScreenInteractor {
-        return DetailScreenInteractorImpl(moviesRepository)
+    internal fun provideDetailScreenInteractor(
+            moviesRepository: MoviesRepository,
+            translateRepository: TranslateRepository
+    ): DetailScreenInteractor {
+        return DetailScreenInteractorImpl(moviesRepository, translateRepository)
     }
 
     @Provides

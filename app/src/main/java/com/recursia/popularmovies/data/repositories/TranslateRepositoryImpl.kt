@@ -1,17 +1,16 @@
 package com.recursia.popularmovies.data.repositories
 
-import com.recursia.popularmovies.data.mappers.ReviewNetworkToEntityModelMapper
 import com.recursia.popularmovies.data.network.TranslateApi
 import com.recursia.popularmovies.domain.TranslateRepository
-import com.recursia.popularmovies.domain.models.Review
 import io.reactivex.Single
+import io.reactivex.schedulers.Schedulers
 
 class TranslateRepositoryImpl(
-        private val translateApi: TranslateApi,
-        private val mapper: ReviewNetworkToEntityModelMapper
+        private val translateApi: TranslateApi
 ) : TranslateRepository {
-
-    override fun getTranslate(text: String, lang: String): Single<Review> {
-        TODO("Not yet implemented")
+    override fun translateText(text: String, lang: String): Single<String> {
+        return translateApi.getTranslate(text, lang)
+                .subscribeOn(Schedulers.io())
+                .map { it.text.firstOrNull() }
     }
 }

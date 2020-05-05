@@ -20,5 +20,4 @@ interface MoviesRepository {
     fun makeFavoriteMovie(movie: Movie): Completable
 
     fun removeFavoriteMovie(movie: Movie): Completable
-
 }

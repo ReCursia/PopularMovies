@@ -31,10 +31,12 @@ import com.recursia.popularmovies.R
 import com.recursia.popularmovies.TheApplication
 import com.recursia.popularmovies.domain.models.Genre
 import com.recursia.popularmovies.domain.models.Movie
+import com.recursia.popularmovies.domain.models.Review
 import com.recursia.popularmovies.domain.models.Trailer
 import com.recursia.popularmovies.presentation.presenters.DetailScreenPresenter
 import com.recursia.popularmovies.presentation.views.adapters.CastAdapter
 import com.recursia.popularmovies.presentation.views.adapters.MoviesAdapter
+import com.recursia.popularmovies.presentation.views.adapters.ReviewsAdapter
 import com.recursia.popularmovies.presentation.views.adapters.TrailersAdapter
 import com.recursia.popularmovies.presentation.views.contracts.DetailScreenContract
 import com.recursia.popularmovies.presentation.views.decorations.MarginItemDecoration
@@ -76,6 +78,9 @@ class DetailScreenFragment : MvpAppCompatFragment(), DetailScreenContract {
     @BindView(R.id.recyclerViewCast)
     internal lateinit var recyclerViewCast: RecyclerView
 
+    @BindView(R.id.recyclerViewReviews)
+    internal lateinit var recyclerViewReviews: RecyclerView
+
     @BindView(R.id.castCardView)
     internal lateinit var castCardView: CardView
 
@@ -96,6 +101,7 @@ class DetailScreenFragment : MvpAppCompatFragment(), DetailScreenContract {
     private lateinit var trailersAdapter: TrailersAdapter
     private lateinit var castAdapter: CastAdapter
     private lateinit var moviesAdapter: MoviesAdapter
+    private lateinit var reviewsAdapter: ReviewsAdapter
     private var movie: Movie? = null
 
     override fun showFavoriteIcon() {
@@ -114,6 +120,10 @@ class DetailScreenFragment : MvpAppCompatFragment(), DetailScreenContract {
     @OnClick(R.id.backdropImage)
     fun onBackdropImageClicked() {
         presenter.onBackdropImageClicked(movie)
+    }
+
+    override fun updateReview(review: Review, position: Int) {
+        reviewsAdapter.updateReview(review, position)
     }
 
     override fun setRecommendationMovies(movies: List<Movie>) {
@@ -201,6 +211,9 @@ class DetailScreenFragment : MvpAppCompatFragment(), DetailScreenContract {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        // Reviews
+        initReviewsRecyclerView()
+        initReviewsAdapter()
         // Trailers
         initTrailerRecyclerView()
         initTrailersAdapter()
@@ -213,6 +226,20 @@ class DetailScreenFragment : MvpAppCompatFragment(), DetailScreenContract {
 
         initToolbar()
         initCollapsingToolbarLayout()
+    }
+
+    private fun initReviewsAdapter() {
+        reviewsAdapter = ReviewsAdapter(context!!)
+        reviewsAdapter.setClickListener { review: Review, position: Int ->
+            presenter.onTranslateReviewTextClicked(review, position)
+        }
+        recyclerViewReviews.adapter = reviewsAdapter
+    }
+
+    private fun initReviewsRecyclerView() {
+        recyclerViewReviews.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+        recyclerViewReviews.addItemDecoration(
+                MarginItemDecoration(context!!, 0, 0, 5, 5))
     }
 
     private fun initTrailerRecyclerView() {
@@ -297,7 +324,11 @@ class DetailScreenFragment : MvpAppCompatFragment(), DetailScreenContract {
         if (casts.isNotEmpty()) {
             castAdapter.setCast(casts)
         }
-        // Trailers
+        // Reviews
+        val reviews = movie.reviews
+        if (reviews.isNotEmpty()) {
+            reviewsAdapter.setReviews(reviews as MutableList<Review>)
+        }
         collapsingToolbarLayout.title = movie.title
         originalTitleTextView.text = movie.originalTitle
         releaseDateTextView.text = DateUtils.formatDate(movie.releaseDate!!)
