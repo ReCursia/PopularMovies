@@ -24,7 +24,7 @@ public class ReviewsResponse {
     private int totalResults;
 
     public ReviewsResponse() {
-        this.reviews = new ArrayList<ReviewNetworkModel>();
+        this.reviews = new ArrayList<>();
     }
 
     public int getId() {

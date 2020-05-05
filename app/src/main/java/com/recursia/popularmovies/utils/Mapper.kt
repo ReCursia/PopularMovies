@@ -13,7 +13,7 @@ abstract class Mapper<T, V> {
                 collection.add(transform(value))
             }
         } else {
-            collection = emptyList<V>()
+            collection = emptyList()
         }
         return collection
     }
