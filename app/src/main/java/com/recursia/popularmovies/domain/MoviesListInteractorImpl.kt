@@ -9,5 +9,4 @@ class MoviesListInteractorImpl(private val moviesRepository: MoviesRepository) :
     override fun discoverMovies(sortBy: String, page: Int, voteCount: Int, language: String): Single<List<Movie>> {
         return moviesRepository.discoverMovies(sortBy, page, voteCount, language)
     }
-
 }

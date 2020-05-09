@@ -12,6 +12,4 @@ import com.recursia.popularmovies.data.models.TrailerDatabaseModel
 abstract class MovieDatabase : RoomDatabase() {
 
     abstract fun movieDao(): MovieDao
-
 }
-

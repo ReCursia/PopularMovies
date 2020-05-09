@@ -1,13 +1,14 @@
 package com.recursia.popularmovies.domain
 
 import com.recursia.popularmovies.domain.models.Movie
-
+import com.recursia.popularmovies.domain.models.Review
 import io.reactivex.Completable
 import io.reactivex.Single
 
-
-//TODO delegate?
-class DetailScreenInteractorImpl(private val moviesRepository: MoviesRepository) : DetailScreenInteractor {
+class DetailScreenInteractorImpl(
+        private val moviesRepository: MoviesRepository,
+        private val translateRepository: TranslateRepository
+) : DetailScreenInteractor {
 
     override fun getMovieRecommendations(movieId: Int, page: Int, language: String): Single<List<Movie>> {
         return moviesRepository.getMovieRecommendations(movieId, page, language)
@@ -25,4 +26,11 @@ class DetailScreenInteractorImpl(private val moviesRepository: MoviesRepository)
         return moviesRepository.removeFavoriteMovie(movie)
     }
 
+    override fun translateReview(review: Review, lang: String): Single<Review> {
+        return translateRepository.translateText(review.text!!, lang)
+                .map {
+                    review.text = it
+                    review
+                }
+    }
 }

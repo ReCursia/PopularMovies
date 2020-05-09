@@ -1,7 +1,6 @@
 package com.recursia.popularmovies.domain
 
 import com.recursia.popularmovies.domain.models.Movie
-
 import io.reactivex.Completable
 import io.reactivex.Flowable
 import io.reactivex.Single
@@ -21,5 +20,4 @@ interface MoviesRepository {
     fun makeFavoriteMovie(movie: Movie): Completable
 
     fun removeFavoriteMovie(movie: Movie): Completable
-
 }

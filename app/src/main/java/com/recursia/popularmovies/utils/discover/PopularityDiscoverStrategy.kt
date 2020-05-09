@@ -9,5 +9,4 @@ class PopularityDiscoverStrategy : DiscoverStrategy {
 
     override val voteCount: Int
         get() = NetworkUtils.VOTE_COUNT_POPULARITY
-
 }

@@ -31,11 +31,12 @@ import com.recursia.popularmovies.R
 import com.recursia.popularmovies.TheApplication
 import com.recursia.popularmovies.domain.models.Genre
 import com.recursia.popularmovies.domain.models.Movie
+import com.recursia.popularmovies.domain.models.Review
 import com.recursia.popularmovies.domain.models.Trailer
 import com.recursia.popularmovies.presentation.presenters.DetailScreenPresenter
 import com.recursia.popularmovies.presentation.views.adapters.CastAdapter
 import com.recursia.popularmovies.presentation.views.adapters.MoviesAdapter
-import com.recursia.popularmovies.presentation.views.adapters.OnItemClickListener
+import com.recursia.popularmovies.presentation.views.adapters.ReviewsAdapter
 import com.recursia.popularmovies.presentation.views.adapters.TrailersAdapter
 import com.recursia.popularmovies.presentation.views.contracts.DetailScreenContract
 import com.recursia.popularmovies.presentation.views.decorations.MarginItemDecoration
@@ -46,42 +47,62 @@ import com.recursia.popularmovies.utils.TagUtils
 class DetailScreenFragment : MvpAppCompatFragment(), DetailScreenContract {
     @BindView(R.id.descriptionTextView)
     internal lateinit var descriptionTextView: TextView
+
     @BindView(R.id.ratingTextView)
     internal lateinit var ratingTextView: TextView
+
     @BindView(R.id.originalTitleTextView)
     internal lateinit var originalTitleTextView: TextView
+
     @BindView(R.id.favoriteIcon)
     internal lateinit var favoriteIcon: FloatingActionButton
+
     @BindView(R.id.releaseDateTextView)
     internal lateinit var releaseDateTextView: TextView
+
     @BindView(R.id.recycleViewTrailers)
     internal lateinit var recyclerViewTrailers: RecyclerView
+
     @BindView(R.id.backdropImage)
     internal lateinit var backdropImage: ImageView
+
     @BindView(R.id.toolbar)
     internal lateinit var toolbar: Toolbar
+
     @BindView(R.id.collapsingToolbar)
     internal lateinit var collapsingToolbarLayout: CollapsingToolbarLayout
+
     @BindView(R.id.genresGroup)
     internal lateinit var genresGroup: ChipGroup
+
     @BindView(R.id.recyclerViewCast)
     internal lateinit var recyclerViewCast: RecyclerView
+
+    @BindView(R.id.recyclerViewReviews)
+    internal lateinit var recyclerViewReviews: RecyclerView
+
     @BindView(R.id.castCardView)
     internal lateinit var castCardView: CardView
+
     @BindView(R.id.descriptionCardView)
     internal lateinit var descriptionCardView: CardView
+
     @BindView(R.id.detailCardView)
     internal lateinit var detailCardView: CardView
+
     @BindView(R.id.recyclerViewMovieRecommendations)
     internal lateinit var recyclerViewMovieRecommendations: RecyclerView
+
     @BindView(R.id.movieRecommendationCardView)
     internal lateinit var movieRecommendationCardView: CardView
+
     @InjectPresenter
     internal lateinit var presenter: DetailScreenPresenter
     private lateinit var trailersAdapter: TrailersAdapter
     private lateinit var castAdapter: CastAdapter
     private lateinit var moviesAdapter: MoviesAdapter
-    private lateinit var movie: Movie
+    private lateinit var reviewsAdapter: ReviewsAdapter
+    private var movie: Movie? = null
 
     override fun showFavoriteIcon() {
         favoriteIcon.show()
@@ -99,6 +120,10 @@ class DetailScreenFragment : MvpAppCompatFragment(), DetailScreenContract {
     @OnClick(R.id.backdropImage)
     fun onBackdropImageClicked() {
         presenter.onBackdropImageClicked(movie)
+    }
+
+    override fun updateReview(review: Review, position: Int) {
+        reviewsAdapter.updateReview(review, position)
     }
 
     override fun setRecommendationMovies(movies: List<Movie>) {
@@ -128,7 +153,7 @@ class DetailScreenFragment : MvpAppCompatFragment(), DetailScreenContract {
 
     override fun setFavoriteIconOn() {
         favoriteIcon.setImageDrawable(context!!.getDrawable(R.drawable.ic_favorite_on))
-        favoriteIcon.imageMatrix = Matrix() //trick
+        favoriteIcon.imageMatrix = Matrix() // trick
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -175,7 +200,7 @@ class DetailScreenFragment : MvpAppCompatFragment(), DetailScreenContract {
 
     override fun setFavoriteIconOff() {
         favoriteIcon.setImageDrawable(context!!.getDrawable(R.drawable.ic_favorite_off))
-        favoriteIcon.imageMatrix = Matrix() //trick
+        favoriteIcon.imageMatrix = Matrix() // trick
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -186,18 +211,35 @@ class DetailScreenFragment : MvpAppCompatFragment(), DetailScreenContract {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        //Trailers
+        // Reviews
+        initReviewsRecyclerView()
+        initReviewsAdapter()
+        // Trailers
         initTrailerRecyclerView()
         initTrailersAdapter()
-        //Cast
+        // Cast
         initCastRecyclerView()
         initCreditsAdapter()
-        //Movie recommendation
+        // Movie recommendation
         initMovieRecommendationRecyclerView()
         initMovieRecommendationAdapter()
 
         initToolbar()
         initCollapsingToolbarLayout()
+    }
+
+    private fun initReviewsAdapter() {
+        reviewsAdapter = ReviewsAdapter(context!!)
+        reviewsAdapter.setClickListener { review: Review, position: Int ->
+            presenter.onTranslateReviewTextClicked(review, position)
+        }
+        recyclerViewReviews.adapter = reviewsAdapter
+    }
+
+    private fun initReviewsRecyclerView() {
+        recyclerViewReviews.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+        recyclerViewReviews.addItemDecoration(
+                MarginItemDecoration(context!!, 0, 0, 5, 5))
     }
 
     private fun initTrailerRecyclerView() {
@@ -209,11 +251,9 @@ class DetailScreenFragment : MvpAppCompatFragment(), DetailScreenContract {
 
     private fun initTrailersAdapter() {
         trailersAdapter = TrailersAdapter(context!!)
-        trailersAdapter.setClickListener(object : OnItemClickListener<Trailer> {
-            override fun onItemClick(trailer: Trailer) {
-                presenter.onTrailerPlayButtonClicked(trailer)
-            }
-        })
+        trailersAdapter.setClickListener {
+            presenter.onTrailerPlayButtonClicked(it)
+        }
         recyclerViewTrailers.adapter = trailersAdapter
     }
 
@@ -238,11 +278,9 @@ class DetailScreenFragment : MvpAppCompatFragment(), DetailScreenContract {
 
     private fun initMovieRecommendationAdapter() {
         moviesAdapter = MoviesAdapter(context!!, IS_RECOMMENDATION_MOVIES)
-        moviesAdapter.setClickListener(object : OnItemClickListener<Movie> {
-            override fun onItemClick(movie: Movie) {
-                presenter.onMovieClicked(movie)
-            }
-        })
+        moviesAdapter.setClickListener {
+            presenter.onMovieClicked(it)
+        }
         recyclerViewMovieRecommendations.adapter = moviesAdapter
     }
 
@@ -271,36 +309,42 @@ class DetailScreenFragment : MvpAppCompatFragment(), DetailScreenContract {
 
     override fun setMovieDetail(movie: Movie) {
         this.movie = movie
-        //Trailers
+        // Trailers
         val trailers = movie.trailers
         if (trailers.isNotEmpty()) {
             trailersAdapter.setTrailers(trailers)
         }
-        //Genres
+        // Genres
         val genres = movie.genres
         if (genres.isNotEmpty()) {
             setGenres(genres)
         }
-        //Cast
+        // Cast
         val casts = movie.casts
         if (casts.isNotEmpty()) {
             castAdapter.setCast(casts)
         }
-        //Trailers
+        // Reviews
+        val reviews = movie.reviews
+        if (reviews.isNotEmpty()) {
+            reviewsAdapter.setReviews(reviews as MutableList<Review>)
+        }
         collapsingToolbarLayout.title = movie.title
         originalTitleTextView.text = movie.originalTitle
         releaseDateTextView.text = DateUtils.formatDate(movie.releaseDate!!)
         descriptionTextView.text = movie.overview
         ratingTextView.text = movie.voteAverage.toString()
-        //Image
-        Glide.with(this)
-                .load(NetworkUtils.getBigPosterUrl(movie.backdropPath!!))
-                .transition(DrawableTransitionOptions.withCrossFade(FADE_OUT_DURATION))
-                .into(backdropImage)
+        // Image
+        movie.backdropPath?.let {
+            Glide.with(this)
+                    .load(NetworkUtils.getBigPosterUrl(it))
+                    .transition(DrawableTransitionOptions.withCrossFade(FADE_OUT_DURATION))
+                    .into(backdropImage)
+        }
     }
 
     private fun setGenres(genres: List<Genre>) {
-        //Before set genres remove previous one
+        // Before set genres remove previous one
         genresGroup.removeAllViews()
         val layoutInflater = LayoutInflater.from(context)
         for (genre in genres) {
@@ -311,7 +355,7 @@ class DetailScreenFragment : MvpAppCompatFragment(), DetailScreenContract {
     }
 
     companion object {
-        private const val FADE_OUT_DURATION = 100 //ms
+        private const val FADE_OUT_DURATION = 100 // ms
         private const val IS_RECOMMENDATION_MOVIES = true
 
         fun getInstance(movieId: Int): DetailScreenFragment {
@@ -322,5 +366,4 @@ class DetailScreenFragment : MvpAppCompatFragment(), DetailScreenContract {
             return fragment
         }
     }
-
 }

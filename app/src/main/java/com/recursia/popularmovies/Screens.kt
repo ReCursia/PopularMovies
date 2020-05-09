@@ -6,7 +6,6 @@ import ru.terrakok.cicerone.android.support.SupportAppScreen
 
 class Screens {
     class DetailScreen(private val movieId: Int) : SupportAppScreen() {
-
         override fun getFragment(): Fragment {
             return DetailScreenFragment.getInstance(movieId)
         }
@@ -14,7 +13,7 @@ class Screens {
 
     class FavoriteScreen : SupportAppScreen() {
         override fun getFragment(): Fragment {
-            return FavoriteScreenFragment.getInstance() //TODO make it val instance? with caps
+            return FavoriteScreenFragment.instance
         }
     }
 
@@ -31,7 +30,6 @@ class Screens {
     }
 
     class PhotoScreen(private val imagePath: String) : SupportAppScreen() {
-
         override fun getFragment(): Fragment {
             return PhotoScreenFragment.getInstance(imagePath)
         }
@@ -48,5 +46,4 @@ class Screens {
             return MainScreenFragment.instance
         }
     }
-
 }

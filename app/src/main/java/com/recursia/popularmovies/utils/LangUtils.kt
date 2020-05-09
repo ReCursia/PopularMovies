@@ -1,10 +1,9 @@
 package com.recursia.popularmovies.utils
 
-import java.util.Locale
+import java.util.*
 
 object LangUtils {
 
     val defaultLanguage: String
-        get() = Locale.getDefault().toString()
-
+        get() = Locale.getDefault().language
 }

@@ -5,4 +5,4 @@ import com.arellomobile.mvp.viewstate.strategy.AddToEndSingleStrategy
 import com.arellomobile.mvp.viewstate.strategy.StateStrategyType
 
 @StateStrategyType(AddToEndSingleStrategy::class)
-interface PopularScreenContract : MvpView//TODO implement some interfaces
+interface PopularScreenContract : MvpView // TODO implement some interfaces

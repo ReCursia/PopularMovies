@@ -24,7 +24,7 @@ class MoviesPagerAdapter(fm: FragmentManager) : FragmentStatePagerAdapter(fm) {
 
     private fun getInstance(index: Int): Fragment {
         val fragment = MoviesListFragment()
-        //Passing args
+        // Passing args
         val args = Bundle()
         args.putString(TagUtils.FRAGMENT_MOVIES, argsList[index])
         fragment.arguments = args
@@ -38,5 +38,4 @@ class MoviesPagerAdapter(fm: FragmentManager) : FragmentStatePagerAdapter(fm) {
     companion object {
         private const val TAB_COUNT = 2
     }
-
 }

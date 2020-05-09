@@ -27,7 +27,7 @@ class MainScreenFragment : MvpAppCompatFragment() {
         initTabChangeListener()
     }
 
-    private fun initTabChangeListener() { //TODO make it with presenter
+    private fun initTabChangeListener() { // TODO make it with presenter
         navigationView.setOnNavigationItemSelectedListener { menuItem: MenuItem ->
             when (menuItem.itemId) {
                 R.id.navigation_popular -> openPopularScreen()
@@ -43,7 +43,7 @@ class MainScreenFragment : MvpAppCompatFragment() {
     private fun openFavoriteScreen() {
         childFragmentManager
                 .beginTransaction()
-                .replace(R.id.fragment_container, FavoriteScreenFragment.getInstance())
+                .replace(R.id.fragment_container, FavoriteScreenFragment.instance)
                 .commit()
     }
 

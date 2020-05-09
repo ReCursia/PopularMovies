@@ -23,7 +23,7 @@ class SectionsPagerAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
 
     private fun getInstance(index: Int): Fragment {
         val fragment = SectionScreenFragment()
-        //Passing args
+        // Passing args
         val args = Bundle()
         args.putSerializable(TagUtils.FRAGMENT_INTRO, sectionItemList[index])
         fragment.arguments = args
@@ -33,5 +33,4 @@ class SectionsPagerAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
     override fun getCount(): Int {
         return sectionItemList.size
     }
-
 }

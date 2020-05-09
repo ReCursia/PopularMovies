@@ -5,16 +5,18 @@ import com.recursia.popularmovies.data.models.MovieExtraDatabaseModel
 import com.recursia.popularmovies.domain.models.Movie
 import com.recursia.popularmovies.utils.Mapper
 
-class EntityToMovieExtraDatabaseModelMapper(private val entityToCastDatabaseModelMapper: EntityToCastDatabaseModelMapper,
-                                            private val entityToGenreDatabaseModelMapper: EntityToGenreDatabaseModelMapper,
-                                            private val entityToTrailerDatabaseModelMapper: EntityToTrailerDatabaseModelMapper) : Mapper<Movie, MovieExtraDatabaseModel>() {
+class EntityToMovieExtraDatabaseModelMapper(
+    private val entityToCastDatabaseModelMapper: EntityToCastDatabaseModelMapper,
+    private val entityToGenreDatabaseModelMapper: EntityToGenreDatabaseModelMapper,
+    private val entityToTrailerDatabaseModelMapper: EntityToTrailerDatabaseModelMapper
+) : Mapper<Movie, MovieExtraDatabaseModel>() {
 
     override fun transform(movie: Movie): MovieExtraDatabaseModel {
         val movieExtraDatabaseModel = MovieExtraDatabaseModel()
         movieExtraDatabaseModel.cast = entityToCastDatabaseModelMapper.transform(movie.casts)
         movieExtraDatabaseModel.genres = entityToGenreDatabaseModelMapper.transform(movie.genres)
         movieExtraDatabaseModel.trailers = entityToTrailerDatabaseModelMapper.transform(movie.trailers)
-        //Movie
+        // Movie
         val movieDatabaseModel = MovieDatabaseModel()
         movieDatabaseModel.isFavorite = movie.isFavorite
         movieDatabaseModel.voteCount = movie.voteCount

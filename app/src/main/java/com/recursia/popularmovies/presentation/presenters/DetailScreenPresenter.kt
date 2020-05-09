@@ -5,6 +5,7 @@ import com.arellomobile.mvp.MvpPresenter
 import com.recursia.popularmovies.Screens
 import com.recursia.popularmovies.domain.DetailScreenInteractor
 import com.recursia.popularmovies.domain.models.Movie
+import com.recursia.popularmovies.domain.models.Review
 import com.recursia.popularmovies.domain.models.Trailer
 import com.recursia.popularmovies.presentation.views.contracts.DetailScreenContract
 import com.recursia.popularmovies.utils.LangUtils
@@ -13,7 +14,11 @@ import io.reactivex.disposables.CompositeDisposable
 import ru.terrakok.cicerone.Router
 
 @InjectViewState
-class DetailScreenPresenter(private val detailScreenInteractor: DetailScreenInteractor, private val router: Router, private val movieId: Int) : MvpPresenter<DetailScreenContract>() {
+class DetailScreenPresenter(
+        private val detailScreenInteractor: DetailScreenInteractor,
+        private val router: Router,
+        private val movieId: Int
+) : MvpPresenter<DetailScreenContract>() {
     private val compositeDisposable = CompositeDisposable()
 
     override fun onFirstViewAttach() {
@@ -69,13 +74,12 @@ class DetailScreenPresenter(private val detailScreenInteractor: DetailScreenInte
         compositeDisposable.clear()
     }
 
-    fun onFavoriteIconClicked(movie: Movie) {
+    fun onFavoriteIconClicked(movie: Movie?) = movie?.let {
         if (movie.isFavorite) {
             removeMovieFavorite(movie)
         } else {
             makeMovieFavorite(movie)
         }
-
     }
 
     private fun removeMovieFavorite(movie: Movie) {
@@ -101,7 +105,7 @@ class DetailScreenPresenter(private val detailScreenInteractor: DetailScreenInte
     }
 
     fun onShareIconClicked(movie: Movie?) {
-        if (movie != null) {
+        movie?.let {
             viewState.shareMovie(movie)
         }
     }
@@ -111,8 +115,8 @@ class DetailScreenPresenter(private val detailScreenInteractor: DetailScreenInte
     }
 
     fun onBackdropImageClicked(movie: Movie?) {
-        if (movie != null) {
-            router.navigateTo(Screens.PhotoScreen(movie.backdropPath!!))
+        movie?.backdropPath?.let {
+            router.navigateTo(Screens.PhotoScreen(it))
         }
     }
 
@@ -124,8 +128,17 @@ class DetailScreenPresenter(private val detailScreenInteractor: DetailScreenInte
         router.exit()
     }
 
+    fun onTranslateReviewTextClicked(review: Review, position: Int) {
+        val d = detailScreenInteractor
+                .translateReview(review, LangUtils.defaultLanguage)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                        { viewState.updateReview(review, position) },
+                        { t -> viewState.showErrorMessage(t.localizedMessage) })
+        compositeDisposable.add(d)
+    }
+
     companion object {
         private const val MOVIE_RECOMMENDATION_PAGE = 1
     }
-
 }

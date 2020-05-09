@@ -7,5 +7,6 @@ import com.recursia.popularmovies.presentation.views.contracts.PopularScreenCont
 import ru.terrakok.cicerone.Router
 
 @InjectViewState
-class PopularScreenPresenter(private val router: Router //TODO need some logic further?
+class PopularScreenPresenter(
+    private val router: Router // TODO need some logic further?
 ) : MvpPresenter<PopularScreenContract>()

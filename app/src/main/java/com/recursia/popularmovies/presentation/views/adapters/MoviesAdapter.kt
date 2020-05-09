@@ -15,11 +15,13 @@ import com.recursia.popularmovies.R
 import com.recursia.popularmovies.domain.models.Movie
 import com.recursia.popularmovies.utils.NetworkUtils
 
-class MoviesAdapter(private val context: Context, private val isRecommendationMovies: Boolean) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class MoviesAdapter(private val context: Context,
+                    private val isRecommendationMovies: Boolean
+) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private var movies: MutableList<Movie> = ArrayList()
-    private var clickListener: OnItemClickListener<Movie>? = null
+    private var clickListener: ((Movie) -> Unit)? = null
 
-    fun setClickListener(clickListener: OnItemClickListener<Movie>) {
+    fun setClickListener(clickListener: (Movie) -> Unit) {
         this.clickListener = clickListener
     }
 
@@ -58,48 +60,46 @@ class MoviesAdapter(private val context: Context, private val isRecommendationMo
     }
 
     private fun setRecommendationMovieData(movie: Movie, movieViewHolder: RecommendationMovieViewHolder) {
-        //Title
+        // Title
         movieViewHolder.movieTitleTextView.text = movie.title
-        //Rating
+        // Rating
         movieViewHolder.movieRatingTextView.text = movie.voteAverage.toString()
-        //Image
+        // Image
         Glide.with(context)
                 .load(NetworkUtils.getMediumPosterUrl(movie.posterPath!!))
                 .placeholder(R.drawable.ic_poster_placeholder)
                 .transition(DrawableTransitionOptions.withCrossFade(FADE_OUT_DURATION))
                 .into(movieViewHolder.moviePoster)
-        //Listener
+        // Listener
         movieViewHolder.itemView.setOnClickListener {
-            if (clickListener != null) {
-                clickListener!!.onItemClick(movie)
-            }
+            clickListener?.invoke(movie)
         }
     }
 
     private fun setPlainMovieData(movie: Movie, movieViewHolder: MovieViewHolder) {
-        //Title
+        // Title
         movieViewHolder.movieTitleTextView.text = movie.title
-        //Rating
+        // Rating
         movieViewHolder.movieRatingTextView.text = movie.voteAverage.toString()
-        //Image
+        // Image
         Glide.with(context)
                 .load(NetworkUtils.getMediumPosterUrl(movie.posterPath ?: ""))
                 .placeholder(R.drawable.ic_poster_placeholder)
                 .transition(DrawableTransitionOptions.withCrossFade(FADE_OUT_DURATION))
                 .into(movieViewHolder.moviePoster)
-        //Listener
+        // Listener
         movieViewHolder.itemView.setOnClickListener {
-            if (clickListener != null) {
-                clickListener!!.onItemClick(movie)
-            }
+            clickListener?.invoke(movie)
         }
     }
 
     internal inner class MovieViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         @BindView(R.id.smallMoviePoster)
         lateinit var moviePoster: ImageView
+
         @BindView(R.id.movieTitleTextView)
         lateinit var movieTitleTextView: TextView
+
         @BindView(R.id.movieRatingTextView)
         lateinit var movieRatingTextView: TextView
 
@@ -111,8 +111,10 @@ class MoviesAdapter(private val context: Context, private val isRecommendationMo
     internal inner class RecommendationMovieViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         @BindView(R.id.smallMoviePoster)
         lateinit var moviePoster: ImageView
+
         @BindView(R.id.movieTitleTextView)
         lateinit var movieTitleTextView: TextView
+
         @BindView(R.id.movieRatingTextView)
         lateinit var movieRatingTextView: TextView
 
@@ -122,7 +124,6 @@ class MoviesAdapter(private val context: Context, private val isRecommendationMo
     }
 
     companion object {
-        private const val FADE_OUT_DURATION = 100 //ms
+        private const val FADE_OUT_DURATION = 100 // ms
     }
-
 }

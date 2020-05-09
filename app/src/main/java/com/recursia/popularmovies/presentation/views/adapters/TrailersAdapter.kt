@@ -18,9 +18,9 @@ import java.util.*
 
 class TrailersAdapter(private val context: Context) : RecyclerView.Adapter<TrailersAdapter.TrailerViewHolder>() {
     private var trailers: List<Trailer> = ArrayList()
-    private var clickListener: OnItemClickListener<Trailer>? = null
+    private var clickListener: ((Trailer) -> Unit)? = null
 
-    fun setClickListener(clickListener: OnItemClickListener<Trailer>) {
+    fun setClickListener(clickListener: (Trailer) -> Unit) {
         this.clickListener = clickListener
     }
 
@@ -36,19 +36,17 @@ class TrailersAdapter(private val context: Context) : RecyclerView.Adapter<Trail
 
     override fun onBindViewHolder(trailerViewHolder: TrailerViewHolder, i: Int) {
         val trailer = trailers[i]
-        //Image
+        // Image
         Glide.with(context)
                 .load(String.format(NetworkUtils.TRAILER_IMAGE_FORMAT_URL, trailer.key))
                 .placeholder(R.drawable.ic_trailer_placeholder)
                 .transition(DrawableTransitionOptions.withCrossFade(FADE_OUT_DURATION))
                 .into(trailerViewHolder.trailerImage)
-        //Title
+        // Title
         trailerViewHolder.trailerTitle.text = trailer.name
-        //Play button
-        trailerViewHolder.playButton.setOnClickListener { v ->
-            if (clickListener != null) {
-                clickListener!!.onItemClick(trailer)
-            }
+        // Play button
+        trailerViewHolder.playButton.setOnClickListener {
+            clickListener?.invoke(trailer)
         }
     }
 
@@ -59,8 +57,10 @@ class TrailersAdapter(private val context: Context) : RecyclerView.Adapter<Trail
     inner class TrailerViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         @BindView(R.id.playButton)
         lateinit var playButton: ImageView
+
         @BindView(R.id.trailerTitle)
         lateinit var trailerTitle: TextView
+
         @BindView(R.id.trailerImage)
         lateinit var trailerImage: ImageView
 
@@ -70,6 +70,6 @@ class TrailersAdapter(private val context: Context) : RecyclerView.Adapter<Trail
     }
 
     companion object {
-        private const val FADE_OUT_DURATION = 100 //ms
+        private const val FADE_OUT_DURATION = 100 // ms
     }
 }

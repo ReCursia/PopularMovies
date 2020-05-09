@@ -7,5 +7,4 @@ import io.reactivex.Flowable
 interface FavoriteScreenInteractor {
 
     val allFavoriteMovies: Flowable<List<Movie>>
-
 }

@@ -13,7 +13,11 @@ import io.reactivex.disposables.CompositeDisposable
 import ru.terrakok.cicerone.Router
 
 @InjectViewState
-class MoviesListPresenter(private val moviesListInteractor: MoviesListInteractor, private val discoverStrategy: DiscoverStrategy, private val router: Router) : MvpPresenter<MoviesListContract>() {
+class MoviesListPresenter(
+    private val moviesListInteractor: MoviesListInteractor,
+    private val discoverStrategy: DiscoverStrategy,
+    private val router: Router
+) : MvpPresenter<MoviesListContract>() {
     private val compositeDisposable = CompositeDisposable()
     private var currentPage: Int = 1
     private var isRefreshing: Boolean = false
@@ -76,5 +80,4 @@ class MoviesListPresenter(private val moviesListInteractor: MoviesListInteractor
     fun onMovieClicked(movie: Movie) {
         router.navigateTo(Screens.DetailScreen(movie.id))
     }
-
 }

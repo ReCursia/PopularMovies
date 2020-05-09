@@ -49,7 +49,7 @@ class PhotoScreenFragment : MvpAppCompatFragment() {
         toolbar.title = getString(R.string.photo_detail)
     }
 
-    private fun setImageData(imagePath: String) { //Image
+    private fun setImageData(imagePath: String) {
         Glide.with(this)
                 .asBitmap()
                 .load(getOriginalPosterUrl(imagePath))

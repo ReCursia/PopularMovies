@@ -18,7 +18,6 @@ import com.recursia.popularmovies.TheApplication
 import com.recursia.popularmovies.domain.models.Movie
 import com.recursia.popularmovies.presentation.presenters.MoviesListPresenter
 import com.recursia.popularmovies.presentation.views.adapters.MoviesAdapter
-import com.recursia.popularmovies.presentation.views.adapters.OnItemClickListener
 import com.recursia.popularmovies.presentation.views.contracts.MoviesListContract
 import com.recursia.popularmovies.utils.NetworkUtils.TOP_RATED
 import com.recursia.popularmovies.utils.TagUtils.FRAGMENT_MOVIES
@@ -28,13 +27,16 @@ import com.recursia.popularmovies.utils.discover.TopRatedDiscoverStrategy
 class MoviesListFragment : MvpAppCompatFragment(), MoviesListContract {
     @BindView(R.id.recyclerViewPosters)
     lateinit var recyclerView: RecyclerView
+
     @BindView(R.id.swipeIndicator)
     lateinit var swipeIndicator: SwipeRefreshLayout
+
     @InjectPresenter
     lateinit var presenter: MoviesListPresenter
     private lateinit var moviesAdapter: MoviesAdapter
+
     @ProvidePresenter
-    fun providePresenter(): MoviesListPresenter { //Strategy
+    fun providePresenter(): MoviesListPresenter { // Strategy
         val sortStrategy = arguments!!.getString(FRAGMENT_MOVIES)
         val strategy = if (sortStrategy == TOP_RATED) TopRatedDiscoverStrategy() else PopularityDiscoverStrategy()
         val app = TheApplication.getInstance().appComponent
@@ -51,17 +53,15 @@ class MoviesListFragment : MvpAppCompatFragment(), MoviesListContract {
 
     private fun initAdapter() {
         moviesAdapter = MoviesAdapter(activity!!, IS_RECOMMENDATION_MOVIES)
-        moviesAdapter.setClickListener(object : OnItemClickListener<Movie> {
-            override fun onItemClick(movie: Movie) {
-                presenter.onMovieClicked(movie)
-            }
-        })
+        moviesAdapter.setClickListener {
+            presenter.onMovieClicked(it)
+        }
         recyclerView.adapter = moviesAdapter
     }
 
     private fun initRecyclerView() {
         recyclerView.layoutManager = GridLayoutManager(activity, SPAN_COUNT)
-        recyclerView.setHasFixedSize(true) //items are same height
+        recyclerView.setHasFixedSize(true) // items are same height
         recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                 super.onScrollStateChanged(recyclerView, newState)

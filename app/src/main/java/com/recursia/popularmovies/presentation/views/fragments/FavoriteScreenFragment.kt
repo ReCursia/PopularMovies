@@ -18,19 +18,22 @@ import com.recursia.popularmovies.TheApplication
 import com.recursia.popularmovies.domain.models.Movie
 import com.recursia.popularmovies.presentation.presenters.FavoriteScreenPresenter
 import com.recursia.popularmovies.presentation.views.adapters.MoviesAdapter
-import com.recursia.popularmovies.presentation.views.adapters.OnItemClickListener
 import com.recursia.popularmovies.presentation.views.contracts.FavoriteScreenContract
 
 class FavoriteScreenFragment : MvpAppCompatFragment(), FavoriteScreenContract {
     @BindView(R.id.favoriteRecycleView)
     lateinit var recyclerView: RecyclerView
+
     @BindView(R.id.toolbar)
     lateinit var toolbar: Toolbar
+
     @BindView(R.id.noFavoriteMoviesScreen)
     lateinit var noFavoriteMoviesScreen: View
+
     @InjectPresenter
     lateinit var presenter: FavoriteScreenPresenter
     private lateinit var moviesAdapter: MoviesAdapter
+
     @ProvidePresenter
     fun providePresenter(): FavoriteScreenPresenter {
         val app = TheApplication.getInstance().appComponent
@@ -63,24 +66,20 @@ class FavoriteScreenFragment : MvpAppCompatFragment(), FavoriteScreenContract {
     }
 
     private fun initToolbar() {
-        toolbar.setNavigationIcon(R.drawable.ic_arrow_back)
-        toolbar.setNavigationOnClickListener { v: View? -> presenter.onBackPressed() }
         toolbar.setBackgroundColor(resources.getColor(R.color.black))
         toolbar.title = getString(R.string.favorite_item)
     }
 
     private fun initRecyclerView() {
         recyclerView.layoutManager = GridLayoutManager(context, SPAN_COUNT)
-        recyclerView.setHasFixedSize(true) //items are same height
+        recyclerView.setHasFixedSize(true) // items are same height
     }
 
     private fun initAdapter() {
         moviesAdapter = MoviesAdapter(context!!, IS_RECOMMENDATION_MOVIES)
-        moviesAdapter.setClickListener(object : OnItemClickListener<Movie> {
-            override fun onItemClick(movie: Movie) {
-                presenter.onItemClicked(movie)
-            }
-        })
+        moviesAdapter.setClickListener {
+            presenter.onItemClicked(it)
+        }
         recyclerView.adapter = moviesAdapter
     }
 
@@ -94,6 +93,7 @@ class FavoriteScreenFragment : MvpAppCompatFragment(), FavoriteScreenContract {
         private const val SPAN_COUNT = 2
         private const val IS_RECOMMENDATION_MOVIES = false
 
-        fun getInstance() = FavoriteScreenFragment()
+        val instance: FavoriteScreenFragment
+            get() = FavoriteScreenFragment()
     }
 }

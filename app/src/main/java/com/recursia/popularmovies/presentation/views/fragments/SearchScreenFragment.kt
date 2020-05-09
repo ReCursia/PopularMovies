@@ -19,14 +19,15 @@ import com.recursia.popularmovies.TheApplication
 import com.recursia.popularmovies.domain.models.Movie
 import com.recursia.popularmovies.presentation.presenters.SearchScreenPresenter
 import com.recursia.popularmovies.presentation.views.adapters.MoviesAdapter
-import com.recursia.popularmovies.presentation.views.adapters.OnItemClickListener
 import com.recursia.popularmovies.presentation.views.contracts.SearchScreenContract
 
 class SearchScreenFragment : MvpAppCompatFragment(), SearchScreenContract {
     @BindView(R.id.searchRecyclerView)
     lateinit var searchRecyclerView: RecyclerView
+
     @BindView(R.id.toolbar)
     lateinit var toolbar: Toolbar
+
     @InjectPresenter
     lateinit var presenter: SearchScreenPresenter
     private lateinit var moviesAdapter: MoviesAdapter
@@ -56,8 +57,6 @@ class SearchScreenFragment : MvpAppCompatFragment(), SearchScreenContract {
     private fun initToolbar() {
         toolbar.title = getString(R.string.search_movie_title)
         toolbar.setBackgroundColor(resources.getColor(R.color.black))
-        toolbar.setNavigationIcon(R.drawable.ic_arrow_back)
-        toolbar.setNavigationOnClickListener { v: View? -> presenter.onBackPressed() }
         toolbar.inflateMenu(R.menu.search_menu)
         val searchItem = toolbar.menu.findItem(R.id.searchItem)
         val searchView = searchItem.actionView as SearchView
@@ -81,11 +80,9 @@ class SearchScreenFragment : MvpAppCompatFragment(), SearchScreenContract {
 
     private fun initAdapter() {
         moviesAdapter = MoviesAdapter(context!!, false)
-        moviesAdapter.setClickListener(object : OnItemClickListener<Movie> {
-            override fun onItemClick(movie: Movie) {
-                presenter.onItemClicked(movie)
-            }
-        })
+        moviesAdapter.setClickListener {
+            presenter.onItemClicked(it)
+        }
         searchRecyclerView.adapter = moviesAdapter
     }
 

@@ -9,5 +9,4 @@ class TopRatedDiscoverStrategy : DiscoverStrategy {
 
     override val voteCount: Int
         get() = NetworkUtils.VOTE_COUNT_TOP_RATED
-
 }

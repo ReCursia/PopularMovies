@@ -8,5 +8,4 @@ class FavoriteScreenInteractorImpl(private val moviesRepository: MoviesRepositor
 
     override val allFavoriteMovies: Flowable<List<Movie>>
         get() = moviesRepository.allFavoriteMovies
-
 }
