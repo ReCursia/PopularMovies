@@ -151,6 +151,7 @@ class IntroScreenFragment : MvpAppCompatFragment(), IntroScreenContract {
     companion object {
         private const val DOT_SIZE = 35
         private const val DOT_FROM_HTML = "&#8226"
+
         val instance: IntroScreenFragment
             get() = IntroScreenFragment()
     }

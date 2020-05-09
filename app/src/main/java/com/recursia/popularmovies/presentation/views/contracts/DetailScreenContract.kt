@@ -18,15 +18,6 @@ interface DetailScreenContract : MvpView {
 
     fun showMovieDetail()
 
-    // Favorite icon
-    fun setFavoriteIconOn()
-
-    fun setFavoriteIconOff()
-
-    fun showFavoriteIcon()
-
-    fun hideFavoriteIcon()
-
     // Share
     @StateStrategyType(SkipStrategy::class)
     fun shareMovie(movie: Movie)
@@ -35,10 +26,7 @@ interface DetailScreenContract : MvpView {
     fun showErrorMessage(message: String)
 
     @StateStrategyType(SkipStrategy::class)
-    fun showMovieAddedMessage()
-
-    @StateStrategyType(SkipStrategy::class)
-    fun showMovieRemovedMessage()
+    fun showMovieStatusSetMessage()
 
     @StateStrategyType(SkipStrategy::class)
     fun openTrailerUrl(trailer: Trailer)

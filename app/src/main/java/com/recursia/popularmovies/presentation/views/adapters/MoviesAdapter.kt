@@ -42,7 +42,7 @@ class MoviesAdapter(private val context: Context,
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, i: Int): RecyclerView.ViewHolder {
         return if (isRecommendationMovies) {
-            val itemView = LayoutInflater.from(viewGroup.context).inflate(R.layout.recommendation_movie_item, viewGroup, false)
+            val itemView = LayoutInflater.from(viewGroup.context).inflate(R.layout.movie_item, viewGroup, false)
             RecommendationMovieViewHolder(itemView)
         } else {
             val itemView = LayoutInflater.from(viewGroup.context).inflate(R.layout.movie_item, viewGroup, false)

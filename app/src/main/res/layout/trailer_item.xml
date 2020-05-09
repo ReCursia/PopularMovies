@@ -18,7 +18,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/gradient_item" />
+        android:background="@drawable/gradient_movie_poster" />
 
     <TextView
         android:ellipsize="end"

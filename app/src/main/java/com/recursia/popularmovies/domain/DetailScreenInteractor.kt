@@ -9,9 +9,7 @@ interface DetailScreenInteractor {
 
     fun getMovieById(movieId: Int, language: String): Single<Movie>
 
-    fun makeFavoriteMovie(movie: Movie): Completable
-
-    fun removeFavoriteMovie(movie: Movie): Completable
+    fun setMovieStatus(movie: Movie): Completable
 
     fun getMovieRecommendations(movieId: Int, page: Int, language: String): Single<List<Movie>>
 

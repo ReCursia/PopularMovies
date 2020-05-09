@@ -23,6 +23,7 @@ import ru.terrakok.cicerone.Router
 class PhotoScreenFragment : MvpAppCompatFragment() {
     @BindView(R.id.backdropImage)
     lateinit var backdropImage: TouchImageView
+
     @BindView(R.id.toolbar)
     lateinit var toolbar: Toolbar
     private lateinit var router: Router

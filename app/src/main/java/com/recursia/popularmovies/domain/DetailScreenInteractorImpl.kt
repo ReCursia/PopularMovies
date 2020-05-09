@@ -5,32 +5,20 @@ import com.recursia.popularmovies.domain.models.Review
 import io.reactivex.Completable
 import io.reactivex.Single
 
-class DetailScreenInteractorImpl(
-        private val moviesRepository: MoviesRepository,
-        private val translateRepository: TranslateRepository
-) : DetailScreenInteractor {
+class DetailScreenInteractorImpl : DetailScreenInteractor {
+    override fun getMovieById(movieId: Int, language: String): Single<Movie> {
+        TODO("Not yet implemented")
+    }
+
+    override fun setMovieStatus(movie: Movie): Completable {
+        TODO("Not yet implemented")
+    }
 
     override fun getMovieRecommendations(movieId: Int, page: Int, language: String): Single<List<Movie>> {
-        return moviesRepository.getMovieRecommendations(movieId, page, language)
-    }
-
-    override fun getMovieById(movieId: Int, language: String): Single<Movie> {
-        return moviesRepository.getMovieById(movieId, language)
-    }
-
-    override fun makeFavoriteMovie(movie: Movie): Completable {
-        return moviesRepository.makeFavoriteMovie(movie)
-    }
-
-    override fun removeFavoriteMovie(movie: Movie): Completable {
-        return moviesRepository.removeFavoriteMovie(movie)
+        TODO("Not yet implemented")
     }
 
     override fun translateReview(review: Review, lang: String): Single<Review> {
-        return translateRepository.translateText(review.text!!, lang)
-                .map {
-                    review.text = it
-                    review
-                }
+        TODO("Not yet implemented")
     }
 }

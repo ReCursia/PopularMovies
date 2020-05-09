@@ -11,9 +11,9 @@ import ru.terrakok.cicerone.Router
 
 @InjectViewState
 class IntroScreenPresenter(
-    private val prefUtils: PrefUtils,
-    private val sectionItems: List<SectionItem>,
-    private val router: Router
+        private val prefUtils: PrefUtils,
+        private val sectionItems: List<SectionItem>,
+        private val router: Router
 ) : MvpPresenter<IntroScreenContract>() {
     private var currentSection: Int = 0
 

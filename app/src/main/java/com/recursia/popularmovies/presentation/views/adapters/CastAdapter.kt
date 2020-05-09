@@ -38,7 +38,7 @@ class CastAdapter(private val context: Context) : RecyclerView.Adapter<CastAdapt
         // Image
         Glide.with(context)
                 .load(NetworkUtils.getMediumProfileUrl(castItem.profilePath ?: ""))
-                .placeholder(R.drawable.ic_user_placeholder)
+                .placeholder(R.drawable.ic_cast_placeholder)
                 .transition(DrawableTransitionOptions.withCrossFade(FADE_OUT_DURATION))
                 .into(movieViewHolder.castImage)
         // Name
