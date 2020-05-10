@@ -122,8 +122,7 @@ class DetailScreenFragment : MvpAppCompatFragment(), DetailScreenContract {
     private fun initViewPager() {
         val pagerAdapter = MoviePagerAdapter(childFragmentManager, context!!, movieId)
         viewPager.adapter = pagerAdapter
-        //TODO make resource
-        viewPager.pageMargin = DimensionsUtils.convertDpToPixel(20.0f, context!!).toInt()
+        viewPager.pageMargin = DimensionsUtils.convertDpToPixel(resources.getDimension(R.dimen.view_pager_margin), context!!).toInt()
     }
 
     private fun initMovieStatusAdapter() {
