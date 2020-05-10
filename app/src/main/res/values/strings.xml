@@ -63,6 +63,9 @@
     <string name="main_screen_top_rated">Top rated</string>
     <string name="main_screen_upcoming">Upcoming</string>
     <string name="main_screen_latest">Latest</string>
+    <string name="welcome_account_text">If you want to see you favorite movies, sign in or create account</string>
+    <string name="welcome_screen_next">Next</string>
+    <string name="account_title">Account</string>
 
 
 </resources>

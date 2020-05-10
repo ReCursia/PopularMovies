@@ -17,6 +17,19 @@ class Screens {
         }
     }
 
+    class WelcomeScreen : SupportAppScreen() {
+        override fun getFragment(): Fragment {
+            return WelcomeScreenFragment.getInstance()
+        }
+    }
+
+    class AccountScreen : SupportAppScreen() {
+        override fun getFragment(): Fragment {
+            //TODO implement account screen and replace it
+            return SearchScreenFragment.instance
+        }
+    }
+
     class IntroScreen : SupportAppScreen() {
         override fun getFragment(): Fragment {
             return IntroScreenFragment.instance

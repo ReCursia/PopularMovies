@@ -44,7 +44,7 @@ class MainScreenPresenter(
     }
 
     fun onAccountClicked() {
-        //TODO implement it
+        router.navigateTo(Screens.WelcomeScreen())
     }
 
     fun onSearchItemClicked() {
