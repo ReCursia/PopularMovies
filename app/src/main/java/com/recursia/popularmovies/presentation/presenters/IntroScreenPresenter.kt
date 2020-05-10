@@ -2,11 +2,9 @@ package com.recursia.popularmovies.presentation.presenters
 
 import com.arellomobile.mvp.InjectViewState
 import com.arellomobile.mvp.MvpPresenter
-import com.recursia.popularmovies.Screens
 import com.recursia.popularmovies.presentation.models.SectionItem
 import com.recursia.popularmovies.presentation.views.contracts.IntroScreenContract
 import com.recursia.popularmovies.utils.intro.PrefUtils
-
 import ru.terrakok.cicerone.Router
 
 @InjectViewState
@@ -37,7 +35,8 @@ class IntroScreenPresenter(
         if (isFirstLaunch) {
             initViewState()
         } else {
-            router.newRootScreen(Screens.MainScreen())
+            //TODO turn it back
+            //router.newRootScreen(Screens.MainScreen())
         }
     }
 
@@ -77,7 +76,8 @@ class IntroScreenPresenter(
 
     fun onFinishButtonClicked() {
         prefUtils.putValue(false) // now this is not first launch
-        router.newRootScreen(Screens.MainScreen())
+        //TODO turn it back
+        //router.newRootScreen(Screens.MainScreen())
     }
 
     fun onPageSelected(i: Int) {

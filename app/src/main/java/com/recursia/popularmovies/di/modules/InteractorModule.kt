@@ -9,8 +9,8 @@ import dagger.Provides
 class InteractorModule {
 
     @Provides
-    internal fun provideDetailScreenInteractor(): DetailScreenInteractor {
-        return DetailScreenInteractorImpl()
+    internal fun provideDetailScreenInteractor(moviesRepository: MoviesRepository): DetailScreenInteractor {
+        return DetailScreenInteractorImpl(moviesRepository)
     }
 
     @Provides

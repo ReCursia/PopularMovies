@@ -31,6 +31,7 @@ import com.recursia.popularmovies.presentation.views.adapters.MoviePagerAdapter
 import com.recursia.popularmovies.presentation.views.adapters.MovieStatusesAdapter
 import com.recursia.popularmovies.presentation.views.contracts.DetailScreenContract
 import com.recursia.popularmovies.presentation.views.decorations.MarginItemDecoration
+import com.recursia.popularmovies.utils.DimensionsUtils
 import com.recursia.popularmovies.utils.NetworkUtils
 import com.recursia.popularmovies.utils.TagUtils
 
@@ -121,6 +122,8 @@ class DetailScreenFragment : MvpAppCompatFragment(), DetailScreenContract {
     private fun initViewPager() {
         val pagerAdapter = MoviePagerAdapter(childFragmentManager, context!!, movieId)
         viewPager.adapter = pagerAdapter
+        //TODO make resource
+        viewPager.pageMargin = DimensionsUtils.convertDpToPixel(20.0f, context!!).toInt()
     }
 
     private fun initMovieStatusAdapter() {
@@ -128,6 +131,7 @@ class DetailScreenFragment : MvpAppCompatFragment(), DetailScreenContract {
         movieStatusesAdapter.setOnClickListener {
             presenter.onMovieStatusClicked(movie, it)
         }
+        movieStatusRecyclerView.adapter = movieStatusesAdapter
     }
 
     private fun initMovieStatusRecyclerView() {
@@ -158,6 +162,8 @@ class DetailScreenFragment : MvpAppCompatFragment(), DetailScreenContract {
     private fun initCollapsingToolbarLayout() {
         collapsingToolbarLayout.setExpandedTitleColor(resources.getColor(R.color.white))
         collapsingToolbarLayout.setCollapsedTitleTextColor(resources.getColor(R.color.white))
+        //TODO remove
+        //collapsingToolbarLayout.setExpandedTitleMargin(0, 0, 0, 220)
     }
 
     override fun showMovieStatusSetMessage() {

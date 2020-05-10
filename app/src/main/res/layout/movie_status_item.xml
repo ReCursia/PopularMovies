@@ -24,6 +24,7 @@
         <TextView
             android:id="@+id/status_emoji_text_view"
             android:layout_width="wrap_content"
+            android:textSize="20sp"
             android:layout_height="wrap_content"
             tools:text="EMOJI" />
 

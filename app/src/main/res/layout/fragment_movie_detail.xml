@@ -1,156 +1,162 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:background="@color/black">
+    android:layout_height="wrap_content">
 
-    <android.support.v7.widget.CardView
-        android:id="@+id/detail_card_view"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:elevation="0dp"
-        app:cardBackgroundColor="@color/darkGray"
-        app:cardCornerRadius="16dp">
+        android:orientation="vertical"
+        tools:background="@color/black">
 
-        <FrameLayout
+        <android.support.v7.widget.CardView
+            android:id="@+id/detail_card_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingStart="20dp"
-            android:paddingTop="24dp"
-            android:paddingEnd="20dp"
-            android:paddingBottom="24dp">
+            android:layout_marginBottom="10dp"
+            android:elevation="0dp"
+            app:cardBackgroundColor="@color/darkGray"
+            app:cardCornerRadius="16dp">
 
-            <LinearLayout
+            <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:paddingStart="20dp"
+                android:paddingTop="24dp"
+                android:paddingEnd="20dp"
+                android:paddingBottom="24dp">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dp"
-                    android:text="@string/description"
-                    android:textColor="@color/lightGray" />
-
-                <TextView
-                    android:id="@+id/description"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dp"
-                    android:textColor="@color/white"
-                    android:textSize="16sp"
-                    tools:text="Movie description here we go" />
+                    android:orientation="vertical">
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dp"
-                    android:text="@string/release_date"
-                    android:textColor="@color/lightGray" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:text="@string/description"
+                        android:textColor="@color/lightGray" />
 
-                <TextView
-                    android:id="@+id/release_date"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dp"
-                    android:textColor="@color/white"
-                    android:textSize="16sp"
-                    tools:text="23 sept. 2020" />
+                    <TextView
+                        android:id="@+id/description"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:textColor="@color/white"
+                        android:textSize="16sp"
+                        tools:text="Movie description here we go" />
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="16dp"
-                    android:text="@string/genre"
-                    android:textColor="@color/lightGray" />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:text="@string/release_date"
+                        android:textColor="@color/lightGray" />
 
-                <android.support.design.chip.ChipGroup
-                    android:id="@+id/genres_group"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    <TextView
+                        android:id="@+id/release_date"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:textColor="@color/white"
+                        android:textSize="16sp"
+                        tools:text="23 sept. 2020" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="16dp"
+                        android:text="@string/genre"
+                        android:textColor="@color/lightGray" />
+
+                    <android.support.design.chip.ChipGroup
+                        android:id="@+id/genres_group"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
 
 
-            </LinearLayout>
+                </LinearLayout>
 
-        </FrameLayout>
+            </FrameLayout>
 
-    </android.support.v7.widget.CardView>
+        </android.support.v7.widget.CardView>
 
-    <android.support.v7.widget.CardView
-        android:id="@+id/cast_card_view"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:elevation="0dp"
-        app:cardBackgroundColor="@color/darkGray"
-        app:cardCornerRadius="16dp">
-
-        <FrameLayout
+        <android.support.v7.widget.CardView
+            android:id="@+id/cast_card_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingTop="24dp"
-            android:paddingBottom="24dp">
+            android:layout_marginBottom="10dp"
+            android:elevation="0dp"
+            app:cardBackgroundColor="@color/darkGray"
+            app:cardCornerRadius="16dp">
 
-            <LinearLayout
+            <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:paddingTop="24dp"
+                android:paddingBottom="24dp">
 
-                <TextView
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="24dp"
-                    android:layout_marginBottom="10dp"
-                    android:text="@string/cast"
-                    android:textColor="@color/lightGray" />
+                    android:orientation="vertical">
 
-                <android.support.v7.widget.RecyclerView
-                    android:id="@+id/recycler_view_cast"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-            </LinearLayout>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="24dp"
+                        android:layout_marginBottom="10dp"
+                        android:text="@string/cast"
+                        android:textColor="@color/lightGray" />
 
-        </FrameLayout>
-    </android.support.v7.widget.CardView>
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/recycler_view_cast"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
 
-    <android.support.v7.widget.CardView
-        android:id="@+id/recommendation_card_view"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:elevation="0dp"
-        app:cardBackgroundColor="@color/darkGray"
-        app:cardCornerRadius="16dp">
+            </FrameLayout>
+        </android.support.v7.widget.CardView>
 
-        <FrameLayout
+        <android.support.v7.widget.CardView
+            android:id="@+id/recommendation_card_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingTop="24dp"
-            android:paddingBottom="24dp">
+            android:elevation="0dp"
+            app:cardBackgroundColor="@color/darkGray"
+            app:cardCornerRadius="16dp">
 
-            <LinearLayout
+            <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:paddingTop="24dp"
+                android:paddingBottom="24dp">
 
-                <TextView
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="24dp"
-                    android:layout_marginBottom="10dp"
-                    android:text="@string/movie_recommendations"
-                    android:textColor="@color/lightGray" />
+                    android:orientation="vertical">
 
-                <android.support.v7.widget.RecyclerView
-                    android:id="@+id/recycler_view_recommendation"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-            </LinearLayout>
-        </FrameLayout>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="24dp"
+                        android:layout_marginBottom="10dp"
+                        android:text="@string/movie_recommendations"
+                        android:textColor="@color/lightGray" />
 
-    </android.support.v7.widget.CardView>
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/recycler_view_recommendation"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+            </FrameLayout>
 
-</LinearLayout>
+        </android.support.v7.widget.CardView>
+
+    </LinearLayout>
+
+</android.support.v4.widget.NestedScrollView>

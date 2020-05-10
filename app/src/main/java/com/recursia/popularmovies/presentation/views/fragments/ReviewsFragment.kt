@@ -11,7 +11,9 @@ import butterknife.BindView
 import butterknife.ButterKnife
 import com.arellomobile.mvp.MvpAppCompatFragment
 import com.arellomobile.mvp.presenter.InjectPresenter
+import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.recursia.popularmovies.R
+import com.recursia.popularmovies.TheApplication
 import com.recursia.popularmovies.domain.models.Review
 import com.recursia.popularmovies.presentation.presenters.ReviewsPresenter
 import com.recursia.popularmovies.presentation.views.adapters.ReviewsAdapter
@@ -26,6 +28,16 @@ class ReviewsFragment : MvpAppCompatFragment(), ReviewsContract {
 
     @InjectPresenter
     lateinit var presenter: ReviewsPresenter
+
+    private var movieId = 0
+
+
+    @ProvidePresenter
+    internal fun providePresenter(): ReviewsPresenter {
+        movieId = arguments!!.getInt(TagUtils.MOVIE_ID)
+        val app = TheApplication.getInstance().appComponent
+        return ReviewsPresenter(app!!.detailScreenInteractor, movieId)
+    }
 
     private lateinit var reviewsAdapter: ReviewsAdapter
 

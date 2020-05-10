@@ -121,7 +121,29 @@ class MoviesRepositoryImpl(
                                 "This my lovely long review ahahahah look at this!!!!!!!!!!!!!!!!!!" +
                                 "This my lovely long review ahahahah look at this!!!!!!!!!!!!!!!!!!" +
                                 "This my lovely long review ahahahah look at this!!!!!!!!!!!!!!!!!!" +
+                                "This my lovely long review ahahahah look at this!!!!!!!!!!!!!!!!!!"),
+                        Review("Test", "This my lovely long review ahahahah look at this!!!!!!!!!!!!!!!!!!" +
+                                "This my lovely long review ahahahah look at this!!!!!!!!!!!!!!!!!!" +
+                                "This my lovely long review ahahahah look at this!!!!!!!!!!!!!!!!!!" +
+                                "This my lovely long review ahahahah look at this!!!!!!!!!!!!!!!!!!" +
+                                "This my lovely long review ahahahah look at this!!!!!!!!!!!!!!!!!!"),
+                        Review("Test", "This my lovely long review ahahahah look at this!!!!!!!!!!!!!!!!!!" +
+                                "This my lovely long review ahahahah look at this!!!!!!!!!!!!!!!!!!" +
+                                "This my lovely long review ahahahah look at this!!!!!!!!!!!!!!!!!!" +
+                                "This my lovely long review ahahahah look at this!!!!!!!!!!!!!!!!!!" +
+                                "This my lovely long review ahahahah look at this!!!!!!!!!!!!!!!!!!"),
+                        Review("Test", "This my lovely long review ahahahah look at this!!!!!!!!!!!!!!!!!!" +
+                                "This my lovely long review ahahahah look at this!!!!!!!!!!!!!!!!!!" +
+                                "This my lovely long review ahahahah look at this!!!!!!!!!!!!!!!!!!" +
+                                "This my lovely long review ahahahah look at this!!!!!!!!!!!!!!!!!!" +
+                                "This my lovely long review ahahahah look at this!!!!!!!!!!!!!!!!!!" +
+                                "This my lovely long review ahahahah look at this!!!!!!!!!!!!!!!!!!" +
+                                "This my lovely long review ahahahah look at this!!!!!!!!!!!!!!!!!!" +
+                                "This my lovely long review ahahahah look at this!!!!!!!!!!!!!!!!!!" +
+                                "This my lovely long review ahahahah look at this!!!!!!!!!!!!!!!!!!" +
+                                "This my lovely long review ahahahah look at this!!!!!!!!!!!!!!!!!!" +
                                 "This my lovely long review ahahahah look at this!!!!!!!!!!!!!!!!!!")
+
                 ),
                 MovieStatus.WANT_TO_WATCH,
                 "This is Harry potter film" +
@@ -129,11 +151,11 @@ class MoviesRepositoryImpl(
                         "This is Harry potter film" +
                         "This is Harry potter film" +
                         "This is Harry potter film",
-                null,
+                "",
                 "23 sempt",
                 "Harry Potter and Prince Half-Blood test",
                 8.4,
-                null
+                ""
 
         )
     }

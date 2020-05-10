@@ -19,7 +19,6 @@ import com.recursia.popularmovies.R
 import com.recursia.popularmovies.TheApplication
 import com.recursia.popularmovies.domain.models.Genre
 import com.recursia.popularmovies.domain.models.Movie
-import com.recursia.popularmovies.domain.models.Trailer
 import com.recursia.popularmovies.presentation.presenters.MovieDetailPresenter
 import com.recursia.popularmovies.presentation.views.adapters.CastAdapter
 import com.recursia.popularmovies.presentation.views.adapters.MoviesAdapter
@@ -120,6 +119,10 @@ class MovieDetailFragment : MvpAppCompatFragment(), MovieDetailContract {
     }
 
     override fun setMovieDetail(movie: Movie) {
+        // Description
+        descriptionTextView.text = movie.overview
+        // Release date
+        releaseDateTextView.text = movie.releaseDate
         // Cast
         castAdapter.setCast(movie.casts)
         // Genres

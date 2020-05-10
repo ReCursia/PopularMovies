@@ -23,7 +23,7 @@ class MovieStatusesAdapter(private val context: Context) : RecyclerView.Adapter<
 
     fun setStatusHighlighted(status: MovieStatus) {
         val index = statuses.indexOf(status)
-        for (i in 0..isHighlighted.size) {
+        for (i in isHighlighted.indices) {
             isHighlighted[i] = false
         }
         isHighlighted[index] = true
@@ -56,9 +56,9 @@ class MovieStatusesAdapter(private val context: Context) : RecyclerView.Adapter<
         val status = statuses[index]
         //TODO move it factory class and make view model
         val emoji = when (status) {
-            MovieStatus.ALREADY_SAW -> "&#128530;"
-            MovieStatus.WANT_TO_WATCH -> "&#128530;"
-            MovieStatus.FAVORITE -> "&#128530;"
+            MovieStatus.ALREADY_SAW -> 128522
+            MovieStatus.WANT_TO_WATCH -> 128522
+            MovieStatus.FAVORITE -> 128522
             MovieStatus.UNKNOWN -> throw IllegalStateException()
         }
         val text = when (status) {
@@ -67,17 +67,20 @@ class MovieStatusesAdapter(private val context: Context) : RecyclerView.Adapter<
             MovieStatus.FAVORITE -> context.getString(R.string.status_favorite)
             MovieStatus.UNKNOWN -> throw IllegalStateException()
         }
-        movieStatusViewHolder.statusEmojiTextView.text = emoji
+        movieStatusViewHolder.statusEmojiTextView.text = getEmojiByUnicode(emoji)
         movieStatusViewHolder.statusTextView.text = text
 
-        if (isHighlighted[index]) {
-            movieStatusViewHolder.cardView.strokeColor = context.resources.getColor(R.color.white)
-            movieStatusViewHolder.statusTextView.setTextColor(context.resources.getColor(R.color.white))
-        }
+        val colorId = if (isHighlighted[index]) R.color.white else R.color.lightGray
+        movieStatusViewHolder.cardView.strokeColor = context.resources.getColor(colorId)
+        movieStatusViewHolder.statusTextView.setTextColor(context.resources.getColor(colorId))
 
         movieStatusViewHolder.itemView.setOnClickListener {
             clickListener?.invoke(status)
         }
+    }
+
+    private fun getEmojiByUnicode(unicode: Int): String? {
+        return String(Character.toChars(unicode))
     }
 
     companion object {
