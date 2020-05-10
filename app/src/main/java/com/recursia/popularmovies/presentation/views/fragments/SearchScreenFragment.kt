@@ -79,8 +79,8 @@ class SearchScreenFragment : MvpAppCompatFragment(), SearchScreenContract {
     }
 
     private fun initAdapter() {
-        moviesAdapter = MoviesAdapter(context!!, false)
-        moviesAdapter.setClickListener {
+        moviesAdapter = MoviesAdapter(context!!)
+        moviesAdapter.setOnClickListener {
             presenter.onItemClicked(it)
         }
         searchRecyclerView.adapter = moviesAdapter

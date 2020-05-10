@@ -3,8 +3,13 @@ package com.recursia.popularmovies.presentation.presenters
 import com.arellomobile.mvp.InjectViewState
 import com.arellomobile.mvp.MvpPresenter
 import com.recursia.popularmovies.domain.DetailScreenInteractor
+import com.recursia.popularmovies.domain.models.Movie
+import com.recursia.popularmovies.domain.models.enums.MovieStatus
 import com.recursia.popularmovies.presentation.views.contracts.DetailScreenContract
+import com.recursia.popularmovies.utils.LangUtils
+import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.schedulers.Schedulers
 import ru.terrakok.cicerone.Router
 
 @InjectViewState
@@ -17,14 +22,19 @@ class DetailScreenPresenter(
 
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
-        viewState.hideFavoriteIcon()
-        viewState.hideMovieDetail()
-        viewState.hideRecommendationMovies()
         initData()
     }
 
     private fun initData() {
-        //TODO implement
+        val d = detailScreenInteractor
+                .getMovieById(movieId, LangUtils.defaultLanguage)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                        { viewState.setMovieDetail(it) },
+                        { viewState.showErrorMessage(it.localizedMessage) }
+                )
+        compositeDisposable.add(d)
     }
 
     override fun onDestroy() {
@@ -34,6 +44,30 @@ class DetailScreenPresenter(
 
     fun onBackPressed() {
         router.exit()
+    }
+
+    fun onShareIconClicked(movie: Movie?) {
+        movie?.let {
+            viewState.shareMovie(movie)
+        }
+    }
+
+    fun onMovieStatusClicked(movie: Movie?, status: MovieStatus) {
+        movie?.let {
+            val d = detailScreenInteractor
+                    .setMovieStatus(movie)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .doOnSubscribe { movie.status = status }
+                    .subscribe(
+                            {
+                                viewState.setMovieStatus(status)
+                                viewState.showMovieStatusSetMessage()
+                            },
+                            { viewState.showErrorMessage(it.localizedMessage) }
+                    )
+            compositeDisposable.add(d)
+        }
     }
 
     companion object {

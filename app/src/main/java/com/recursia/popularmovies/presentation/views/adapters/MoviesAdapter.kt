@@ -15,13 +15,13 @@ import com.recursia.popularmovies.R
 import com.recursia.popularmovies.domain.models.Movie
 import com.recursia.popularmovies.utils.NetworkUtils
 
-class MoviesAdapter(private val context: Context,
-                    private val isRecommendationMovies: Boolean
-) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class MoviesAdapter(
+        private val context: Context
+) : RecyclerView.Adapter<MoviesAdapter.MovieViewHolder>() {
     private var movies: MutableList<Movie> = ArrayList()
     private var clickListener: ((Movie) -> Unit)? = null
 
-    fun setClickListener(clickListener: (Movie) -> Unit) {
+    fun setOnClickListener(clickListener: (Movie) -> Unit) {
         this.clickListener = clickListener
     }
 
@@ -40,26 +40,17 @@ class MoviesAdapter(private val context: Context,
         return movies.size
     }
 
-    override fun onCreateViewHolder(viewGroup: ViewGroup, i: Int): RecyclerView.ViewHolder {
-        return if (isRecommendationMovies) {
-            val itemView = LayoutInflater.from(viewGroup.context).inflate(R.layout.movie_item, viewGroup, false)
-            RecommendationMovieViewHolder(itemView)
-        } else {
-            val itemView = LayoutInflater.from(viewGroup.context).inflate(R.layout.movie_item, viewGroup, false)
-            MovieViewHolder(itemView)
-        }
+    override fun onCreateViewHolder(viewGroup: ViewGroup, i: Int): MovieViewHolder {
+        val itemView = LayoutInflater.from(viewGroup.context).inflate(R.layout.movie_item, viewGroup, false)
+        return MovieViewHolder(itemView)
     }
 
-    override fun onBindViewHolder(movieViewHolder: RecyclerView.ViewHolder, i: Int) {
+    override fun onBindViewHolder(movieViewHolder: MovieViewHolder, i: Int) {
         val movie = movies[i]
-        if (isRecommendationMovies) {
-            setRecommendationMovieData(movie, movieViewHolder as RecommendationMovieViewHolder)
-        } else {
-            setPlainMovieData(movie, movieViewHolder as MovieViewHolder)
-        }
+        setMovieData(movie, movieViewHolder)
     }
 
-    private fun setRecommendationMovieData(movie: Movie, movieViewHolder: RecommendationMovieViewHolder) {
+    private fun setMovieData(movie: Movie, movieViewHolder: MovieViewHolder) {
         // Title
         movieViewHolder.movieTitleTextView.text = movie.title
         // Rating
@@ -76,39 +67,7 @@ class MoviesAdapter(private val context: Context,
         }
     }
 
-    private fun setPlainMovieData(movie: Movie, movieViewHolder: MovieViewHolder) {
-        // Title
-        movieViewHolder.movieTitleTextView.text = movie.title
-        // Rating
-        movieViewHolder.movieRatingTextView.text = movie.voteAverage.toString()
-        // Image
-        Glide.with(context)
-                .load(NetworkUtils.getMediumPosterUrl(movie.posterPath ?: ""))
-                .placeholder(R.drawable.ic_poster_placeholder)
-                .transition(DrawableTransitionOptions.withCrossFade(FADE_OUT_DURATION))
-                .into(movieViewHolder.moviePoster)
-        // Listener
-        movieViewHolder.itemView.setOnClickListener {
-            clickListener?.invoke(movie)
-        }
-    }
-
-    internal inner class MovieViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        @BindView(R.id.smallMoviePoster)
-        lateinit var moviePoster: ImageView
-
-        @BindView(R.id.movieTitleTextView)
-        lateinit var movieTitleTextView: TextView
-
-        @BindView(R.id.movieRatingTextView)
-        lateinit var movieRatingTextView: TextView
-
-        init {
-            ButterKnife.bind(this, itemView)
-        }
-    }
-
-    internal inner class RecommendationMovieViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class MovieViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         @BindView(R.id.smallMoviePoster)
         lateinit var moviePoster: ImageView
 

@@ -4,4 +4,5 @@ enum class MovieStatus {
     UNKNOWN,
     WANT_TO_WATCH,
     ALREADY_SAW,
+    FAVORITE
 }

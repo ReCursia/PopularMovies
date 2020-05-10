@@ -1,0 +1,3 @@
+package com.recursia.popularmovies.presentation.presenters
+
+class MovieDetailPresenter

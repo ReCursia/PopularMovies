@@ -46,8 +46,9 @@ class CastAdapter(private val context: Context) : RecyclerView.Adapter<CastAdapt
     }
 
     inner class CastViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        @BindView(R.id.castImage)
+        @BindView(R.id.cast_image)
         lateinit var castImage: ImageView
+
         @BindView(R.id.castName)
         lateinit var castName: TextView
 

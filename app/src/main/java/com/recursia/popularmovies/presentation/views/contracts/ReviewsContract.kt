@@ -4,22 +4,15 @@ import com.arellomobile.mvp.MvpView
 import com.arellomobile.mvp.viewstate.strategy.AddToEndSingleStrategy
 import com.arellomobile.mvp.viewstate.strategy.SkipStrategy
 import com.arellomobile.mvp.viewstate.strategy.StateStrategyType
-import com.recursia.popularmovies.domain.models.Movie
-import com.recursia.popularmovies.domain.models.enums.MovieStatus
+import com.recursia.popularmovies.domain.models.Review
 
 @StateStrategyType(AddToEndSingleStrategy::class)
-interface DetailScreenContract : MvpView {
+interface ReviewsContract : MvpView {
 
-    fun setMovieDetail(movie: Movie)
+    fun updateReview(review: Review, position: Int)
 
-    fun setMovieStatus(status: MovieStatus)
-
-    @StateStrategyType(SkipStrategy::class)
-    fun shareMovie(movie: Movie)
+    fun setReviews(reviews: List<Review>)
 
     @StateStrategyType(SkipStrategy::class)
     fun showErrorMessage(message: String)
-
-    @StateStrategyType(SkipStrategy::class)
-    fun showMovieStatusSetMessage()
 }

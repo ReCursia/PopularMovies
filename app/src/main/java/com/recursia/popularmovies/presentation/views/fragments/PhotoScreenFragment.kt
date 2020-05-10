@@ -21,7 +21,7 @@ import com.recursia.popularmovies.utils.TagUtils.IMAGE_PATH
 import ru.terrakok.cicerone.Router
 
 class PhotoScreenFragment : MvpAppCompatFragment() {
-    @BindView(R.id.backdropImage)
+    @BindView(R.id.backdrop_image)
     lateinit var backdropImage: TouchImageView
 
     @BindView(R.id.toolbar)

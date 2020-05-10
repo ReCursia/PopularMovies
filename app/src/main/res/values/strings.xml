@@ -49,4 +49,13 @@
         <item>@string/intro_file_path_item_01</item>
         <item>@string/intro_file_path_item_02</item>
     </string-array>
+
+
+    <!-- NEW STRING -->
+    <string name="about_movie_tab_title">About movie</string>
+    <string name="reviews_tab_title">Reviews</string>
+    <string name="status_want_to_watch">Want to watch</string>
+    <string name="status_favorite">Favorite</string>
+    <string name="status_already_saw">Already saw</string>
+    <string name="status_set_toast">Status set successfully</string>
 </resources>
