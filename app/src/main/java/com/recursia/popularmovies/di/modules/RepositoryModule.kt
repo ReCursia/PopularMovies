@@ -1,13 +1,9 @@
 package com.recursia.popularmovies.di.modules
 
 import com.recursia.popularmovies.data.db.MovieDao
-import com.recursia.popularmovies.data.mappers.*
 import com.recursia.popularmovies.data.network.MoviesApi
-import com.recursia.popularmovies.data.network.TranslateApi
 import com.recursia.popularmovies.data.repositories.MoviesRepositoryImpl
-import com.recursia.popularmovies.data.repositories.TranslateRepositoryImpl
 import com.recursia.popularmovies.domain.MoviesRepository
-import com.recursia.popularmovies.domain.TranslateRepository
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
@@ -23,27 +19,21 @@ class RepositoryModule {
     @Singleton
     internal fun provideMoviesRepository(
             movieDao: MovieDao,
-            moviesApi: MoviesApi,
-            movieDatabaseModelToEntityMapper: MovieDatabaseModelToEntityMapper,
-            discoverMovieResponseToMovieMapper: DiscoverMovieResponseToMovieMapper,
-            creditsResponseToCastMapper: CreditsResponseToCastMapper,
-            movieTrailersResponseToTrailersMapper: MovieTrailersResponseToTrailersMapper,
-            movieExtraDatabaseModelToEntityMapper: MovieExtraDatabaseModelToEntityMapper,
-            entityToMovieExtraDatabaseModelMapper: EntityToMovieExtraDatabaseModelMapper,
-            reviewsResponseToReviewMapper: ReviewsResponseToReviewMapper
+            moviesApi: MoviesApi
+//            movieDatabaseModelToEntityMapper: MovieDatabaseModelToEntityMapper,
+//            discoverMovieResponseToMovieMapper: DiscoverMovieResponseToMovieMapper,
+//            creditsResponseToCastMapper: CreditsResponseToCastMapper,
+//            movieTrailersResponseToTrailersMapper: MovieTrailersResponseToTrailersMapper,
+//            movieExtraDatabaseModelToEntityMapper: MovieExtraDatabaseModelToEntityMapper,
+//            entityToMovieExtraDatabaseModelMapper: EntityToMovieExtraDatabaseModelMapper,
+//            reviewsResponseToReviewMapper: ReviewsResponseToReviewMapper
     ): MoviesRepository {
         return MoviesRepositoryImpl(
                 movieDao,
-                moviesApi,
-                movieDatabaseModelToEntityMapper,
-                discoverMovieResponseToMovieMapper,
-                creditsResponseToCastMapper,
-                movieTrailersResponseToTrailersMapper,
-                movieExtraDatabaseModelToEntityMapper,
-                entityToMovieExtraDatabaseModelMapper,
-                reviewsResponseToReviewMapper)
+                moviesApi)
     }
 
+    /*
     @Provides
     @Singleton
     internal fun provideTranslateRepository(
@@ -51,4 +41,6 @@ class RepositoryModule {
     ): TranslateRepository {
         return TranslateRepositoryImpl(translateApi)
     }
+
+     */
 }

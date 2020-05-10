@@ -28,18 +28,24 @@ import java.util.*
 class IntroScreenFragment : MvpAppCompatFragment(), IntroScreenContract {
     @BindView(R.id.section_view_pager)
     lateinit var sectionViewPager: ViewPager
+
     @BindView(R.id.finish_button)
     lateinit var finishButton: Button
+
     @BindView(R.id.previous_button)
     lateinit var previousButton: Button
+
     @BindView(R.id.next_button)
     lateinit var nextButton: Button
+
     @BindView(R.id.dots_linear_layout)
     lateinit var dotsLinearLayout: LinearLayout
+
     @InjectPresenter
     lateinit var presenter: IntroScreenPresenter
     private lateinit var sectionsPagerAdapter: SectionsPagerAdapter
     private lateinit var dots: MutableList<TextView>
+
     @ProvidePresenter
     fun providePresenter(): IntroScreenPresenter {
         val descriptions = resources.getStringArray(R.array.intro_descriptions)

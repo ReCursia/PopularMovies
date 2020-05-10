@@ -1,9 +1,6 @@
 <resources>
     <string name="app_name" translatable="false">Popular Movies</string>
     <string name="movie_poster">Poster of movie</string>
-    <string name="rating">Rating:</string>
-    <string name="release_date">Release date:</string>
-    <string name="description">Description:</string>
     <string name="added_favorite">Added to favorite</string>
     <string name="removed_favorite">Removed from favorite</string>
     <string name="about_description">This application allows you to discover interesting movies, look detail information and also save movies to favorite list</string>
@@ -16,12 +13,10 @@
     <string name="previous_button">Previous</string>
     <string name="finish_button">Done</string>
     <string name="trailer_thumbnail">Trailer thumbnail</string>
-    <string name="cast">Cast:</string>
     <string name="cast_image">Cast image</string>
     <string name="share_icon">Share icon</string>
     <string name="share_to">How you want to send movie detail?</string>
     <string name="share_message">Hey, i recommend you that movie:\n%s\n%s</string>
-    <string name="movie_recommendations">Recommendations:</string>
     <string name="original_title">Original title:</string>
     <string name="photo_detail">Photo detail</string>
     <string name="intro_description_item_00">Watch popular and top rated movies,\nexplore movies to watch tonight!</string>
@@ -35,9 +30,6 @@
     <string name="search_movie_title">Search movies</string>
     <string name="favorite_item">Favorite</string>
     <string name="about_item">About</string>
-    <string name="review">Reviews:</string>
-    <string name="translate_button">Translate</string>
-    <string name="show_more">Show more…</string>
 
     <string-array name="intro_descriptions">
         <item>@string/intro_description_item_00</item>
@@ -58,4 +50,13 @@
     <string name="status_favorite">Favorite</string>
     <string name="status_already_saw">Already saw</string>
     <string name="status_set_toast">Status set successfully</string>
+    <string name="release_date">RELEASE DATE</string>
+    <string name="description">DESCRIPTION</string>
+    <string name="cast">CAST</string>
+    <string name="genre">GENRE</string>
+    <string name="movie_recommendations">RECOMMENDATIONS</string>
+    <string name="translate_button">Translate</string>
+    <string name="show_more">Show more</string>
+
+
 </resources>

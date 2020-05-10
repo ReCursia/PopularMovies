@@ -11,21 +11,10 @@ class Screens {
         }
     }
 
-    class FavoriteScreen : SupportAppScreen() {
-        override fun getFragment(): Fragment {
-            return FavoriteScreenFragment.instance
-        }
-    }
 
     class IntroScreen : SupportAppScreen() {
         override fun getFragment(): Fragment {
             return IntroScreenFragment.instance
-        }
-    }
-
-    class PopularScreen : SupportAppScreen() {
-        override fun getFragment(): Fragment {
-            return PopularScreenFragment.instance
         }
     }
 
@@ -41,9 +30,15 @@ class Screens {
         }
     }
 
-    class MainScreen : SupportAppScreen() {
+    class MovieDetailScreen(private val movieId: Int) : SupportAppScreen() {
         override fun getFragment(): Fragment {
-            return MainScreenFragment.instance
+            return MovieDetailFragment.getInstance(movieId)
+        }
+    }
+
+    class ReviewsScreen(private val movieId: Int) : SupportAppScreen() {
+        override fun getFragment(): Fragment {
+            return ReviewsFragment.getInstance(movieId)
         }
     }
 }

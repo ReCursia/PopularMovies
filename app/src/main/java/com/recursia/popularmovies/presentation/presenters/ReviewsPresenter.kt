@@ -2,49 +2,32 @@ package com.recursia.popularmovies.presentation.presenters
 
 import com.arellomobile.mvp.InjectViewState
 import com.arellomobile.mvp.MvpPresenter
-import com.recursia.popularmovies.Screens
 import com.recursia.popularmovies.domain.DetailScreenInteractor
-import com.recursia.popularmovies.domain.models.Movie
-import com.recursia.popularmovies.presentation.views.contracts.MovieDetailContract
+import com.recursia.popularmovies.domain.models.Review
+import com.recursia.popularmovies.presentation.views.contracts.ReviewsContract
 import com.recursia.popularmovies.utils.LangUtils
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
-import ru.terrakok.cicerone.Router
 
 @InjectViewState
-class MovieDetailPresenter(
+class ReviewsPresenter(
         private val detailScreenInteractor: DetailScreenInteractor,
-        private val router: Router,
         private val movieId: Int
-) : MvpPresenter<MovieDetailContract>() {
+) : MvpPresenter<ReviewsContract>() {
     private val compositeDisposable = CompositeDisposable()
-
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
-        initMovieData()
-        initRecommendations()
+        initData()
     }
 
-    private fun initRecommendations() {
-        val d = detailScreenInteractor
-                .getMovieRecommendations(movieId, MOVIE_RECOMMENDATION_PAGE, LangUtils.defaultLanguage)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(
-                        { viewState.setRecommendationMovies(it) },
-                        { viewState.showErrorMessage(it.localizedMessage) }
-                )
-        compositeDisposable.add(d)
-    }
-
-    private fun initMovieData() {
+    private fun initData() {
         val d = detailScreenInteractor
                 .getMovieById(movieId, LangUtils.defaultLanguage)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
-                        { viewState.setMovieDetail(it) },
+                        { viewState.setReviews(it.reviews) },
                         { viewState.showErrorMessage(it.localizedMessage) }
                 )
         compositeDisposable.add(d)
@@ -55,11 +38,16 @@ class MovieDetailPresenter(
         compositeDisposable.clear()
     }
 
-    fun onMovieClicked(movie: Movie) {
-        router.navigateTo(Screens.DetailScreen(movie.id))
-    }
-
-    companion object {
-        private const val MOVIE_RECOMMENDATION_PAGE = 1
+    fun onTranslateReviewClicked(review: Review, position: Int) {
+        //TODO view show translation loading progress
+        val d = detailScreenInteractor
+                .translateReview(review, LangUtils.defaultLanguage)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                        { viewState.updateReview(review, position) },
+                        { viewState.showErrorMessage(it.localizedMessage) }
+                )
+        compositeDisposable.add(d)
     }
 }

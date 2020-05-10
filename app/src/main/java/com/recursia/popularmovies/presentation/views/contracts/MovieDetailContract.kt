@@ -5,7 +5,6 @@ import com.arellomobile.mvp.viewstate.strategy.AddToEndSingleStrategy
 import com.arellomobile.mvp.viewstate.strategy.SkipStrategy
 import com.arellomobile.mvp.viewstate.strategy.StateStrategyType
 import com.recursia.popularmovies.domain.models.Movie
-import com.recursia.popularmovies.domain.models.Trailer
 
 
 @StateStrategyType(AddToEndSingleStrategy::class)
@@ -16,7 +15,4 @@ interface MovieDetailContract : MvpView {
 
     @StateStrategyType(SkipStrategy::class)
     fun showErrorMessage(message: String)
-
-    @StateStrategyType(SkipStrategy::class)
-    fun openTrailerUrl(trailer: Trailer)
 }

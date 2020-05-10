@@ -12,7 +12,7 @@
     app:contentPaddingLeft="12dp"
     app:contentPaddingRight="12dp"
     app:contentPaddingTop="7dp"
-    app:strokeColor="@color/gray"
+    app:strokeColor="@color/lightGray"
     app:strokeWidth="1dp">
 
     <LinearLayout
@@ -31,7 +31,7 @@
             android:id="@+id/status_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/gray"
+            android:textColor="@color/lightGray"
             tools:text="Need to watch" />
     </LinearLayout>
 

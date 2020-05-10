@@ -68,13 +68,13 @@ class MoviesAdapter(
     }
 
     inner class MovieViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        @BindView(R.id.smallMoviePoster)
+        @BindView(R.id.small_movie_poster)
         lateinit var moviePoster: ImageView
 
-        @BindView(R.id.movieTitleTextView)
+        @BindView(R.id.movie_title_text_view)
         lateinit var movieTitleTextView: TextView
 
-        @BindView(R.id.movieRatingTextView)
+        @BindView(R.id.movie_rating_text_view)
         lateinit var movieRatingTextView: TextView
 
         init {

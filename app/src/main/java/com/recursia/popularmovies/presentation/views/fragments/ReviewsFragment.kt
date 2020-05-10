@@ -1,10 +1,62 @@
 package com.recursia.popularmovies.presentation.views.fragments
 
 import android.os.Bundle
+import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.Toast
+import butterknife.BindView
+import butterknife.ButterKnife
 import com.arellomobile.mvp.MvpAppCompatFragment
+import com.arellomobile.mvp.presenter.InjectPresenter
+import com.recursia.popularmovies.R
+import com.recursia.popularmovies.domain.models.Review
+import com.recursia.popularmovies.presentation.presenters.ReviewsPresenter
+import com.recursia.popularmovies.presentation.views.adapters.ReviewsAdapter
+import com.recursia.popularmovies.presentation.views.contracts.ReviewsContract
+import com.recursia.popularmovies.presentation.views.decorations.MarginItemDecoration
 import com.recursia.popularmovies.utils.TagUtils
 
-class ReviewsFragment : MvpAppCompatFragment() {
+class ReviewsFragment : MvpAppCompatFragment(), ReviewsContract {
+
+    @BindView(R.id.recycler_view_reviews)
+    lateinit var recyclerViewReviews: RecyclerView
+
+    @InjectPresenter
+    lateinit var presenter: ReviewsPresenter
+
+    private lateinit var reviewsAdapter: ReviewsAdapter
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        val view = inflater.inflate(R.layout.fragment_reviews, container, false)
+        ButterKnife.bind(this, view)
+        return view
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        // Reviews
+        initReviewsRecyclerView()
+        initReviewsAdapter()
+    }
+
+    private fun initReviewsAdapter() {
+        reviewsAdapter = ReviewsAdapter(context!!)
+        reviewsAdapter.setOnClickListener { review: Review, position: Int ->
+            presenter.onTranslateReviewClicked(review, position)
+        }
+        recyclerViewReviews.adapter = reviewsAdapter
+    }
+
+    private fun initReviewsRecyclerView() {
+        recyclerViewReviews.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+        recyclerViewReviews.addItemDecoration(
+                MarginItemDecoration(context!!, 0, 0, 5, 5)
+        )
+    }
+
     companion object {
         fun getInstance(movieId: Int): ReviewsFragment {
             val fragment = ReviewsFragment()
@@ -13,5 +65,17 @@ class ReviewsFragment : MvpAppCompatFragment() {
             fragment.arguments = arguments
             return fragment
         }
+    }
+
+    override fun updateReview(review: Review, position: Int) {
+        reviewsAdapter.updateReview(review, position)
+    }
+
+    override fun setReviews(reviews: List<Review>) {
+        reviewsAdapter.setReviews(reviews as MutableList<Review>)
+    }
+
+    override fun showErrorMessage(message: String) {
+        Toast.makeText(context!!, message, Toast.LENGTH_LONG).show()
     }
 }

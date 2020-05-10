@@ -21,7 +21,7 @@ class ReviewsAdapter(private val context: Context) : RecyclerView.Adapter<Review
         notifyDataSetChanged()
     }
 
-    fun setClickListener(clickListener: (Review, Int) -> Unit) {
+    fun setOnClickListener(clickListener: (Review, Int) -> Unit) {
         this.clickListener = clickListener
     }
 
@@ -36,9 +36,10 @@ class ReviewsAdapter(private val context: Context) : RecyclerView.Adapter<Review
         // Text
         reviewViewHolder.text.text = review.text
         // Translate
-        reviewViewHolder.translateText.setOnClickListener {
-            clickListener?.invoke(review, i)
-        }
+        //TODO add translate
+        //reviewViewHolder.translateText.setOnClickListener {
+        //    clickListener?.invoke(review, i)
+        //}
         // Show more
         if (shouldShowMoreText(review.text)) {
             reviewViewHolder.showMore.visibility = View.VISIBLE
@@ -71,8 +72,9 @@ class ReviewsAdapter(private val context: Context) : RecyclerView.Adapter<Review
         @BindView(R.id.text)
         lateinit var text: TextView
 
-        @BindView(R.id.translate_text)
-        lateinit var translateText: TextView
+        //TODO add translate??
+        //@BindView(R.id.translate_text)
+        //lateinit var translateText: TextView
 
         @BindView(R.id.show_more)
         lateinit var showMore: TextView

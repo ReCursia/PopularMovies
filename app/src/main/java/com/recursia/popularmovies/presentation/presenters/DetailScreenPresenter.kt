@@ -70,7 +70,4 @@ class DetailScreenPresenter(
         }
     }
 
-    companion object {
-        private const val MOVIE_RECOMMENDATION_PAGE = 1
-    }
 }

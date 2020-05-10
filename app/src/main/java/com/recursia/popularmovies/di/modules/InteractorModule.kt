@@ -9,21 +9,13 @@ import dagger.Provides
 class InteractorModule {
 
     @Provides
-    internal fun provideDetailScreenInteractor(
-            moviesRepository: MoviesRepository,
-            translateRepository: TranslateRepository
-    ): DetailScreenInteractor {
-        return DetailScreenInteractorImpl(moviesRepository, translateRepository)
+    internal fun provideDetailScreenInteractor(): DetailScreenInteractor {
+        return DetailScreenInteractorImpl()
     }
 
     @Provides
-    internal fun provideFavoriteScreenInteractor(moviesRepository: MoviesRepository): FavoriteScreenInteractor {
-        return FavoriteScreenInteractorImpl(moviesRepository)
-    }
-
-    @Provides
-    internal fun provideMoviesListInteractor(moviesRepository: MoviesRepository): MoviesListInteractor {
-        return MoviesListInteractorImpl(moviesRepository)
+    internal fun provideMoviesListInteractor(): MainScreenInteractor {
+        return MainScreenInteractorImpl()
     }
 
     @Provides

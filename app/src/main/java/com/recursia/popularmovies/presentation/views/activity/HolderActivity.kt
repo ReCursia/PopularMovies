@@ -3,7 +3,7 @@ package com.recursia.popularmovies.presentation.views.activity
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import com.recursia.popularmovies.R
-import com.recursia.popularmovies.Screens.IntroScreen
+import com.recursia.popularmovies.Screens
 import com.recursia.popularmovies.TheApplication
 import ru.terrakok.cicerone.Navigator
 import ru.terrakok.cicerone.NavigatorHolder
@@ -27,7 +27,7 @@ class HolderActivity : AppCompatActivity() {
                 .appComponent
                 .navigationHolder
         if (savedInstanceState == null) {
-            navigator.applyCommands(arrayOf<Command>(Replace(IntroScreen())))
+            navigator.applyCommands(arrayOf<Command>(Replace(Screens.DetailScreen(0))))
         }
     }
 

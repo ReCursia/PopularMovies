@@ -1,13 +1,10 @@
 package com.recursia.popularmovies.di.modules
 
-import com.recursia.popularmovies.data.mappers.*
-
 import dagger.Module
-import dagger.Provides
 
 @Module
 class MapperModule {
-
+    /*
     @Provides
     internal fun provideCastDatabaseModelToEntityMapper(): CastDatabaseModelToEntityMapper {
         return CastDatabaseModelToEntityMapper()
@@ -87,4 +84,6 @@ class MapperModule {
     ): ReviewsResponseToReviewMapper {
         return ReviewsResponseToReviewMapper(reviewNetworkToEntityModelMapper)
     }
+
+     */
 }
