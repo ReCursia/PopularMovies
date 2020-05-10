@@ -2,6 +2,7 @@ package com.recursia.popularmovies.presentation.presenters
 
 import com.arellomobile.mvp.InjectViewState
 import com.arellomobile.mvp.MvpPresenter
+import com.recursia.popularmovies.Screens
 import com.recursia.popularmovies.domain.DetailScreenInteractor
 import com.recursia.popularmovies.domain.models.Movie
 import com.recursia.popularmovies.domain.models.enums.MovieStatus
@@ -67,6 +68,12 @@ class DetailScreenPresenter(
                             { viewState.showErrorMessage(it.localizedMessage) }
                     )
             compositeDisposable.add(d)
+        }
+    }
+
+    fun onBackdropClicked(movie: Movie?) {
+        movie?.let {
+            router.navigateTo(Screens.PhotoScreen(movie.backdropPath!!))
         }
     }
 

@@ -2,7 +2,6 @@ package com.recursia.popularmovies.presentation.views.fragments
 
 import android.content.Intent
 import android.os.Bundle
-import android.support.design.widget.CollapsingToolbarLayout
 import android.support.design.widget.TabLayout
 import android.support.v4.view.ViewPager
 import android.support.v7.widget.LinearLayoutManager
@@ -34,6 +33,7 @@ import com.recursia.popularmovies.presentation.views.decorations.MarginItemDecor
 import com.recursia.popularmovies.utils.DimensionsUtils
 import com.recursia.popularmovies.utils.NetworkUtils
 import com.recursia.popularmovies.utils.TagUtils
+import net.opacapp.multilinecollapsingtoolbar.CollapsingToolbarLayout
 
 class DetailScreenFragment : MvpAppCompatFragment(), DetailScreenContract {
 
@@ -113,6 +113,15 @@ class DetailScreenFragment : MvpAppCompatFragment(), DetailScreenContract {
 
         initViewPager()
         initTabLayout()
+
+        // Init listeners
+        initOnBackDropClickListener()
+    }
+
+    private fun initOnBackDropClickListener() {
+        backdropImage.setOnClickListener {
+            presenter.onBackdropClicked(movie)
+        }
     }
 
     private fun initTabLayout() {
@@ -161,8 +170,13 @@ class DetailScreenFragment : MvpAppCompatFragment(), DetailScreenContract {
     private fun initCollapsingToolbarLayout() {
         collapsingToolbarLayout.setExpandedTitleColor(resources.getColor(R.color.white))
         collapsingToolbarLayout.setCollapsedTitleTextColor(resources.getColor(R.color.white))
-        //TODO remove
-        //collapsingToolbarLayout.setExpandedTitleMargin(0, 0, 0, 220)
+        //TODO make it all dimens
+        collapsingToolbarLayout.setExpandedTitleMargin(
+                DimensionsUtils.convertDpToPixel(22.0f, context!!).toInt(),
+                0,
+                DimensionsUtils.convertDpToPixel(44.0f, context!!).toInt(),
+                DimensionsUtils.convertDpToPixel(75.0f, context!!).toInt()
+        )
     }
 
     override fun showMovieStatusSetMessage() {

@@ -98,4 +98,6 @@ dependencies {
     // Detekt
     def detekt_ver = "1.5.1"
     detektPlugins "io.gitlab.arturbosch.detekt:detekt-formatting:$detekt_ver"
+    // Multi line
+    implementation 'net.opacapp:multiline-collapsingtoolbar:27.1.1'
 }
