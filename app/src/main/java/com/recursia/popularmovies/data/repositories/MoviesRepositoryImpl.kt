@@ -4,6 +4,7 @@ import com.recursia.popularmovies.data.db.MovieDao
 import com.recursia.popularmovies.data.network.MoviesApi
 import com.recursia.popularmovies.domain.MoviesRepository
 import com.recursia.popularmovies.domain.models.*
+import com.recursia.popularmovies.domain.models.enums.Category
 import com.recursia.popularmovies.domain.models.enums.MovieStatus
 import io.reactivex.Completable
 import io.reactivex.Flowable
@@ -165,7 +166,15 @@ class MoviesRepositoryImpl(
     }
 
     override fun getMoviesByQuery(query: String, page: Int, language: String): Single<List<Movie>> {
-        TODO("Not yet implemented")
+        return Single.just(arrayListOf(
+                getMockedMovie(),
+                getMockedMovie(),
+                getMockedMovie(),
+                getMockedMovie(),
+                getMockedMovie(),
+                getMockedMovie(),
+                getMockedMovie(),
+                getMockedMovie()))
     }
 
     override fun getMovieRecommendations(movieId: Int, page: Int, language: String): Single<List<Movie>> {
@@ -182,5 +191,17 @@ class MoviesRepositoryImpl(
 
     override fun setMovieStatus(movie: Movie): Completable {
         TODO("Not yet implemented")
+    }
+
+    override fun getMoviesWithCategory(category: Category, language: String): Single<List<Movie>> {
+        return Single.just(arrayListOf(
+                getMockedMovie(),
+                getMockedMovie(),
+                getMockedMovie(),
+                getMockedMovie(),
+                getMockedMovie(),
+                getMockedMovie(),
+                getMockedMovie(),
+                getMockedMovie()))
     }
 }

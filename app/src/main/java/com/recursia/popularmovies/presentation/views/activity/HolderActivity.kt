@@ -27,7 +27,7 @@ class HolderActivity : AppCompatActivity() {
                 .appComponent
                 .navigationHolder
         if (savedInstanceState == null) {
-            navigator.applyCommands(arrayOf<Command>(Replace(Screens.DetailScreen(0))))
+            navigator.applyCommands(arrayOf<Command>(Replace(Screens.IntroScreen())))
         }
     }
 

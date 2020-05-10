@@ -73,6 +73,7 @@ class MovieStatusesAdapter(private val context: Context) : RecyclerView.Adapter<
         val colorId = if (isHighlighted[index]) R.color.almostWhite else R.color.lightGray
         movieStatusViewHolder.cardView.strokeColor = context.resources.getColor(colorId)
         movieStatusViewHolder.statusTextView.setTextColor(context.resources.getColor(colorId))
+        movieStatusViewHolder.statusEmojiTextView.setTextColor(context.resources.getColor(colorId))
 
         movieStatusViewHolder.itemView.setOnClickListener {
             clickListener?.invoke(status)

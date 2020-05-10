@@ -16,7 +16,8 @@ import com.recursia.popularmovies.domain.models.Movie
 import com.recursia.popularmovies.utils.NetworkUtils
 
 class MoviesAdapter(
-        private val context: Context
+        private val context: Context,
+        val tag: String? = null
 ) : RecyclerView.Adapter<MoviesAdapter.MovieViewHolder>() {
     private var movies: MutableList<Movie> = ArrayList()
     private var clickListener: ((Movie) -> Unit)? = null

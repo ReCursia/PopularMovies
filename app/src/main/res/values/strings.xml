@@ -57,6 +57,12 @@
     <string name="movie_recommendations">RECOMMENDATIONS</string>
     <string name="translate_button">Translate</string>
     <string name="show_more">Show more</string>
+    <string name="main_screen_popular_now">Popular now</string>
+    <string name="main_screen_movies_title">Movies</string>
+    <string name="main_screen_now_playing">Now playing</string>
+    <string name="main_screen_top_rated">Top rated</string>
+    <string name="main_screen_upcoming">Upcoming</string>
+    <string name="main_screen_latest">Latest</string>
 
 
 </resources>

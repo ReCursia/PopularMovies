@@ -56,9 +56,11 @@ class SearchScreenFragment : MvpAppCompatFragment(), SearchScreenContract {
 
     private fun initToolbar() {
         toolbar.title = getString(R.string.search_movie_title)
-        toolbar.setBackgroundColor(resources.getColor(R.color.black))
+        toolbar.setNavigationIcon(R.drawable.ic_arrow_back)
+        toolbar.setNavigationOnClickListener { presenter.onBackPressed() }
+        toolbar.setBackgroundColor(resources.getColor(R.color.colorPrimary))
         toolbar.inflateMenu(R.menu.search_menu)
-        val searchItem = toolbar.menu.findItem(R.id.searchItem)
+        val searchItem = toolbar.menu.findItem(R.id.search_item)
         val searchView = searchItem.actionView as SearchView
         searchView.queryHint = getString(R.string.search_hint)
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
@@ -95,7 +97,7 @@ class SearchScreenFragment : MvpAppCompatFragment(), SearchScreenContract {
     }
 
     companion object {
-        private const val SPAN_COUNT = 2
+        private const val SPAN_COUNT = 3
         val instance: SearchScreenFragment
             get() = SearchScreenFragment()
     }

@@ -11,6 +11,11 @@ class Screens {
         }
     }
 
+    class MainScreen : SupportAppScreen() {
+        override fun getFragment(): Fragment {
+            return MainScreenFragment.getInstance()
+        }
+    }
 
     class IntroScreen : SupportAppScreen() {
         override fun getFragment(): Fragment {

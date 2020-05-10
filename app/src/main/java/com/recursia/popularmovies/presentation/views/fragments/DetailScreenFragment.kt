@@ -8,7 +8,6 @@ import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.Toolbar
 import android.view.LayoutInflater
-import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
@@ -74,13 +73,6 @@ class DetailScreenFragment : MvpAppCompatFragment(), DetailScreenContract {
         movieId = arguments!!.getInt(TagUtils.MOVIE_ID)
         val app = TheApplication.getInstance().appComponent
         return DetailScreenPresenter(app!!.detailScreenInteractor, app.router, movieId)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.itemId == R.id.shareItem) {
-            presenter.onShareIconClicked(movie)
-        }
-        return super.onOptionsItemSelected(item)
     }
 
     override fun shareMovie(movie: Movie) {
@@ -159,7 +151,7 @@ class DetailScreenFragment : MvpAppCompatFragment(), DetailScreenContract {
         toolbar.setNavigationOnClickListener { presenter.onBackPressed() }
         toolbar.inflateMenu(R.menu.detail_menu)
         toolbar.setOnMenuItemClickListener { menuItem ->
-            if (menuItem.itemId == R.id.shareItem) {
+            if (menuItem.itemId == R.id.share_item) {
                 presenter.onShareIconClicked(movie)
                 return@setOnMenuItemClickListener true
             }

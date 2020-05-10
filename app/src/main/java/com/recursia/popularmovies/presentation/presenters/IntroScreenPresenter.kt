@@ -2,21 +2,22 @@ package com.recursia.popularmovies.presentation.presenters
 
 import com.arellomobile.mvp.InjectViewState
 import com.arellomobile.mvp.MvpPresenter
+import com.recursia.popularmovies.Screens
 import com.recursia.popularmovies.presentation.models.SectionItem
 import com.recursia.popularmovies.presentation.views.contracts.IntroScreenContract
-import com.recursia.popularmovies.utils.intro.PrefUtils
+import com.recursia.popularmovies.utils.intro.FirstLaunchPreferences
 import ru.terrakok.cicerone.Router
 
 @InjectViewState
 class IntroScreenPresenter(
-        private val prefUtils: PrefUtils,
+        private val prefUtils: FirstLaunchPreferences,
         private val sectionItems: List<SectionItem>,
         private val router: Router
 ) : MvpPresenter<IntroScreenContract>() {
     private var currentSection: Int = 0
 
     private val isFirstLaunch: Boolean
-        get() = prefUtils.value
+        get() = prefUtils.isFirstLaunch
 
     private val isInitialPosition: Boolean
         get() = currentSection == 0
@@ -35,8 +36,7 @@ class IntroScreenPresenter(
         if (isFirstLaunch) {
             initViewState()
         } else {
-            //TODO turn it back
-            //router.newRootScreen(Screens.MainScreen())
+            router.newRootScreen(Screens.MainScreen())
         }
     }
 
@@ -75,9 +75,8 @@ class IntroScreenPresenter(
     }
 
     fun onFinishButtonClicked() {
-        prefUtils.putValue(false) // now this is not first launch
-        //TODO turn it back
-        //router.newRootScreen(Screens.MainScreen())
+        prefUtils.setFirstLaunch(false)
+        router.newRootScreen(Screens.MainScreen())
     }
 
     fun onPageSelected(i: Int) {

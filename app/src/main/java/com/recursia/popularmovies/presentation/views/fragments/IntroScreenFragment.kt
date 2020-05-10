@@ -22,7 +22,7 @@ import com.recursia.popularmovies.presentation.models.SectionItem
 import com.recursia.popularmovies.presentation.presenters.IntroScreenPresenter
 import com.recursia.popularmovies.presentation.views.adapters.SectionsPagerAdapter
 import com.recursia.popularmovies.presentation.views.contracts.IntroScreenContract
-import com.recursia.popularmovies.utils.intro.PrefUtilsImpl
+import com.recursia.popularmovies.utils.intro.PreferencesImpl
 import java.util.*
 
 class IntroScreenFragment : MvpAppCompatFragment(), IntroScreenContract {
@@ -55,7 +55,7 @@ class IntroScreenFragment : MvpAppCompatFragment(), IntroScreenContract {
             sectionItems.add(SectionItem(filePaths[i], descriptions[i]))
         }
         val app = TheApplication.getInstance()
-        return IntroScreenPresenter(PrefUtilsImpl(context!!), sectionItems, app.appComponent.router)
+        return IntroScreenPresenter(PreferencesImpl(context!!), sectionItems, app.appComponent.router)
     }
 
     @OnClick(R.id.next_button)

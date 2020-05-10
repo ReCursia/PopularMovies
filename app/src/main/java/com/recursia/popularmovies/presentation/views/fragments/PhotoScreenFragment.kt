@@ -44,7 +44,7 @@ class PhotoScreenFragment : MvpAppCompatFragment() {
     }
 
     private fun initToolbar() {
-        toolbar.setBackgroundColor(resources.getColor(R.color.black))
+        toolbar.setBackgroundColor(resources.getColor(R.color.colorPrimary))
         toolbar.setNavigationIcon(R.drawable.ic_arrow_back)
         toolbar.setNavigationOnClickListener { router.exit() }
         toolbar.title = getString(R.string.photo_detail)

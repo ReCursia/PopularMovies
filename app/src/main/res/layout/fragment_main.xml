@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary">
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <include layout="@layout/toolbar" />
+
+            <TextView
+                style="@style/ActionBar.Title"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="@string/app_name"
+                android:textColor="@color/white" />
+        </FrameLayout>
+    </android.support.design.widget.AppBarLayout>
+
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/main_screen_title_margin_horizontal"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="@dimen/main_screen_title_margin_horizontal"
+                android:layout_marginBottom="10dp"
+                android:text="@string/main_screen_movies_title"
+                android:textColor="@color/white"
+                android:textSize="28sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/main_screen_title_margin_horizontal"
+                android:layout_marginEnd="@dimen/main_screen_title_margin_horizontal"
+                android:layout_marginBottom="20dp"
+                android:text="@string/main_screen_popular_now"
+                android:textAllCaps="true"
+                android:textColor="@color/lightGray" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recycler_view_popular_now"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/main_screen_title_margin_horizontal"
+                android:layout_marginEnd="@dimen/main_screen_title_margin_horizontal"
+                android:layout_marginBottom="20dp"
+                android:text="@string/main_screen_now_playing"
+                android:textAllCaps="true"
+                android:textColor="@color/lightGray" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recycler_view_now_playing"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/main_screen_title_margin_horizontal"
+                android:layout_marginEnd="@dimen/main_screen_title_margin_horizontal"
+                android:layout_marginBottom="20dp"
+                android:text="@string/main_screen_top_rated"
+                android:textAllCaps="true"
+                android:textColor="@color/lightGray" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recycler_view_top_rated"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/main_screen_title_margin_horizontal"
+                android:layout_marginEnd="@dimen/main_screen_title_margin_horizontal"
+                android:layout_marginBottom="20dp"
+                android:text="@string/main_screen_upcoming"
+                android:textAllCaps="true"
+                android:textColor="@color/lightGray" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recycler_view_upcoming"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/main_screen_title_margin_horizontal"
+                android:layout_marginEnd="@dimen/main_screen_title_margin_horizontal"
+                android:layout_marginBottom="20dp"
+                android:text="@string/main_screen_latest"
+                android:textAllCaps="true"
+                android:textColor="@color/lightGray" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recycler_view_latest"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
+
+
+</android.support.design.widget.CoordinatorLayout>

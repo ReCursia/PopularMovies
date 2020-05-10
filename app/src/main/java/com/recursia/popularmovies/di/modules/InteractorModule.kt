@@ -14,8 +14,8 @@ class InteractorModule {
     }
 
     @Provides
-    internal fun provideMoviesListInteractor(): MainScreenInteractor {
-        return MainScreenInteractorImpl()
+    internal fun provideMainScreenInteractor(moviesRepository: MoviesRepository): MainScreenInteractor {
+        return MainScreenInteractorImpl(moviesRepository)
     }
 
     @Provides

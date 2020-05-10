@@ -59,6 +59,10 @@ class SearchScreenPresenter(
         }
     }
 
+    fun onBackPressed() {
+        router.exit()
+    }
+
     companion object {
         private const val TIMEOUT = 300
         private val TIME_UNIT = TimeUnit.MILLISECONDS
