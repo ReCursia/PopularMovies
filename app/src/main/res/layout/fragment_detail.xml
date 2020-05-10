@@ -59,6 +59,7 @@
             android:layout_height="wrap_content"
             app:layout_collapseMode="pin"
             app:tabMode="fixed"
+            app:tabIndicatorFullWidth="false"
             app:tabSelectedTextColor="@color/colorAccent"
             app:tabTextColor="@color/white" />
     </android.support.design.widget.AppBarLayout>

@@ -151,11 +151,11 @@ class MoviesRepositoryImpl(
                         "This is Harry potter film" +
                         "This is Harry potter film" +
                         "This is Harry potter film",
-                "",
+                "/xBHvZcjRiWyobQ9kxBhO6B2dtRI.jpg",
                 "23 sempt",
                 "Harry Potter and Prince Half-Blood test",
                 8.4,
-                ""
+                "/xBHvZcjRiWyobQ9kxBhO6B2dtRI.jpg"
 
         )
     }
