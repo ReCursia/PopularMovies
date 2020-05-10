@@ -8,7 +8,7 @@
 
     <dimen name="card_view_status_padding_vertical">8dp</dimen>
     <dimen name="card_view_status_padding_horizontal">15dp</dimen>
-    <dimen name="view_pager_margin">24dp</dimen>
+    <dimen name="view_pager_margin">16dp</dimen>
 
     <dimen name="movie_tab_layout_margin_horizontal">22dp</dimen>
 </resources>

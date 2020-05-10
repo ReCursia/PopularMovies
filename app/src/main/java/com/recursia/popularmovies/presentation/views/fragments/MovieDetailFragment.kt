@@ -24,6 +24,7 @@ import com.recursia.popularmovies.presentation.views.adapters.CastAdapter
 import com.recursia.popularmovies.presentation.views.adapters.MoviesAdapter
 import com.recursia.popularmovies.presentation.views.contracts.MovieDetailContract
 import com.recursia.popularmovies.presentation.views.decorations.MarginItemDecoration
+import com.recursia.popularmovies.utils.DateUtils
 import com.recursia.popularmovies.utils.TagUtils
 
 class MovieDetailFragment : MvpAppCompatFragment(), MovieDetailContract {
@@ -122,7 +123,7 @@ class MovieDetailFragment : MvpAppCompatFragment(), MovieDetailContract {
         // Description
         descriptionTextView.text = movie.overview
         // Release date
-        releaseDateTextView.text = movie.releaseDate
+        releaseDateTextView.text = DateUtils.formatDate(movie.releaseDate!!)
         // Cast
         castAdapter.setCast(movie.casts)
         // Genres

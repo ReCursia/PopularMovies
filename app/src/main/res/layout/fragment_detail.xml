@@ -21,7 +21,8 @@
             app:contentScrim="@color/colorPrimary"
             app:expandedTitleTextAppearance="@style/ExpandedAppBar"
             app:layout_scrollFlags="scroll|exitUntilCollapsed"
-            app:maxLines="2">
+            app:maxLines="2"
+            app:scrimAnimationDuration="200">
 
             <FrameLayout
                 android:layout_width="match_parent"
