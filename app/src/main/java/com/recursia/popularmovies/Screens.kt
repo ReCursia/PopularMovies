@@ -25,8 +25,19 @@ class Screens {
 
     class AccountScreen : SupportAppScreen() {
         override fun getFragment(): Fragment {
-            //TODO implement account screen and replace it
-            return SearchScreenFragment.instance
+            return AccountScreenFragment.getInstance()
+        }
+    }
+
+    class ResetPasswordScreen : SupportAppScreen() {
+        override fun getFragment(): Fragment {
+            return ResetPasswordScreenFragment.getInstance()
+        }
+    }
+
+    class AuthScreen : SupportAppScreen() {
+        override fun getFragment(): Fragment {
+            return AuthScreenFragment.getInstance()
         }
     }
 

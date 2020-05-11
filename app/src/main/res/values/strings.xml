@@ -66,6 +66,11 @@
     <string name="welcome_account_text">If you want to see you favorite movies, sign in or create account</string>
     <string name="welcome_screen_next">Next</string>
     <string name="account_title">Account</string>
+    <string name="hint_email">Input email</string>
+    <string name="hint_password">Input password</string>
+    <string name="forgot_password">Forgot password?</string>
+    <string name="sign_in">Sign in</string>
+    <string name="sign_up">Register</string>
 
 
 </resources>

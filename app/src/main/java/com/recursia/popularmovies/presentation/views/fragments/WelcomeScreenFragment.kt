@@ -18,7 +18,6 @@ import ru.terrakok.cicerone.Router
 
 class WelcomeScreenFragment : MvpAppCompatFragment() {
 
-
     @BindView(R.id.toolbar)
     lateinit var toolbar: Toolbar
 
@@ -50,7 +49,7 @@ class WelcomeScreenFragment : MvpAppCompatFragment() {
         toolbar.setBackgroundColor(resources.getColor(R.color.colorPrimary))
         toolbar.setNavigationIcon(R.drawable.ic_arrow_back)
         toolbar.setNavigationOnClickListener { router.exit() }
-        welcomeNextButton.setOnClickListener { router.exit() }
+        welcomeNextButton.setOnClickListener { router.replaceScreen(Screens.AuthScreen()) }
     }
 
     companion object {

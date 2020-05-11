@@ -22,4 +22,9 @@ class InteractorModule {
     internal fun provideSearchScreenInteractor(moviesRepository: MoviesRepository): SearchScreenInteractor {
         return SearchScreenInteractorImpl(moviesRepository)
     }
+
+    @Provides
+    internal fun provideAuthScreenInteractor(moviesRepository: MoviesRepository): AuthScreenInteractor {
+        return AuthScreenInteractorImpl()
+    }
 }
