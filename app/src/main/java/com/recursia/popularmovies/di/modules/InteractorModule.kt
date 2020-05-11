@@ -24,11 +24,6 @@ class InteractorModule {
     }
 
     @Provides
-    internal fun provideAuthScreenInteractor(authRepository: AuthRepository): AuthScreenInteractor {
-        return AuthScreenInteractorImpl(authRepository)
-    }
-
-    @Provides
     internal fun provideAccountScreenInteractor(accountRepository: AccountRepository): AccountScreenInteractor {
         return AccountScreenInteractorImpl(accountRepository)
     }

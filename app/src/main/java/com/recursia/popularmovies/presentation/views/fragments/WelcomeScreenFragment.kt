@@ -11,8 +11,6 @@ import butterknife.ButterKnife
 import com.recursia.popularmovies.R
 import com.recursia.popularmovies.Screens
 import com.recursia.popularmovies.TheApplication
-import com.recursia.popularmovies.utils.intro.AuthPreferences
-import com.recursia.popularmovies.utils.intro.PreferencesImpl
 import moxy.MvpAppCompatFragment
 import ru.terrakok.cicerone.Router
 
@@ -25,7 +23,6 @@ class WelcomeScreenFragment : MvpAppCompatFragment() {
     lateinit var welcomeNextButton: Button
 
     lateinit var router: Router
-    lateinit var preferences: AuthPreferences
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_account_welcome, container, false)
@@ -36,12 +33,7 @@ class WelcomeScreenFragment : MvpAppCompatFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         router = TheApplication.getInstance().appComponent.router
-        preferences = PreferencesImpl(context!!)
-        if (preferences.isAuthorized) {
-            router.replaceScreen(Screens.AccountScreen())
-        } else {
-            initView()
-        }
+        initView()
     }
 
     private fun initView() {

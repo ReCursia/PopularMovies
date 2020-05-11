@@ -6,15 +6,16 @@ import moxy.viewstate.strategy.SkipStrategy
 import moxy.viewstate.strategy.StateStrategyType
 
 
-@StateStrategyType(AddToEndSingleStrategy::class)
+@StateStrategyType(SkipStrategy::class)
 interface AuthScreenContract : MvpView {
 
-    @StateStrategyType(SkipStrategy::class)
-    fun showProgressingDialog()
+    fun signIn(email: String, password: String)
 
-    @StateStrategyType(SkipStrategy::class)
-    fun hideProgressingDialog()
+    fun signUp(email: String, password: String)
 
-    @StateStrategyType(SkipStrategy::class)
-    fun showErrorMessage(message: String)
+    @StateStrategyType(AddToEndSingleStrategy::class)
+    fun setShowEmailValidationError(error: Boolean)
+
+    @StateStrategyType(AddToEndSingleStrategy::class)
+    fun setShowPasswordValidationError(error: Boolean)
 }

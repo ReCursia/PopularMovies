@@ -71,6 +71,8 @@
     <string name="forgot_password">Forgot password?</string>
     <string name="sign_in">Sign in</string>
     <string name="sign_up">Register</string>
+    <string name="edit_text_email_error">Email is invalid!</string>
+    <string name="edit_text_password_error">Password is invalid!</string>
 
 
 </resources>

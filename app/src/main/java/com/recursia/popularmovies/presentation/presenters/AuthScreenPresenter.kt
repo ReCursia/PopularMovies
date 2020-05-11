@@ -1,10 +1,9 @@
 package com.recursia.popularmovies.presentation.presenters
 
+import android.util.Patterns
 import com.recursia.popularmovies.Screens
-import com.recursia.popularmovies.domain.AuthScreenInteractor
 import com.recursia.popularmovies.presentation.views.contracts.AuthScreenContract
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.CompositeDisposable
+import com.recursia.popularmovies.utils.intro.AuthPreferences
 import moxy.InjectViewState
 import moxy.MvpPresenter
 import ru.terrakok.cicerone.Router
@@ -12,16 +11,9 @@ import ru.terrakok.cicerone.Router
 
 @InjectViewState
 class AuthScreenPresenter(
-        private val authScreenInteractor: AuthScreenInteractor,
+        private val authPreferences: AuthPreferences,
         private val router: Router
 ) : MvpPresenter<AuthScreenContract>() {
-    private val compositeDisposable = CompositeDisposable()
-    //TODO save data to preferences
-
-    override fun onDestroy() {
-        super.onDestroy()
-        compositeDisposable.clear()
-    }
 
     fun onBackPressed() {
         router.exit()
@@ -32,34 +24,32 @@ class AuthScreenPresenter(
     }
 
     fun onSignInButtonClicked(email: String, password: String) {
-        val d = authScreenInteractor
-                .signIn(email, password)
-                .observeOn(AndroidSchedulers.mainThread())
-                .doOnSubscribe { viewState.showProgressingDialog() }
-                .subscribe(
-                        { router.replaceScreen(Screens.AccountScreen()) },
-                        {
-                            viewState.hideProgressingDialog()
-                            viewState.showErrorMessage(it.localizedMessage)
-                        }
-                )
-        compositeDisposable.add(d)
+        if (isValid(email, password)) {
+            viewState.signIn(email, password)
+        }
     }
 
     fun onSignUpButtonClicked(email: String, password: String) {
-        val d = authScreenInteractor
-                .signUp(email, password)
-                .observeOn(AndroidSchedulers.mainThread())
-                .doOnSubscribe { viewState.showProgressingDialog() }
-                .subscribe(
-                        {
-                            router.replaceScreen(Screens.AccountScreen())
-                        },
-                        {
-                            viewState.hideProgressingDialog()
-                            viewState.showErrorMessage(it.localizedMessage)
-                        }
-                )
-        compositeDisposable.add(d)
+        if (isValid(email, password)) {
+            viewState.signUp(email, password)
+        }
+    }
+
+    private fun isValid(email: String, password: String): Boolean {
+        val emailIsValid = emailIsValid(email)
+        val passwordIsValid = passwordIsValid(password)
+
+        viewState.setShowEmailValidationError(emailIsValid)
+        viewState.setShowPasswordValidationError(passwordIsValid)
+        return emailIsValid && passwordIsValid
+    }
+
+    private fun passwordIsValid(password: String) = password.isNotEmpty()
+
+    private fun emailIsValid(email: String) = Patterns.EMAIL_ADDRESS.matcher(email).matches()
+
+    fun onSuccessSign() {
+        authPreferences.setAuthorized(true)
+        router.replaceScreen(Screens.AccountScreen())
     }
 }

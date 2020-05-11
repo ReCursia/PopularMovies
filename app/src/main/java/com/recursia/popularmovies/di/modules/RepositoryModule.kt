@@ -3,10 +3,8 @@ package com.recursia.popularmovies.di.modules
 import com.recursia.popularmovies.data.db.MovieDao
 import com.recursia.popularmovies.data.network.MoviesApi
 import com.recursia.popularmovies.data.repositories.AccountRepositoryImpl
-import com.recursia.popularmovies.data.repositories.AuthRepositoryImpl
 import com.recursia.popularmovies.data.repositories.MoviesRepositoryImpl
 import com.recursia.popularmovies.domain.AccountRepository
-import com.recursia.popularmovies.domain.AuthRepository
 import com.recursia.popularmovies.domain.MoviesRepository
 import dagger.Module
 import dagger.Provides
@@ -35,12 +33,6 @@ class RepositoryModule {
     @Singleton
     internal fun provideAccountRepository(): AccountRepository {
         return AccountRepositoryImpl()
-    }
-
-    @Provides
-    @Singleton
-    internal fun provideAuthRepository(): AuthRepository {
-        return AuthRepositoryImpl()
     }
 
 }

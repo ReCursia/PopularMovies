@@ -18,6 +18,7 @@ import com.recursia.popularmovies.presentation.presenters.MainScreenPresenter
 import com.recursia.popularmovies.presentation.views.adapters.MoviesAdapter
 import com.recursia.popularmovies.presentation.views.contracts.MainScreenContract
 import com.recursia.popularmovies.presentation.views.decorations.MarginItemDecoration
+import com.recursia.popularmovies.utils.intro.PreferencesImpl
 import moxy.MvpAppCompatFragment
 import moxy.presenter.InjectPresenter
 import moxy.presenter.ProvidePresenter
@@ -48,7 +49,7 @@ class MainScreenFragment : MvpAppCompatFragment(), MainScreenContract {
     @ProvidePresenter
     internal fun providePresenter(): MainScreenPresenter {
         val app = TheApplication.getInstance().appComponent
-        return MainScreenPresenter(app!!.mainScreenInteractor, app.router)
+        return MainScreenPresenter(app!!.mainScreenInteractor, PreferencesImpl(context!!), app.router)
     }
 
     private val categoryMap = mutableMapOf<Category, MoviesAdapter>()

@@ -2,7 +2,10 @@ package com.recursia.popularmovies.di
 
 import com.recursia.popularmovies.di.modules.InteractorModule
 import com.recursia.popularmovies.di.modules.NavigationModule
-import com.recursia.popularmovies.domain.*
+import com.recursia.popularmovies.domain.AccountScreenInteractor
+import com.recursia.popularmovies.domain.DetailScreenInteractor
+import com.recursia.popularmovies.domain.MainScreenInteractor
+import com.recursia.popularmovies.domain.SearchScreenInteractor
 import dagger.Component
 import ru.terrakok.cicerone.NavigatorHolder
 import ru.terrakok.cicerone.Router
@@ -16,8 +19,6 @@ interface AppComponent {
     val mainScreenInteractor: MainScreenInteractor
 
     val searchScreenInteractor: SearchScreenInteractor
-
-    val authScreenInteractor: AuthScreenInteractor
 
     val accountScreenInteractor: AccountScreenInteractor
 
