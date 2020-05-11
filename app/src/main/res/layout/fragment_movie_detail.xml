@@ -39,6 +39,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="10dp"
                         android:text="@string/description"
+                        android:textAllCaps="true"
                         android:textColor="@color/lightGray" />
 
                     <TextView
@@ -55,6 +56,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="10dp"
                         android:text="@string/release_date"
+                        android:textAllCaps="true"
                         android:textColor="@color/lightGray" />
 
                     <TextView
@@ -71,6 +73,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="10dp"
                         android:text="@string/genre"
+                        android:textAllCaps="true"
                         android:textColor="@color/lightGray" />
 
                     <com.google.android.material.chip.ChipGroup
@@ -84,6 +87,12 @@
             </FrameLayout>
 
         </androidx.cardview.widget.CardView>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view_trailers"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp" />
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cast_card_view"
@@ -111,6 +120,7 @@
                         android:layout_marginStart="24dp"
                         android:layout_marginBottom="10dp"
                         android:text="@string/cast"
+                        android:textAllCaps="true"
                         android:textColor="@color/lightGray" />
 
                     <androidx.recyclerview.widget.RecyclerView
@@ -147,6 +157,7 @@
                         android:layout_marginStart="24dp"
                         android:layout_marginBottom="10dp"
                         android:text="@string/movie_recommendations"
+                        android:textAllCaps="true"
                         android:textColor="@color/lightGray" />
 
                     <androidx.recyclerview.widget.RecyclerView

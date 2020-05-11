@@ -1,5 +1,7 @@
 package com.recursia.popularmovies.presentation.views.fragments
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -16,12 +18,15 @@ import com.recursia.popularmovies.R
 import com.recursia.popularmovies.TheApplication
 import com.recursia.popularmovies.domain.models.Genre
 import com.recursia.popularmovies.domain.models.Movie
+import com.recursia.popularmovies.domain.models.Trailer
 import com.recursia.popularmovies.presentation.presenters.MovieDetailPresenter
 import com.recursia.popularmovies.presentation.views.adapters.CastAdapter
 import com.recursia.popularmovies.presentation.views.adapters.MoviesAdapter
+import com.recursia.popularmovies.presentation.views.adapters.TrailersAdapter
 import com.recursia.popularmovies.presentation.views.contracts.MovieDetailContract
 import com.recursia.popularmovies.presentation.views.decorations.MarginItemDecoration
 import com.recursia.popularmovies.utils.DateUtils
+import com.recursia.popularmovies.utils.NetworkUtils
 import com.recursia.popularmovies.utils.TagUtils
 import moxy.MvpAppCompatFragment
 import moxy.presenter.InjectPresenter
@@ -38,6 +43,9 @@ class MovieDetailFragment : MvpAppCompatFragment(), MovieDetailContract {
     @BindView(R.id.genres_group)
     lateinit var genresGroup: ChipGroup
 
+    @BindView(R.id.recycler_view_trailers)
+    lateinit var recyclerViewTrailers: RecyclerView
+
     @BindView(R.id.recycler_view_cast)
     lateinit var recyclerViewCast: RecyclerView
 
@@ -45,6 +53,7 @@ class MovieDetailFragment : MvpAppCompatFragment(), MovieDetailContract {
     lateinit var recyclerViewRecommendation: RecyclerView
 
     private lateinit var castAdapter: CastAdapter
+    private lateinit var trailersAdapter: TrailersAdapter
     private lateinit var moviesAdapter: MoviesAdapter
 
     @InjectPresenter
@@ -74,6 +83,25 @@ class MovieDetailFragment : MvpAppCompatFragment(), MovieDetailContract {
         // Movie recommendations
         initRecommendationRecyclerView()
         initRecommendationAdapter()
+        // Trailers
+        initTrailersRecyclerView()
+        initTrailersAdapter()
+    }
+
+    private fun initTrailersAdapter() {
+        trailersAdapter = TrailersAdapter(context!!)
+        trailersAdapter.setOnClickListener {
+            presenter.onTrailerClicked(it)
+        }
+        recyclerViewTrailers.adapter = trailersAdapter
+    }
+
+    private fun initTrailersRecyclerView() {
+        recyclerViewTrailers.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+        recyclerViewTrailers.setHasFixedSize(true)
+        recyclerViewTrailers.addItemDecoration(
+                MarginItemDecoration(context!!, 0, 10, 0, 0)
+        )
     }
 
     private fun initRecommendationAdapter() {
@@ -88,7 +116,7 @@ class MovieDetailFragment : MvpAppCompatFragment(), MovieDetailContract {
         recyclerViewRecommendation.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         recyclerViewRecommendation.setHasFixedSize(true)
         recyclerViewRecommendation.addItemDecoration(
-                MarginItemDecoration(context!!, 7, 7, 0, 0)
+                MarginItemDecoration(context!!, 13, 1, 0, 0)
         )
     }
 
@@ -119,6 +147,11 @@ class MovieDetailFragment : MvpAppCompatFragment(), MovieDetailContract {
         moviesAdapter.setMovies(movies as MutableList<Movie>)
     }
 
+    override fun openTrailerUrl(trailer: Trailer) {
+        val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(NetworkUtils.TRAILER_BASE_URL + trailer.key))
+        startActivity(browserIntent)
+    }
+
     override fun setMovieDetail(movie: Movie) {
         // Description
         descriptionTextView.text = movie.overview
@@ -128,6 +161,8 @@ class MovieDetailFragment : MvpAppCompatFragment(), MovieDetailContract {
         castAdapter.setCast(movie.casts)
         // Genres
         setGenres(movie.genres)
+        // Trailers
+        trailersAdapter.setTrailers(movie.trailers)
     }
 
     private fun setGenres(genres: List<Genre>) {

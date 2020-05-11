@@ -3,6 +3,7 @@ package com.recursia.popularmovies.presentation.presenters
 import com.recursia.popularmovies.Screens
 import com.recursia.popularmovies.domain.DetailScreenInteractor
 import com.recursia.popularmovies.domain.models.Movie
+import com.recursia.popularmovies.domain.models.Trailer
 import com.recursia.popularmovies.presentation.views.contracts.MovieDetailContract
 import com.recursia.popularmovies.utils.LangUtils
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -57,6 +58,10 @@ class MovieDetailPresenter(
 
     fun onMovieClicked(movie: Movie) {
         router.navigateTo(Screens.DetailScreen(movie.id))
+    }
+
+    fun onTrailerClicked(trailer: Trailer) {
+        viewState.openTrailerUrl(trailer)
     }
 
     companion object {

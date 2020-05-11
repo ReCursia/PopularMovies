@@ -3,9 +3,6 @@ package com.recursia.popularmovies.utils
 object NetworkUtils {
     const val TRAILER_BASE_URL = "https://www.youtube.com/watch?v="
     const val TRAILER_IMAGE_FORMAT_URL = "http://img.youtube.com/vi/%s/mqdefault.jpg" // returns 320x180 image
-    const val VOTE_COUNT_TOP_RATED = 2000
-    const val VOTE_COUNT_POPULARITY = 0 // doesn't matter
-
     // Google play store
     const val GOOGLE_PLAY_NATIVE = "market://details?id="
     const val GOOGLE_PLAY_URL = "http://play.google.com/store/apps/details?id="

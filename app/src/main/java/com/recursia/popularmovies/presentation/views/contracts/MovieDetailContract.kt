@@ -1,6 +1,7 @@
 package com.recursia.popularmovies.presentation.views.contracts
 
 import com.recursia.popularmovies.domain.models.Movie
+import com.recursia.popularmovies.domain.models.Trailer
 import moxy.MvpView
 import moxy.viewstate.strategy.AddToEndSingleStrategy
 import moxy.viewstate.strategy.SkipStrategy
@@ -15,4 +16,7 @@ interface MovieDetailContract : MvpView {
 
     @StateStrategyType(SkipStrategy::class)
     fun showErrorMessage(message: String)
+
+    @StateStrategyType(SkipStrategy::class)
+    fun openTrailerUrl(trailer: Trailer)
 }

@@ -20,7 +20,7 @@ class TrailersAdapter(private val context: Context) : RecyclerView.Adapter<Trail
     private var trailers: List<Trailer> = ArrayList()
     private var clickListener: ((Trailer) -> Unit)? = null
 
-    fun setClickListener(clickListener: (Trailer) -> Unit) {
+    fun setOnClickListener(clickListener: (Trailer) -> Unit) {
         this.clickListener = clickListener
     }
 
@@ -37,9 +37,9 @@ class TrailersAdapter(private val context: Context) : RecyclerView.Adapter<Trail
     override fun onBindViewHolder(trailerViewHolder: TrailerViewHolder, i: Int) {
         val trailer = trailers[i]
         // Image
-        //TODO add placeholder
         Glide.with(context)
                 .load(String.format(NetworkUtils.TRAILER_IMAGE_FORMAT_URL, trailer.key))
+                .placeholder(R.drawable.ic_trailer_placeholder)
                 .transition(DrawableTransitionOptions.withCrossFade(FADE_OUT_DURATION))
                 .into(trailerViewHolder.trailerImage)
         // Title
