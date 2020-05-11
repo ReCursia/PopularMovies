@@ -34,9 +34,6 @@ class MainScreenFragment : MvpAppCompatFragment(), MainScreenContract {
     @BindView(R.id.recycler_view_top_rated)
     lateinit var recyclerViewTopRated: RecyclerView
 
-    @BindView(R.id.recycler_view_latest)
-    lateinit var recyclerViewLatest: RecyclerView
-
     @BindView(R.id.recycler_view_upcoming)
     lateinit var recyclerViewUpcoming: RecyclerView
 
@@ -96,7 +93,6 @@ class MainScreenFragment : MvpAppCompatFragment(), MainScreenContract {
     private fun setRecyclerViewAdapter(category: Category, adapter: MoviesAdapter) {
         when (category) {
             Category.TOP_RATED -> initRecyclerView(adapter, recyclerViewTopRated)
-            Category.LATEST -> initRecyclerView(adapter, recyclerViewLatest)
             Category.NOW_PLAYING -> initRecyclerView(adapter, recyclerViewNowPlaying)
             Category.POPULAR -> initRecyclerView(adapter, recyclerViewPopularNow)
             Category.UPCOMING -> initRecyclerView(adapter, recyclerViewUpcoming)

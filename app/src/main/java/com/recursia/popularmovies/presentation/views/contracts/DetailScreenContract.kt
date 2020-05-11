@@ -19,7 +19,4 @@ interface DetailScreenContract : MvpView {
 
     @StateStrategyType(SkipStrategy::class)
     fun showErrorMessage(message: String)
-
-    @StateStrategyType(SkipStrategy::class)
-    fun showMovieStatusSetMessage()
 }

@@ -135,11 +135,13 @@ class MovieDetailFragment : MvpAppCompatFragment(), MovieDetailContract {
         val layoutInflater = LayoutInflater.from(context)
         for (genre in genres) {
             val chip = layoutInflater.inflate(R.layout.genre_chip, genresGroup, false) as Chip
-            //TODO add emoji
-            chip.text = genre.name
+
+            chip.text = getCapitalized(genre.name!!)
             genresGroup.addView(chip)
         }
     }
+
+    private fun getCapitalized(str: String) = str.substring(0, 1).toUpperCase() + str.substring(1).toLowerCase()
 
     override fun showErrorMessage(message: String) {
         Toast.makeText(context!!, message, Toast.LENGTH_LONG).show()

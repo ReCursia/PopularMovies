@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-public class TranslateNetworkModel {
+public class TranslateModel {
     @SerializedName("code")
     @Expose
     private int code;
@@ -16,7 +16,7 @@ public class TranslateNetworkModel {
     @Expose
     private List<String> text = null;
 
-    public TranslateNetworkModel() {
+    public TranslateModel() {
     }
 
     public int getCode() {

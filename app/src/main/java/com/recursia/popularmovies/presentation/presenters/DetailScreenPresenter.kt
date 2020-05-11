@@ -61,10 +61,7 @@ class DetailScreenPresenter(
                     .observeOn(AndroidSchedulers.mainThread())
                     .doOnSubscribe { movie.status = status }
                     .subscribe(
-                            {
-                                viewState.setMovieStatus(status)
-                                viewState.showMovieStatusSetMessage()
-                            },
+                            { viewState.setMovieStatus(status) },
                             { viewState.showErrorMessage(it.localizedMessage) }
                     )
             compositeDisposable.add(d)

@@ -22,6 +22,8 @@ class MovieStatusesAdapter(private val context: Context) : RecyclerView.Adapter<
     }
 
     fun setStatusHighlighted(status: MovieStatus) {
+        if (status == MovieStatus.UNKNOWN) return
+
         val index = statuses.indexOf(status)
         for (i in isHighlighted.indices) {
             isHighlighted[i] = false
@@ -56,9 +58,9 @@ class MovieStatusesAdapter(private val context: Context) : RecyclerView.Adapter<
         val status = statuses[index]
         //TODO move it factory class and make view model
         val emoji = when (status) {
-            MovieStatus.ALREADY_SAW -> 128522
-            MovieStatus.WANT_TO_WATCH -> 128522
-            MovieStatus.FAVORITE -> 128522
+            MovieStatus.ALREADY_SAW -> 129393
+            MovieStatus.WANT_TO_WATCH -> 129321
+            MovieStatus.FAVORITE -> 10084
             MovieStatus.UNKNOWN -> throw IllegalStateException()
         }
         val text = when (status) {

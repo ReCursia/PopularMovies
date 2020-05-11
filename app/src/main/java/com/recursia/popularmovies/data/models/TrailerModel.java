@@ -2,20 +2,11 @@ package com.recursia.popularmovies.data.models;
 
 
 import androidx.annotation.NonNull;
-import androidx.room.Entity;
-import androidx.room.ForeignKey;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-@Entity(
-        foreignKeys = @ForeignKey(entity = MovieDatabaseModel.class,
-                parentColumns = "id",
-                childColumns = "movieId",
-                onDelete = ForeignKey.CASCADE),
-        primaryKeys = {"movieId", "id"}
-)
-public class TrailerDatabaseModel {
+public class TrailerModel {
     private int movieId;
     @SerializedName("id")
     @Expose

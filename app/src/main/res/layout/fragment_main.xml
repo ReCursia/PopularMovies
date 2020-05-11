@@ -111,21 +111,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/main_screen_title_margin_horizontal"
-                android:layout_marginEnd="@dimen/main_screen_title_margin_horizontal"
-                android:layout_marginBottom="20dp"
-                android:text="@string/main_screen_latest"
-                android:textAllCaps="true"
-                android:textColor="@color/lightGray" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recycler_view_latest"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 

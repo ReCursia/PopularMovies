@@ -10,7 +10,6 @@ import com.recursia.popularmovies.di.modules.MoviesRetrofitModule;
 import com.recursia.popularmovies.di.modules.NavigationModule;
 import com.recursia.popularmovies.di.modules.RepositoryModule;
 import com.recursia.popularmovies.di.modules.RetrofitAdaptersModule;
-import com.recursia.popularmovies.di.modules.RoomModule;
 import com.recursia.popularmovies.di.modules.TranslateRetrofitModule;
 
 public class TheApplication extends Application {
@@ -31,7 +30,6 @@ public class TheApplication extends Application {
                     .retrofitAdaptersModule(new RetrofitAdaptersModule())
                     .moviesRetrofitModule(new MoviesRetrofitModule())
                     .translateRetrofitModule(new TranslateRetrofitModule())
-                    .roomModule(new RoomModule(this))
                     .navigationModule(new NavigationModule())
                     .build();
         }

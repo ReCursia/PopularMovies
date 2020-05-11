@@ -70,13 +70,6 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
-    // Room
-    implementation "androidx.room:room-runtime:2.2.5"
-    kapt "androidx.room:room-compiler:2.2.5" // For Kotlin use kapt instead of annotationProcessor
-    // optional - Kotlin Extensions and Coroutines support for Room
-    implementation "androidx.room:room-ktx:2.2.5"
-    // optional - RxJava support for Room
-    implementation "androidx.room:room-rxjava2:2.2.5"
     // Dagger
     def dagger_ver = '2.27'
     implementation "com.google.dagger:dagger:$dagger_ver"

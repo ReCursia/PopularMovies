@@ -19,7 +19,7 @@ public class DiscoverMoviesResponse {
     private int totalPages;
     @SerializedName("results")
     @Expose
-    private List<MovieDatabaseModel> movies;
+    private List<MovieModel> movies;
 
     public DiscoverMoviesResponse() {
         this.movies = new ArrayList<>();
@@ -49,11 +49,11 @@ public class DiscoverMoviesResponse {
         this.totalPages = totalPages;
     }
 
-    public List<MovieDatabaseModel> getMovies() {
+    public List<MovieModel> getMovies() {
         return movies;
     }
 
-    public void setMovies(List<MovieDatabaseModel> movies) {
+    public void setMovies(List<MovieModel> movies) {
         this.movies = movies;
     }
 

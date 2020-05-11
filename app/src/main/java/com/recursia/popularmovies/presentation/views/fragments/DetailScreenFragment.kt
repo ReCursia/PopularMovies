@@ -171,17 +171,13 @@ class DetailScreenFragment : MvpAppCompatFragment(), DetailScreenContract {
         )
     }
 
-    override fun showMovieStatusSetMessage() {
-        Toast.makeText(context!!, getString(R.string.status_set_toast), Toast.LENGTH_SHORT).show()
-    }
-
     override fun setMovieDetail(movie: Movie) {
         this.movie = movie
         collapsingToolbarLayout.title = movie.title
         textViewRating.text = movie.voteAverage.toString()
         movieStatusesAdapter.setStatusHighlighted(movie.status)
 
-        movie.backdropPath?.let {
+        movie.posterPath?.let {
             Glide.with(this)
                     .load(NetworkUtils.getBigPosterUrl(it))
                     .transition(DrawableTransitionOptions.withCrossFade(FADE_OUT_DURATION))

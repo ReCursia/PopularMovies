@@ -58,7 +58,7 @@ class MoviesAdapter(
         movieViewHolder.movieRatingTextView.text = movie.voteAverage.toString()
         // Image
         Glide.with(context)
-                .load(NetworkUtils.getMediumPosterUrl(movie.posterPath!!))
+                .load(NetworkUtils.getMediumPosterUrl(movie.posterPath ?: ""))
                 .placeholder(R.drawable.ic_poster_placeholder)
                 .transition(DrawableTransitionOptions.withCrossFade(FADE_OUT_DURATION))
                 .into(movieViewHolder.moviePoster)

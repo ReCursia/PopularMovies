@@ -11,7 +11,7 @@ public class CreditsResponse {
     private int id;
     @SerializedName("cast")
     @Expose
-    private List<CastDatabaseModel> cast;
+    private List<CastModel> cast;
 
     public int getId() {
         return id;
@@ -21,11 +21,11 @@ public class CreditsResponse {
         this.id = id;
     }
 
-    public List<CastDatabaseModel> getCast() {
+    public List<CastModel> getCast() {
         return cast;
     }
 
-    public void setCast(List<CastDatabaseModel> cast) {
+    public void setCast(List<CastModel> cast) {
         this.cast = cast;
     }
 

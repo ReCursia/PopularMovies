@@ -11,7 +11,7 @@ public class MovieTrailersResponse {
     private int id;
     @SerializedName("results")
     @Expose
-    private List<TrailerDatabaseModel> trailers = null;
+    private List<TrailerModel> trailers = null;
 
     public int getId() {
         return id;
@@ -21,11 +21,11 @@ public class MovieTrailersResponse {
         this.id = id;
     }
 
-    public List<TrailerDatabaseModel> getTrailers() {
+    public List<TrailerModel> getTrailers() {
         return trailers;
     }
 
-    public void setTrailers(List<TrailerDatabaseModel> trailers) {
+    public void setTrailers(List<TrailerModel> trailers) {
         this.trailers = trailers;
     }
 
