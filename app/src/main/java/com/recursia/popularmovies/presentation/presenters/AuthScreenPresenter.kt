@@ -1,13 +1,12 @@
 package com.recursia.popularmovies.presentation.presenters
 
-import com.arellomobile.mvp.InjectViewState
-import com.arellomobile.mvp.MvpPresenter
 import com.recursia.popularmovies.Screens
 import com.recursia.popularmovies.domain.AuthScreenInteractor
 import com.recursia.popularmovies.presentation.views.contracts.AuthScreenContract
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.schedulers.Schedulers
+import moxy.InjectViewState
+import moxy.MvpPresenter
 import ru.terrakok.cicerone.Router
 
 
@@ -35,7 +34,6 @@ class AuthScreenPresenter(
     fun onSignInButtonClicked(email: String, password: String) {
         val d = authScreenInteractor
                 .signIn(email, password)
-                .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSubscribe { viewState.showProgressingDialog() }
                 .subscribe(
@@ -49,10 +47,8 @@ class AuthScreenPresenter(
     }
 
     fun onSignUpButtonClicked(email: String, password: String) {
-        //TODO move subscribeOn in repository btw (do finally??)
         val d = authScreenInteractor
                 .signUp(email, password)
-                .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSubscribe { viewState.showProgressingDialog() }
                 .subscribe(

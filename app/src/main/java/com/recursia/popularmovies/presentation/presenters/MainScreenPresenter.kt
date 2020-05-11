@@ -1,7 +1,5 @@
 package com.recursia.popularmovies.presentation.presenters
 
-import com.arellomobile.mvp.InjectViewState
-import com.arellomobile.mvp.MvpPresenter
 import com.recursia.popularmovies.Screens
 import com.recursia.popularmovies.domain.MainScreenInteractor
 import com.recursia.popularmovies.domain.models.Movie
@@ -11,6 +9,8 @@ import com.recursia.popularmovies.utils.LangUtils
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
+import moxy.InjectViewState
+import moxy.MvpPresenter
 import ru.terrakok.cicerone.Router
 
 @InjectViewState

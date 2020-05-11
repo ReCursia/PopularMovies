@@ -1,9 +1,9 @@
 package com.recursia.popularmovies.presentation.views.adapters
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentManager
-import android.support.v4.app.FragmentPagerAdapter
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentPagerAdapter
 import com.recursia.popularmovies.presentation.models.SectionItem
 import com.recursia.popularmovies.presentation.views.fragments.SectionScreenFragment
 import com.recursia.popularmovies.utils.TagUtils

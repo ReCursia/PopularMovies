@@ -1,7 +1,7 @@
 package com.recursia.popularmovies.presentation.views.fragments
 
-import com.arellomobile.mvp.MvpAppCompatFragment
 import com.recursia.popularmovies.presentation.views.contracts.AccountScreenContract
+import moxy.MvpAppCompatFragment
 
 class AccountScreenFragment : MvpAppCompatFragment(), AccountScreenContract {
 

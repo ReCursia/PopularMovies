@@ -13,13 +13,6 @@ import io.reactivex.Single
 class MoviesRepositoryImpl(
         private val movieDao: MovieDao,
         private val moviesApi: MoviesApi
-//        private val movieDatabaseModelToEntityMapper: MovieDatabaseModelToEntityMapper,
-//        private val discoverMovieResponseToMovieMapper: DiscoverMovieResponseToMovieMapper,
-//        private val creditsResponseToCastMapper: CreditsResponseToCastMapper,
-//        private val movieTrailersResponseToTrailersMapper: MovieTrailersResponseToTrailersMapper,
-//        private val movieExtraDatabaseModelToEntityMapper: MovieExtraDatabaseModelToEntityMapper,
-//        private val entityToMovieExtraDatabaseModelMapper: EntityToMovieExtraDatabaseModelMapper,
-//        private val reviewsResponseToReviewMapper: ReviewsResponseToReviewMapper
 ) : MoviesRepository {
 
     //    override fun discoverMovies(sortBy: String, page: Int, voteCount: Int, language: String): Single<List<Movie>> {

@@ -1,17 +1,14 @@
 package com.recursia.popularmovies.presentation.views.fragments
 
 import android.os.Bundle
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import butterknife.BindView
 import butterknife.ButterKnife
-import com.arellomobile.mvp.MvpAppCompatFragment
-import com.arellomobile.mvp.presenter.InjectPresenter
-import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.recursia.popularmovies.R
 import com.recursia.popularmovies.TheApplication
 import com.recursia.popularmovies.domain.models.Review
@@ -20,6 +17,9 @@ import com.recursia.popularmovies.presentation.views.adapters.ReviewsAdapter
 import com.recursia.popularmovies.presentation.views.contracts.ReviewsContract
 import com.recursia.popularmovies.presentation.views.decorations.MarginItemDecoration
 import com.recursia.popularmovies.utils.TagUtils
+import moxy.MvpAppCompatFragment
+import moxy.presenter.InjectPresenter
+import moxy.presenter.ProvidePresenter
 
 class ReviewsFragment : MvpAppCompatFragment(), ReviewsContract {
 

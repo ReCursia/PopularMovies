@@ -1,19 +1,19 @@
 package com.recursia.popularmovies.presentation.views.fragments
 
 import android.os.Bundle
-import android.support.v7.widget.Toolbar
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import androidx.appcompat.widget.Toolbar
 import butterknife.BindView
 import butterknife.ButterKnife
-import com.arellomobile.mvp.MvpAppCompatFragment
 import com.recursia.popularmovies.R
 import com.recursia.popularmovies.Screens
 import com.recursia.popularmovies.TheApplication
 import com.recursia.popularmovies.utils.intro.AuthPreferences
 import com.recursia.popularmovies.utils.intro.PreferencesImpl
+import moxy.MvpAppCompatFragment
 import ru.terrakok.cicerone.Router
 
 class WelcomeScreenFragment : MvpAppCompatFragment() {

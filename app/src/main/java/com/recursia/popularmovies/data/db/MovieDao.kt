@@ -1,6 +1,6 @@
 package com.recursia.popularmovies.data.db
 
-import android.arch.persistence.room.*
+import androidx.room.*
 import com.recursia.popularmovies.data.models.*
 import io.reactivex.Flowable
 import io.reactivex.Single

@@ -1,8 +1,9 @@
 package com.recursia.popularmovies.data.models;
 
-import android.arch.persistence.room.Entity;
-import android.arch.persistence.room.ForeignKey;
-import android.support.annotation.NonNull;
+
+import androidx.annotation.NonNull;
+import androidx.room.Entity;
+import androidx.room.ForeignKey;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

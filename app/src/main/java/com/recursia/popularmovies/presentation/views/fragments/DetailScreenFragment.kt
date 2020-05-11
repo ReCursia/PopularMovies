@@ -2,24 +2,21 @@ package com.recursia.popularmovies.presentation.views.fragments
 
 import android.content.Intent
 import android.os.Bundle
-import android.support.design.widget.TabLayout
-import android.support.v4.view.ViewPager
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
-import android.support.v7.widget.Toolbar
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.widget.Toolbar
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import androidx.viewpager.widget.ViewPager
 import butterknife.BindView
 import butterknife.ButterKnife
-import com.arellomobile.mvp.MvpAppCompatFragment
-import com.arellomobile.mvp.presenter.InjectPresenter
-import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
+import com.google.android.material.tabs.TabLayout
 import com.recursia.popularmovies.R
 import com.recursia.popularmovies.TheApplication
 import com.recursia.popularmovies.domain.models.Movie
@@ -32,6 +29,9 @@ import com.recursia.popularmovies.presentation.views.decorations.MarginItemDecor
 import com.recursia.popularmovies.utils.DimensionsUtils
 import com.recursia.popularmovies.utils.NetworkUtils
 import com.recursia.popularmovies.utils.TagUtils
+import moxy.MvpAppCompatFragment
+import moxy.presenter.InjectPresenter
+import moxy.presenter.ProvidePresenter
 import net.opacapp.multilinecollapsingtoolbar.CollapsingToolbarLayout
 
 class DetailScreenFragment : MvpAppCompatFragment(), DetailScreenContract {

@@ -1,11 +1,11 @@
 package com.recursia.popularmovies.presentation.views.contracts
 
-import com.arellomobile.mvp.MvpView
-import com.arellomobile.mvp.viewstate.strategy.AddToEndStrategy
-import com.arellomobile.mvp.viewstate.strategy.SkipStrategy
-import com.arellomobile.mvp.viewstate.strategy.StateStrategyType
 import com.recursia.popularmovies.domain.models.Movie
 import com.recursia.popularmovies.domain.models.enums.Category
+import moxy.MvpView
+import moxy.viewstate.strategy.AddToEndStrategy
+import moxy.viewstate.strategy.SkipStrategy
+import moxy.viewstate.strategy.StateStrategyType
 
 @StateStrategyType(AddToEndStrategy::class)
 interface MainScreenContract : MvpView {

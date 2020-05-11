@@ -1,6 +1,7 @@
 package com.recursia.popularmovies.presentation.views.fragments
 
-import com.arellomobile.mvp.MvpAppCompatFragment
+import moxy.MvpAppCompatFragment
+
 
 class ResetPasswordScreenFragment : MvpAppCompatFragment() {
     companion object {

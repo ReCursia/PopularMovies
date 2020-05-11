@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     style="@style/Theme.MaterialComponents.NoActionBar"
@@ -8,10 +8,11 @@
     android:background="@color/colorPrimary"
     tools:context=".presentation.views.fragments.DetailScreenFragment">
 
-    <android.support.design.widget.AppBarLayout
+    <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/app_bar_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
         android:theme="@style/AppTheme">
 
         <net.opacapp.multilinecollapsingtoolbar.CollapsingToolbarLayout
@@ -47,7 +48,7 @@
 
             </FrameLayout>
 
-            <android.support.v7.widget.RecyclerView
+            <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/movie_status_recycler_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -59,20 +60,22 @@
         </net.opacapp.multilinecollapsingtoolbar.CollapsingToolbarLayout>
 
 
-        <android.support.design.widget.TabLayout
+        <com.google.android.material.tabs.TabLayout
             android:id="@+id/tabs"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/movie_tab_layout_margin_horizontal"
             android:layout_marginEnd="@dimen/movie_tab_layout_margin_horizontal"
+            android:background="@color/colorPrimary"
             app:layout_collapseMode="pin"
+            app:tabIndicatorColor="@color/colorAccent"
             app:tabIndicatorFullWidth="false"
             app:tabMode="fixed"
             app:tabSelectedTextColor="@color/colorAccent"
             app:tabTextAppearance="@style/TextTabStyle"
             app:tabTextColor="@color/white" />
 
-    </android.support.design.widget.AppBarLayout>
+    </com.google.android.material.appbar.AppBarLayout>
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -99,11 +102,11 @@
             android:src="@drawable/ic_star" />
     </LinearLayout>
 
-    <android.support.v4.view.ViewPager
+    <androidx.viewpager.widget.ViewPager
         android:id="@+id/view_pager"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
 
-</android.support.design.widget.CoordinatorLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

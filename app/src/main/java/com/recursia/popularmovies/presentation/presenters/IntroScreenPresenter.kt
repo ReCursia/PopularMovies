@@ -1,11 +1,11 @@
 package com.recursia.popularmovies.presentation.presenters
 
-import com.arellomobile.mvp.InjectViewState
-import com.arellomobile.mvp.MvpPresenter
 import com.recursia.popularmovies.Screens
 import com.recursia.popularmovies.presentation.models.SectionItem
 import com.recursia.popularmovies.presentation.views.contracts.IntroScreenContract
 import com.recursia.popularmovies.utils.intro.FirstLaunchPreferences
+import moxy.InjectViewState
+import moxy.MvpPresenter
 import ru.terrakok.cicerone.Router
 
 @InjectViewState

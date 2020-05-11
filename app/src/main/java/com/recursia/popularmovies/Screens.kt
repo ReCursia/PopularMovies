@@ -1,6 +1,6 @@
 package com.recursia.popularmovies
 
-import android.support.v4.app.Fragment
+import androidx.fragment.app.Fragment
 import com.recursia.popularmovies.presentation.views.fragments.*
 import ru.terrakok.cicerone.android.support.SupportAppScreen
 

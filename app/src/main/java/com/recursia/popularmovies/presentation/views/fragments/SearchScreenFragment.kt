@@ -1,25 +1,25 @@
 package com.recursia.popularmovies.presentation.views.fragments
 
 import android.os.Bundle
-import android.support.v7.widget.GridLayoutManager
-import android.support.v7.widget.RecyclerView
-import android.support.v7.widget.SearchView
-import android.support.v7.widget.Toolbar
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.widget.SearchView
+import androidx.appcompat.widget.Toolbar
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import butterknife.BindView
 import butterknife.ButterKnife
-import com.arellomobile.mvp.MvpAppCompatFragment
-import com.arellomobile.mvp.presenter.InjectPresenter
-import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.recursia.popularmovies.R
 import com.recursia.popularmovies.TheApplication
 import com.recursia.popularmovies.domain.models.Movie
 import com.recursia.popularmovies.presentation.presenters.SearchScreenPresenter
 import com.recursia.popularmovies.presentation.views.adapters.MoviesAdapter
 import com.recursia.popularmovies.presentation.views.contracts.SearchScreenContract
+import moxy.MvpAppCompatFragment
+import moxy.presenter.InjectPresenter
+import moxy.presenter.ProvidePresenter
 
 class SearchScreenFragment : MvpAppCompatFragment(), SearchScreenContract {
     @BindView(R.id.searchRecyclerView)

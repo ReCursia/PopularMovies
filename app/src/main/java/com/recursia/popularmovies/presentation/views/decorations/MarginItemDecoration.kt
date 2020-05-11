@@ -2,9 +2,9 @@ package com.recursia.popularmovies.presentation.views.decorations
 
 import android.content.Context
 import android.graphics.Rect
-import android.support.v7.widget.RecyclerView
 import android.util.TypedValue
 import android.view.View
+import androidx.recyclerview.widget.RecyclerView
 
 class MarginItemDecoration(context: Context, marginLeft: Int, marginRight: Int, marginTop: Int, marginBottom: Int) : RecyclerView.ItemDecoration() {
     private val marginLeft: Int

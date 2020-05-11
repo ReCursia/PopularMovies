@@ -1,8 +1,6 @@
 package com.recursia.popularmovies.presentation.views.fragments
 
 import android.os.Bundle
-import android.support.v4.view.ViewPager
-import android.support.v4.view.ViewPager.OnPageChangeListener
 import android.text.Html
 import android.view.LayoutInflater
 import android.view.View
@@ -10,12 +8,10 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.viewpager.widget.ViewPager
 import butterknife.BindView
 import butterknife.ButterKnife
 import butterknife.OnClick
-import com.arellomobile.mvp.MvpAppCompatFragment
-import com.arellomobile.mvp.presenter.InjectPresenter
-import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.recursia.popularmovies.R
 import com.recursia.popularmovies.TheApplication
 import com.recursia.popularmovies.presentation.models.SectionItem
@@ -23,6 +19,9 @@ import com.recursia.popularmovies.presentation.presenters.IntroScreenPresenter
 import com.recursia.popularmovies.presentation.views.adapters.SectionsPagerAdapter
 import com.recursia.popularmovies.presentation.views.contracts.IntroScreenContract
 import com.recursia.popularmovies.utils.intro.PreferencesImpl
+import moxy.MvpAppCompatFragment
+import moxy.presenter.InjectPresenter
+import moxy.presenter.ProvidePresenter
 import java.util.*
 
 class IntroScreenFragment : MvpAppCompatFragment(), IntroScreenContract {
@@ -81,7 +80,7 @@ class IntroScreenFragment : MvpAppCompatFragment(), IntroScreenContract {
     private fun initViewPager() {
         sectionsPagerAdapter = SectionsPagerAdapter(childFragmentManager)
         sectionViewPager.adapter = sectionsPagerAdapter
-        sectionViewPager.addOnPageChangeListener(object : OnPageChangeListener {
+        sectionViewPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
             override fun onPageScrolled(i: Int, v: Float, i1: Int) {}
             override fun onPageSelected(i: Int) {
                 presenter.onPageSelected(i)

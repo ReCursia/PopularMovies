@@ -3,13 +3,12 @@ package com.recursia.popularmovies.presentation.views.fragments
 import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
 import android.os.Bundle
-import android.support.v7.widget.Toolbar
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.Toolbar
 import butterknife.BindView
 import butterknife.ButterKnife
-import com.arellomobile.mvp.MvpAppCompatFragment
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.transition.Transition
@@ -18,6 +17,7 @@ import com.recursia.popularmovies.R
 import com.recursia.popularmovies.TheApplication
 import com.recursia.popularmovies.utils.NetworkUtils.getOriginalPosterUrl
 import com.recursia.popularmovies.utils.TagUtils.IMAGE_PATH
+import moxy.MvpAppCompatFragment
 import ru.terrakok.cicerone.Router
 
 class PhotoScreenFragment : MvpAppCompatFragment() {

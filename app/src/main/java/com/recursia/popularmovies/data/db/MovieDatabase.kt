@@ -1,8 +1,7 @@
 package com.recursia.popularmovies.data.db
 
-import android.arch.persistence.room.Database
-import android.arch.persistence.room.RoomDatabase
-
+import androidx.room.Database
+import androidx.room.RoomDatabase
 import com.recursia.popularmovies.data.models.CastDatabaseModel
 import com.recursia.popularmovies.data.models.GenreDatabaseModel
 import com.recursia.popularmovies.data.models.MovieDatabaseModel

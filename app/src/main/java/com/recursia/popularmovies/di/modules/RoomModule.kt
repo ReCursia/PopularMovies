@@ -1,15 +1,12 @@
 package com.recursia.popularmovies.di.modules
 
 import android.app.Application
-import android.arch.persistence.room.Room
-
+import androidx.room.Room
 import com.recursia.popularmovies.data.db.MovieDao
 import com.recursia.popularmovies.data.db.MovieDatabase
-
-import javax.inject.Singleton
-
 import dagger.Module
 import dagger.Provides
+import javax.inject.Singleton
 
 @Module
 class RoomModule(application: Application) {

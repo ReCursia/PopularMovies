@@ -1,7 +1,5 @@
 package com.recursia.popularmovies.presentation.presenters
 
-import com.arellomobile.mvp.InjectViewState
-import com.arellomobile.mvp.MvpPresenter
 import com.recursia.popularmovies.domain.DetailScreenInteractor
 import com.recursia.popularmovies.domain.models.Review
 import com.recursia.popularmovies.presentation.views.contracts.ReviewsContract
@@ -9,6 +7,8 @@ import com.recursia.popularmovies.utils.LangUtils
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
+import moxy.InjectViewState
+import moxy.MvpPresenter
 
 @InjectViewState
 class ReviewsPresenter(

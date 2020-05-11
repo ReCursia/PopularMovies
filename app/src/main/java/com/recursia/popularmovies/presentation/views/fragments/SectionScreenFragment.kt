@@ -8,10 +8,10 @@ import android.widget.TextView
 import butterknife.BindView
 import butterknife.ButterKnife
 import com.airbnb.lottie.LottieAnimationView
-import com.arellomobile.mvp.MvpAppCompatFragment
 import com.recursia.popularmovies.R
 import com.recursia.popularmovies.presentation.models.SectionItem
 import com.recursia.popularmovies.utils.TagUtils.FRAGMENT_INTRO
+import moxy.MvpAppCompatFragment
 
 class SectionScreenFragment : MvpAppCompatFragment() {
     @BindView(R.id.section_lottieAnimation)
