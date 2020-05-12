@@ -13,7 +13,9 @@ class AccountScreenInteractorImpl(private val accountRepository: AccountReposito
     }
 
     override fun setUserName(name: String): Completable {
-        return accountRepository.setUserName(name)
+        return accountRepository.getUserInfo()
+                .doOnSuccess { it.username = name }
+                .flatMapCompletable { accountRepository.setUserInfo(it) }
     }
 
     override fun getUserMoviesWithStatus(status: MovieStatus): Flowable<List<Movie>> {

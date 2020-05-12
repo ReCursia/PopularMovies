@@ -23,6 +23,7 @@ class MoviesRepositoryImpl(
 
     override fun getMovieById(movieId: Int, language: String): Single<Movie> {
         return loadMovieFromNetwork(movieId, language)
+                .subscribeOn(Schedulers.io())
     }
 
     private fun loadMovieFromNetwork(movieId: Int, language: String): Single<Movie> {

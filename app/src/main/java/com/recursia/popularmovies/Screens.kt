@@ -58,16 +58,4 @@ class Screens {
             return SearchScreenFragment.instance
         }
     }
-
-    class MovieDetailScreen(private val movieId: Int) : SupportAppScreen() {
-        override fun getFragment(): Fragment {
-            return MovieDetailFragment.getInstance(movieId)
-        }
-    }
-
-    class ReviewsScreen(private val movieId: Int) : SupportAppScreen() {
-        override fun getFragment(): Fragment {
-            return ReviewsFragment.getInstance(movieId)
-        }
-    }
 }
