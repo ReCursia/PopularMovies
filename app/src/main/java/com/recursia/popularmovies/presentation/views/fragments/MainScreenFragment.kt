@@ -87,7 +87,6 @@ class MainScreenFragment : MvpAppCompatFragment(), MainScreenContract {
             categoryMap[category] = adapter
             setRecyclerViewAdapter(category, adapter)
         }
-
     }
 
     private fun setRecyclerViewAdapter(category: Category, adapter: MoviesAdapter) {

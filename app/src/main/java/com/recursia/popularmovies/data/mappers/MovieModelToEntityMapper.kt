@@ -5,7 +5,9 @@ import com.recursia.popularmovies.domain.models.Movie
 import com.recursia.popularmovies.domain.models.enums.MovieStatus
 import com.recursia.popularmovies.utils.Mapper
 
-class MovieModelToEntityMapper(private val genreDatabaseModelToEntityMapper: GenreModelToEntityMapper) : Mapper<MovieModel, Movie>() {
+class MovieModelToEntityMapper(
+        private val genreDatabaseModelToEntityMapper: GenreModelToEntityMapper
+) : Mapper<MovieModel, Movie>() {
 
     override fun transform(movieDatabaseModel: MovieModel): Movie {
         val movie = Movie()

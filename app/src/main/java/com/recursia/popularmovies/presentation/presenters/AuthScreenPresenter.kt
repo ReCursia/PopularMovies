@@ -8,7 +8,6 @@ import moxy.InjectViewState
 import moxy.MvpPresenter
 import ru.terrakok.cicerone.Router
 
-
 @InjectViewState
 class AuthScreenPresenter(
         private val authPreferences: AuthPreferences,

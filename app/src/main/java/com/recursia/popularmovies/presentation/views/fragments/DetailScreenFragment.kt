@@ -145,7 +145,6 @@ class DetailScreenFragment : MvpAppCompatFragment(), DetailScreenContract {
         movieStatusesAdapter.setStatusHighlighted(status)
     }
 
-
     private fun initToolbar() {
         toolbar.setNavigationIcon(R.drawable.ic_arrow_back)
         toolbar.setNavigationOnClickListener { presenter.onBackPressed() }
@@ -162,7 +161,7 @@ class DetailScreenFragment : MvpAppCompatFragment(), DetailScreenContract {
     private fun initCollapsingToolbarLayout() {
         collapsingToolbarLayout.setExpandedTitleColor(resources.getColor(R.color.white))
         collapsingToolbarLayout.setCollapsedTitleTextColor(resources.getColor(R.color.white))
-        //TODO make it all dimens
+        // TODO make it all dimens
         collapsingToolbarLayout.setExpandedTitleMargin(
                 DimensionsUtils.convertDpToPixel(22.0f, context!!).toInt(),
                 0,

@@ -14,12 +14,12 @@ import io.reactivex.schedulers.Schedulers
 
 class AccountRepositoryImpl : AccountRepository {
     override fun getUserInfo(): Single<User> {
-        //TODO implement
+        // TODO implement
         return Single.just(User("test", "today"))
     }
 
     override fun setUserInfo(user: User): Completable {
-        //TODO implement
+        // TODO implement
         return Completable.complete()
     }
 
@@ -62,7 +62,7 @@ class AccountRepositoryImpl : AccountRepository {
                             if (existedMovie == null) {
                                 ref.push().setValue(movie)
                             }
-                            //TODO update child if existed
+                            // TODO update child if existed
                             emitter.onComplete()
                         }
                     }
@@ -100,5 +100,4 @@ class AccountRepositoryImpl : AccountRepository {
             )
         }.toFlowable(BackpressureStrategy.LATEST).subscribeOn(Schedulers.io())
     }
-
 }

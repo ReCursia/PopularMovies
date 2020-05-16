@@ -31,7 +31,6 @@ class ReviewsFragment : MvpAppCompatFragment(), ReviewsContract {
 
     private var movieId = 0
 
-
     @ProvidePresenter
     internal fun providePresenter(): ReviewsPresenter {
         movieId = arguments!!.getInt(TagUtils.MOVIE_ID)

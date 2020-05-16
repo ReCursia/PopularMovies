@@ -66,7 +66,6 @@ class AuthScreenFragment : MvpAppCompatFragment(), AuthScreenContract {
         initListeners()
     }
 
-
     private fun initListeners() {
         forgotPasswordButton.setOnClickListener {
             presenter.onForgotButtonClicked()
@@ -155,6 +154,4 @@ class AuthScreenFragment : MvpAppCompatFragment(), AuthScreenContract {
     companion object {
         fun getInstance() = AuthScreenFragment()
     }
-
-
 }

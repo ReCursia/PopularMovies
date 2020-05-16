@@ -20,7 +20,6 @@ class AccountScreenPresenter(
 ) : MvpPresenter<AccountScreenContract>() {
     private val compositeDisposable = CompositeDisposable()
 
-
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
         initUserData()

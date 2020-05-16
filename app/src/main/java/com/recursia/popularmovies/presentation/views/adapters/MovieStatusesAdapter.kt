@@ -56,7 +56,7 @@ class MovieStatusesAdapter(private val context: Context) : RecyclerView.Adapter<
 
     override fun onBindViewHolder(movieStatusViewHolder: MovieStatusViewHolder, index: Int) {
         val status = statuses[index]
-        //TODO move it factory class and make view model
+        // TODO move it factory class and make view model
         val emoji = when (status) {
             MovieStatus.ALREADY_SAW -> 129393
             MovieStatus.WANT_TO_WATCH -> 129321

@@ -13,5 +13,4 @@ interface MoviesRepository {
     fun getMovieRecommendations(movieId: Int, page: Int, language: String): Single<List<Movie>>
 
     fun getMoviesWithCategory(category: Category, language: String): Single<List<Movie>>
-
 }

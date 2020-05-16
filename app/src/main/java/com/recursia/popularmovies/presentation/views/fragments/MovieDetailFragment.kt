@@ -61,7 +61,6 @@ class MovieDetailFragment : MvpAppCompatFragment(), MovieDetailContract {
 
     private var movieId: Int = 0
 
-
     @ProvidePresenter
     internal fun providePresenter(): MovieDetailPresenter {
         movieId = arguments!!.getInt(TagUtils.MOVIE_ID)
@@ -181,6 +180,4 @@ class MovieDetailFragment : MvpAppCompatFragment(), MovieDetailContract {
     override fun showErrorMessage(message: String) {
         Toast.makeText(context!!, message, Toast.LENGTH_LONG).show()
     }
-
-
 }

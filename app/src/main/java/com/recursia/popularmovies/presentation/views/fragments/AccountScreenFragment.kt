@@ -30,7 +30,6 @@ import moxy.presenter.ProvidePresenter
 
 class AccountScreenFragment : MvpAppCompatFragment(), AccountScreenContract {
 
-
     @BindView(R.id.toolbar)
     lateinit var toolbar: Toolbar
 
@@ -57,7 +56,6 @@ class AccountScreenFragment : MvpAppCompatFragment(), AccountScreenContract {
 
     @InjectPresenter
     lateinit var presenter: AccountScreenPresenter
-
 
     @ProvidePresenter
     fun providePresenter(): AccountScreenPresenter {
@@ -148,7 +146,7 @@ class AccountScreenFragment : MvpAppCompatFragment(), AccountScreenContract {
     }
 
     override fun showAboutDialog() {
-        //TODO load old dialog about
+        // TODO load old dialog about
     }
 
     override fun showErrorMessage(message: String) {

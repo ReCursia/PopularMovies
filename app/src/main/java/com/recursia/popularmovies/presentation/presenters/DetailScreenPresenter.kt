@@ -73,5 +73,4 @@ class DetailScreenPresenter(
             router.navigateTo(Screens.PhotoScreen(movie.posterPath!!))
         }
     }
-
 }

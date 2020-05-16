@@ -33,7 +33,6 @@ class MapperModule {
         return MovieModelToEntityMapper(mapper)
     }
 
-
     @Provides
     internal fun provideEntityToTrailerDatabaseModelMapper(): EntityToTrailerModelMapper {
         return EntityToTrailerModelMapper()

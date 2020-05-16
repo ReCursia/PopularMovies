@@ -9,4 +9,3 @@ data class Trailer(
         var size: Int = 0,
         var type: String? = null
 )
-

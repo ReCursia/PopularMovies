@@ -9,4 +9,3 @@ data class Review(
         var url: String? = null,
         var status: ReviewStatus = ReviewStatus.UNKNOWN
 )
-

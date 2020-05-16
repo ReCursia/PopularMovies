@@ -5,7 +5,6 @@ import moxy.viewstate.strategy.AddToEndSingleStrategy
 import moxy.viewstate.strategy.SkipStrategy
 import moxy.viewstate.strategy.StateStrategyType
 
-
 @StateStrategyType(SkipStrategy::class)
 interface AuthScreenContract : MvpView {
 

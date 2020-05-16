@@ -39,7 +39,6 @@ class RepositoryModule {
         )
     }
 
-
     @Provides
     @Singleton
     internal fun provideAccountRepository(): AccountRepository {
@@ -51,5 +50,4 @@ class RepositoryModule {
     internal fun provideTranslateRepository(translateApi: TranslateApi): TranslateRepository {
         return TranslateRepositoryImpl(translateApi)
     }
-
 }

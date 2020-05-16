@@ -15,5 +15,4 @@ interface MainScreenContract : MvpView {
 
     @StateStrategyType(SkipStrategy::class)
     fun showErrorMessage(message: String)
-
 }
