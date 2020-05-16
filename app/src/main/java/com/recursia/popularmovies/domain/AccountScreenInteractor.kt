@@ -11,7 +11,7 @@ interface AccountScreenInteractor {
 
     fun getUserInfo(): Single<User>
 
-    fun setUserName(name: String): Completable
+    fun setUserProfileImage(imagePath: String): Completable
 
     fun getUserMoviesWithStatus(status: MovieStatus): Flowable<List<Movie>>
 }

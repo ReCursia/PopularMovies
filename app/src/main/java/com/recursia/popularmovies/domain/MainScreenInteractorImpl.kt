@@ -8,6 +8,10 @@ class MainScreenInteractorImpl(
         private val moviesRepository: MoviesRepository
 ) : MainScreenInteractor {
     override fun getMoviesWithCategory(category: Category, language: String): Single<List<Movie>> {
-        return moviesRepository.getMoviesWithCategory(category, language)
+        return moviesRepository.getMoviesWithCategory(category, language, PAGE)
+    }
+
+    companion object {
+        private const val PAGE = 1
     }
 }

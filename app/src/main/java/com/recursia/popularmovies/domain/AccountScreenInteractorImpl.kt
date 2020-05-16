@@ -10,12 +10,11 @@ import io.reactivex.Single
 class AccountScreenInteractorImpl(private val accountRepository: AccountRepository) : AccountScreenInteractor {
     override fun getUserInfo(): Single<User> {
         return accountRepository.getUserInfo()
+                .toSingle()
     }
 
-    override fun setUserName(name: String): Completable {
-        return accountRepository.getUserInfo()
-                .doOnSuccess { it.username = name }
-                .flatMapCompletable { accountRepository.setUserInfo(it) }
+    override fun setUserProfileImage(imagePath: String): Completable {
+        return accountRepository.setUserProfileImage(imagePath)
     }
 
     override fun getUserMoviesWithStatus(status: MovieStatus): Flowable<List<Movie>> {

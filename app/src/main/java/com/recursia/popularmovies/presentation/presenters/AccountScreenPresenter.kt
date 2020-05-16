@@ -72,4 +72,17 @@ class AccountScreenPresenter(
         authPreferences.setAuthorized(false)
         router.exit()
     }
+
+    fun onImageProfileChosen(imageUri: String?) {
+        imageUri?.let {
+            val d = accountScreenInteractor
+                    .setUserProfileImage(imageUri)
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(
+                            { initUserData() },
+                            { viewState.showErrorMessage(it.localizedMessage) }
+                    )
+            compositeDisposable.add(d)
+        }
+    }
 }

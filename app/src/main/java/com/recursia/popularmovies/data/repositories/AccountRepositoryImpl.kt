@@ -1,10 +1,15 @@
 package com.recursia.popularmovies.data.repositories
 
+import android.net.Uri
+import android.util.Log
+import com.google.android.gms.tasks.OnSuccessListener
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.UploadTask
 import com.recursia.popularmovies.domain.AccountRepository
 import com.recursia.popularmovies.domain.models.Movie
 import com.recursia.popularmovies.domain.models.User
@@ -13,9 +18,48 @@ import io.reactivex.*
 import io.reactivex.schedulers.Schedulers
 
 class AccountRepositoryImpl : AccountRepository {
-    override fun getUserInfo(): Single<User> {
-        // TODO implement
-        return Single.just(User("test", "today"))
+    override fun getUserInfo(): Maybe<User> {
+        return Maybe.create<User> { emitter ->
+            val user = User()
+            val firebaseUser = FirebaseAuth.getInstance().currentUser
+            user.username = firebaseUser?.displayName
+            //TODO registration date
+            user.registrationDate = "TEST REGISTRATION DATE"
+
+            //Image
+            val storageRef = FirebaseStorage
+                    .getInstance()
+                    .reference
+                    .child("images/${firebaseUser?.uid}")
+
+            storageRef.downloadUrl
+                    .addOnSuccessListener {
+                        OnSuccessListener<Uri> {
+                            user.profileImagePath = it.toString()
+                            emitter.onSuccess(user)
+                        }
+                    }
+                    .addOnFailureListener {
+                        emitter.onSuccess(user)
+                    }
+        }.subscribeOn(Schedulers.io())
+    }
+
+    override fun setUserProfileImage(imagePath: String): Completable {
+        return Completable.create { emitter ->
+            val user = FirebaseAuth.getInstance().currentUser
+            val storageRef = FirebaseStorage.getInstance().reference
+            val imageRef = storageRef.child("images/${user?.uid}")
+            val uri = Uri.parse(imagePath)
+            Log.i("PORTAL", uri.path)
+            imageRef.putFile(uri)
+                    .addOnSuccessListener {
+                        OnSuccessListener<UploadTask.TaskSnapshot> { emitter.onComplete() }
+                    }
+                    .addOnFailureListener {
+                        emitter.onError(it)
+                    }
+        }.subscribeOn(Schedulers.io())
     }
 
     override fun setUserInfo(user: User): Completable {

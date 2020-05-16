@@ -6,10 +6,9 @@ import com.recursia.popularmovies.domain.models.enums.MovieStatus
 import io.reactivex.Completable
 import io.reactivex.Flowable
 import io.reactivex.Maybe
-import io.reactivex.Single
 
 interface AccountRepository {
-    fun getUserInfo(): Single<User>
+    fun getUserInfo(): Maybe<User>
 
     fun setUserInfo(user: User): Completable
 
@@ -18,4 +17,6 @@ interface AccountRepository {
     fun getMovieById(movieId: Int): Maybe<Movie>
 
     fun setMovieStatus(movie: Movie): Completable
+
+    fun setUserProfileImage(imagePath: String): Completable
 }

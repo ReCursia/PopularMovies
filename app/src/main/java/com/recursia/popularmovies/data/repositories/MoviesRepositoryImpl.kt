@@ -33,7 +33,7 @@ class MoviesRepositoryImpl(
                 .map { creditsResponseToCastMapper.transform(it) }
         val trailerListSingle = moviesApi.getMovieTrailersById(movieId, language)
                 .map { movieTrailersResponseToTrailersMapper.transform(it) }
-        val reviewListSingle = moviesApi.getMovieReviews(movieId, PAGE)
+        val reviewListSingle = moviesApi.getMovieReviews(movieId, REVIEWS_PAGE)
                 .map { reviewsResponseToReviewMapper.transform(it) }
 
         return Single.zip(
@@ -62,12 +62,12 @@ class MoviesRepositoryImpl(
                 .subscribeOn(Schedulers.io())
     }
 
-    override fun getMoviesWithCategory(category: Category, language: String): Single<List<Movie>> {
+    override fun getMoviesWithCategory(category: Category, language: String, page: Int): Single<List<Movie>> {
         val observable = when (category) {
-            Category.UPCOMING -> moviesApi.getMoviesUpcoming(language, PAGE)
-            Category.POPULAR -> moviesApi.getMoviesPopular(language, PAGE)
-            Category.NOW_PLAYING -> moviesApi.getMoviesNowPlaying(language, PAGE)
-            Category.TOP_RATED -> moviesApi.getMoviesTopRated(language, PAGE)
+            Category.UPCOMING -> moviesApi.getMoviesUpcoming(language, page)
+            Category.POPULAR -> moviesApi.getMoviesPopular(language, page)
+            Category.NOW_PLAYING -> moviesApi.getMoviesNowPlaying(language, page)
+            Category.TOP_RATED -> moviesApi.getMoviesTopRated(language, page)
         }
         return observable
                 .map { discoverMovieResponseToMovieMapper.transform(it) }
@@ -75,6 +75,6 @@ class MoviesRepositoryImpl(
     }
 
     companion object {
-        private const val PAGE = 1
+        private const val REVIEWS_PAGE = 1
     }
 }
