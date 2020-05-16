@@ -62,6 +62,7 @@ class SearchScreenFragment : MvpAppCompatFragment(), SearchScreenContract {
         toolbar.inflateMenu(R.menu.search_menu)
         val searchItem = toolbar.menu.findItem(R.id.search_item)
         val searchView = searchItem.actionView as SearchView
+        searchItem.expandActionView()
         searchView.queryHint = getString(R.string.search_hint)
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(s: String): Boolean {
