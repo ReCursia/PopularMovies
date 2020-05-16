@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
@@ -12,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import butterknife.BindView
 import butterknife.ButterKnife
+import com.google.firebase.auth.FirebaseAuth
 import com.recursia.popularmovies.R
 import com.recursia.popularmovies.TheApplication
 import com.recursia.popularmovies.domain.models.Movie
@@ -21,6 +23,7 @@ import com.recursia.popularmovies.presentation.presenters.AccountScreenPresenter
 import com.recursia.popularmovies.presentation.views.adapters.MoviesAdapter
 import com.recursia.popularmovies.presentation.views.contracts.AccountScreenContract
 import com.recursia.popularmovies.presentation.views.decorations.MarginItemDecoration
+import com.recursia.popularmovies.utils.intro.PreferencesImpl
 import moxy.MvpAppCompatFragment
 import moxy.presenter.InjectPresenter
 import moxy.presenter.ProvidePresenter
@@ -33,6 +36,9 @@ class AccountScreenFragment : MvpAppCompatFragment(), AccountScreenContract {
 
     @BindView(R.id.profile_image)
     lateinit var profileImage: ImageView
+
+    @BindView(R.id.button_sign_out)
+    lateinit var buttonSignOut: Button
 
     @BindView(R.id.text_view_user_name)
     lateinit var textViewUserName: TextView
@@ -56,7 +62,7 @@ class AccountScreenFragment : MvpAppCompatFragment(), AccountScreenContract {
     @ProvidePresenter
     fun providePresenter(): AccountScreenPresenter {
         val app = TheApplication.getInstance().appComponent
-        return AccountScreenPresenter(app.accountScreenInteractor, app.router)
+        return AccountScreenPresenter(app.accountScreenInteractor, app.router, PreferencesImpl(context!!))
     }
 
     private val statusMap = mutableMapOf<MovieStatus, MoviesAdapter>()
@@ -73,6 +79,11 @@ class AccountScreenFragment : MvpAppCompatFragment(), AccountScreenContract {
 
         // Recycler view
         initRecyclerViewsAndAdapters()
+
+        buttonSignOut.setOnClickListener {
+            FirebaseAuth.getInstance().signOut()
+            presenter.onSignOutClicked()
+        }
     }
 
     private fun initRecyclerViewsAndAdapters() {

@@ -8,6 +8,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import butterknife.BindView
 import butterknife.ButterKnife
+import com.google.android.material.button.MaterialButton
 import com.recursia.popularmovies.R
 import com.recursia.popularmovies.domain.models.Review
 import com.recursia.popularmovies.utils.TextViewUtils
@@ -36,11 +37,10 @@ class ReviewsAdapter(private val context: Context) : RecyclerView.Adapter<Review
         // Text
         reviewViewHolder.text.text = review.text
         // Translate
-        //TODO add translate
-        //reviewViewHolder.translateText.setOnClickListener {
-        //    clickListener?.invoke(review, i)
-        //}
-        // Show more
+        reviewViewHolder.translateButton.setOnClickListener {
+            clickListener?.invoke(review, i)
+        }
+
         if (shouldShowMoreText(review.text)) {
             reviewViewHolder.showMore.visibility = View.VISIBLE
             TextViewUtils.collapseTextView(reviewViewHolder.text, LINE_LIMIT)
@@ -72,9 +72,8 @@ class ReviewsAdapter(private val context: Context) : RecyclerView.Adapter<Review
         @BindView(R.id.text)
         lateinit var text: TextView
 
-        //TODO add translate??
-        //@BindView(R.id.translate_text)
-        //lateinit var translateText: TextView
+        @BindView(R.id.translate_button)
+        lateinit var translateButton: MaterialButton
 
         @BindView(R.id.show_more)
         lateinit var showMore: TextView
@@ -87,6 +86,6 @@ class ReviewsAdapter(private val context: Context) : RecyclerView.Adapter<Review
     companion object {
         private const val TEXT_LENGTH_LIMIT = 400
         private const val LINE_LIMIT = 5
-        private const val ANIMATION_DURATION = 200L // ms
+        private const val ANIMATION_DURATION = 500L // ms
     }
 }

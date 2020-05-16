@@ -33,6 +33,22 @@
                     android:layout_height="wrap_content"
                     android:textColor="@color/lightGray"
                     tools:text="Author" />
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/translate_button"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/translate_button"
+                    android:textAllCaps="false"
+                    android:textColor="@color/colorAccent"
+                    app:strokeWidth="0dp" />
+
             </LinearLayout>
 
             <TextView
@@ -44,14 +60,15 @@
                 android:textSize="16sp"
                 tools:text="Hello, this is review from me!!!" />
 
-            <Button
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/show_more"
-                style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/show_more"
                 android:textAllCaps="false"
-                android:textColor="@color/colorAccent" />
+                android:textColor="@color/colorAccent"
+                app:strokeWidth="0dp" />
         </LinearLayout>
     </FrameLayout>
 

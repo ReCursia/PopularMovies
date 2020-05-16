@@ -73,6 +73,7 @@
     <string name="sign_up">Register</string>
     <string name="edit_text_email_error">Email is invalid!</string>
     <string name="edit_text_password_error">Password is invalid!</string>
+    <string name="account_button_sign_out">Sign out</string>
 
 
 </resources>

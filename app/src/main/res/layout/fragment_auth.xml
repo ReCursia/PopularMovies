@@ -69,26 +69,28 @@
                         android:singleLine="true" />
                 </com.google.android.material.textfield.TextInputLayout>
 
-                <Button
+                <com.google.android.material.button.MaterialButton
                     android:id="@+id/forgot_password_button"
-                    style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/forgot_password"
                     android:textAllCaps="false"
-                    android:textColor="@color/colorAccent" />
+                    android:textColor="@color/colorAccent"
+                    app:strokeWidth="0dp" />
 
 
             </LinearLayout>
 
             <Button
                 android:id="@+id/button_sign_in"
-                style="@style/AppTheme.RoundedCornerMaterialButton"
+                style="@style/Widget.MaterialComponents.Button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
                 android:layout_marginEnd="24dp"
                 android:layout_marginBottom="8dp"
+                android:backgroundTint="@color/colorAccent"
                 android:text="@string/sign_in"
                 android:textAllCaps="false"
                 android:textColor="@color/white"
@@ -97,9 +99,9 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
 
-            <Button
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/button_sign_up"
-                style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
@@ -112,7 +114,8 @@
                 android:textSize="16sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:strokeWidth="0dp" />
 
             <ProgressBar
                 android:id="@+id/progress_bar"

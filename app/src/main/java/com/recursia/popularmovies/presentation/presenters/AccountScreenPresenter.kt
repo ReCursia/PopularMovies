@@ -5,6 +5,7 @@ import com.recursia.popularmovies.domain.AccountScreenInteractor
 import com.recursia.popularmovies.domain.models.Movie
 import com.recursia.popularmovies.domain.models.enums.MovieStatus
 import com.recursia.popularmovies.presentation.views.contracts.AccountScreenContract
+import com.recursia.popularmovies.utils.intro.AuthPreferences
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import moxy.InjectViewState
@@ -14,7 +15,8 @@ import ru.terrakok.cicerone.Router
 @InjectViewState
 class AccountScreenPresenter(
         private val accountScreenInteractor: AccountScreenInteractor,
-        private val router: Router
+        private val router: Router,
+        private val authPreferences: AuthPreferences
 ) : MvpPresenter<AccountScreenContract>() {
     private val compositeDisposable = CompositeDisposable()
 
@@ -65,5 +67,10 @@ class AccountScreenPresenter(
 
     fun onMovieClicked(movie: Movie) {
         router.navigateTo(Screens.DetailScreen(movie.id))
+    }
+
+    fun onSignOutClicked() {
+        authPreferences.setAuthorized(false)
+        router.exit()
     }
 }

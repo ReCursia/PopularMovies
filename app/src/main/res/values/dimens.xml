@@ -13,4 +13,6 @@
     <dimen name="movie_tab_layout_margin_horizontal">22dp</dimen>
 
     <dimen name="main_screen_title_margin_horizontal">20dp</dimen>
+
+    <dimen name="colored_button_padding_vertical">10dp</dimen>
 </resources>

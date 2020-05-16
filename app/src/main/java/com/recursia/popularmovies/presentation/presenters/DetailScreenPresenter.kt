@@ -70,7 +70,7 @@ class DetailScreenPresenter(
 
     fun onBackdropClicked(movie: Movie?) {
         movie?.let {
-            router.navigateTo(Screens.PhotoScreen(movie.backdropPath!!))
+            router.navigateTo(Screens.PhotoScreen(movie.posterPath!!))
         }
     }
 

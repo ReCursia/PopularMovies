@@ -7,7 +7,8 @@ import io.reactivex.Single
 
 class DetailScreenInteractorImpl(
         private val accountRepository: AccountRepository,
-        private val moviesRepository: MoviesRepository
+        private val moviesRepository: MoviesRepository,
+        private val translateRepository: TranslateRepository
 ) : DetailScreenInteractor {
     override fun getMovieById(movieId: Int, language: String): Single<Movie> {
         return accountRepository.getMovieById(movieId)
@@ -23,6 +24,6 @@ class DetailScreenInteractorImpl(
     }
 
     override fun translateReview(review: Review, lang: String): Single<Review> {
-        TODO("Not yet implemented")
+        return translateRepository.translateReview(review, lang)
     }
 }

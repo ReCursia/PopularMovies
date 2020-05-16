@@ -39,7 +39,6 @@ class ReviewsPresenter(
     }
 
     fun onTranslateReviewClicked(review: Review, position: Int) {
-        //TODO view show translation loading progress
         val d = detailScreenInteractor
                 .translateReview(review, LangUtils.defaultLanguage)
                 .subscribeOn(Schedulers.io())
