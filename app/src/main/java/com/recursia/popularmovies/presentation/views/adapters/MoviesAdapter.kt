@@ -17,7 +17,8 @@ import com.recursia.popularmovies.utils.NetworkUtils
 
 class MoviesAdapter(
         private val context: Context,
-        val tag: String? = null
+        val tag: String? = null,
+        private val isLargeItem: Boolean = false
 ) : RecyclerView.Adapter<MoviesAdapter.MovieViewHolder>() {
     private var movies: MutableList<Movie> = ArrayList()
     private var clickListener: ((Movie) -> Unit)? = null
@@ -42,7 +43,8 @@ class MoviesAdapter(
     }
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, i: Int): MovieViewHolder {
-        val itemView = LayoutInflater.from(viewGroup.context).inflate(R.layout.movie_item, viewGroup, false)
+        val layoutId = if (isLargeItem) R.layout.movie_item_large else R.layout.movie_item
+        val itemView = LayoutInflater.from(viewGroup.context).inflate(layoutId, viewGroup, false)
         return MovieViewHolder(itemView)
     }
 

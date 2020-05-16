@@ -98,7 +98,7 @@ class SearchScreenFragment : MvpAppCompatFragment(), SearchScreenContract {
     }
 
     companion object {
-        private const val SPAN_COUNT = 3
+        private const val SPAN_COUNT = 2
         val instance: SearchScreenFragment
             get() = SearchScreenFragment()
     }

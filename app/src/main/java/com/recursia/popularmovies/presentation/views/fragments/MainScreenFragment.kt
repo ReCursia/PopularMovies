@@ -80,7 +80,7 @@ class MainScreenFragment : MvpAppCompatFragment(), MainScreenContract {
 
     private fun initRecyclerViewsAndAdapters() {
         for (category in Category.values()) {
-            val adapter = MoviesAdapter(context!!, category.toString())
+            val adapter = MoviesAdapter(context!!, category.toString(), shouldBeLargeIcon(category))
             adapter.setOnClickListener {
                 presenter.onMovieClicked(it)
             }
@@ -88,6 +88,8 @@ class MainScreenFragment : MvpAppCompatFragment(), MainScreenContract {
             setRecyclerViewAdapter(category, adapter)
         }
     }
+
+    private fun shouldBeLargeIcon(category: Category) = category == Category.POPULAR
 
     private fun setRecyclerViewAdapter(category: Category, adapter: MoviesAdapter) {
         when (category) {
