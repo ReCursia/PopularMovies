@@ -1,7 +1,6 @@
 package com.recursia.popularmovies.data.repositories
 
 import android.net.Uri
-import android.util.Log
 import com.google.android.gms.tasks.OnSuccessListener
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
@@ -32,16 +31,12 @@ class AccountRepositoryImpl : AccountRepository {
                     .reference
                     .child("images/${firebaseUser?.uid}")
 
-            storageRef.downloadUrl
-                    .addOnSuccessListener {
-                        OnSuccessListener<Uri> {
-                            user.profileImagePath = it.toString()
-                            emitter.onSuccess(user)
-                        }
-                    }
-                    .addOnFailureListener {
-                        emitter.onSuccess(user)
-                    }
+            storageRef.downloadUrl.addOnSuccessListener {
+                user.profileImagePath = it.toString()
+                emitter.onSuccess(user)
+            }.addOnFailureListener {
+                emitter.onSuccess(user)
+            }
         }.subscribeOn(Schedulers.io())
     }
 
@@ -51,7 +46,6 @@ class AccountRepositoryImpl : AccountRepository {
             val storageRef = FirebaseStorage.getInstance().reference
             val imageRef = storageRef.child("images/${user?.uid}")
             val uri = Uri.parse(imagePath)
-            Log.i("PORTAL", uri.path)
             imageRef.putFile(uri)
                     .addOnSuccessListener {
                         OnSuccessListener<UploadTask.TaskSnapshot> { emitter.onComplete() }

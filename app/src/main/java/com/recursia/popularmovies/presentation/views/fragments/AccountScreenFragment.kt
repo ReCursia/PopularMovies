@@ -168,8 +168,6 @@ class AccountScreenFragment : MvpAppCompatFragment(), AccountScreenContract {
         textViewUserName.visibility = View.VISIBLE
         textViewRegistrationDate.visibility = View.VISIBLE
 
-        Toast.makeText(context!!, user.profileImagePath, Toast.LENGTH_LONG).show()
-
         Glide.with(context!!)
                 .load(user.profileImagePath ?: "")
                 .placeholder(R.drawable.ic_cast_placeholder)
