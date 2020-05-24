@@ -9,7 +9,6 @@ import com.recursia.popularmovies.utils.LangUtils
 import com.recursia.popularmovies.utils.intro.AuthPreferences
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.schedulers.Schedulers
 import moxy.InjectViewState
 import moxy.MvpPresenter
 import ru.terrakok.cicerone.Router
@@ -30,7 +29,6 @@ class MainScreenPresenter(
         for (category in Category.values()) {
             val d = mainScreenInteractor
                     .getMoviesWithCategory(category, LangUtils.defaultLanguage)
-                    .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(
                             { viewState.setCategoryMovies(it, category) },

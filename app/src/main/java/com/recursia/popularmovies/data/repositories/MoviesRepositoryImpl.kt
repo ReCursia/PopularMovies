@@ -47,7 +47,7 @@ class MoviesRepositoryImpl(
                     movie.reviews = reviews
                     movie
                 }
-        )
+        ).subscribeOn(Schedulers.io())
     }
 
     override fun getMoviesByQuery(query: String, page: Int, language: String): Single<List<Movie>> {

@@ -8,7 +8,6 @@ import com.recursia.popularmovies.presentation.views.contracts.MovieDetailContra
 import com.recursia.popularmovies.utils.LangUtils
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.schedulers.Schedulers
 import moxy.InjectViewState
 import moxy.MvpPresenter
 import ru.terrakok.cicerone.Router
@@ -30,7 +29,6 @@ class MovieDetailPresenter(
     private fun initRecommendations() {
         val d = detailScreenInteractor
                 .getMovieRecommendations(movieId, MOVIE_RECOMMENDATION_PAGE, LangUtils.defaultLanguage)
-                .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
                         { viewState.setRecommendationMovies(it) },
@@ -42,7 +40,6 @@ class MovieDetailPresenter(
     private fun initMovieData() {
         val d = detailScreenInteractor
                 .getMovieById(movieId, LangUtils.defaultLanguage)
-                .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
                         { viewState.setMovieDetail(it) },

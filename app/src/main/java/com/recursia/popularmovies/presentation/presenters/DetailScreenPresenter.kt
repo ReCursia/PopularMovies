@@ -8,7 +8,6 @@ import com.recursia.popularmovies.presentation.views.contracts.DetailScreenContr
 import com.recursia.popularmovies.utils.LangUtils
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.schedulers.Schedulers
 import moxy.InjectViewState
 import moxy.MvpPresenter
 import ru.terrakok.cicerone.Router
@@ -29,7 +28,6 @@ class DetailScreenPresenter(
     private fun initData() {
         val d = detailScreenInteractor
                 .getMovieById(movieId, LangUtils.defaultLanguage)
-                .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
                         { viewState.setMovieDetail(it) },
@@ -57,7 +55,6 @@ class DetailScreenPresenter(
         movie?.let {
             val d = detailScreenInteractor
                     .setMovieStatus(movie)
-                    .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .doOnSubscribe { movie.status = status }
                     .subscribe(
