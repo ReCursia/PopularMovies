@@ -47,8 +47,8 @@ class AccountScreenFragment : MvpAppCompatFragment(), AccountScreenContract {
     @BindView(R.id.text_view_user_name)
     lateinit var textViewUserName: TextView
 
-    @BindView(R.id.text_view_registration_date)
-    lateinit var textViewRegistrationDate: TextView
+    @BindView(R.id.text_view_email)
+    lateinit var textViewEmail: TextView
 
     @BindView(R.id.recycler_view_want_to_watch)
     lateinit var recyclerViewWantToWatch: RecyclerView
@@ -163,10 +163,10 @@ class AccountScreenFragment : MvpAppCompatFragment(), AccountScreenContract {
 
     override fun setUserData(user: User) {
         textViewUserName.text = user.username
-        textViewRegistrationDate.text = user.registrationDate
+        textViewEmail.text = user.email
 
         textViewUserName.visibility = View.VISIBLE
-        textViewRegistrationDate.visibility = View.VISIBLE
+        textViewEmail.visibility = View.VISIBLE
 
         Glide.with(context!!)
                 .load(user.profileImagePath ?: "")

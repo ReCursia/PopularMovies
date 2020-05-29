@@ -22,8 +22,7 @@ class AccountRepositoryImpl : AccountRepository {
             val user = User()
             val firebaseUser = FirebaseAuth.getInstance().currentUser
             user.username = firebaseUser?.displayName
-            //TODO registration date
-            user.registrationDate = "TEST REGISTRATION DATE"
+            user.email = firebaseUser?.email
 
             //Image
             val storageRef = FirebaseStorage
