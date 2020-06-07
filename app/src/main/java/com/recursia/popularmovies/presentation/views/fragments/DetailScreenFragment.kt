@@ -19,6 +19,7 @@ import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.google.android.material.tabs.TabLayout
 import com.recursia.popularmovies.R
 import com.recursia.popularmovies.TheApplication
+import com.recursia.popularmovies.domain.models.Genre
 import com.recursia.popularmovies.domain.models.Movie
 import com.recursia.popularmovies.domain.models.enums.MovieStatus
 import com.recursia.popularmovies.presentation.presenters.DetailScreenPresenter
@@ -26,16 +27,17 @@ import com.recursia.popularmovies.presentation.views.adapters.MoviePagerAdapter
 import com.recursia.popularmovies.presentation.views.adapters.MovieStatusesAdapter
 import com.recursia.popularmovies.presentation.views.contracts.DetailScreenContract
 import com.recursia.popularmovies.presentation.views.decorations.MarginItemDecoration
+import com.recursia.popularmovies.presentation.views.dialogs.GenresBottomSheetDialogFragment
 import com.recursia.popularmovies.utils.DimensionsUtils
 import com.recursia.popularmovies.utils.NetworkUtils
+import com.recursia.popularmovies.utils.OnItemClickListener
 import com.recursia.popularmovies.utils.TagUtils
 import moxy.MvpAppCompatFragment
 import moxy.presenter.InjectPresenter
 import moxy.presenter.ProvidePresenter
 import net.opacapp.multilinecollapsingtoolbar.CollapsingToolbarLayout
 
-class DetailScreenFragment : MvpAppCompatFragment(), DetailScreenContract {
-
+class DetailScreenFragment : MvpAppCompatFragment(), DetailScreenContract, OnItemClickListener<Genre> {
     @BindView(R.id.backdrop_image)
     lateinit var backdropImage: ImageView
 
@@ -184,8 +186,18 @@ class DetailScreenFragment : MvpAppCompatFragment(), DetailScreenContract {
         }
     }
 
+    override fun onClick(genre: Genre) {
+        presenter.onGenreClicked(genre)
+    }
+
+    override fun showBottomSheetGenreMovies(genre: Genre) {
+        val bottomSheetDialog = GenresBottomSheetDialogFragment.getInstance(genre.id)
+        bottomSheetDialog.show(childFragmentManager, BOTTOM_SHEET_TAG)
+    }
+
     companion object {
         private const val FADE_OUT_DURATION = 100 // ms
+        private const val BOTTOM_SHEET_TAG = "BottomSheetTag"
 
         fun getInstance(movieId: Int): DetailScreenFragment {
             val fragment = DetailScreenFragment()

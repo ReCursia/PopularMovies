@@ -1,5 +1,6 @@
 package com.recursia.popularmovies.domain
 
+import com.recursia.popularmovies.domain.models.Genre
 import com.recursia.popularmovies.domain.models.Movie
 import com.recursia.popularmovies.domain.models.enums.Category
 import io.reactivex.Single
@@ -13,4 +14,8 @@ interface MoviesRepository {
     fun getMovieRecommendations(movieId: Int, page: Int, language: String): Single<List<Movie>>
 
     fun getMoviesWithCategory(category: Category, language: String, page: Int): Single<List<Movie>>
+
+    fun getGenreMovies(genre: Genre, page: Int, language: String): Single<List<Movie>>
+
+    fun getGenres(language: String): Single<List<Genre>>
 }

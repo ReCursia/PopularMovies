@@ -16,7 +16,9 @@ import com.recursia.popularmovies.TheApplication
 import com.recursia.popularmovies.domain.models.Movie
 import com.recursia.popularmovies.presentation.presenters.SearchScreenPresenter
 import com.recursia.popularmovies.presentation.views.adapters.MoviesAdapter
+import com.recursia.popularmovies.presentation.views.adapters.common.MovieStretchItemType
 import com.recursia.popularmovies.presentation.views.contracts.SearchScreenContract
+import com.recursia.popularmovies.presentation.views.decorations.MarginItemDecoration
 import moxy.MvpAppCompatFragment
 import moxy.presenter.InjectPresenter
 import moxy.presenter.ProvidePresenter
@@ -78,11 +80,14 @@ class SearchScreenFragment : MvpAppCompatFragment(), SearchScreenContract {
 
     private fun initRecyclerView() {
         searchRecyclerView.layoutManager = GridLayoutManager(context, SPAN_COUNT)
+        searchRecyclerView.addItemDecoration(
+                MarginItemDecoration(context!!, 10, 10, 5, 5)
+        )
         searchRecyclerView.setHasFixedSize(true)
     }
 
     private fun initAdapter() {
-        moviesAdapter = MoviesAdapter(context!!)
+        moviesAdapter = MoviesAdapter(context!!, MovieStretchItemType())
         moviesAdapter.setOnClickListener {
             presenter.onItemClicked(it)
         }

@@ -3,16 +3,14 @@ package com.recursia.popularmovies.utils
 import android.animation.ObjectAnimator
 import android.widget.TextView
 
-class TextViewUtils {
+object TextViewUtils {
 
-    companion object {
-        fun expandTextViewWithAnimation(tv: TextView, duration: Long) {
-            val animation = ObjectAnimator.ofInt(tv, "maxLines", tv.lineCount)
-            animation.setDuration(duration).start()
-        }
+    fun expandTextViewWithAnimation(tv: TextView, duration: Long) {
+        val animation = ObjectAnimator.ofInt(tv, "maxLines", tv.lineCount)
+        animation.setDuration(duration).start()
+    }
 
-        fun collapseTextView(tv: TextView, lineLimit: Int) {
-            tv.maxLines = lineLimit
-        }
+    fun collapseTextView(tv: TextView, lineLimit: Int) {
+        tv.maxLines = lineLimit
     }
 }

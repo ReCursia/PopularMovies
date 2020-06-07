@@ -16,6 +16,9 @@ import com.recursia.popularmovies.domain.models.Movie
 import com.recursia.popularmovies.domain.models.enums.Category
 import com.recursia.popularmovies.presentation.presenters.MainScreenPresenter
 import com.recursia.popularmovies.presentation.views.adapters.MoviesAdapter
+import com.recursia.popularmovies.presentation.views.adapters.common.ItemType
+import com.recursia.popularmovies.presentation.views.adapters.common.MovieLargeItemType
+import com.recursia.popularmovies.presentation.views.adapters.common.MovieMediumItemType
 import com.recursia.popularmovies.presentation.views.contracts.MainScreenContract
 import com.recursia.popularmovies.presentation.views.decorations.MarginItemDecoration
 import com.recursia.popularmovies.utils.intro.PreferencesImpl
@@ -80,7 +83,7 @@ class MainScreenFragment : MvpAppCompatFragment(), MainScreenContract {
 
     private fun initRecyclerViewsAndAdapters() {
         for (category in Category.values()) {
-            val adapter = MoviesAdapter(context!!, category.toString(), shouldBeLargeIcon(category))
+            val adapter = MoviesAdapter(context!!, getItemType(category), category.toString())
             adapter.setOnClickListener {
                 presenter.onMovieClicked(it)
             }
@@ -89,7 +92,12 @@ class MainScreenFragment : MvpAppCompatFragment(), MainScreenContract {
         }
     }
 
-    private fun shouldBeLargeIcon(category: Category) = category == Category.POPULAR
+    private fun getItemType(category: Category): ItemType {
+        if (category == Category.POPULAR) {
+            return MovieLargeItemType()
+        }
+        return MovieMediumItemType()
+    }
 
     private fun setRecyclerViewAdapter(category: Category, adapter: MoviesAdapter) {
         when (category) {

@@ -2,6 +2,7 @@ package com.recursia.popularmovies.presentation.presenters
 
 import com.recursia.popularmovies.Screens
 import com.recursia.popularmovies.domain.DetailScreenInteractor
+import com.recursia.popularmovies.domain.models.Genre
 import com.recursia.popularmovies.domain.models.Movie
 import com.recursia.popularmovies.domain.models.enums.MovieStatus
 import com.recursia.popularmovies.presentation.views.contracts.DetailScreenContract
@@ -69,5 +70,9 @@ class DetailScreenPresenter(
         movie?.let {
             router.navigateTo(Screens.PhotoScreen(movie.posterPath!!))
         }
+    }
+
+    fun onGenreClicked(genre: Genre) {
+        viewState.showBottomSheetGenreMovies(genre)
     }
 }

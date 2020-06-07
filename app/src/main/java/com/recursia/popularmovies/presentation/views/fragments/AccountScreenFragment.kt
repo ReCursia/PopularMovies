@@ -25,13 +25,13 @@ import com.recursia.popularmovies.domain.models.User
 import com.recursia.popularmovies.domain.models.enums.MovieStatus
 import com.recursia.popularmovies.presentation.presenters.AccountScreenPresenter
 import com.recursia.popularmovies.presentation.views.adapters.MoviesAdapter
+import com.recursia.popularmovies.presentation.views.adapters.common.MovieMediumItemType
 import com.recursia.popularmovies.presentation.views.contracts.AccountScreenContract
 import com.recursia.popularmovies.presentation.views.decorations.MarginItemDecoration
 import com.recursia.popularmovies.utils.intro.PreferencesImpl
 import moxy.MvpAppCompatFragment
 import moxy.presenter.InjectPresenter
 import moxy.presenter.ProvidePresenter
-
 
 class AccountScreenFragment : MvpAppCompatFragment(), AccountScreenContract {
 
@@ -83,13 +83,13 @@ class AccountScreenFragment : MvpAppCompatFragment(), AccountScreenContract {
         // Recycler view
         initRecyclerViewsAndAdapters()
 
-        //Button sign out
+        // Button sign out
         buttonSignOut.setOnClickListener {
             FirebaseAuth.getInstance().signOut()
             presenter.onSignOutClicked()
         }
 
-        //Image profile listener
+        // Image profile listener
         initImageProfileListener()
     }
 
@@ -111,7 +111,7 @@ class AccountScreenFragment : MvpAppCompatFragment(), AccountScreenContract {
     private fun initRecyclerViewsAndAdapters() {
         val statuses = MovieStatus.values().filter { it != MovieStatus.UNKNOWN }
         for (status in statuses) {
-            val adapter = MoviesAdapter(context!!, status.toString())
+            val adapter = MoviesAdapter(context!!, MovieMediumItemType(), status.toString())
             adapter.setOnClickListener {
                 presenter.onMovieClicked(it)
             }
@@ -186,6 +186,6 @@ class AccountScreenFragment : MvpAppCompatFragment(), AccountScreenContract {
     companion object {
         fun getInstance() = AccountScreenFragment()
         private const val FADE_OUT_DURATION = 100 // ms
-        private const val IMAGE_REQUEST_CODE = 30 //does not matter
+        private const val IMAGE_REQUEST_CODE = 30 // does not matter
     }
 }

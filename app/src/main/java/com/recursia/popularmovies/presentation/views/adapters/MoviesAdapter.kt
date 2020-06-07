@@ -13,12 +13,13 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.recursia.popularmovies.R
 import com.recursia.popularmovies.domain.models.Movie
+import com.recursia.popularmovies.presentation.views.adapters.common.ItemType
 import com.recursia.popularmovies.utils.NetworkUtils
 
 class MoviesAdapter(
         private val context: Context,
-        val tag: String? = null,
-        private val isLargeItem: Boolean = false
+        private val itemType: ItemType,
+        val tag: String? = null
 ) : RecyclerView.Adapter<MoviesAdapter.MovieViewHolder>() {
     private var movies: MutableList<Movie> = ArrayList()
     private var clickListener: ((Movie) -> Unit)? = null
@@ -43,7 +44,7 @@ class MoviesAdapter(
     }
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, i: Int): MovieViewHolder {
-        val layoutId = if (isLargeItem) R.layout.movie_item_large else R.layout.movie_item
+        val layoutId = itemType.getLayoutId()
         val itemView = LayoutInflater.from(viewGroup.context).inflate(layoutId, viewGroup, false)
         return MovieViewHolder(itemView)
     }

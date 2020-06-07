@@ -24,7 +24,7 @@ class AccountRepositoryImpl : AccountRepository {
             user.username = firebaseUser?.displayName
             user.email = firebaseUser?.email
 
-            //Image
+            // Image
             val storageRef = FirebaseStorage
                     .getInstance()
                     .reference

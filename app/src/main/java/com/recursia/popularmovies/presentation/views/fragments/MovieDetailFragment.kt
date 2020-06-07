@@ -23,11 +23,10 @@ import com.recursia.popularmovies.presentation.presenters.MovieDetailPresenter
 import com.recursia.popularmovies.presentation.views.adapters.CastAdapter
 import com.recursia.popularmovies.presentation.views.adapters.MoviesAdapter
 import com.recursia.popularmovies.presentation.views.adapters.TrailersAdapter
+import com.recursia.popularmovies.presentation.views.adapters.common.MovieMediumItemType
 import com.recursia.popularmovies.presentation.views.contracts.MovieDetailContract
 import com.recursia.popularmovies.presentation.views.decorations.MarginItemDecoration
-import com.recursia.popularmovies.utils.DateUtils
-import com.recursia.popularmovies.utils.NetworkUtils
-import com.recursia.popularmovies.utils.TagUtils
+import com.recursia.popularmovies.utils.*
 import moxy.MvpAppCompatFragment
 import moxy.presenter.InjectPresenter
 import moxy.presenter.ProvidePresenter
@@ -104,7 +103,7 @@ class MovieDetailFragment : MvpAppCompatFragment(), MovieDetailContract {
     }
 
     private fun initRecommendationAdapter() {
-        moviesAdapter = MoviesAdapter(context!!)
+        moviesAdapter = MoviesAdapter(context!!, MovieMediumItemType())
         moviesAdapter.setOnClickListener {
             presenter.onMovieClicked(it)
         }
@@ -169,13 +168,14 @@ class MovieDetailFragment : MvpAppCompatFragment(), MovieDetailContract {
         val layoutInflater = LayoutInflater.from(context)
         for (genre in genres) {
             val chip = layoutInflater.inflate(R.layout.genre_chip, genresGroup, false) as Chip
-
-            chip.text = getCapitalized(genre.name!!)
+            chip.text = StringUtils.getCapitalized(genre.name!!)
+            chip.setOnClickListener {
+                val listener = parentFragment as OnItemClickListener<Genre>
+                listener.onClick(genre)
+            }
             genresGroup.addView(chip)
         }
     }
-
-    private fun getCapitalized(str: String) = str.substring(0, 1).toUpperCase() + str.substring(1).toLowerCase()
 
     override fun showErrorMessage(message: String) {
         Toast.makeText(context!!, message, Toast.LENGTH_LONG).show()

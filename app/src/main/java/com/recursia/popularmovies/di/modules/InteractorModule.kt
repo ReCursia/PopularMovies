@@ -31,4 +31,9 @@ class InteractorModule {
     internal fun provideAccountScreenInteractor(accountRepository: AccountRepository): AccountScreenInteractor {
         return AccountScreenInteractorImpl(accountRepository)
     }
+
+    @Provides
+    internal fun provideGenresBottomSheetInteractor(moviesRepository: MoviesRepository): GenresBottomSheetInteractor {
+        return GenreBottomSheetInteractorImpl(moviesRepository)
+    }
 }

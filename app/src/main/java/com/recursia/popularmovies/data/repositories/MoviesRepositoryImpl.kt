@@ -3,10 +3,7 @@ package com.recursia.popularmovies.data.repositories
 import com.recursia.popularmovies.data.mappers.*
 import com.recursia.popularmovies.data.network.MoviesApi
 import com.recursia.popularmovies.domain.MoviesRepository
-import com.recursia.popularmovies.domain.models.Cast
-import com.recursia.popularmovies.domain.models.Movie
-import com.recursia.popularmovies.domain.models.Review
-import com.recursia.popularmovies.domain.models.Trailer
+import com.recursia.popularmovies.domain.models.*
 import com.recursia.popularmovies.domain.models.enums.Category
 import io.reactivex.Single
 import io.reactivex.functions.Function4
@@ -18,7 +15,8 @@ class MoviesRepositoryImpl(
         private val creditsResponseToCastMapper: CreditsResponseToCastMapper,
         private val movieTrailersResponseToTrailersMapper: MovieTrailersResponseToTrailersMapper,
         private val reviewsResponseToReviewMapper: ReviewsResponseToReviewMapper,
-        private val movieModelToEntityMapper: MovieModelToEntityMapper
+        private val movieModelToEntityMapper: MovieModelToEntityMapper,
+        private val genresResponseToEntityMapper: GenresResponseToEntityMapper
 ) : MoviesRepository {
 
     override fun getMovieById(movieId: Int, language: String): Single<Movie> {
@@ -71,6 +69,18 @@ class MoviesRepositoryImpl(
         }
         return observable
                 .map { discoverMovieResponseToMovieMapper.transform(it) }
+                .subscribeOn(Schedulers.io())
+    }
+
+    override fun getGenreMovies(genre: Genre, page: Int, language: String): Single<List<Movie>> {
+        return moviesApi.getGenreMovies(genre.id, language, page)
+                .map { discoverMovieResponseToMovieMapper.transform(it) }
+                .subscribeOn(Schedulers.io())
+    }
+
+    override fun getGenres(language: String): Single<List<Genre>> {
+        return moviesApi.getGenres(language)
+                .map { genresResponseToEntityMapper.transform(it) }
                 .subscribeOn(Schedulers.io())
     }
 

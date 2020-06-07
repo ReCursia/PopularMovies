@@ -27,7 +27,8 @@ class RepositoryModule {
             creditsResponseToCastMapper: CreditsResponseToCastMapper,
             movieTrailersResponseToTrailersMapper: MovieTrailersResponseToTrailersMapper,
             reviewsResponseToReviewMapper: ReviewsResponseToReviewMapper,
-            movieModelToEntityMapper: MovieModelToEntityMapper
+            movieModelToEntityMapper: MovieModelToEntityMapper,
+            genresResponseToEntityMapper: GenresResponseToEntityMapper
     ): MoviesRepository {
         return MoviesRepositoryImpl(
                 moviesApi,
@@ -35,7 +36,8 @@ class RepositoryModule {
                 creditsResponseToCastMapper,
                 movieTrailersResponseToTrailersMapper,
                 reviewsResponseToReviewMapper,
-                movieModelToEntityMapper
+                movieModelToEntityMapper,
+                genresResponseToEntityMapper
         )
     }
 
