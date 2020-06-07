@@ -75,6 +75,8 @@
     <string name="edit_text_password_error">Password is invalid!</string>
     <string name="account_button_sign_out">Sign out</string>
     <string name="about">About</string>
+    <string name="restore_password">Restore password</string>
+    <string name="reset_password_success">Instructions sent to specified e-mail</string>
 
 
 </resources>

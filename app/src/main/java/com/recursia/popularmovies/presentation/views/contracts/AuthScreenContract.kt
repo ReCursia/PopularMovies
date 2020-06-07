@@ -17,4 +17,7 @@ interface AuthScreenContract : MvpView {
 
     @StateStrategyType(AddToEndSingleStrategy::class)
     fun setShowPasswordValidationError(error: Boolean)
+
+    @StateStrategyType(SkipStrategy::class)
+    fun showResetPasswordBottomSheet()
 }

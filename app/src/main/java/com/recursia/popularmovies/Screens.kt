@@ -29,12 +29,6 @@ class Screens {
         }
     }
 
-    class ResetPasswordScreen : SupportAppScreen() {
-        override fun getFragment(): Fragment {
-            return ResetPasswordScreenFragment.getInstance()
-        }
-    }
-
     class AuthScreen : SupportAppScreen() {
         override fun getFragment(): Fragment {
             return AuthScreenFragment.getInstance()

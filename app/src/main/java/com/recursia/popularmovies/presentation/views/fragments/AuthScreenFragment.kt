@@ -17,6 +17,7 @@ import com.recursia.popularmovies.R
 import com.recursia.popularmovies.TheApplication
 import com.recursia.popularmovies.presentation.presenters.AuthScreenPresenter
 import com.recursia.popularmovies.presentation.views.contracts.AuthScreenContract
+import com.recursia.popularmovies.presentation.views.dialogs.ForgotPasswordBottomSheetDialogFragment
 import com.recursia.popularmovies.utils.intro.PreferencesImpl
 import moxy.MvpAppCompatFragment
 import moxy.presenter.InjectPresenter
@@ -138,6 +139,11 @@ class AuthScreenFragment : MvpAppCompatFragment(), AuthScreenContract {
         }
     }
 
+    override fun showResetPasswordBottomSheet() {
+        val bottomSheetDialog = ForgotPasswordBottomSheetDialogFragment.getInstance()
+        bottomSheetDialog.show(childFragmentManager, BOTTOM_SHEET_TAG)
+    }
+
     private fun showErrorMessage(message: String) {
         Toast.makeText(context!!, message, Toast.LENGTH_LONG).show()
     }
@@ -152,6 +158,7 @@ class AuthScreenFragment : MvpAppCompatFragment(), AuthScreenContract {
     }
 
     companion object {
+        private const val BOTTOM_SHEET_TAG = "BottomSheetTag"
         fun getInstance() = AuthScreenFragment()
     }
 }

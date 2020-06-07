@@ -19,7 +19,7 @@ class AuthScreenPresenter(
     }
 
     fun onForgotButtonClicked() {
-        router.navigateTo(Screens.ResetPasswordScreen())
+        viewState.showResetPasswordBottomSheet()
     }
 
     fun onSignInButtonClicked(email: String, password: String) {
