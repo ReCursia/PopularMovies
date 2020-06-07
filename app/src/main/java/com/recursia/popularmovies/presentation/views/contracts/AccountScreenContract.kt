@@ -21,5 +21,11 @@ interface AccountScreenContract : MvpView {
     fun showAboutDialog()
 
     @StateStrategyType(SkipStrategy::class)
+    fun hideAboutDialog()
+
+    @StateStrategyType(SkipStrategy::class)
+    fun openGooglePlayPage()
+
+    @StateStrategyType(SkipStrategy::class)
     fun showErrorMessage(message: String)
 }

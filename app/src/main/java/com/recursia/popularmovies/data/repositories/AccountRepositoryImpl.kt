@@ -21,7 +21,7 @@ class AccountRepositoryImpl : AccountRepository {
         return Maybe.create<User> { emitter ->
             val user = User()
             val firebaseUser = FirebaseAuth.getInstance().currentUser
-            user.username = firebaseUser?.displayName
+            user.username = firebaseUser?.uid
             user.email = firebaseUser?.email
 
             // Image

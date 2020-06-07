@@ -7,7 +7,7 @@
     <string name="no_favorite_movies">У вас еще нет избранных фильмов!</string>
     <string name="no_favorite_movies_icon">Иконка, сообщающая об отсутствии избранных фильмов</string>
     <string name="rate_app_dialog_positive_button">ОЦЕНИТЬ</string>
-    <string name="rate_app_negative_button">ПОЗЖЕ</string>
+    <string name="rate_app_negative_button">ЗАКРЫТЬ</string>
     <string name="release_date">Дата выхода:</string>
     <string name="removed_favorite">Удалено из избранного</string>
     <string name="play_button">Кнопка открыть трейлер</string>

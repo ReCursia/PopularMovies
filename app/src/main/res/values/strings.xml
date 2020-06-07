@@ -5,7 +5,7 @@
     <string name="removed_favorite">Removed from favorite</string>
     <string name="about_description">This application allows you to discover interesting movies, look detail information and also save movies to favorite list</string>
     <string name="rate_app_dialog_positive_button">RATE APP</string>
-    <string name="rate_app_negative_button">LATER</string>
+    <string name="rate_app_negative_button">CLOSE</string>
     <string name="no_favorite_movies">You have no favorites movies yet!</string>
     <string name="no_favorite_movies_icon">No favorite movies icon</string>
     <string name="play_button">Play trailer button</string>
@@ -74,6 +74,7 @@
     <string name="edit_text_email_error">Email is invalid!</string>
     <string name="edit_text_password_error">Password is invalid!</string>
     <string name="account_button_sign_out">Sign out</string>
+    <string name="about">About</string>
 
 
 </resources>

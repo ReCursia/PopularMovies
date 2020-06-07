@@ -85,4 +85,16 @@ class AccountScreenPresenter(
             compositeDisposable.add(d)
         }
     }
+
+    fun onPositiveDialogButtonClicked() {
+        viewState.openGooglePlayPage()
+    }
+
+    fun onNegativeDialogButtonClicked() {
+        viewState.hideAboutDialog()
+    }
+
+    fun onDismissDialog() {
+        viewState.hideAboutDialog()
+    }
 }
