@@ -83,6 +83,15 @@ class SearchScreenFragment : MvpAppCompatFragment(), SearchScreenContract {
         searchRecyclerView.addItemDecoration(
                 MarginItemDecoration(context!!, 10, 10, 5, 5)
         )
+        searchRecyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                super.onScrollStateChanged(recyclerView, newState)
+                val isBottomReached = !recyclerView.canScrollVertically(DIRECTION_DOWN)
+                if (isBottomReached) {
+                    presenter.bottomIsReached()
+                }
+            }
+        })
         searchRecyclerView.setHasFixedSize(true)
     }
 
@@ -104,6 +113,7 @@ class SearchScreenFragment : MvpAppCompatFragment(), SearchScreenContract {
 
     companion object {
         private const val SPAN_COUNT = 2
+        private const val DIRECTION_DOWN = 1
         val instance: SearchScreenFragment
             get() = SearchScreenFragment()
     }

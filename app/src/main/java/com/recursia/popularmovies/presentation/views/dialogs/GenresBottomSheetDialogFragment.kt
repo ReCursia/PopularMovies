@@ -37,6 +37,8 @@ class GenresBottomSheetDialogFragment : MvpBottomSheetDialogFragment(), GenresBo
     @InjectPresenter
     lateinit var presenter: GenresBottomSheetPresenter
 
+    private var genre: Genre? = null
+
     @ProvidePresenter
     internal fun providePresenter(): GenresBottomSheetPresenter {
         val genreId = arguments!!.getInt(TagUtils.GENRE_ID)
@@ -65,6 +67,15 @@ class GenresBottomSheetDialogFragment : MvpBottomSheetDialogFragment(), GenresBo
         recyclerViewMovies.addItemDecoration(
                 MarginItemDecoration(context!!, 10, 10, 5, 5)
         )
+        recyclerViewMovies.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                super.onScrollStateChanged(recyclerView, newState)
+                val isBottomReached = !recyclerView.canScrollVertically(DIRECTION_DOWN)
+                if (isBottomReached) {
+                    presenter.bottomIsReached(genre!!)
+                }
+            }
+        })
         recyclerViewMovies.setHasFixedSize(true)
         recyclerViewMovies.adapter = moviesAdapter
     }
@@ -79,13 +90,18 @@ class GenresBottomSheetDialogFragment : MvpBottomSheetDialogFragment(), GenresBo
         moviesAdapter.setMovies(movies as MutableList<Movie>)
     }
 
+    override fun addMovies(movies: List<Movie>) {
+        moviesAdapter.addMovies(movies as MutableList<Movie>)
+    }
+
     override fun setGenre(genre: Genre) {
+        this.genre = genre
         textViewGenre.text = StringUtils.getCapitalized(genre.name!!)
     }
 
     companion object {
         private const val SPAN_COUNT = 2
-
+        private const val DIRECTION_DOWN = 1
         fun getInstance(genreId: Int): GenresBottomSheetDialogFragment {
             val fragment = GenresBottomSheetDialogFragment()
             val args = Bundle()

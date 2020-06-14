@@ -60,7 +60,7 @@ class MoviesRepositoryImpl(
                 .subscribeOn(Schedulers.io())
     }
 
-    override fun getMoviesWithCategory(category: Category, language: String, page: Int): Single<List<Movie>> {
+    override fun getMoviesWithCategory(category: Category, page: Int, language: String): Single<List<Movie>> {
         val observable = when (category) {
             Category.UPCOMING -> moviesApi.getMoviesUpcoming(language, page)
             Category.POPULAR -> moviesApi.getMoviesPopular(language, page)

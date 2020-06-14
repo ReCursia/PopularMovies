@@ -11,6 +11,7 @@ import moxy.viewstate.strategy.StateStrategyType
 interface MainScreenContract : MvpView {
     fun setCategoryMovies(movies: List<Movie>, category: Category)
 
+    @StateStrategyType(AddToEndStrategy::class)
     fun addCategoryMovies(movies: List<Movie>, category: Category)
 
     @StateStrategyType(SkipStrategy::class)

@@ -4,6 +4,7 @@ import com.recursia.popularmovies.domain.models.Genre
 import com.recursia.popularmovies.domain.models.Movie
 import moxy.MvpView
 import moxy.viewstate.strategy.AddToEndSingleStrategy
+import moxy.viewstate.strategy.AddToEndStrategy
 import moxy.viewstate.strategy.SkipStrategy
 import moxy.viewstate.strategy.StateStrategyType
 
@@ -13,6 +14,9 @@ interface GenresBottomSheetDialogContract : MvpView {
     fun setGenre(genre: Genre)
 
     fun setMovies(movies: List<Movie>)
+
+    @StateStrategyType(AddToEndStrategy::class)
+    fun addMovies(movies: List<Movie>)
 
     @StateStrategyType(SkipStrategy::class)
     fun showErrorMessage(message: String)

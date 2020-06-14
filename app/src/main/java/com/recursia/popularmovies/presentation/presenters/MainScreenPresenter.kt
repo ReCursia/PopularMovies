@@ -20,6 +20,9 @@ class MainScreenPresenter(
         private val router: Router
 ) : MvpPresenter<MainScreenContract>() {
     private val compositeDisposable = CompositeDisposable()
+    private val currentPage = mutableMapOf<Category, Int>()
+    private var isLoading = false
+
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
         initData()
@@ -27,8 +30,9 @@ class MainScreenPresenter(
 
     private fun initData() {
         for (category in Category.values()) {
+            currentPage[category] = 1
             val d = mainScreenInteractor
-                    .getMoviesWithCategory(category, LangUtils.defaultLanguage)
+                    .getMoviesWithCategory(category, currentPage[category]!!, LangUtils.defaultLanguage)
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(
                             { viewState.setCategoryMovies(it, category) },
@@ -58,5 +62,21 @@ class MainScreenPresenter(
 
     fun onMovieClicked(movie: Movie) {
         router.navigateTo(Screens.DetailScreen(movie.id))
+    }
+
+    fun rightIsReached(category: Category) {
+        if (!isLoading) {
+            val d = mainScreenInteractor
+                    .getMoviesWithCategory(category, currentPage[category]!! + 1, LangUtils.defaultLanguage)
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .doFinally { isLoading = false }
+                    .doOnSuccess { currentPage[category] = currentPage[category]!!.plus(1) }
+                    .doOnSubscribe { isLoading = true }
+                    .subscribe(
+                            { viewState.addCategoryMovies(it, category) },
+                            { viewState.showErrorMessage(it.localizedMessage) }
+                    )
+            compositeDisposable.add(d)
+        }
     }
 }

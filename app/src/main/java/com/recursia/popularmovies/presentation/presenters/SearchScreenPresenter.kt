@@ -20,6 +20,9 @@ class SearchScreenPresenter(
 ) : MvpPresenter<SearchScreenContract>() {
     private val compositeDisposable = CompositeDisposable()
     private val subject = BehaviorSubject.create<String>()
+    private var isLoading = false
+    private var currentPage = 1
+    private var currentQuery: String? = null
 
     override fun onFirstViewAttach() {
         initLiveSearch()
@@ -35,7 +38,7 @@ class SearchScreenPresenter(
 
     private fun updateDisplayedList(query: String) {
         val d = searchScreenInteractor
-                .getMoviesByQuery(query, QUERY_PAGE, LangUtils.defaultLanguage)
+                .getMoviesByQuery(query, currentPage, LangUtils.defaultLanguage)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
                         { m -> viewState.setMovies(m) },
@@ -55,6 +58,10 @@ class SearchScreenPresenter(
 
     fun onQueryTextChanged(query: String) {
         if (query.isNotEmpty()) {
+            if (query != currentQuery) {
+                currentPage = 1
+            }
+            currentQuery = query
             subject.onNext(query)
         }
     }
@@ -63,9 +70,24 @@ class SearchScreenPresenter(
         router.exit()
     }
 
+    fun bottomIsReached() {
+        if (!isLoading) {
+            val d = searchScreenInteractor
+                    .getMoviesByQuery(currentQuery!!, currentPage + 1, LangUtils.defaultLanguage)
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .doFinally { isLoading = false }
+                    .doOnSuccess { currentPage += 1 }
+                    .doOnSubscribe { isLoading = true }
+                    .subscribe(
+                            { viewState.addMovies(it) },
+                            { viewState.showErrorMessage(it.localizedMessage) }
+                    )
+            compositeDisposable.add(d)
+        }
+    }
+
     companion object {
         private const val TIMEOUT = 300
         private val TIME_UNIT = TimeUnit.MILLISECONDS
-        private const val QUERY_PAGE = 1
     }
 }

@@ -19,6 +19,8 @@ class MovieDetailPresenter(
         private val movieId: Int
 ) : MvpPresenter<MovieDetailContract>() {
     private val compositeDisposable = CompositeDisposable()
+    private var recommendationCurrentPage = 1
+    private var isLoading = false
 
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
@@ -28,7 +30,7 @@ class MovieDetailPresenter(
 
     private fun initRecommendations() {
         val d = detailScreenInteractor
-                .getMovieRecommendations(movieId, MOVIE_RECOMMENDATION_PAGE, LangUtils.defaultLanguage)
+                .getMovieRecommendations(movieId, recommendationCurrentPage, LangUtils.defaultLanguage)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
                         { viewState.setRecommendationMovies(it) },
@@ -61,7 +63,19 @@ class MovieDetailPresenter(
         viewState.openTrailerUrl(trailer)
     }
 
-    companion object {
-        private const val MOVIE_RECOMMENDATION_PAGE = 1
+    fun rightIsReached() {
+        if (!isLoading) {
+            val d = detailScreenInteractor
+                    .getMovieRecommendations(movieId, recommendationCurrentPage + 1, LangUtils.defaultLanguage)
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .doFinally { isLoading = false }
+                    .doOnSuccess { recommendationCurrentPage += 1 }
+                    .doOnSubscribe { isLoading = true }
+                    .subscribe(
+                            { viewState.addRecommendationMovies(it) },
+                            { viewState.showErrorMessage(it.localizedMessage) }
+                    )
+            compositeDisposable.add(d)
+        }
     }
 }

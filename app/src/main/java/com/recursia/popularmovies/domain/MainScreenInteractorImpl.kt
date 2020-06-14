@@ -7,11 +7,7 @@ import io.reactivex.Single
 class MainScreenInteractorImpl(
         private val moviesRepository: MoviesRepository
 ) : MainScreenInteractor {
-    override fun getMoviesWithCategory(category: Category, language: String): Single<List<Movie>> {
-        return moviesRepository.getMoviesWithCategory(category, language, PAGE)
-    }
-
-    companion object {
-        private const val PAGE = 1
+    override fun getMoviesWithCategory(category: Category, page: Int, language: String): Single<List<Movie>> {
+        return moviesRepository.getMoviesWithCategory(category, page, language)
     }
 }

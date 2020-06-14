@@ -113,9 +113,22 @@ class MovieDetailFragment : MvpAppCompatFragment(), MovieDetailContract {
     private fun initRecommendationRecyclerView() {
         recyclerViewRecommendation.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         recyclerViewRecommendation.setHasFixedSize(true)
+        recyclerViewRecommendation.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                super.onScrollStateChanged(recyclerView, newState)
+                val isRightReached = !recyclerView.canScrollHorizontally(DIRECTION_RIGHT)
+                if (isRightReached) {
+                    presenter.rightIsReached()
+                }
+            }
+        })
         recyclerViewRecommendation.addItemDecoration(
                 MarginItemDecoration(context!!, 13, 1, 0, 0)
         )
+    }
+
+    override fun addRecommendationMovies(movies: List<Movie>) {
+        moviesAdapter.addMovies(movies as MutableList<Movie>)
     }
 
     private fun initCastAdapter() {
@@ -129,16 +142,6 @@ class MovieDetailFragment : MvpAppCompatFragment(), MovieDetailContract {
         recyclerViewCast.addItemDecoration(
                 MarginItemDecoration(context!!, 20, 0, 0, 0)
         )
-    }
-
-    companion object {
-        fun getInstance(movieId: Int): MovieDetailFragment {
-            val fragment = MovieDetailFragment()
-            val arguments = Bundle()
-            arguments.putInt(TagUtils.MOVIE_ID, movieId)
-            fragment.arguments = arguments
-            return fragment
-        }
     }
 
     override fun setRecommendationMovies(movies: List<Movie>) {
@@ -179,5 +182,16 @@ class MovieDetailFragment : MvpAppCompatFragment(), MovieDetailContract {
 
     override fun showErrorMessage(message: String) {
         Toast.makeText(context!!, message, Toast.LENGTH_LONG).show()
+    }
+
+    companion object {
+        private const val DIRECTION_RIGHT = 1
+        fun getInstance(movieId: Int): MovieDetailFragment {
+            val fragment = MovieDetailFragment()
+            val arguments = Bundle()
+            arguments.putInt(TagUtils.MOVIE_ID, movieId)
+            fragment.arguments = arguments
+            return fragment
+        }
     }
 }

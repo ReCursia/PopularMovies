@@ -18,7 +18,8 @@ class GenresBottomSheetPresenter(
         private val router: Router,
         private val genreId: Int
 ) : MvpPresenter<GenresBottomSheetDialogContract>() {
-
+    private var isLoading = false
+    private var currentPage = 1
     private val compositeDisposable = CompositeDisposable()
 
     override fun onFirstViewAttach() {
@@ -35,7 +36,7 @@ class GenresBottomSheetPresenter(
         val genre = genres.find { it.id == genreId }
         viewState.setGenre(genre!!)
         val d = genresBottomSheetInteractor
-                .getGenreMovies(genre, GENRE_MOVIES_PAGE, LangUtils.defaultLanguage)
+                .getGenreMovies(genre, currentPage, LangUtils.defaultLanguage)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
                         { viewState.setMovies(it) },
@@ -53,7 +54,19 @@ class GenresBottomSheetPresenter(
         router.navigateTo(Screens.DetailScreen(movie.id))
     }
 
-    companion object {
-        private const val GENRE_MOVIES_PAGE = 1
+    fun bottomIsReached(genre: Genre) {
+        if (!isLoading) {
+            val d = genresBottomSheetInteractor
+                    .getGenreMovies(genre, currentPage + 1, LangUtils.defaultLanguage)
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .doFinally { isLoading = false }
+                    .doOnSuccess { currentPage += 1 }
+                    .doOnSubscribe { isLoading = true }
+                    .subscribe(
+                            { viewState.addMovies(it) },
+                            { viewState.showErrorMessage(it.localizedMessage) }
+                    )
+            compositeDisposable.add(d)
+        }
     }
 }

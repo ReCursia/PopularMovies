@@ -101,19 +101,28 @@ class MainScreenFragment : MvpAppCompatFragment(), MainScreenContract {
 
     private fun setRecyclerViewAdapter(category: Category, adapter: MoviesAdapter) {
         when (category) {
-            Category.TOP_RATED -> initRecyclerView(adapter, recyclerViewTopRated)
-            Category.NOW_PLAYING -> initRecyclerView(adapter, recyclerViewNowPlaying)
-            Category.POPULAR -> initRecyclerView(adapter, recyclerViewPopularNow)
-            Category.UPCOMING -> initRecyclerView(adapter, recyclerViewUpcoming)
+            Category.TOP_RATED -> initRecyclerView(adapter, category, recyclerViewTopRated)
+            Category.NOW_PLAYING -> initRecyclerView(adapter, category, recyclerViewNowPlaying)
+            Category.POPULAR -> initRecyclerView(adapter, category, recyclerViewPopularNow)
+            Category.UPCOMING -> initRecyclerView(adapter, category, recyclerViewUpcoming)
         }
     }
 
-    private fun initRecyclerView(adapter: MoviesAdapter, recyclerView: RecyclerView) {
+    private fun initRecyclerView(adapter: MoviesAdapter, category: Category, recyclerView: RecyclerView) {
         recyclerView.layoutManager = LinearLayoutManager(context!!, LinearLayoutManager.HORIZONTAL, false)
         recyclerView.setHasFixedSize(true)
         recyclerView.addItemDecoration(
                 MarginItemDecoration(context!!, 7, 7, 0, 0)
         )
+        recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                super.onScrollStateChanged(recyclerView, newState)
+                val isRightReached = !recyclerView.canScrollHorizontally(DIRECTION_RIGHT)
+                if (isRightReached) {
+                    presenter.rightIsReached(category)
+                }
+            }
+        })
         recyclerView.adapter = adapter
     }
 
@@ -133,5 +142,6 @@ class MainScreenFragment : MvpAppCompatFragment(), MainScreenContract {
 
     companion object {
         fun getInstance() = MainScreenFragment()
+        private const val DIRECTION_RIGHT = 1
     }
 }
