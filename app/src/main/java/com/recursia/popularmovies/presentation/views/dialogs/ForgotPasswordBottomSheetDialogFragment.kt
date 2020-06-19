@@ -20,7 +20,6 @@ class ForgotPasswordBottomSheetDialogFragment : MvpBottomSheetDialogFragment() {
     @BindView(R.id.text_input_email)
     lateinit var textInputEmail: TextInputLayout
 
-
     override fun getTheme() = R.style.CustomBottomSheetDialog
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {

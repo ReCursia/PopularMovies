@@ -7,11 +7,11 @@ import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 
 class MarginItemDecoration(
-        context: Context,
-        marginLeft: Int,
-        marginRight: Int,
-        marginTop: Int,
-        marginBottom: Int
+    context: Context,
+    marginLeft: Int,
+    marginRight: Int,
+    marginTop: Int,
+    marginBottom: Int
 ) : RecyclerView.ItemDecoration() {
     private val marginLeft: Int
     private val marginRight: Int

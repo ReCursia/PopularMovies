@@ -10,13 +10,13 @@ import io.reactivex.functions.Function4
 import io.reactivex.schedulers.Schedulers
 
 class MoviesRepositoryImpl(
-        private val moviesApi: MoviesApi,
-        private val discoverMovieResponseToMovieMapper: DiscoverMovieResponseToMovieMapper,
-        private val creditsResponseToCastMapper: CreditsResponseToCastMapper,
-        private val movieTrailersResponseToTrailersMapper: MovieTrailersResponseToTrailersMapper,
-        private val reviewsResponseToReviewMapper: ReviewsResponseToReviewMapper,
-        private val movieModelToEntityMapper: MovieModelToEntityMapper,
-        private val genresResponseToEntityMapper: GenresResponseToEntityMapper
+    private val moviesApi: MoviesApi,
+    private val discoverMovieResponseToMovieMapper: DiscoverMovieResponseToMovieMapper,
+    private val creditsResponseToCastMapper: CreditsResponseToCastMapper,
+    private val movieTrailersResponseToTrailersMapper: MovieTrailersResponseToTrailersMapper,
+    private val reviewsResponseToReviewMapper: ReviewsResponseToReviewMapper,
+    private val movieModelToEntityMapper: MovieModelToEntityMapper,
+    private val genresResponseToEntityMapper: GenresResponseToEntityMapper
 ) : MoviesRepository {
 
     override fun getMovieById(movieId: Int, language: String): Single<Movie> {

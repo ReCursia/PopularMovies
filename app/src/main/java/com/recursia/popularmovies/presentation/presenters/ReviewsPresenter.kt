@@ -11,8 +11,8 @@ import moxy.MvpPresenter
 
 @InjectViewState
 class ReviewsPresenter(
-        private val detailScreenInteractor: DetailScreenInteractor,
-        private val movieId: Int
+    private val detailScreenInteractor: DetailScreenInteractor,
+    private val movieId: Int
 ) : MvpPresenter<ReviewsContract>() {
     private val compositeDisposable = CompositeDisposable()
     override fun onFirstViewAttach() {

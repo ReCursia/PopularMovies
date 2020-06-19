@@ -15,9 +15,9 @@ import ru.terrakok.cicerone.Router
 
 @InjectViewState
 class MainScreenPresenter(
-        private val mainScreenInteractor: MainScreenInteractor,
-        private val authPreferences: AuthPreferences,
-        private val router: Router
+    private val mainScreenInteractor: MainScreenInteractor,
+    private val authPreferences: AuthPreferences,
+    private val router: Router
 ) : MvpPresenter<MainScreenContract>() {
     private val compositeDisposable = CompositeDisposable()
     private val currentPage = mutableMapOf<Category, Int>()

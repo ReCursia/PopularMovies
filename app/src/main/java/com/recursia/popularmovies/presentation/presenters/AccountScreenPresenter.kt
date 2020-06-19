@@ -14,9 +14,9 @@ import ru.terrakok.cicerone.Router
 
 @InjectViewState
 class AccountScreenPresenter(
-        private val accountScreenInteractor: AccountScreenInteractor,
-        private val router: Router,
-        private val authPreferences: AuthPreferences
+    private val accountScreenInteractor: AccountScreenInteractor,
+    private val router: Router,
+    private val authPreferences: AuthPreferences
 ) : MvpPresenter<AccountScreenContract>() {
     private val compositeDisposable = CompositeDisposable()
 

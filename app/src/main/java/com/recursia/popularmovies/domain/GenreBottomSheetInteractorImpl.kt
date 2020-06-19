@@ -5,7 +5,7 @@ import com.recursia.popularmovies.domain.models.Movie
 import io.reactivex.Single
 
 class GenreBottomSheetInteractorImpl(
-        private val moviesRepository: MoviesRepository
+    private val moviesRepository: MoviesRepository
 ) : GenresBottomSheetInteractor {
     override fun getGenreMovies(genre: Genre, page: Int, language: String): Single<List<Movie>> {
         return moviesRepository.getGenreMovies(genre, page, language)

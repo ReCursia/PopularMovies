@@ -14,9 +14,9 @@ import ru.terrakok.cicerone.Router
 
 @InjectViewState
 class GenresBottomSheetPresenter(
-        private val genresBottomSheetInteractor: GenresBottomSheetInteractor,
-        private val router: Router,
-        private val genreId: Int
+    private val genresBottomSheetInteractor: GenresBottomSheetInteractor,
+    private val router: Router,
+    private val genreId: Int
 ) : MvpPresenter<GenresBottomSheetDialogContract>() {
     private var isLoading = false
     private var currentPage = 1

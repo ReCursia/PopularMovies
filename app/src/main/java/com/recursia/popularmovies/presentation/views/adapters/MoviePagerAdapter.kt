@@ -9,9 +9,9 @@ import com.recursia.popularmovies.presentation.views.fragments.MovieDetailFragme
 import com.recursia.popularmovies.presentation.views.fragments.ReviewsFragment
 
 class MoviePagerAdapter(
-        fm: FragmentManager,
-        private val context: Context,
-        private val movieId: Int
+    fm: FragmentManager,
+    private val context: Context,
+    private val movieId: Int
 ) : FragmentStatePagerAdapter(fm) {
 
     private val titles = arrayOf(

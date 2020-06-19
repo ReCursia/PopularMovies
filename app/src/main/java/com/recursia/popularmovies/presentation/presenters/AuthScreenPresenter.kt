@@ -10,8 +10,8 @@ import ru.terrakok.cicerone.Router
 
 @InjectViewState
 class AuthScreenPresenter(
-        private val authPreferences: AuthPreferences,
-        private val router: Router
+    private val authPreferences: AuthPreferences,
+    private val router: Router
 ) : MvpPresenter<AuthScreenContract>() {
 
     fun onBackPressed() {

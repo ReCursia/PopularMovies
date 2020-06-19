@@ -22,13 +22,13 @@ class RepositoryModule {
     @Provides
     @Singleton
     internal fun provideMoviesRepository(
-            moviesApi: MoviesApi,
-            discoverMovieResponseToMovieMapper: DiscoverMovieResponseToMovieMapper,
-            creditsResponseToCastMapper: CreditsResponseToCastMapper,
-            movieTrailersResponseToTrailersMapper: MovieTrailersResponseToTrailersMapper,
-            reviewsResponseToReviewMapper: ReviewsResponseToReviewMapper,
-            movieModelToEntityMapper: MovieModelToEntityMapper,
-            genresResponseToEntityMapper: GenresResponseToEntityMapper
+        moviesApi: MoviesApi,
+        discoverMovieResponseToMovieMapper: DiscoverMovieResponseToMovieMapper,
+        creditsResponseToCastMapper: CreditsResponseToCastMapper,
+        movieTrailersResponseToTrailersMapper: MovieTrailersResponseToTrailersMapper,
+        reviewsResponseToReviewMapper: ReviewsResponseToReviewMapper,
+        movieModelToEntityMapper: MovieModelToEntityMapper,
+        genresResponseToEntityMapper: GenresResponseToEntityMapper
     ): MoviesRepository {
         return MoviesRepositoryImpl(
                 moviesApi,

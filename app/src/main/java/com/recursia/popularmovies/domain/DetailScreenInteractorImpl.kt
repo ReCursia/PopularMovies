@@ -6,9 +6,9 @@ import io.reactivex.Completable
 import io.reactivex.Single
 
 class DetailScreenInteractorImpl(
-        private val accountRepository: AccountRepository,
-        private val moviesRepository: MoviesRepository,
-        private val translateRepository: TranslateRepository
+    private val accountRepository: AccountRepository,
+    private val moviesRepository: MoviesRepository,
+    private val translateRepository: TranslateRepository
 ) : DetailScreenInteractor {
     override fun getMovieById(movieId: Int, language: String): Single<Movie> {
         return accountRepository.getMovieById(movieId)

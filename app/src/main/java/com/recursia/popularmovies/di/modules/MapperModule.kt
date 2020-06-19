@@ -64,14 +64,14 @@ class MapperModule {
 
     @Provides
     internal fun provideReviewsResponseToReviewMapper(
-            reviewNetworkToEntityModelMapper: ReviewNetworkToEntityModelMapper
+        reviewNetworkToEntityModelMapper: ReviewNetworkToEntityModelMapper
     ): ReviewsResponseToReviewMapper {
         return ReviewsResponseToReviewMapper(reviewNetworkToEntityModelMapper)
     }
 
     @Provides
     internal fun provideGenresResponseToEntityMapper(
-            genreModelToEntityMapper: GenreModelToEntityMapper
+        genreModelToEntityMapper: GenreModelToEntityMapper
     ): GenresResponseToEntityMapper {
         return GenresResponseToEntityMapper(genreModelToEntityMapper)
     }

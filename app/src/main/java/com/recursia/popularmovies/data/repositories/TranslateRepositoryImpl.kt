@@ -7,7 +7,7 @@ import io.reactivex.Single
 import io.reactivex.schedulers.Schedulers
 
 class TranslateRepositoryImpl(
-        private val translateApi: TranslateApi
+    private val translateApi: TranslateApi
 ) : TranslateRepository {
     override fun translateReview(review: Review, lang: String): Single<Review> {
         return translateApi.getTranslate(review.text!!, lang)

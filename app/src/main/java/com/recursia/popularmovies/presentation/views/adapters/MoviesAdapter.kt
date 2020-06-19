@@ -17,9 +17,9 @@ import com.recursia.popularmovies.presentation.views.adapters.common.ItemType
 import com.recursia.popularmovies.utils.NetworkUtils
 
 class MoviesAdapter(
-        private val context: Context,
-        private val itemType: ItemType,
-        val tag: String? = null
+    private val context: Context,
+    private val itemType: ItemType,
+    val tag: String? = null
 ) : RecyclerView.Adapter<MoviesAdapter.MovieViewHolder>() {
     private var movies: MutableList<Movie> = ArrayList()
     private var clickListener: ((Movie) -> Unit)? = null

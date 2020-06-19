@@ -40,9 +40,9 @@ interface MoviesApi {
 
     @GET("3/discover/movie?api_key=$API_KEY")
     fun getGenreMovies(
-            @Query("with_genres") genreId: Int,
-            @Query("language") language: String,
-            @Query("page") page: Int
+        @Query("with_genres") genreId: Int,
+        @Query("language") language: String,
+        @Query("page") page: Int
     ): Single<DiscoverMoviesResponse>
 
     @GET("3/genre/movie/list?api_key=$API_KEY")

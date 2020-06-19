@@ -5,7 +5,7 @@ import com.recursia.popularmovies.domain.models.Movie
 import com.recursia.popularmovies.utils.Mapper
 
 class DiscoverMovieResponseToMovieMapper(
-        private val mapper: MovieModelToEntityMapper
+    private val mapper: MovieModelToEntityMapper
 ) : Mapper<DiscoverMoviesResponse, List<Movie>>() {
 
     override fun transform(response: DiscoverMoviesResponse): List<Movie> {

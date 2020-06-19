@@ -21,8 +21,8 @@ class TranslateRetrofitModule {
     @Singleton
     @Named("translateInstance")
     internal fun retrofit(
-            gsonConverterFactory: GsonConverterFactory,
-            rxJava2CallAdapterFactory: RxJava2CallAdapterFactory
+        gsonConverterFactory: GsonConverterFactory,
+        rxJava2CallAdapterFactory: RxJava2CallAdapterFactory
     ): Retrofit {
         return Retrofit.Builder()
                 .baseUrl(BASE_URL)

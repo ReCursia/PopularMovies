@@ -15,9 +15,9 @@ import ru.terrakok.cicerone.Router
 
 @InjectViewState
 class DetailScreenPresenter(
-        private val detailScreenInteractor: DetailScreenInteractor,
-        private val router: Router,
-        private val movieId: Int
+    private val detailScreenInteractor: DetailScreenInteractor,
+    private val router: Router,
+    private val movieId: Int
 ) : MvpPresenter<DetailScreenContract>() {
     private val compositeDisposable = CompositeDisposable()
 

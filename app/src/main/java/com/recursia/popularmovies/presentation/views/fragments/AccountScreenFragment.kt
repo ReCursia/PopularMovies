@@ -207,10 +207,10 @@ class AccountScreenFragment : MvpAppCompatFragment(), AccountScreenContract {
         val uri: Uri = Uri.parse(NetworkUtils.GOOGLE_PLAY_NATIVE + context!!.packageName)
         val goToMarket = Intent(Intent.ACTION_VIEW, uri)
         try {
-            //Try to open in Google Play
+            // Try to open in Google Play
             startActivity(goToMarket)
         } catch (e: ActivityNotFoundException) {
-            //Open in browser
+            // Open in browser
             startActivity(Intent(Intent.ACTION_VIEW,
                     Uri.parse(NetworkUtils.GOOGLE_PLAY_URL + context!!.packageName)))
         }
