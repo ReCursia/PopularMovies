@@ -1,5 +1,10 @@
 package com.recursia.popularmovies.domain.models
 
+/**
+ * Copyright Alexander Silinsky 2020
+ * Date 10.04.2020
+ * Cast entity model
+ */
 data class Cast(
         var movieId: Int = 0,
         var castId: Int = 0,

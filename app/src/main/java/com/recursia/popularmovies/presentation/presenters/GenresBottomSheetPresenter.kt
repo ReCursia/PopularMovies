@@ -12,16 +12,24 @@ import moxy.InjectViewState
 import moxy.MvpPresenter
 import ru.terrakok.cicerone.Router
 
+/**
+ * Copyright Alexander Silinsky 2020
+ * Date 10.04.2020
+ * Genres movies bottom sheet
+ */
 @InjectViewState
 class GenresBottomSheetPresenter(
-        private val genresBottomSheetInteractor: GenresBottomSheetInteractor,
-        private val router: Router,
-        private val genreId: Int
+        private val genresBottomSheetInteractor: GenresBottomSheetInteractor, // genres bottom sheet interactor
+        private val router: Router, // router for navigating
+        private val genreId: Int // genre id
 ) : MvpPresenter<GenresBottomSheetDialogContract>() {
-    private var isLoading = false
-    private var currentPage = 1
-    private val compositeDisposable = CompositeDisposable()
+    private var isLoading = false // is movies loading
+    private var currentPage = 1 // current page, by default = 1
+    private val compositeDisposable = CompositeDisposable() // for disposables on view detach
 
+    /**
+     * Calls on first view attach
+     */
     override fun onFirstViewAttach() {
         val d = genresBottomSheetInteractor
                 .getGenres(LangUtils.defaultLanguage)
@@ -32,6 +40,10 @@ class GenresBottomSheetPresenter(
                 )
     }
 
+    /**
+     * Function to handle genres and set movies
+     * @param genres genres
+     */
     private fun handleGenres(genres: List<Genre>) {
         val genre = genres.find { it.id == genreId }
         viewState.setGenre(genre!!)
@@ -45,15 +57,26 @@ class GenresBottomSheetPresenter(
         compositeDisposable.add(d)
     }
 
+    /**
+     * Calls on destroy
+     */
     override fun onDestroy() {
         super.onDestroy()
         compositeDisposable.clear()
     }
 
+    /**
+     * On movie clicked callback
+     * @param movie movie to navigate
+     */
     fun onMovieClicked(movie: Movie) {
         router.navigateTo(Screens.DetailScreen(movie.id))
     }
 
+    /**
+     * Calls on bottom list reached
+     * @param genre genre to load then
+     */
     fun bottomIsReached(genre: Genre) {
         if (!isLoading) {
             val d = genresBottomSheetInteractor

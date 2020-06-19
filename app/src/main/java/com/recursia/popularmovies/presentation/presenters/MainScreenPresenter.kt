@@ -13,21 +13,33 @@ import moxy.InjectViewState
 import moxy.MvpPresenter
 import ru.terrakok.cicerone.Router
 
+
+/**
+ * Copyright Alexander Silinsky 2020
+ * Date 10.04.2020
+ * Main screen presenter
+ */
 @InjectViewState
 class MainScreenPresenter(
-        private val mainScreenInteractor: MainScreenInteractor,
-        private val authPreferences: AuthPreferences,
-        private val router: Router
+        private val mainScreenInteractor: MainScreenInteractor, //main screen interactor
+        private val authPreferences: AuthPreferences, // auth prefs to save persistent data
+        private val router: Router // router for navigating
 ) : MvpPresenter<MainScreenContract>() {
-    private val compositeDisposable = CompositeDisposable()
-    private val currentPage = mutableMapOf<Category, Int>()
-    private var isLoading = false
+    private val compositeDisposable = CompositeDisposable() // for all disposables when view detach
+    private val currentPage = mutableMapOf<Category, Int>() // to control current pages of lists
+    private var isLoading = false // is loading new movies
 
+    /**
+     * Calls on first view attach
+     */
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
         initData()
     }
 
+    /**
+     * Function to init data
+     */
     private fun initData() {
         for (category in Category.values()) {
             currentPage[category] = 1
@@ -42,11 +54,17 @@ class MainScreenPresenter(
         }
     }
 
+    /**
+     * Calls on destroy
+     */
     override fun onDestroy() {
         super.onDestroy()
         compositeDisposable.clear()
     }
 
+    /**
+     * On account clicked callback
+     */
     fun onAccountClicked() {
         val screen = if (authPreferences.isAuthorized) {
             Screens.AccountScreen()
@@ -56,14 +74,24 @@ class MainScreenPresenter(
         router.navigateTo(screen)
     }
 
+    /**
+     * On search item clicked callback
+     */
     fun onSearchItemClicked() {
         router.navigateTo(Screens.SearchScreen())
     }
 
+    /**
+     * On movie clicked callback
+     * @param movie movie to open
+     */
     fun onMovieClicked(movie: Movie) {
         router.navigateTo(Screens.DetailScreen(movie.id))
     }
 
+    /**
+     * Calls when end of list reached with category
+     */
     fun rightIsReached(category: Category) {
         if (!isLoading) {
             val d = mainScreenInteractor

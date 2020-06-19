@@ -2,6 +2,11 @@ package com.recursia.popularmovies.domain.models
 
 import com.recursia.popularmovies.domain.models.enums.MovieStatus
 
+/**
+ * Copyright Alexander Silinsky 2020
+ * Date 10.04.2020
+ * Movie entity model
+ */
 data class Movie(
         var id: Int = 0,
         var genres: List<Genre> = ArrayList(),

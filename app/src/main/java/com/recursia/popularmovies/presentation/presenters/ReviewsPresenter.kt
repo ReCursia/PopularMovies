@@ -9,17 +9,29 @@ import io.reactivex.disposables.CompositeDisposable
 import moxy.InjectViewState
 import moxy.MvpPresenter
 
+/**
+ * Copyright Alexander Silinsky 2020
+ * Date 10.04.2020
+ * Movie detail presenter
+ */
 @InjectViewState
 class ReviewsPresenter(
-        private val detailScreenInteractor: DetailScreenInteractor,
-        private val movieId: Int
+        private val detailScreenInteractor: DetailScreenInteractor, // detail screen interacotr
+        private val movieId: Int // movie id
 ) : MvpPresenter<ReviewsContract>() {
-    private val compositeDisposable = CompositeDisposable()
+    private val compositeDisposable = CompositeDisposable() // for all disposables when detach view
+
+    /**
+     * Calls on first view attach
+     */
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
         initData()
     }
 
+    /**
+     * Function to init data
+     */
     private fun initData() {
         val d = detailScreenInteractor
                 .getMovieById(movieId, LangUtils.defaultLanguage)
@@ -31,11 +43,17 @@ class ReviewsPresenter(
         compositeDisposable.add(d)
     }
 
+    /**
+     * Calls on destroy
+     */
     override fun onDestroy() {
         super.onDestroy()
         compositeDisposable.clear()
     }
 
+    /**
+     * On translate review clicked callback
+     */
     fun onTranslateReviewClicked(review: Review, position: Int) {
         val d = detailScreenInteractor
                 .translateReview(review, LangUtils.defaultLanguage)

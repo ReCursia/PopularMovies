@@ -16,7 +16,16 @@ import com.recursia.popularmovies.domain.models.enums.MovieStatus
 import io.reactivex.*
 import io.reactivex.schedulers.Schedulers
 
+/**
+ * Copyright Alexander Silinsky 2020
+ * Date 10.04.2020
+ * Class user for saving and retrieving user information/movies and etc.
+ */
 class AccountRepositoryImpl : AccountRepository {
+    /**
+     * Function to get user info Firebase
+     * @return user or empty
+     */
     override fun getUserInfo(): Maybe<User> {
         return Maybe.create<User> { emitter ->
             val user = User()
@@ -39,6 +48,12 @@ class AccountRepositoryImpl : AccountRepository {
         }.subscribeOn(Schedulers.io())
     }
 
+    /**
+     * Function to set user profile image
+     * @param imagePath image path
+     *
+     * @return Completable
+     */
     override fun setUserProfileImage(imagePath: String): Completable {
         return Completable.create { emitter ->
             val user = FirebaseAuth.getInstance().currentUser
@@ -55,11 +70,12 @@ class AccountRepositoryImpl : AccountRepository {
         }.subscribeOn(Schedulers.io())
     }
 
-    override fun setUserInfo(user: User): Completable {
-        // TODO implement
-        return Completable.complete()
-    }
-
+    /**
+     * Function to get movie by id
+     * @param movieId movie id
+     *
+     * @return movie or empty
+     */
     override fun getMovieById(movieId: Int): Maybe<Movie> {
         return Maybe.create<Movie> { emitter ->
             val user = FirebaseAuth.getInstance().currentUser
@@ -83,6 +99,12 @@ class AccountRepositoryImpl : AccountRepository {
         }.subscribeOn(Schedulers.io())
     }
 
+    /**
+     * Function to set movie status
+     * @param movie movie
+     *
+     * @return Completable
+     */
     override fun setMovieStatus(movie: Movie): Completable {
         return Completable.create { emitter ->
             val user = FirebaseAuth.getInstance().currentUser
@@ -107,17 +129,35 @@ class AccountRepositoryImpl : AccountRepository {
         }.subscribeOn(Schedulers.io())
     }
 
+    /**
+     * Function to find movie
+     * @param movieId movie id
+     * @param snapshot data snapshot from Firebase
+     *
+     * @return datasnapshot with movie or null
+     */
     private fun findMovie(movieId: Int, snapshot: DataSnapshot): DataSnapshot? {
         return snapshot.children
                 .asSequence()
                 .find { (it.getValue(Movie::class.java) as Movie).id == movieId }
     }
 
+    /**
+     * Function to find movies with status
+     * @param status movie status
+     * @param snapshot data snapshot from Firebase
+     */
     private fun findMoviesWithStatus(status: MovieStatus, snapshot: DataSnapshot): List<DataSnapshot> {
         return snapshot.children
                 .filter { (it.getValue(Movie::class.java) as Movie).status == status }
     }
 
+    /**
+     * Function to get user movies with specified status
+     * @param status movie status
+     *
+     * @return flowable flow of movies list
+     */
     override fun getUserMoviesWithStatus(status: MovieStatus): Flowable<List<Movie>> {
         return Observable.create<List<Movie>> { emitter ->
             val user = FirebaseAuth.getInstance().currentUser
